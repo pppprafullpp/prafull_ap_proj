@@ -22,5 +22,7 @@ module SocialBooker
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
+    config.assets.precompile += ['*.js', '*.ico', '*.png', '*.jpg']
+    config.assets.precompile += [ Dir["#{Rails.root}/app/assets/lib/*"]]
   end
 end
