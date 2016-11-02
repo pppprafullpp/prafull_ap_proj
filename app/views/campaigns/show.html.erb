@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @campaign.title %>
+</p>
+
+<p>
+  <strong>Message:</strong>
+  <%= @campaign.message %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @campaign.description %>
+</p>
+
+<p>
+  <strong>Caption:</strong>
+  <%= @campaign.caption %>
+</p>
+
+<p>
+  <strong>Image:</strong>
+  <%= @campaign.image %>
+</p>
+
+<p>
+  <strong>Url:</strong>
+  <%= @campaign.url %>
+</p>
+
+<p>
+  <strong>Media type:</strong>
+  <%= @campaign.media_type %>
+</p>
+
+<p>
+  <strong>Platform type:</strong>
+  <%= @campaign.platform_type %>
+</p>
+
+<%= link_to 'Edit', edit_campaign_path(@campaign) %> |
+<%= link_to 'Back', campaigns_path %>

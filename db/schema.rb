@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161101092757) do
+ActiveRecord::Schema.define(version: 20161101135233) do
 
   create_table "advertisers", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "", null: false
@@ -26,9 +26,50 @@ ActiveRecord::Schema.define(version: 20161101092757) do
     t.string   "last_sign_in_ip",        limit: 255
     t.datetime "created_at",                                      null: false
     t.datetime "updated_at",                                      null: false
+    t.string   "name",                   limit: 255
+    t.string   "telephone_no",           limit: 255
+    t.string   "address",                limit: 255
+    t.string   "city",                   limit: 255
+    t.string   "state",                  limit: 255
+    t.string   "country",                limit: 255
+    t.string   "zip",                    limit: 255
+    t.string   "username",               limit: 255
+    t.string   "providerid",             limit: 255
+    t.string   "uid",                    limit: 255
   end
 
   add_index "advertisers", ["email"], name: "index_advertisers_on_email", unique: true, using: :btree
   add_index "advertisers", ["reset_password_token"], name: "index_advertisers_on_reset_password_token", unique: true, using: :btree
+
+  create_table "campaigns", force: :cascade do |t|
+    t.integer  "category_id",               limit: 4
+    t.integer  "advertiser_id",             limit: 4
+    t.text     "title",                     limit: 65535
+    t.string   "message",                   limit: 255
+    t.string   "description",               limit: 255
+    t.text     "caption",                   limit: 65535
+    t.string   "image",                     limit: 255
+    t.string   "url",                       limit: 255
+    t.string   "media_type",                limit: 255
+    t.string   "platform_type",             limit: 255
+    t.datetime "post_start_time"
+    t.datetime "post_end_time"
+    t.integer  "delay_time",                limit: 4
+    t.boolean  "random_post_accounts",                    default: false
+    t.boolean  "delete_after_finished",                   default: false
+    t.boolean  "auto_pause_posts",                        default: false
+    t.integer  "time_pause",                limit: 4
+    t.integer  "after_complete_post_count", limit: 4
+    t.boolean  "repeat_post",                             default: false
+    t.string   "repeat_frequency",          limit: 255
+    t.datetime "created_at",                                              null: false
+    t.datetime "updated_at",                                              null: false
+  end
+
+  create_table "categories", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
 
 end

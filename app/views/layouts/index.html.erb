@@ -1,0 +1,343 @@
+	<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--  
+    Document Title
+    =============================================
+    -->
+    <title>SocialBooker</title>
+    <!--  
+    Favicons
+    =============================================
+    -->
+    <link rel="apple-touch-icon" sizes="57x57" href="assets/images/favicons/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="assets/images/favicons/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="assets/images/favicons/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="assets/images/favicons/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="assets/images/favicons/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="assets/images/favicons/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="assets/images/favicons/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="assets/images/favicons/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/images/favicons/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="assets/images/favicons/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="assets/images/favicons/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicons/favicon-16x16.png">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="assets/images/favicons/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+    <!--  
+    Preloader
+    =============================================
+    
+    -->
+    <style>
+      body main {
+          opacity: 0;
+          filter: alpha(opacity=0);
+      }
+      
+    </style>
+    <script type="text/javascript">
+      paceOptions = {
+          ajax: false,
+          document: true,
+          restartOnPushState: false,
+          restartOnRequestAfter: false
+      }
+    </script>
+    <link href="assets/lib/pace/themes/blue/pace-theme-center-simple.css" rel="stylesheet">
+    <script src="assets/lib/pace/pace.min.js"></script>
+    <!--  
+    Stylesheets
+    =============================================
+    
+    -->
+    <link href="assets/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+    <link href="assets/lib/Ionicons/css/ionicons.css" rel="stylesheet">
+    <link href="assets/lib/animate-css/animate.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="assets/lib/menuzord/css/menuzord.css">
+    <link href="assets/lib/magnific-popup/dist/magnific-popup.css" rel="stylesheet">
+    <link href="assets/lib/owl.carousel.2.1.0/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="assets/css/style.css" rel="stylesheet">
+    <link id="color-scheme" href="assets/css/colors/custom.css" rel="stylesheet">
+  </head>
+  <body data-spy="scroll" data-target=".menuzord" data-offset="60">
+    <main>
+      <section id="one-page-side-menu-static" class="one-page-side-menu-static side-menu">
+        <div class="content-wrapper">
+          <div id="menuzord" class="menuzord clearfix menuzord-single navigationbar-animation solid sideBar"><a href="social-influencer-admin.html" class="menuzord-brand"><img src="assets/images/header/menu-logo-blue.png" class="dark-logo"/></a>
+            
+			<ul class="nav menuzord-menu">
+              <li><a href="social-influencer-admin.html"><i class="ion-home"></i> <span>Dashboard</span></a></li>
+              <li><a href="ad-request.html"><i class="ion-android-open"></i> <span>Ad Request</span></a></li>
+              <li><a href="insights.html"><i class="ion-android-bulb"></i> <span>Insights</span></a></li>
+              <li class="active"><a href="account.html"><i class="ion-person"></i> <span>Account</span></a></li>
+              <li><a href="payments.html"><i class="ion-card"></i> <span>Payments</span></a></li>
+            </ul>
+          </div>
+          <!-- Header Section-->
+          <div class="topBar">
+			<div class="row">
+				<div class="userName"><span class="ion-navicon-round navIcon1"></span> <span class="ion-navicon-round navIcon2"></span></div>
+				<!--<div class="userName">
+					<strong>Hello, User</strong>
+				</div>-->
+				<div class="user-nav">
+					<ul>
+						<li class="lg-font">Your Balance: $350</li>
+						<li class="dropdown messages">
+                        <span class="badge badge-danager animated bounceIn" id="new-messages">38</span>
+                        <a class="dropdown-toggle options topIcon" id="toggle-mail" data-toggle="dropdown">
+                            <span class="ion-ios-bell"></span>
+                        </a>
+                        <ul class="dropdown-menu alert animated fadeInDown">
+                            <li>
+                                <h1>You have <strong>38</strong> new Notification</h1>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <div class="profile-photo">
+                                        <img src="assets/images/profile-img.png" alt="" class="img-circle">
+                                    </div>
+                                    <div class="message-info">
+                                        <span class="sender">James Bond</span>
+                                        <span class="time">30 mins</span>
+                                        <div class="message-content">Lorem ipsum dolor sit amet, elit rutrum felis sed erat augue fusce...</div>
+                                    </div>
+                                </a>
+                            </li>
+							<li>
+                                <a href="#">
+                                    <div class="profile-photo">
+                                        <img src="assets/images/profile-img.png" alt="" class="img-circle">
+                                    </div>
+                                    <div class="message-info">
+                                        <span class="sender">Ivan Bella</span>
+                                        <span class="time">6 hours</span>
+                                        <div class="message-content">Curabitur metus faucibus sapien elit, ante molestie sapien...</div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li><a href="#">Check all Notifications <span class="ion-arrow-right-b"></span></a>
+                            </li>
+                        </ul>
+
+                    </li>
+                    
+                    <li class="dropdown messages">
+                        <span class="badge badge-danager animated bounceIn" id="new-messages">10</span>
+                        <a class="dropdown-toggle options topIcon" id="toggle-mail" data-toggle="dropdown">
+                            <span class="ion-android-mail"></span>
+                        </a>
+                        <ul class="dropdown-menu alert animated fadeInDown">
+                            <li>
+                                <h1>You have <strong>10</strong> new messages</h1>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <div class="profile-photo">
+                                        <img src="assets/images/profile-img.png" alt="" class="img-circle">
+                                    </div>
+                                    <div class="message-info">
+                                        <span class="sender">James Bond</span>
+                                        <span class="time">30 mins</span>
+                                        <div class="message-content">Lorem ipsum dolor sit amet, elit rutrum felis sed erat augue fusce...</div>
+                                    </div>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="#">
+                                    <div class="profile-photo">
+                                        <img src="assets/images/profile-img.png" alt="" class="img-circle">
+                                    </div>
+                                    <div class="message-info">
+                                        <span class="sender">Jeffrey Ashby</span>
+                                        <span class="time">2 hour</span>
+                                        <div class="message-content">hendrerit pellentesque, iure tincidunt, faucibus vitae dolor aliquam...</div>
+                                    </div>
+                                </a>
+                            </li>
+
+                            <li><a href="#">Check all messages <span class="ion-arrow-right-b"></span></a>
+                            </li>
+                        </ul>
+
+                    </li>
+						<li><a class="dropdown-toggle" data-toggle="dropdown" href="#"><img src="assets/images/member-img.png" class="profile-thumb img-responsive"></a>
+							<ul class="dropdown-menu animated fadeInDown">
+								<li>
+									<a href="#"><span class="ion-person"></span> Account</a>
+								</li>
+								<li>
+									<a href="settings.html"><span class="ion-gear-b"></span> Settings</a>
+								</li>
+								<li>
+									<a href="#"><span class="ion-power"></span> Logout</a>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+			</div>
+		  </div>
+          <!-- /#header-->
+          
+          <section class="account section" style="min-height:575px;">
+			<div class="container">
+			
+			  <div class="row">
+				<div class="col-md-12">
+					<h1>Account</h1>
+				</div>
+			 </div>
+			 
+			 <div class="form-horizontal">
+			 <div class="row">
+				<div class="col-sm-8">
+				  <!--<div class="form-group">
+					<label class="control-label col-md-5" for="">Change Password</label>
+					<div class="col-md-7">
+					<input placeholder="Change Password" class="form-control" type="password">
+					</div>
+				  </div>
+				  <div class="form-group">
+					<label class="control-label col-md-5" for="">Confirm Change Password</label>
+					<div class="col-md-7">
+					<input placeholder="Confirm Change Password" class="form-control" type="password">
+					</div>
+				  </div> -->
+				  <div class="form-group">
+				  <label class="control-label col-md-5" for="">Change Media</label>
+					<div class="col-md-7">
+					<select name="" class="custom-select">
+						<option id="facebook" selected>Facebook</option>
+						<option id="Instagram">Instagram</option>
+					</select>
+				  </div>
+				  </div>
+				  <div class="form-group">
+				  <label class="control-label col-md-5" for="">Change URL</label>
+					<div class="col-md-7">
+					<input placeholder="http://facebook.com/" class="form-control" type="text">
+				  </div>
+				  </div>
+				  
+				  <!--<div class="form-group">
+					<label class="control-label col-md-5" for="">Change Payment Information</label>
+					<div class="col-md-7">
+					<select name="" id="paymentInfo" 
+						<option value="Paypal" id="Paypal">Paypal</option>
+						<option value="Bank Account" id="Bank Account">Bank Account</option>
+					</select>
+					</div>
+				  </div>
+				  
+				  <div class="form-group all-detail">
+					<div class="col-md-7 col-md-offset-5">
+					<input placeholder="Change Email Address" class="form-control" type="text">
+				  </div>
+				  </div>
+				  
+				  <div class="form-group all-detail">
+					<div class="col-md-7 col-md-offset-5">
+					<input placeholder="Change Bank Account" class="form-control" type="text">
+				  </div>
+				  </div>-->
+				  
+				  
+					<div class="form-group">
+					<label class="control-label col-md-5" for="">Change Payment Information</label> 
+					<div class="col-md-7">
+					  <select id="paymentInfo" class="custom-select">
+						 <option value="red">Paypal</option>
+						 <option value="yellow">Bank</option>
+					</select>
+					</div>
+					</div>
+				  
+
+					<div class="output">
+					  <div id="red" class="colors form-group all-detail">
+						<div class="">
+						<div class="col-md-7 col-md-offset-5">
+						<input placeholder="Change Email Address" class="form-control" type="text">
+					  </div>
+					  </div>
+					  </div>
+					  
+					  <div id="yellow" class="colors form-group all-detail">
+						<div class="">
+						<div class="col-md-7 col-md-offset-5">
+						<input placeholder="Change Bank Account" class="form-control" type="text">
+					  </div>
+					  </div>
+					  </div>
+					</div>
+				  
+				  <div class="col-md-7 col-md-offset-5">
+				    <a class="btn btn-mountain btn-sm btn-round" href="#">Save</a>
+					<a class="btn btn-mountain btn-sm btn-round" href="#">Cancel</a>
+					</div>
+				  
+				  <!--<button class="btn btn-mountain-o btn-sm btn-round">Save</button> <button class="btn btn-mountain-o btn-sm btn-round">Cancel</button>		-->
+				</div>
+			  </div>
+			  </div>
+			 
+			</div> 
+		  </section>
+          
+          
+		  
+          
+          <!-- Footer-->
+          <footer>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-6">
+                  <p>Copyrights © 2016 All Rights Reserved by SocialBooker.<br/><span><a href="javascript:void();">About Us</a>|<a href="javascript:void();">Terms of use </a>|<a href="javascript:void();">Privacy Policy</a>|<a href="javascript:void();">Press & Media </a></span></p>
+                </div>
+                <div class="col-sm-6">
+                  <div class="social-icons"><a href="#" class="footer-social"><span class="ion-social-facebook"></span></a><a href="#" class="footer-social"><span class="ion-social-twitter"></span></a><a href="#" class="footer-social"><span class="ion-social-pinterest"></span></a><a href="#" class="footer-social"><span class="ion-social-youtube"></span></a><a href="#" class="footer-social"><span class="ion-social-googleplus"></span></a><a href="#" class="footer-social"><span class="ion-social-linkedin"></span></a></div>
+                </div>
+              </div>
+              <!-- /.row-->
+            </div>
+            <!-- /.container-->
+          </footer>
+        </div>
+      </section>
+    </main>
+    <!--  
+    JavaScripts
+    =============================================
+    -->
+    <script src="assets/lib/jquery/dist/jquery.js"></script>
+    <script src="assets/lib/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="assets/lib/jquery-easing/jquery.easing.min.js"></script>
+    <script src="assets/lib/jquery.stellar/jquery.stellar.js"></script>
+    <script src="assets/lib/wow/dist/wow.js"></script>
+    <script src="assets/lib/menuzord/js/menuzord.js"></script>
+    <script src="assets/lib/imagesloaded/imagesloaded.pkgd.js"></script>
+    <script src="assets/lib/smoothscroll-for-websites/SmoothScroll.js"></script>
+    <script src="assets/lib/masonry/dist/masonry.pkgd.js"></script>
+    <script src="assets/lib/owl.carousel.2.1.0/owl.carousel.min.js"></script>
+    <script src="assets/lib/isotope/dist/isotope.pkgd.js"></script>
+    <script src="assets/lib/magnific-popup/dist/jquery.magnific-popup.js"></script>
+    <script src="assets/lib/owl.carousel.2.1.0/owl.carousel.min.js"></script>
+    <script src="assets/lib/waypoints/lib/jquery.waypoints.js"></script>
+    <script src="assets/lib/waypoints/lib/shortcuts/inview.js"></script>
+    <script src="http://maps.google.com/maps/api/js?key=AIzaSyDTtEGdjx9jpfeUbUclbTkOzkhFuHyGtfA"></script>
+    <script src="assets/lib/gmaps/gmaps.js"></script>
+    <!-- Please update the api key with your own key-->
+    
+    <script src="assets/js/main.js"></script>
+	<script src="assets/js/custom.js"></script>
+  </body>
+</html>
