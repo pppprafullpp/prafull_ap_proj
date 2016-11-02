@@ -13,10 +13,8 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
+//= require custom
+//= require main
 //= require_tree .
 
-
-/*================================================
-            Animated Header (Text-Rotator)
-=================================================*/
 

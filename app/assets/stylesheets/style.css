@@ -1313,7 +1313,7 @@ ul.top-contact-links li span.contact-link-icons {
   top: 20px;
   overflow: hidden;
   border: none;
-  background: url(../images/header/cross.png) no-repeat center center;
+  background: url(../assets/images/header/cross.png) no-repeat center center;
   text-indent: 200%;
   color: transparent;
   outline: none;
@@ -2571,7 +2571,7 @@ ul.top-contact-links li span.contact-link-icons {
 }
 
 .cta3 {
-  background: #181622 url("../images/cta/cta-3.jpg");
+  background: #181622 url("../assets/images/cta/cta-3.jpg");
   color: #fff;
   position: relative;
   background-size: cover;
@@ -3730,7 +3730,7 @@ footer .social-icons .footer-social:hover {
 
 /*----------------------------  Video Background Header---------------------*/
 .header-video {
-  background: url(../images/header/videobg.jpg);
+  background: url(../assets/images/header/videobg.jpg);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -4482,7 +4482,7 @@ footer .social-icons .footer-social:hover {
 
 .pst-wrap {
   position: relative;
-  background-image: url("../images/pricing/pst-image.jpg");
+  background-image: url("../assets/images/pricing/pst-image.jpg");
   background-size: cover;
   background-position: center center;
 }
@@ -4727,19 +4727,19 @@ footer .social-icons .footer-social:hover {
 }
 
 .testimonial #testimonial-slider .owl-dots .owl-dot:first-child span {
-  background-image: url(../images/testimonials/t_small_1.jpg);
+  background-image: url(../assets/images/testimonials/t_small_1.jpg);
 }
 
 .testimonial #testimonial-slider .owl-dots .owl-dot:nth-child(2) span {
-  background-image: url(../images/testimonials/t_small_2.jpg);
+  background-image: url(../assets/images/testimonials/t_small_2.jpg);
 }
 
 .testimonial #testimonial-slider .owl-dots .owl-dot:nth-child(3) span {
-  background-image: url(../images/testimonials/t_small_3.jpg);
+  background-image: url(../assets/images/testimonials/t_small_3.jpg);
 }
 
 .testimonial #testimonial-slider .owl-dots .owl-dot:nth-child(4) span {
-  background-image: url(../images/testimonials/t_small_4.jpg);
+  background-image: url(../assets/images/testimonials/t_small_4.jpg);
 }
 
 .testimonial #testimonial-slider .owl-dots .owl-dot.active {
@@ -4871,19 +4871,19 @@ footer .social-icons .footer-social:hover {
 }
 
 .testimonial #testimonial-slider-2 .owl-dots .owl-dot:first-child span {
-  background-image: url(../images/testimonials/t_small_1.jpg);
+  background-image: url(../assets/images/testimonials/t_small_1.jpg);
 }
 
 .testimonial #testimonial-slider-2 .owl-dots .owl-dot:nth-child(2) span {
-  background-image: url(../images/testimonials/t_small_2.jpg);
+  background-image: url(../assets/images/testimonials/t_small_2.jpg);
 }
 
 .testimonial #testimonial-slider-2 .owl-dots .owl-dot:nth-child(3) span {
-  background-image: url(../images/testimonials/t_small_3.jpg);
+  background-image: url(../assets/images/testimonials/t_small_3.jpg);
 }
 
 .testimonial #testimonial-slider-2 .owl-dots .owl-dot:nth-child(4) span {
-  background-image: url(../images/testimonials/t_small_4.jpg);
+  background-image: url(../assets/images/testimonials/t_small_4.jpg);
 }
 
 .testimonial #testimonial-slider-2 .owl-dots .owl-dot.active {
@@ -7261,7 +7261,7 @@ xpush
 # 404
 --------------------------------------------------------------*/
 .not-found {
-  background-image: url(../images/404/404.jpg);
+  background-image: url(../assets/images/404/404.jpg);
   background-size: cover;
   background-position: bottom;
   width: 100%;
@@ -7909,7 +7909,7 @@ xpush
 # showcase
 --------------------------------------------------------------*/
 .showcase-cta {
-  background-image: url("../images/showcase/cta-bg.png");
+  background-image: url("../assets/images/showcase/cta-bg.png");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -7926,7 +7926,7 @@ xpush
   transform: translate3d(0, 0, 0);
   -webkit-animation: moveSlideshow 2000s linear infinite;
   animation: moveSlideshow 2000s linear infinite;
-  background-image: url("../images/showcase/showcase-header.jpg");
+  background-image: url("../assets/images/showcase/showcase-header.jpg");
   background-size: contain;
   background-position: center center;
 }
@@ -9452,7 +9452,7 @@ h3.media-page-header {
 .fb-signup-btn-text{font-weight:500;cursor:pointer}
 .btn-fb-wrapper{margin:auto}
 .facebook-button-icon {
-    background-image: url("../images/icons-24.png"); background-position: -122px -142px;
+    background-image: url("../assets/images/icons-24.png"); background-position: -122px -142px;
     display: inline-block;
     height: 16px;
     vertical-align: middle;
@@ -9466,7 +9466,7 @@ h3.media-page-header {
 .gp-signup-btn-text{font-weight:500;cursor:pointer}
 .btn-gp-wrapper{margin:auto}
 .gp-button-icon {
-    background-image: url("../images/icons-24.png"); background-position: -120px -262px;
+    background-image: url("../assets/images/icons-24.png"); background-position: -120px -262px;
     display: inline-block;
     height: 16px;
     vertical-align: middle;
@@ -9549,7 +9549,7 @@ h3.media-page-header {
 		float: left;
 		display: inline-block;
 		border: 1px solid rgba(0, 0, 0, 0.1); border-radius:3px;          
-		background: url("../images/dropdown-sprite.png") no-repeat right 0 transparent;
+		background: url("../assets/images/dropdown-sprite.png") no-repeat right 0 transparent;
 		cursor: pointer;
 		
 	}
