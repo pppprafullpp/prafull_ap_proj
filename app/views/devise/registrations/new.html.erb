@@ -8,16 +8,14 @@
 					<img src="/assets/header/menu-logo.png">
 				</div>
 				<h4 class="text-center">Sign Up</h4>
-
 				<div class="form-horizontal">
-                <form>
 
+   
 
 					<!--<div class="signup-text-divider"><h5>OR</h5></div> -->
 				  <div class="row">
 					<div class="col-md-12">
 					<div class="form-group" style="margin-bottom:30px;">
-
 						<input class="advertiser-btn" type="radio" id="radio1" name="radios" value="" checked>
 						<label for="radio1" class="btn-label">Advertisers</label>
 						<input class="influencer-btn" type="radio" id="radio2" name="radios" value="">
@@ -33,89 +31,81 @@
 					</div>-->
 				  </div>
 
-
-
 				  <div class="advetiser-singup">
+            <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+
 					  <div class="form-group">
 						<label class="control-label col-md-4" for="">Name</label>
 						<div class="col-md-8">
-						<input id="" type="text" placeholder="Name" class="form-control"/>
+					  <%= f.text_field :name, :class=>"form-control",:placeholder=>"Enter Name"%>
 						</div>
 					  </div>
 					  <div class="form-group">
 						<label class="control-label col-md-4" for="">Telephone No.</label>
 						<div class="col-md-8">
-						<input id="" type="tel" placeholder="Telephone Number" class="form-control"/>
+            <%= f.number_field :telephone_no, :class=>"form-control",:placeholder=>"Enter Name"%>
 						</div>
 					  </div>
 					  <div class="form-group">
 						<label class="control-label col-md-4" for="">Address</label>
 						<div class="col-md-8">
-						<input id="" type="text" placeholder="Address" class="form-control"/>
+              <%= f.text_field :address, :class=>"form-control",:placeholder=>"Enter Name"%>
 						</div>
 					  </div>
 					  <div class="form-group">
 						<label class="control-label col-md-4" for="">City</label>
 						<div class="col-md-8">
-						<input id="" type="text" placeholder="City" class="form-control"/>
+              <%= f.text_field :city, :class=>"form-control",:placeholder=>"Enter Name"%>
 						</div>
 					  </div>
 					  <div class="form-group">
 						<label class="control-label col-md-4" for="">State</label>
 						<div class="col-md-8">
-						<input id="" type="text" placeholder="State" class="form-control"/>
+              <%= f.text_field :state, :class=>"form-control",:placeholder=>"Enter State"%>
 						</div>
 					  </div>
 					  <div class="form-group">
 						<label class="control-label col-md-4" for="">Country</label>
 						<div class="col-md-8">
-						<select name="" class="custom-select">
-							<option>Select</option>
-							<option>America</option>
-							<option>Australia</option>
-							<option>Germany</option>
-							<option>France</option>
-							<option>Russsia</option>
-							<option>United Kingdom</option>
-						</select>
+              <%= f.select :country,options_for_select(["America","Australia","Germany","France","Russia","UK"]),:prompt => "-Select Country",:class=>"form-control"%>
 						</div>
 					  </div>
 					  <div class="form-group">
 						<label class="control-label col-md-4" for="">Zip</label>
 						<div class="col-md-8">
-						<input id="" type="text" placeholder="Zip" class="form-control"/>
+              <%= f.text_field :zip, :class=>"form-control",:placeholder=>"Enter Zip"%>
 						</div>
 					  </div>
 					  <div class="form-group">
 						<label class="control-label col-md-4" for="">Username</label>
 						<div class="col-md-8">
-						<input id="" type="text" placeholder="Username" class="form-control"/>
+              <%= f.text_field :username, :class=>"form-control",:placeholder=>"Enter Username"%>
 						</div>
 					  </div>
 					  <div class="form-group">
 						<label class="control-label col-md-4" for="">Email</label>
 						<div class="col-md-8">
-						<input id="" type="email" placeholder="Email" class="form-control"/>
+              <%= f.text_field :email, :class=>"form-control",:placeholder=>"Enter Email"%>
 						</div>
 					  </div>
 					  <div class="form-group">
 						<label class="control-label col-md-4" for="">Password</label>
 						<div class="col-md-8">
-						<input id="" type="password" placeholder="Password" class="form-control"/>
+              <%= f.password_field :password, :class=>"form-control",:placeholder=>"Enter Password"%>
 						</div>
 					  </div>
 					  <div class="form-group">
 						<label class="control-label col-md-4" for="">Word Verification:</label>
 						<div class="col-md-8">
-							<img src="assets/images/captcha-code.jpg" style="margin:0 0 15px 0; padding:5px; border:solid 1px #eee;">
+              <div class="g-recaptcha" data-sitekey="6LfJAwsUAAAAAJP5rBdRdnsi-hysY0nrQyCh6vjz"></div>
 						</div>
 						<div class="col-md-8 col-md-offset-4">Types the words you see the picture.</div>
 						<div class="col-md-8 col-md-offset-4">
 						<input id="" type="text" placeholder="Type Here" class="form-control"/>
 						</div>
-
 					  </div>
-                  </div>
+
+            </div>
 
 				  <div class="influencer-singup">
 					  <div class="form-group">
@@ -178,9 +168,9 @@
 						<input id="" type="text" placeholder="Type Here" class="form-control"/>
 						</div>
 						</div>
-                  </div>
-                  <button type="submit" class="btn btn-mountain btn-block">Sign Up</button>
-                </form>
+            </div>
+            <%= f.submit "SIGN UP", :class=>"btn btn-mountain btn-block"%>
+            <%end%>
 				</div>
 
 				<button class="btn-fb-sign-up js-fb-connect" data-qa-id="btn-fb-sign-up" data-context="signup">
