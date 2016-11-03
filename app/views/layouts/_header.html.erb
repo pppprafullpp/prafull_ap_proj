@@ -1,18 +1,20 @@
   <div class="topBar">
             <div class="row">
               <div class="userName"><span class="ion-navicon-round navIcon1"></span> <span class="ion-navicon-round navIcon2"></span></div>
-              <!--<div class="userName">
-                <strong>Hello, User</strong>
-                </div>-->
+             <div class="userName">
+                <strong>Hello, <%=current_advertiser.name.titleize%></strong>
+                </div>
               <div class="user-nav">
                 <ul>
                   <li class="lg-font">Your Balance: $350</li>
                   <li class="dropdown messages">
                     <span class="badge badge-danager animated bounceIn" id="new-messages">38</span>
-                    <a class="dropdown-toggle options topIcon" id="toggle-mail" data-toggle="dropdown">
+                    <a onclick="javascript:$('#notification-dropdown').toggle()" class="dropdown-toggle options topIcon" id="toggle-mail" data-toggle="dropdown">
                     <span class="ion-ios-bell"></span>
                     </a>
-                    <!-- <ul class="dropdown-menu alert animated fadeInDown">
+
+
+                     <ul id="notification-dropdown" class="dropdown-menu alert animated fadeInDown">
                       <li>
                         <h1>You have <strong>38</strong> new Notification</h1>
                       </li>
@@ -42,14 +44,18 @@
                       </li>
                       <li><a href="#">Check all Notifications <span class="ion-arrow-right-b"></span></a>
                       </li>
-                    </ul> -->
+                    </ul>
+
+
+
+
                   </li>
                   <li class="dropdown messages">
                     <span class="badge badge-danager animated bounceIn" id="new-messages">10</span>
-                    <a class="dropdown-toggle options topIcon" id="toggle-mail" data-toggle="dropdown">
+                    <a onclick="javascript:$('#mailer-dropdown').toggle()" class="dropdown-toggle options topIcon" id="toggle-mail" data-toggle="dropdown">
                     <span class="ion-android-mail"></span>
                     </a>
-                  <!--   <ul class="dropdown-menu alert animated fadeInDown">
+                  <ul id="mailer-dropdown" class="dropdown-menu alert animated fadeInDown">
                       <li>
                         <h1>You have <strong>10</strong> new messages</h1>
                       </li>
@@ -68,7 +74,7 @@
                       <li>
                         <a href="#">
                           <div class="profile-photo">
-                            <img src="assets/images/profile-img.png" alt="" class="img-circle">
+                            <img src="assets/profile-img.png" alt="" class="img-circle">
                           </div>
                           <div class="message-info">
                             <span class="sender">Jeffrey Ashby</span>
@@ -79,11 +85,11 @@
                       </li>
                       <li><a href="#">Check all messages <span class="ion-arrow-right-b"></span></a>
                       </li>
-                    </ul> -->
+                    </ul>
                   </li>
                   <li>
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#"><img src="assets/member-img.png" class="profile-thumb img-responsive"></a>
-                    <ul class="dropdown-menu animated fadeInDown">
+                    <a class="dropdown-toggle" onclick="javascript:$('#account-dropdown').toggle()" data-toggle="dropdown" href="#"><img src="assets/member-img.png" class="profile-thumb img-responsive"></a>
+                    <ul id="account-dropdown" class="dropdown-menu animated fadeInDown">
                       <li>
                         <a href="#"><span class="ion-person"></span> Account</a>
                       </li>
@@ -91,7 +97,7 @@
                         <a href="#"><span class="ion-gear-b"></span> Settings</a>
                       </li>
                       <li>
-                        <a href="#"><span class="ion-power"></span> Logout</a>
+                        <%=link_to "<span class='ion-power'></span>&nbsp;Logout".html_safe, destroy_advertiser_session_path ,method: :delete  %>
                       </li>
                     </ul>
                   </li>

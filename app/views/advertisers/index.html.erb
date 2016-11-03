@@ -1,0 +1,93 @@
+<main>
+ <section id="one-page-side-menu-static" class="one-page-side-menu-static side-menu">
+ <div class="content-wrapper">
+
+<%= render :partial => "/layouts/left_panel" %>
+<%= render :partial => "/layouts/header" %>
+<section class="account section" style="min-height:575px;">
+           <div class="container">
+             <div class="row">
+               <div class="col-md-12">
+                 <h1>Account</h1>
+               </div>
+             </div>
+             <div class="form-horizontal">
+               <div class="row">
+                 <div class="col-sm-8">
+
+                   <%=form_for @current_advertisers_data, :url=>"", :method=>"post" do |f|%>
+
+                      <div class="form-group">
+                      <label class="control-label col-md-5" for="">Change Password</label>
+                        <div class="col-md-7">
+                        <%=f.password_field :password, :class=>"form-control"%>
+                        </div>
+                      </div>
+
+                      <div class="form-group">
+                      <label class="control-label col-md-5" for="">Confirm Change Password</label>
+                      <div class="col-md-7">
+                      <%=f.password_field :confirm_password, :class=>"form-control"%>
+                      </div>
+                      </div>
+
+
+                      <div class="form-group">
+                      <label class="control-label col-md-5" for="">Change Media</label>
+                      <div class="col-md-7">
+                      <select name="" class="custom-select">
+                      <option id="facebook" selected>Facebook</option>
+                      <option id="Instagram">Instagram</option>
+                      </select>
+                      </div>
+                      </div>
+
+
+                      <div class="form-group">
+                      <label class="control-label col-md-5" for="">Change URL</label>
+                      <div class="col-md-7">
+                      <input placeholder="http://facebook.com/" class="form-control" type="text">
+                      </div>
+                      </div>
+
+
+                      <div class="form-group">
+                      <label class="control-label col-md-5" for="">Change Payment Information</label>
+                      <div class="col-md-7">
+                      <select name="" id="paymentInfo" class="form-control">
+                      <option value="Paypal" id="Paypal">Paypal</option>
+                      <option value="Bank Account" id="Bank Account">Bank Account</option>
+                      </select>
+                      </div>
+                      </div>
+
+                      <div class="form-group">
+                      <label class="control-label col-md-5" for="">Name</label>
+                      <div class="col-md-7">
+                      <%=f.text_field :name, :class => "form-control"%>
+                      </div>
+                      </div>
+
+                      <div class="form-group">
+                      <label class="control-label col-md-5" for="">Email</label>
+                      <div class="col-md-7">
+                      <%=f.text_field :email, :class => "form-control"%>
+                      </div>
+                      </div>
+
+
+                   <div class="col-md-7 col-md-offset-5">
+                     <%= f.submit "Save", :class=>"btn btn-mountain btn-sm btn-round"%>
+                   </div>
+                   <!--<button class="btn btn-mountain-o btn-sm btn-round">Save</button> <button class="btn btn-mountain-o btn-sm btn-round">Cancel</button>   -->
+                 </div>
+
+                 <%end%>
+
+               </div>
+             </div>
+           </div>
+         </section>
+         <%= render :partial => "/layouts/footer" %>
+</div>
+</main>

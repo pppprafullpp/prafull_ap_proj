@@ -8,12 +8,12 @@
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
-   
+
     <link rel="manifest" href="/manifest.json">
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="assets/images/favicons/ms-icon-144x144.png">
     <meta name="theme-color" content="#ffffff">
-    
+
     <script type="text/javascript">
       paceOptions = {
           ajax: false,
@@ -22,23 +22,8 @@
           restartOnRequestAfter: false
       }
     </script>
-
 </head>
-
-
-<body data-spy="scroll" data-target=".menuzord" data-offset="60">
-	 <main>
-    <section id="one-page-side-menu-static" class="one-page-side-menu-static side-menu">
-    <div class="content-wrapper">
-    <%= render :partial => "/layouts/left_panel" %>
-
-    <%= render :partial => "/layouts/header" %>
-
+<body>
     <%= yield %>
-
-    <%= render :partial => "/layouts/footer" %>
-    </div>
-    </section>
-    </main>
 </body>
 </html>
