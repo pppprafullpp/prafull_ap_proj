@@ -47,3 +47,53 @@ cancel_advertiser_registration GET    /advertisers/cancel(.:format)        adver
                                PUT    /influencers/:id(.:format)           influencers#update
                                DELETE /influencers/:id(.:format)           influencers#destroy
                           root GET    /                                    home#index
+                        Prefix Verb   URI Pattern                                    Controller#Action
+                     campaigns GET    /campaigns(.:format)                           campaigns#index
+                               POST   /campaigns(.:format)                           campaigns#create
+                  new_campaign GET    /campaigns/new(.:format)                       campaigns#new
+                 edit_campaign GET    /campaigns/:id/edit(.:format)                  campaigns#edit
+                      campaign GET    /campaigns/:id(.:format)                       campaigns#show
+                               PATCH  /campaigns/:id(.:format)                       campaigns#update
+                               PUT    /campaigns/:id(.:format)                       campaigns#update
+                               DELETE /campaigns/:id(.:format)                       campaigns#destroy
+                    categories GET    /categories(.:format)                          categories#index
+                               POST   /categories(.:format)                          categories#create
+                  new_category GET    /categories/new(.:format)                      categories#new
+                 edit_category GET    /categories/:id/edit(.:format)                 categories#edit
+                      category GET    /categories/:id(.:format)                      categories#show
+                               PATCH  /categories/:id(.:format)                      categories#update
+                               PUT    /categories/:id(.:format)                      categories#update
+                               DELETE /categories/:id(.:format)                      categories#destroy
+        new_advertiser_session GET    /advertisers/sign_in(.:format)                 devise/sessions#new
+            advertiser_session POST   /advertisers/sign_in(.:format)                 devise/sessions#create
+    destroy_advertiser_session DELETE /advertisers/sign_out(.:format)                devise/sessions#destroy
+           advertiser_password POST   /advertisers/password(.:format)                devise/passwords#create
+       new_advertiser_password GET    /advertisers/password/new(.:format)            devise/passwords#new
+      edit_advertiser_password GET    /advertisers/password/edit(.:format)           devise/passwords#edit
+                               PATCH  /advertisers/password(.:format)                devise/passwords#update
+                               PUT    /advertisers/password(.:format)                devise/passwords#update
+cancel_advertiser_registration GET    /advertisers/cancel(.:format)                  advertisers#cancel
+       advertiser_registration POST   /advertisers(.:format)                         advertisers#create
+   new_advertiser_registration GET    /advertisers/sign_up(.:format)                 advertisers#new
+  edit_advertiser_registration GET    /advertisers/edit(.:format)                    advertisers#edit
+                               PATCH  /advertisers(.:format)                         advertisers#update
+                               PUT    /advertisers(.:format)                         advertisers#update
+                               DELETE /advertisers(.:format)                         advertisers#destroy
+           advertiser_accounts GET    /advertisers/:advertiser_id/accounts(.:format) advertisers#accounts
+                   advertisers GET    /advertisers(.:format)                         advertisers#index
+                               POST   /advertisers(.:format)                         advertisers#create
+                new_advertiser GET    /advertisers/new(.:format)                     advertisers#new
+               edit_advertiser GET    /advertisers/:id/edit(.:format)                advertisers#edit
+                    advertiser GET    /advertisers/:id(.:format)                     advertisers#show
+                               PATCH  /advertisers/:id(.:format)                     advertisers#update
+                               PUT    /advertisers/:id(.:format)                     advertisers#update
+                               DELETE /advertisers/:id(.:format)                     advertisers#destroy
+                   influencers GET    /influencers(.:format)                         influencers#index
+                               POST   /influencers(.:format)                         influencers#create
+                new_influencer GET    /influencers/new(.:format)                     influencers#new
+               edit_influencer GET    /influencers/:id/edit(.:format)                influencers#edit
+                    influencer GET    /influencers/:id(.:format)                     influencers#show
+                               PATCH  /influencers/:id(.:format)                     influencers#update
+                               PUT    /influencers/:id(.:format)                     influencers#update
+                               DELETE /influencers/:id(.:format)                     influencers#destroy
+                          root GET    /                                              home#index

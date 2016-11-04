@@ -15,6 +15,10 @@ class AdvertisersController < ApplicationController
     redirect_to "/advertisers"
   end
 
+  def accounts
+    
+  end
+
   private
 
   def advertiser_params

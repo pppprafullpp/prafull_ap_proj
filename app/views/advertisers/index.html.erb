@@ -1,93 +1,234 @@
 <main>
  <section id="one-page-side-menu-static" class="one-page-side-menu-static side-menu">
  <div class="content-wrapper">
-
 <%= render :partial => "/layouts/left_panel" %>
 <%= render :partial => "/layouts/header" %>
-<section class="account section" style="min-height:575px;">
-           <div class="container">
-             <div class="row">
-               <div class="col-md-12">
-                 <h1>Account</h1>
-               </div>
-             </div>
-             <div class="form-horizontal">
-               <div class="row">
-                 <div class="col-sm-8">
 
-                   <%=form_for @current_advertisers_data, :url=>"", :method=>"post" do |f|%>
+<section class="account section">
+<div class="container">
+      <div class="row">
+  <div class="col-md-12">
+    <h1>Advertiser Dashboard</h1>
+  </div>
+</div>
 
-                      <div class="form-group">
-                      <label class="control-label col-md-5" for="">Change Password</label>
-                        <div class="col-md-7">
-                        <%=f.password_field :password, :class=>"form-control"%>
-                        </div>
-                      </div>
+<!-- Dashboard Tiles -->
+<div class="row">
+  <div class="col-md-3 col-sm-6">
+              <div class="dashboard-tile detail">
+                  <div class="content">
+                      <h1 class="text-left timer">$50</h1>
+                      <p>Today Spend</p>
+                  </div>
+                  <div class="icon"><span class="ion-social-usd"></span></div>
+              </div>
+          </div>
 
-                      <div class="form-group">
-                      <label class="control-label col-md-5" for="">Confirm Change Password</label>
-                      <div class="col-md-7">
-                      <%=f.password_field :confirm_password, :class=>"form-control"%>
-                      </div>
-                      </div>
+  <div class="col-md-3 col-sm-6">
+              <div class="dashboard-tile detail">
+                  <div class="content">
+                      <h1 class="text-left timer">$115</h1>
+                      <p>Monthly Spend</p>
+                  </div>
+                  <div class="icon"><span class="ion-social-usd"></span></div>
+              </div>
+          </div>
 
+  <div class="col-md-3 col-sm-6">
+              <div class="dashboard-tile detail">
+                  <div class="content">
+                      <h1 class="text-left timer">250 </h1>
+                      <p>Shared Links</p>
+                  </div>
+                  <div class="icon"><span class="ion-share "></span></div>
+              </div>
+          </div>
 
-                      <div class="form-group">
-                      <label class="control-label col-md-5" for="">Change Media</label>
-                      <div class="col-md-7">
-                      <select name="" class="custom-select">
-                      <option id="facebook" selected>Facebook</option>
-                      <option id="Instagram">Instagram</option>
-                      </select>
-                      </div>
-                      </div>
+  <div class="col-md-3 col-sm-6">
+              <div class="dashboard-tile detail">
+                  <div class="content">
+                      <h1 class="text-left timer">150 </h1>
+                      <p>Influencer Listing</p>
+                  </div>
+                  <div class="icon"><span class="ion-clipboard"></span></div>
+              </div>
+          </div>
+</div>
 
+<!-- Dashboard Tiles -->
 
-                      <div class="form-group">
-                      <label class="control-label col-md-5" for="">Change URL</label>
-                      <div class="col-md-7">
-                      <input placeholder="http://facebook.com/" class="form-control" type="text">
-                      </div>
-                      </div>
+<!-- Table -->
+<div class="mgTop30">
+  <div class="row">
+  <div class="col-md-12">
+  <div class="table-responsive">
+    <table class="table table-striped" width="100%" cellspacing="0">
+                              <thead>
+                                  <tr>
+                                      <th>Ad Type</th>
+                                      <th>Media</th>
+                                      <th>Starting Date & Time</th>
+                <th>End Date</th>
+                <th>Status</th>
+                <th>Option</th>
+                                  </tr>
+                              </thead>
 
+                              <tbody>
+                                  <tr>
+                                      <td>Link</td>
+                <td>Facebook</td>
+                <td>Thu, 01 Sep 2016, 9:30 AM</td>
+                                      <td>Fri, 16 Sep 2016</td>
+                                      <td><div class="progress-bar progress-bar-green">Finished</div></td>
+                <td>
+                  <div class="btn-group">
+                    <a href="javascript:void(0);" class="btn btn-default"><span class="ion-edit" title="Edit"></span></a>
+                    <a href="javascript:void(0);" class="btn btn-default"><span class="ion-trash-b" title="Delete"></span></a>
+                              </div>
+                </td>
+                                  </tr>
+                                  <tr>
+                                      <td>Image</td>
+                <td>Instagram</td>
+                <td>Thu, 01 Sep 2016, 9:30 AM</td>
+                                      <td>Fri, 16 Sep 2016</td>
+                                      <td><div class="progress-bar progress-bar-red">Pending</div></td>
+                <td>
+                  <div class="btn-group">
+                    <a href="javascript:void(0);" class="btn btn-default"><span class="ion-edit" title="Edit"></span></a>
+                    <a href="javascript:void(0);" class="btn btn-default"><span class="ion-trash-b" title="Delete"></span></a>
+                              </div>
+                </td>
+                                  </tr>
+                                  <tr>
+                                      <td>Video</td>
+                <td>Both</td>
+                <td>Thu, 01 Sep 2016, 9:30 AM</td>
+                                      <td>Fri, 16 Sep 2016</td>
+                                      <td><div class="progress-bar progress-bar-green">Finished</div></td>
+                <td>
+                  <div class="btn-group">
+                    <a href="javascript:void(0);" class="btn btn-default"><span class="ion-edit" title="Edit"></span></a>
+                    <a href="javascript:void(0);" class="btn btn-default"><span class="ion-trash-b" title="Delete"></span></a>
+                              </div>
+                </td>
+                                  </tr>
+                                  <tr>
+                                      <td>Link</td>
+                <td>Facebook</td>
+                <td>Thu, 01 Sep 2016, 9:30 AM</td>
+                                      <td>Fri, 16 Sep 2016</td>
+                                      <td><div class="progress-bar progress-bar-green">Finished</div></td>
+                <td>
+                  <div class="btn-group">
+                    <a href="javascript:void(0);" class="btn btn-default"><span class="ion-edit" title="Edit"></span></a>
+                    <a href="javascript:void(0);" class="btn btn-default"><span class="ion-trash-b" title="Delete"></span></a>
+                              </div>
+                </td>
+                                  </tr>
+                                  <tr>
+                                      <td>Image</td>
+                <td>Facebook</td>
+                <td>Thu, 01 Sep 2016, 9:30 AM</td>
+                                      <td>Fri, 16 Sep 2016</td>
+                                      <td><div class="progress-bar progress-bar-red">Pending</div></td>
+                <td>
+                  <div class="btn-group">
+                    <a href="javascript:void(0);" class="btn btn-default"><span class="ion-edit" title="Edit"></span></a>
+                    <a href="javascript:void(0);" class="btn btn-default"><span class="ion-trash-b" title="Delete"></span></a>
+                              </div>
+                </td>
+                                  </tr>
+                                  <tr>
+                                      <td>Video</td>
+                <td>Instagram</td>
+                <td>Thu, 01 Sep 2016, 9:30 AM</td>
+                                      <td>Fri, 16 Sep 2016</td>
+                                      <td><div class="progress-bar progress-bar-green">Finished</div></td>
+                <td>
+                  <div class="btn-group">
+                    <a href="javascript:void(0);" class="btn btn-default"><span class="ion-edit" title="Edit"></span></a>
+                    <a href="javascript:void(0);" class="btn btn-default"><span class="ion-trash-b" title="Delete"></span></a>
+                              </div>
+                </td>
+                                  </tr>
+                                  <tr>
+                                      <td>Image</td>
+                <td>Both</td>
+                <td>Thu, 01 Sep 2016, 9:30 AM</td>
+                                      <td>Fri, 16 Sep 2016</td>
+                                      <td><div class="progress-bar progress-bar-red">Pending</div></td>
+                <td>
+                  <div class="btn-group">
+                    <a href="javascript:void(0);" class="btn btn-default"><span class="ion-edit" title="Edit"></span></a>
+                    <a href="javascript:void(0);" class="btn btn-default"><span class="ion-trash-b" title="Delete"></span></a>
+                              </div>
+                </td>
+                                  </tr>
+                                  <tr>
+                                      <td>Video</td>
+                <td>Facebook</td>
+                <td>Thu, 01 Sep 2016, 9:30 AM</td>
+                                      <td>Fri, 16 Sep 2016</td>
+                                      <td><div class="progress-bar progress-bar-green">Finished</div></td>
+                <td>
+                  <div class="btn-group">
+                    <a href="javascript:void(0);" class="btn btn-default"><span class="ion-edit" title="Edit"></span></a>
+                    <a href="javascript:void(0);" class="btn btn-default"><span class="ion-trash-b" title="Delete"></span></a>
+                              </div>
+                </td>
+                                  </tr>
+                                  <tr>
+                                      <td>Link</td>
+                <td>Instagram</td>
+                <td>Thu, 01 Sep 2016, 9:30 AM</td>
+                                      <td>Fri, 16 Sep 2016</td>
+                                      <td><div class="progress-bar progress-bar-green">Finished</div></td>
+                <td>
+                  <div class="btn-group">
+                    <a href="javascript:void(0);" class="btn btn-default"><span class="ion-edit" title="Edit"></span></a>
+                    <a href="javascript:void(0);" class="btn btn-default"><span class="ion-trash-b" title="Delete"></span></a>
+                              </div>
+                </td>
+                                  </tr>
+                                  <tr>
+                                      <td>Video</td>
+                <td>Both</td>
+                <td>Thu, 01 Sep 2016, 9:30 AM</td>
+                                      <td>Fri, 16 Sep 2016</td>
+                                      <td><div class="progress-bar progress-bar-red">Pending</div></td>
+                <td>
+                  <div class="btn-group">
+                    <a href="javascript:void(0);" class="btn btn-default"><span class="ion-edit" title="Edit"></span></a>
+                    <a href="javascript:void(0);" class="btn btn-default"><span class="ion-trash-b" title="Delete"></span></a>
+                              </div>
+                </td>
+                                  </tr>
+                              </tbody>
+                          </table>
+  </div>
+  </div>
+  </div>
 
-                      <div class="form-group">
-                      <label class="control-label col-md-5" for="">Change Payment Information</label>
-                      <div class="col-md-7">
-                      <select name="" id="paymentInfo" class="form-control">
-                      <option value="Paypal" id="Paypal">Paypal</option>
-                      <option value="Bank Account" id="Bank Account">Bank Account</option>
-                      </select>
-                      </div>
-                      </div>
+  <div class="row">
+  <div class="col-md-12">
+     <ul class="pagination">
+      <li><a href="#"><< Previous</a></li>
+      <li><a href="#">1</a></li>
+      <li><a href="#">2</a></li>
+      <li><a href="#">3</a></li>
+      <li><a href="#">Next >></a></li>
+    </ul>
+  </div>
+  </div>
 
-                      <div class="form-group">
-                      <label class="control-label col-md-5" for="">Name</label>
-                      <div class="col-md-7">
-                      <%=f.text_field :name, :class => "form-control"%>
-                      </div>
-                      </div>
+</div>
+<!-- Table -->
 
-                      <div class="form-group">
-                      <label class="control-label col-md-5" for="">Email</label>
-                      <div class="col-md-7">
-                      <%=f.text_field :email, :class => "form-control"%>
-                      </div>
-                      </div>
+</div>
+</section>
 
-
-                   <div class="col-md-7 col-md-offset-5">
-                     <%= f.submit "Save", :class=>"btn btn-mountain btn-sm btn-round"%>
-                   </div>
-                   <!--<button class="btn btn-mountain-o btn-sm btn-round">Save</button> <button class="btn btn-mountain-o btn-sm btn-round">Cancel</button>   -->
-                 </div>
-
-                 <%end%>
-
-               </div>
-             </div>
-           </div>
-         </section>
          <%= render :partial => "/layouts/footer" %>
 </div>
 </main>
