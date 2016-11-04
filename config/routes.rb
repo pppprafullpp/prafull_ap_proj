@@ -4,11 +4,12 @@ Rails.application.routes.draw do
   devise_for :advertisers, :controllers => { registrations: 'advertisers' }
 
   resources :advertisers do
-    get :accounts
+    get :social_accounts
     get :ad_requests
-    get :insights
+    get :audience_management
     get :setting
     get :payments
+    get :ad_compaigns
   end
 
   resources :influencers

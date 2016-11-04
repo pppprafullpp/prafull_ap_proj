@@ -14,5 +14,9 @@
  *= require_self
  *= require ionicons
  *= require_style
+ *= require toastr
  */
 @import 'ionicons';
+#toast-container{
+  top: 70px;
+}

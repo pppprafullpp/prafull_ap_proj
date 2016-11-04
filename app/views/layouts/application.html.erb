@@ -23,6 +23,16 @@
           restartOnRequestAfter: false
       }
     </script>
+
+  <% if flash[:toastr] %>
+    <script type="text/javascript">
+      <% flash[:toastr].each do |type, message| %>
+        toastr.<%= type %>(<%= message.inspect %>)
+      <% end %>
+    </script>
+  <% end %>
+
+
 </head>
 <body>
     <%= yield %>

@@ -12,18 +12,18 @@ class AdvertisersController < ApplicationController
 
   def create
     Advertiser.create!(advertiser_params)
+    flash[:success] = "Successfully Registered, Please Login"
     redirect_to "/advertisers"
   end
 
-  def accounts
+  def social_accounts
 
   end
 
-  def ad_requests
-
+  def ad_compaigns
   end
 
-  def insights
+  def audience_management
 
   end
 
