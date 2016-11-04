@@ -2,7 +2,7 @@
             <div class="row">
               <div class="userName"><span class="ion-navicon-round navIcon1"></span> <span class="ion-navicon-round navIcon2"></span></div>
              <div class="userName">
-                <strong>Hello, <%=current_advertiser.name.titleize%></strong>
+                <strong>Hello, <%=current_advertiser.name.titleize if current_advertiser.name.present?%></strong>
                 </div>
               <div class="user-nav">
                 <ul>

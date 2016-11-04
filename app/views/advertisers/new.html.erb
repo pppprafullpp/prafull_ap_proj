@@ -10,8 +10,6 @@
 				<h4 class="text-center">Sign Up</h4>
 				<div class="form-horizontal">
 
-
-
 					<!--<div class="signup-text-divider"><h5>OR</h5></div> -->
 				  <div class="row">
 					<div class="col-md-12">
@@ -32,7 +30,7 @@
 				  </div>
 
 				  <div class="advetiser-singup">
-            <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+            <%= form_for(@new_advertiser, as: @new_advertiser, url:advertisers_path, :method=>"POST") do |f| %>
 
 					  <div class="form-group">
 						<label class="control-label col-md-4" for="">Name</label>
