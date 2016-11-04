@@ -13,7 +13,6 @@
                     <span class="ion-ios-bell"></span>
                     </a>
 
-
                      <ul id="notification-dropdown" class="dropdown-menu alert animated fadeInDown">
                       <li>
                         <h1>You have <strong>38</strong> new Notification</h1>
@@ -21,7 +20,7 @@
                       <li>
                         <a href="#">
                           <div class="profile-photo">
-                            <img src="assets/images/profile-img.png" alt="" class="img-circle">
+                            <img src="/assets/profile-img.png" alt="" class="img-circle">
                           </div>
                           <div class="message-info">
                             <span class="sender">James Bond</span>
@@ -33,7 +32,7 @@
                       <li>
                         <a href="#">
                           <div class="profile-photo">
-                            <img src="assets/images/profile-img.png" alt="" class="img-circle">
+                            <img src="/assets/profile-img.png" alt="" class="img-circle">
                           </div>
                           <div class="message-info">
                             <span class="sender">Ivan Bella</span>
@@ -62,7 +61,7 @@
                       <li>
                         <a href="#">
                           <div class="profile-photo">
-                            <img src="assets/images/profile-img.png" alt="" class="img-circle">
+                            <img src="/assets/profile-img.png" alt="" class="img-circle">
                           </div>
                           <div class="message-info">
                             <span class="sender">James Bond</span>
@@ -74,7 +73,7 @@
                       <li>
                         <a href="#">
                           <div class="profile-photo">
-                            <img src="assets/profile-img.png" alt="" class="img-circle">
+                            <img src="/assets/profile-img.png" alt="" class="img-circle">
                           </div>
                           <div class="message-info">
                             <span class="sender">Jeffrey Ashby</span>
@@ -88,13 +87,13 @@
                     </ul>
                   </li>
                   <li>
-                    <a class="dropdown-toggle" onclick="javascript:$('#account-dropdown').toggle()" data-toggle="dropdown" href="#"><img src="assets/member-img.png" class="profile-thumb img-responsive"></a>
+                    <a class="dropdown-toggle" onclick="javascript:$('#account-dropdown').toggle()" data-toggle="dropdown" href="#"><img src="/assets//member-img.png" class="profile-thumb img-responsive"></a>
                     <ul id="account-dropdown" class="dropdown-menu animated fadeInDown">
                       <li>
                         <a href="#"><span class="ion-person"></span> Account</a>
                       </li>
                       <li>
-                        <a href="#"><span class="ion-gear-b"></span> Settings</a>
+                        <a href="<%=advertiser_setting_path(advertiser_id:current_advertiser.id)%>"><span class="ion-gear-b"></span> Settings</a>
                       </li>
                       <li>
                         <%=link_to "<span class='ion-power'></span>&nbsp;Logout".html_safe, destroy_advertiser_session_path ,method: :delete  %>

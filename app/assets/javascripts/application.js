@@ -15,11 +15,11 @@
 //= require turbolinks
 //= require custom
 //= require bootstrap-datetimepicker
-//= require_tree 
+//= require_tree
 
 
 
- 
+
 
 jQuery(document).ready(function($) {
 
@@ -37,7 +37,7 @@ jQuery(document).ready(function($) {
         typeLettersDelay = 150,
         selectionDuration = 500,
         typeAnimationDelay = selectionDuration + 800,
-        //clip effect 
+        //clip effect
         revealDuration = 600,
         revealAnimationDelay = 1500;
 
@@ -232,7 +232,7 @@ jQuery(document).ready(function($) {
 
     if(!$('.header-video').html()) return;
     $("#videoBackground").mb_YTPlayer();
-     
+
     $('#video-play').click(function(event) {
         event.preventDefault();
         if ($(this).hasClass('ion-ios-play-outline')) {
@@ -310,7 +310,7 @@ $( document ).ready(function() {
         menu single page scroll
     -------------------------------------*/
 
-    
+
 
     // adds solid navbar on scroll
 
@@ -324,7 +324,7 @@ $( document ).ready(function() {
                 //$nav.css("position: fixed");
                 return;
             }
-            
+
             $nav.removeClass('navbar-solid');
             $(".navbar-nav > li > a").blur();
         }
@@ -347,7 +347,7 @@ $( document ).ready(function() {
                 $nav.addClass('menubar-fixed');
                 return;
             }
-            
+
             $nav.removeClass('menubar-fixed');
             $(".navbar-nav > li > a").blur();
         }
@@ -362,7 +362,7 @@ $( document ).ready(function() {
                      $(window).scroll(function() {
                       topNavbarAnimation();
                     });
-                }  
+                }
             })
     })();
 
@@ -375,7 +375,7 @@ $( document ).ready(function() {
                 $nav.addClass('solid');
                 return;
             }
-            
+
             $nav.removeClass('solid');
             $(".navbar-nav > li > a").blur();
         }
@@ -388,7 +388,7 @@ $( document ).ready(function() {
 
     })();
 
-    
+
 
     $('.icon-3-col .row:first-child').addClass('m-t-0');
 
@@ -582,7 +582,7 @@ $( document ).ready(function() {
         dots: true,
         //rtl: true // turn it on for RTL version
     });
-    
+
 
 
 
@@ -596,7 +596,7 @@ $( document ).ready(function() {
         lat: 23.790223,
         lng: 90.414036,
         scrollwheel: false,
-        // How you would like to style the map. 
+        // How you would like to style the map.
         // This is where you would paste any style found on Snazzy Maps.
         styles: [{"featureType":"administrative.locality","elementType":"all","stylers":[{"hue":"#2c2e33"},{"saturation":7},{"lightness":19},{"visibility":"on"}]},{"featureType":"landscape","elementType":"all","stylers":[{"hue":"#ffffff"},{"saturation":-100},{"lightness":100},{"visibility":"simplified"}]},{"featureType":"poi","elementType":"all","stylers":[{"hue":"#ffffff"},{"saturation":-100},{"lightness":100},{"visibility":"off"}]},{"featureType":"road","elementType":"geometry","stylers":[{"hue":"#bbc0c4"},{"saturation":-93},{"lightness":31},{"visibility":"simplified"}]},{"featureType":"road","elementType":"labels","stylers":[{"hue":"#bbc0c4"},{"saturation":-93},{"lightness":31},{"visibility":"on"}]},{"featureType":"road.arterial","elementType":"labels","stylers":[{"hue":"#bbc0c4"},{"saturation":-93},{"lightness":-2},{"visibility":"simplified"}]},{"featureType":"road.local","elementType":"geometry","stylers":[{"hue":"#e9ebed"},{"saturation":-90},{"lightness":-8},{"visibility":"simplified"}]},{"featureType":"transit","elementType":"all","stylers":[{"hue":"#e9ebed"},{"saturation":10},{"lightness":69},{"visibility":"on"}]},{"featureType":"water","elementType":"all","stylers":[{"hue":"#e9ebed"},{"saturation":-78},{"lightness":67},{"visibility":"simplified"}]}]
         })
@@ -611,7 +611,7 @@ $( document ).ready(function() {
             icon:'assets/images/map/marker.png'
         });
     }// End Google map
-    
+
 
 
     /*---------------------------------------------------
@@ -705,11 +705,11 @@ var flickerAPI = "https://api.flickr.com/services/rest/?api_key=7a2dc9bed9dc2170
       $.each( photos, function( i, item ) {
         if(item.url_m){
           var singleImgWrap = "<a class='gallery-popup' href="+item.url_o+"><img class='img-responsive' src="+item.url_q+" /></a>";
-          $(".flickr-photo-wrap").append(singleImgWrap)  
+          $(".flickr-photo-wrap").append(singleImgWrap)
         }
         if ( i === 11 ) {
             //magnific popup
-            $('.gallery-popup').magnificPopup({        
+            $('.gallery-popup').magnificPopup({
                 type:'image',
                 // delegate: 'a',
                 removalDelay: 300,
@@ -728,11 +728,11 @@ var flickerAPI = "https://api.flickr.com/services/rest/?api_key=7a2dc9bed9dc2170
       });
     });
     }).fail(function(error){
-       
+
     });
 
 
-    $('.gallery-popup').magnificPopup({        
+    $('.gallery-popup').magnificPopup({
                 type:'image',
                 removalDelay: 300,
                 mainClass: 'mfp-fade',
@@ -856,7 +856,7 @@ $(document).ready(function () {
     $('.load-more-portfolio').css({'height':elemHeight,'width': elemWidth});
 
     $('.load-more-portfolio').on('click',function(e){
-            e.preventDefault(); 
+            e.preventDefault();
             $(this).hide();
             jQuery.get('php/portfolio-load-more.php',function(newContent){
                 var itemsToLoad = $(newContent).find('img');
@@ -865,8 +865,8 @@ $(document).ready(function () {
                 var newContents = $(newContent);
                 $grid.append(newContents);
                 $grid.masonry( 'appended', newContents );
-            });              
-           
+            });
+
         })
 
 });
@@ -1039,7 +1039,7 @@ $(document).ready(function(){
 
 
 /*======================================================
-                Single Portfolio Featured Carousel 
+                Single Portfolio Featured Carousel
 ======================================================*/
 
 (function(){
@@ -1089,7 +1089,7 @@ $(document).ready(function () {
 /*=====================================================
     menubar overlay
 ========================================================*/
-(function() {   
+(function() {
     if(!$('#trigger-overlay').html()) return;
     var triggerBttn = document.getElementById( 'trigger-overlay' ),
         overlay = document.querySelector( 'div.overlay' ),
@@ -1178,7 +1178,7 @@ $(".menuzord").css({
     marginBottom: -($(".menuzord").height() + 1)
 });
 
-//$(window).scroll(function() {    
+//$(window).scroll(function() {
 //    var scroll = $(window).scrollTop();
 
 //    if (scroll >= 600) {
@@ -1210,57 +1210,57 @@ $(".menuzord").css({
 $(document).ready(function(){
     $('.awesome-tooltip').tooltip({
         placement: 'left'
-    });   
+    });
 
     $(window).bind('scroll',function(e){
       dotnavigation();
     });
-    
+
     function dotnavigation(){
-             
+
         var numSections = $('section').length;
-        
-        $('#dot-nav li a').removeClass('active').parent('li').removeClass('active');     
+
+        $('#dot-nav li a').removeClass('active').parent('li').removeClass('active');
         $('section').each(function(i,item){
           var ele = $(item), nextTop;
-          
-          console.log(ele.next().html());
-          
+
+          // console.log(ele.next().html());
+
           if (typeof ele.next().offset() != "undefined") {
             nextTop = ele.next().offset().top;
           }
           else {
             nextTop = $(document).height();
           }
-          
+
           if (ele.offset() !== null) {
             thisTop = ele.offset().top - ((nextTop - ele.offset().top) / numSections);
           }
           else {
             thisTop = 0;
           }
-          
+
           var docTop = $(document).scrollTop();
-          
+
           /*if(docTop >= thisTop && (docTop < nextTop)){
             $('#dot-nav li').eq(i).addClass('active');
           }*/
-        });   
+        });
     }
 
     /* get clicks working */
     $('#dot-nav li').click(function(){
-      
+
         var id = $(this).find('a').attr("href"),
           posi,
           ele,
           padding = 0;
-      
+
         ele = $(id);
         posi = ($(ele).offset()||0).top - padding;
-      
+
         $('html, body').animate({scrollTop:posi}, 'slow');
-      
+
         return false;
 
         $('#dot-nav ul li.active').removeClass('active');

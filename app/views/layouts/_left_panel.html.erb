@@ -1,10 +1,10 @@
  <div id="menuzord" class="menuzord clearfix menuzord-single navigationbar-animation solid sideBar">
-            <a href="social-influencer-admin.html" class="menuzord-brand"><%= image_tag "header/menu-logo-blue.png"  ,:class=>"dark-logo"%></a>
+            <a href="/advertisers" class="menuzord-brand"><%= image_tag "header/menu-logo-blue.png"  ,:class=>"dark-logo"%></a>
             <ul class="nav menuzord-menu">
               <li class="<%= 'active' if params[:controller] == 'advertisers' and params[:action] =='index'%>"><a href="/advertisers"><i class="ion-home"></i> <span>Dashboard</span></a></li>
-              <li><a href="/"><i class="ion-android-open"></i> <span>Ad Request</span></a></li>
-              <li><a href="/"><i class="ion-android-bulb"></i> <span>Insights</span></a></li>
+              <li class="<%= 'active' if params[:controller] == 'advertisers' and params[:action] =='ad_requests'%>"><a href="<%= advertiser_ad_requests_path(advertiser_id:current_advertiser.id)%>"><i class="ion-android-open"></i> <span>Ad Request</span></a></li>
+              <li><a href="<%=advertiser_insights_path(advertiser_id:current_advertiser.id)%>"><i class="ion-android-bulb"></i> <span>Insights</span></a></li>
               <li class="<%= 'active' if params[:controller] == 'advertisers' and params[:action] =='accounts' %>"><a href="<%=advertiser_accounts_path(advertiser_id:current_advertiser.id)%>"><i class="ion-person"></i> <span>Account</span></a></li>
-              <li><a href="/"><i class="ion-card"></i> <span>Payments</span></a></li>
+              <li class="<%= 'active' if params[:controller] == 'advertisers' and params[:action] =='payments' %>"><a href="<%=advertiser_payments_path(advertiser_id:current_advertiser.id)%>"><i class="ion-card"></i> <span>Payments</span></a></li>
             </ul>
           </div>

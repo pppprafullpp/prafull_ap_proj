@@ -5,6 +5,10 @@ Rails.application.routes.draw do
 
   resources :advertisers do
     get :accounts
+    get :ad_requests
+    get :insights
+    get :setting
+    get :payments
   end
 
   resources :influencers

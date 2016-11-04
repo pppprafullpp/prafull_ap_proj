@@ -16,7 +16,19 @@ class AdvertisersController < ApplicationController
   end
 
   def accounts
-    
+
+  end
+
+  def ad_requests
+
+  end
+
+  def insights
+
+  end
+
+  def setting
+
   end
 
   private
