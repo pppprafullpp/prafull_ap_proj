@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     get :setting
     get :payments
     get :ad_compaigns
+    get :create_ad_compaign
   end
 
   resources :influencers

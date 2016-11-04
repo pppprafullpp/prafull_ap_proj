@@ -1,0 +1,447 @@
+<main>
+ <section id="one-page-side-menu-static" class="one-page-side-menu-static side-menu">
+ <div class="content-wrapper">
+<%= render :partial => "/layouts/left_panel" %>
+<%= render :partial => "/layouts/header" %>
+<section class="account section">
+<div class="container">
+
+<div class="row">
+<div class="col-md-12">
+<h1>Create Ad Campaigns</h1>
+</div>
+</div>
+
+<div class="form-horizontal">
+
+<div class="form-group">
+              <label class="control-label col-md-3" for="">Category</label>
+              <div class="col-md-5">
+              <select name="" class="custom-select form-control">
+                <option>Select</option>
+                <option>Celebrity</option>
+                <option>Cars</option>
+                <option>Animals</option>
+                <option>Nature</option>
+                <option>Food</option>
+                <option>Sports</option>
+                <option>Fitness</option>
+                <option>Models</option>
+                <option>Technology</option>
+                <option>Premium</option>
+                <option>Other</option>
+              </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="control-label col-md-3" for="">Social Influencer</label>
+              <div class="col-md-5">
+              <select name="" class="custom-select form-control">
+                <option id="">Select</option>
+                <option id="">Social Influencer1</option>
+                <option id="">Social Influencer2</option>
+                <option id="">Social Influencer3</option>
+                <option id="">Social Influencer4</option>
+                <option id="">Social Influencer5</option>
+              </select>
+              <span class="pull-right sm-font"><a href="#">+ Add More</a></span>
+              </div>
+            </div>
+
+
+<div class="form-group">
+              <label class="control-label col-md-3" for="">Social Influencer Group</label>
+              <div class="col-md-5">
+              <select name="" class="custom-select form-control">
+                <option id="">Select</option>
+                <option id="">Group Name1</option>
+                <option id="">Group Name2</option>
+                <option id="">Group Name3</option>
+                <option id="">Group Name4</option>
+                <option id="">Group Name5</option>
+              </select>
+              </div>
+            </div>
+
+
+
+
+
+<div class="form-group">
+              <label class="control-label col-md-3" for="">Media</label>
+              <div class="col-md-5">
+              <select name="" class="custom-select form-control">
+                <option id="">Select</option>
+                <option id="facebook">Facebook</option>
+                <option id="Instagram">Instagram</option>
+                <option id="Both">Both</option>
+              </select>
+              </div>
+            </div>
+
+
+        <div class="row">
+              <div class="col-md-12">
+                          <!-- Nav tabs -->
+        <div class="card">
+                          <ul class="nav nav-tabs" role="tablist">
+                              <li role="presentation" class="active"><a href="#link" aria-controls="link" role="tab" data-toggle="tab">Link</a></li>
+                              <li role="presentation"><a href="#photo" aria-controls="photo" role="tab" data-toggle="tab">Photo</a></li>
+                              <li role="presentation"><a href="#video" aria-controls="video" role="tab" data-toggle="tab">Video</a></li>
+                          </ul>
+
+                          <!-- Tab panes -->
+        <div class="row">
+        <div class="col-md-12">
+                          <div class="tab-content">
+                              <div role="tabpanel" class="tab-pane active" id="link">
+
+            <div class="form-group">
+              <label class="control-label col-md-3" for="">URL</label>
+              <div class="col-md-9">
+              <input placeholder="Link URL" class="form-control input-sm" type="text">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="control-label col-md-3" for="">Message</label>
+              <div class="col-md-9">
+              <textarea class="form-control input-sm" placeholder="Type your Message here"></textarea>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="control-label col-md-3" for="">Title</label>
+              <div class="col-md-9">
+              <input placeholder="Title" class="form-control input-sm" type="text">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="control-label col-md-3" for="">Description</label>
+              <div class="col-md-9">
+              <textarea class="form-control input-sm" placeholder="Type your Description here"></textarea>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="control-label col-md-3" for="">Caption</label>
+              <div class="col-md-9">
+              <input placeholder="Caption" class="form-control input-sm" type="text">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="control-label col-md-3" for="">Upload Image</label>
+              <div class="col-md-9">
+              <input type="file" name="pic" class="form-control-img input-sm">
+              </div>
+            </div>
+
+          </div>
+                              <div role="tabpanel" class="tab-pane" id="photo">
+            <div class="form-group">
+              <label class="control-label col-md-3" for="">Description</label>
+              <div class="col-md-9">
+              <textarea class="form-control input-sm" placeholder="Type your Description here"></textarea>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="control-label col-md-3" for="">Upload Image</label>
+              <div class="col-md-9">
+              <input type="file" name="pic" class="form-control-img input-sm">
+              </div>
+            </div>
+          </div>
+                              <div role="tabpanel" class="tab-pane" id="video">
+            <div class="form-group">
+              <label class="control-label col-md-3" for="">Title</label>
+              <div class="col-md-9">
+              <input placeholder="Title" class="form-control input-sm" type="text">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-md-3" for="">Description</label>
+              <div class="col-md-9">
+              <textarea class="form-control input-sm" placeholder="Type your Description here"></textarea>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="control-label col-md-3" for="">URL</label>
+              <div class="col-md-9">
+              <input placeholder="Youtube URL or Facebook public video URL or video URL ending with .mp4/.flv etc" class="form-control input-sm" type="text">
+              </div>
+            </div>
+          </div>
+                          </div>
+        </div>
+        </div>
+        </div>
+                  </div>
+  </div>
+
+
+<div class="">
+<hr>
+<div class="row">
+<div class="col-md-12">
+<div class="form-group">
+  <label class="control-label col-md-3" for="">Time Post</label>
+  <div class="col-md-9">
+  <div class="input-group date form_datetime input-sm-new" data-date="1979-09-16T05:25:07Z" data-date-format="dd MM yyyy - HH:ii p" data-link-field="dtp_input1">
+  <input class="form-control" size="16" type="text" value="">
+  <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+  <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+  </div>
+  </div>
+</div>
+</div>
+</div>
+
+<div class="row">
+<div class="col-md-12">
+<div class="form-group">
+  <label class="control-label col-md-3" for="">Delay</label>
+  <div class="col-md-5">
+              <select name="" class="custom-select">
+                <option id="">Select</option>
+                <option id="">50 Second</option>
+                <option id="">60 Second</option>
+                <option id="">65 Second</option>
+                <option id="">70 Second</option>
+                <option id="">75 Second</option>
+                <option id="">80 Second</option>
+              </select>
+              </div>
+</div>
+</div>
+</div>
+
+<div class="row">
+<div class="col-md-12">
+  <div class="form-group">
+  <label class="checkbox-inline col-md-offset-3" style="padding-left:35px;">
+    <input value="" type="checkbox">Random post accounts
+  </label>
+  <label class="checkbox-inline" style="padding-left:25px;">
+    <input value="" type="checkbox">Delete after finished
+  </label>
+  </div>
+</div>
+</div>
+
+<hr>
+
+<div class="row">
+<div class="col-md-12">
+  <div class="form-group">
+  <label class="checkbox-inline col-md-offset-3" style="padding-left:35px;">
+    <input value="" type="checkbox">Auto pause posts
+  </label>
+  </div>
+</div>
+</div>
+
+<div class="row">
+<div class="col-md-12">
+<div class="form-group">
+  <label class="control-label col-md-3" for="">After Complete</label>
+  <div class="col-md-5">
+              <select name="" class="custom-select">
+                <option id="">Select</option>
+                <option id="">1 Post</option>
+                <option id="">2 Post</option>
+                <option id="">3 Post</option>
+                <option id="">4 Post</option>
+                <option id="">5 Post</option>
+              </select>
+              </div>
+</div>
+</div>
+</div>
+
+<div class="row">
+<div class="col-md-12">
+<div class="form-group">
+  <label class="control-label col-md-3" for="">Time Pause</label>
+  <div class="col-md-5">
+              <select name="" class="custom-select">
+                <option id="">Select</option>
+                <option id="">15 Minutes</option>
+                <option id="">30 Minutes</option>
+                <option id="">45 Minutes</option>
+                <option id="">60 Minutes</option>
+              </select>
+              </div>
+</div>
+</div>
+</div>
+
+<hr>
+
+<div class="row">
+<div class="col-md-12">
+  <div class="form-group">
+  <label class="checkbox-inline col-md-offset-3" style="padding-left:35px;">
+    <input value="" type="checkbox">Repeat post
+  </label>
+  </div>
+</div>
+</div>
+
+<div class="row">
+<div class="col-md-12">
+<div class="form-group">
+  <label class="control-label col-md-3" for="">Repeat</label>
+  <div class="col-md-5">
+              <select name="" class="custom-select">
+                <option id="">Select</option>
+                <option id="">Once Per Day</option>
+                <option id="">Every Two Day</option>
+                <option id="">Every Three Day</option>
+                <option id="">Every Four Day</option>
+                <option id="">Every Five Day</option>
+                <option id="">Every Six Day</option>
+                <option id="">Once Per Week</option>
+              </select>
+              </div>
+</div>
+</div>
+</div>
+
+<div class="row">
+<div class="col-md-12">
+<div class="form-group">
+  <label class="control-label col-md-3" for="">End Day</label>
+  <div class="col-md-9">
+  <div class="input-group date form_datetime input-sm-new" data-date="1979-09-16T05:25:07Z" data-date-format="dd MM yyyy - HH:ii p" data-link-field="dtp_input1">
+  <input class="form-control" size="16" type="text" value="">
+  <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+  <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+  </div>
+  </div>
+</div>
+</div>
+</div>
+
+<hr>
+
+<!--<div class="row">
+<div class="col-md-6">
+  <h4 style="float:left">Select Influencer </h4>
+  <label class="checkbox-inline" style=" margin-left:20px; margin-top:11px;">
+    <input value="" type="checkbox">Select All
+  </label>
+</div>
+<div class="col-md-4 col-xs-12 pull-right">
+  <div id="custom-search-input">
+                  <div class="input-group col-md-12">
+                      <input type="text" class="  search-query form-control" placeholder="Search" />
+                      <span class="input-group-btn">
+                          <button class="btn btn-mountain-flat btn-sm" type="button">
+                              <span class=" glyphicon glyphicon-search"></span>
+                          </button>
+                      </span>
+                  </div>
+              </div>
+</div>
+</div>
+
+<div class="row">
+<div class="col-md-4">
+  <div class="form-group">
+  <label class="checkbox-inline">
+    <input value="" type="checkbox">Social Influencer 1
+  </label>
+  </div>
+</div>
+<div class="col-md-4">
+  <div class="form-group">
+  <label class="checkbox-inline">
+    <input value="" type="checkbox">Social Influencer 2
+  </label>
+  </div>
+</div>
+<div class="col-md-4">
+  <div class="form-group">
+  <label class="checkbox-inline">
+    <input value="" type="checkbox">Social Influencer 3
+  </label>
+  </div>
+</div>
+<div class="col-md-4">
+  <div class="form-group">
+  <label class="checkbox-inline">
+    <input value="" type="checkbox">Social Influencer 4
+  </label>
+  </div>
+</div>
+<div class="col-md-4">
+  <div class="form-group">
+  <label class="checkbox-inline">
+    <input value="" type="checkbox">Social Influencer 5
+  </label>
+  </div>
+</div>
+<div class="col-md-4">
+  <div class="form-group">
+  <label class="checkbox-inline">
+    <input value="" type="checkbox">Social Influencer 6
+  </label>
+  </div>
+</div>
+<div class="col-md-4">
+  <div class="form-group">
+  <label class="checkbox-inline">
+    <input value="" type="checkbox">Social Influencer 7
+  </label>
+  </div>
+</div>
+<div class="col-md-4">
+  <div class="form-group">
+  <label class="checkbox-inline">
+    <input value="" type="checkbox">Social Influencer 8
+  </label>
+  </div>
+</div>
+<div class="col-md-4">
+  <div class="form-group">
+  <label class="checkbox-inline">
+    <input value="" type="checkbox">Social Influencer 9
+  </label>
+  </div>
+</div>
+<div class="col-md-4">
+  <div class="form-group">
+  <label class="checkbox-inline">
+    <input value="" type="checkbox">Social Influencer 10
+  </label>
+  </div>
+</div>
+</div>
+
+<hr>-->
+
+<div class="row">
+<div class="col-md-9 col-md-offset-3">
+  <a class="btn btn-mountain btn-sm btn-round" href="#">Save</a>
+  <a class="btn btn-mountain btn-sm btn-round" href="#">Cancel</a>
+</div>
+</div>
+
+</div>
+<!--<button class="btn btn-mountain-o btn-sm btn-round">Save</button> <button class="btn btn-mountain-o btn-sm btn-round">Cancel</button>		-->
+
+</div>
+
+</div>
+</section>
+
+
+
+</div>
+</section>
+</main>

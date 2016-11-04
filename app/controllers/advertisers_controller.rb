@@ -31,6 +31,10 @@ class AdvertisersController < ApplicationController
 
   end
 
+
+  def create_ad_compaign
+  end
+
   private
 
   def advertiser_params
