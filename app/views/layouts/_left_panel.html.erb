@@ -8,7 +8,11 @@
     <li class="<%= 'active' if params[:controller] == 'advertisers' and params[:action] =='audience_management' %>"><a href="<%=advertiser_audience_management_path(advertiser_id:current_advertiser.id)%>">
       <i class="ion-person"></i> <span>Audience Management</span></a></li>
     <li class="<%= 'active' if params[:controller] == 'advertisers' and params[:action] =='social_accounts' %>"><a href="<%=advertiser_social_accounts_path(advertiser_id:current_advertiser.id)%>">
-      <i class="ion-card"></i> <span>Social Accounts</span></a></li>
+      <i class="ion-card"></i> <span>Social Accounts</span></a>
+    </li>
+    <!-- <li class="<%= 'active' if params[:controller] == 'advertisers' and params[:action] =='social_accounts' %>"><a href="javascript:void(0)">
+      <i class="ion-card"></i> <span>Social Accounts</span></a>
+    </li> -->
   </ul>
   <%end%>
 </div>
