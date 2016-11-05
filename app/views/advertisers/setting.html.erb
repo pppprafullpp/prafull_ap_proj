@@ -16,31 +16,35 @@
   <div class="form-horizontal">
   <div class="row">
   <div class="col-sm-8">
-  <div class="form-group">
-  <label class="control-label col-md-5" for="">Old Password</label>
-  <div class="col-md-7">
-  <input placeholder="Old Password" class="form-control" type="password">
-  </div>
-  </div>
-  <div class="form-group">
-  <label class="control-label col-md-5" for="">New Password</label>
-  <div class="col-md-7">
-  <input placeholder="New Password" class="form-control" type="password">
-  </div>
-  </div>
-  <div class="form-group">
-  <label class="control-label col-md-5" for="">Confirm New Password</label>
-  <div class="col-md-7">
-  <input placeholder="Confirm New Password" class="form-control" type="password">
-  </div>
-  </div>
+    <%= form_for current_advertiser,:url=>advertiser_change_password_url,:method =>"post" do |f|%>
+        <div class="form-group">
+          <label class="control-label col-md-5" for="">Old Password</label>
+          <div class="col-md-7">
+            <%= f.password_field:old_password, :class=>"form-control"%>
+          </div>
+        </div>
 
-  <div class="col-md-7 col-md-offset-5">
-    <a class="btn btn-mountain btn-sm btn-round" href="#">Save</a>
-  <a class="btn btn-mountain btn-sm btn-round" href="#">Cancel</a>
-  </div>
+        <div class="form-group">
+          <label class="control-label col-md-5" for="">New Password</label>
+          <div class="col-md-7">
+            <%= f.password_field:password, :class=>"form-control"%>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label col-md-5" for="">Confirm New Password</label>
+          <div class="col-md-7">
+            <%= f.password_field:confirm_password, :class=>"form-control"%>
+          </div>
+        </div>
+
+        <div class="col-md-7 col-md-offset-5">
+          <%= f.submit "Save", :class=>"btn btn-mountain btn-sm btn-round"%>
+        <a class="btn btn-mountain btn-sm btn-round" href="#">Cancel</a>
+        </div>
 
   <!--<button class="btn btn-mountain-o btn-sm btn-round">Save</button> <button class="btn btn-mountain-o btn-sm btn-round">Cancel</button>		-->
+  <%end%>
   </div>
   </div>
   </div>

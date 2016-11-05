@@ -35,6 +35,17 @@ class AdvertisersController < ApplicationController
   def create_ad_compaign
   end
 
+  def change_password
+    if current_advertiser.valid_password?(params[:advertiser][:old_password])
+      current_advertiser.update_attributes(:password=> params[:advertiser][:password])
+      flash[:alert] = "Changed"
+      redirect_to :back
+     else
+      flash[:error] = "Wrong Old Password"
+      redirect_to :back
+     end
+
+   end
   private
 
   def advertiser_params
