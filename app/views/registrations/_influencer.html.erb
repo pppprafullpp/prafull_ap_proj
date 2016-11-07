@@ -1,0 +1,63 @@
+<div class="influencer-singup">
+  <%= form_for(@new_influencer, :method=>"post") do |f| %>
+  <div class="form-group">
+  <label class="control-label col-md-4" for="">Name</label>
+    <div class="col-md-8">
+      <%= f.text_field:name, :class=>"form-control", :placeholder=>"Name", :onkeyup=>"check_for_letters(this.value)"%>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="control-label col-md-4" for="">Account Type</label>
+    <div class="col-md-8">
+      <select name="" class="custom-select">
+        <option>Please Select</option>
+        <option>Facebook</option>
+        <option>Instagram</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="control-label col-md-4" for="">Link</label>
+      <div class="col-md-8">
+        <input id="" type="text" placeholder="Link" class="form-control"/>
+        <span class="pull-right sm-font"><a href="#">+ Add More</a></span>
+      </div>
+  </div>
+
+  <div class="form-group">
+    <label class="control-label col-md-4" for="">Email</label>
+       <div class="col-md-8">
+        <%= f.text_field:email, :class=>"form-control", :placeholder=>"Email"%>
+      </div>
+  </div>
+
+
+  <div class="form-group">
+    <label class="control-label col-md-4" for="">Password</label>
+      <div class="col-md-8">
+        <%=f.password_field:password, :class=>"form-control",:placeholder=>"password"%>
+      </div>
+  </div>
+
+
+    <div class="form-group">
+      <label class="control-label col-md-4" for="">Password</label>
+        <div class="col-md-8">
+          <%=f.password_field:password, :class=>"form-control",:placeholder=>"password"%>
+        </div>
+    </div>
+<div class="form-group">
+  <div class="col-md-8">
+    <div class="g-recaptcha" data-sitekey="6LfJAwsUAAAAAJP5rBdRdnsi-hysY0nrQyCh6vjz"></div>
+  </div>
+    </div>
+  <div class="form-group">
+       <div class="col-md-12">
+         <%= f.submit("Sign Up", :class=>"btn-fb-sign-up js-fb-connect")%>
+      </div>
+  </div>
+  </div>
+  <!-- <%= f.submit "SIGN UP", :class=>"btn btn-mountain btn-block"%> -->
+  <%end%>

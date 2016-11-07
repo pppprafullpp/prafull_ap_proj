@@ -1,7 +1,13 @@
 Rails.application.routes.draw do
+  # devise_for :influencers
   resources :campaigns
   resources :categories
-  devise_for :advertisers, :controllers => { registrations: 'advertisers', passwords: "advertisers/change_password" }
+  devise_for :advertisers, :controllers => { registrations: 'registrations', passwords: "advertisers/change_password" }
+  devise_for :influencers, :controllers => { registrations: 'registrations', passwords: "advertisers/change_password" }
+
+  resources :registrations do
+    post :sign_up
+  end
 
   resources :advertisers do
     get :social_accounts
@@ -14,8 +20,17 @@ Rails.application.routes.draw do
     post :change_password
   end
 
-  resources :influencers
-
+  resources :influencers do
+    get :social_accounts
+    get :ad_requests
+    get :audience_management
+    get :setting
+    get :payments
+    get :ad_compaigns
+    get :create_ad_compaign
+    post :change_password
+    end
+#
   root 'home#index'
 
 end

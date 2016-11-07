@@ -19,12 +19,8 @@
     					</div>
   					</div>
 				  </div>
-
-          <%if resource_name == "advertisers"%>
 				    <%= render :partial => "advertiser"%>
-          <%elsif resource_name == "influencer"%>
             <%= render :partial => "influencer"%>
-          <%end%>
 				</div>
 
 				<button class="btn-fb-sign-up js-fb-connect" data-qa-id="btn-fb-sign-up" data-context="signup">
@@ -49,17 +45,18 @@
         </div>
       </section>
       <!-- Footer-->
-      <footer>
-            <div class="container">
-              <div class="row">
-                <div class="col-sm-6">
-                  <p>Copyrights © 2016 All Rights Reserved by SocialBooker.<br/><span><a href="#">About Us</a>|<a href="#">Terms of use </a>|<a href="#">Privacy Policy</a>|<a href="#">Press & Media </a></span></p>
-                </div>
-                <div class="col-sm-6">
-                  <div class="social-icons"><a href="#" class="footer-social"><span class="ion-social-facebook"></span></a><a href="#" class="footer-social"><span class="ion-social-twitter"></span></a><a href="#" class="footer-social"><span class="ion-social-pinterest"></span></a><a href="#" class="footer-social"><span class="ion-social-youtube"></span></a><a href="#" class="footer-social"><span class="ion-social-googleplus"></span></a><a href="#" class="footer-social"><span class="ion-social-linkedin"></span></a></div>
-                </div>
-              </div>
-              <!-- /.row-->
-            </div>
-            <!-- /.container-->
-          </footer>
+      <script>
+        function check_for_number(value) {
+          if(isNaN(value)){
+            alert("enter only numbers please");
+          }
+        }
+        function check_for_letters(value) {
+          if(isNaN(value[value.length-1]) == false){
+            alert("enter only letters please")
+          }
+
+        }
+
+      </script>
+      <%= render :partial=>"layouts/footer"%>

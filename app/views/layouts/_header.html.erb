@@ -2,7 +2,12 @@
             <div class="row">
               <div class="userName"><span class="ion-navicon-round navIcon1"></span> <span class="ion-navicon-round navIcon2"></span></div>
              <div class="userName">
-                <strong>Hello, <%=current_advertiser.name.titleize if current_advertiser.name.present?%></strong>
+               <% if current_advertiser.present?%>
+                 <%name = current_advertiser.name%>
+                 <%elsif current_influencer.present?%>
+                  <%name = current_influencer.name%>
+               <%end%>
+                <strong>Hello, <%=name.titleize%></strong>
                 </div>
               <div class="user-nav">
                 <ul>
@@ -93,7 +98,11 @@
                         <a href="#"><span class="ion-person"></span> Account</a>
                       </li>
                       <li>
-                        <a href="<%=advertiser_setting_path(advertiser_id:current_advertiser.id)%>"><span class="ion-gear-b"></span> Settings</a>
+                        <%if current_advertiser%>
+                          <a href="<%=advertiser_setting_path(advertiser_id:current_advertiser.id)%>"><span class="ion-gear-b"></span> Settings</a>
+                          <%elsif current_influencer%>
+                          <a href="<%=influencer_setting_path(influencer_id:current_influencer.id)%>"><span class="ion-gear-b"></span> Settings</a>
+                        <%end%>
                       </li>
                       <li>
                         <%=link_to "<span class='ion-power'></span>&nbsp;Logout".html_safe, destroy_advertiser_session_path ,method: :delete  %>

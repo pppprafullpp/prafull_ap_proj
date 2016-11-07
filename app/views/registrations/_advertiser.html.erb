@@ -1,0 +1,79 @@
+<div class="advetiser-singup">
+  <%= form_for(@new_advertiser, :method=>"post", :id=>"advertiser_form") do |f| %>
+  <div class="form-group">
+    <label class="control-label col-md-4" for="">Name</label>
+    <div class="col-md-8">
+    <%= f.text_field :name, :class=>"form-control",:placeholder=>"Enter Name", :onkeyup=>"check_for_letters(this.value)"%>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-md-4" for="">Address</label>
+    <div class="col-md-8">
+      <%= f.text_field :address, :class=>"form-control",:placeholder=>"Enter Address"%>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-md-4" for="">Telephone No.</label>
+    <div class="col-md-8">
+    <%= f.text_field :telephone_no, :class=>"form-control",:placeholder=>"Enter telephone no", :maxlength=>"12", :onkeyup=>"check_for_number(this.value)"%>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="control-label col-md-4" for="">City</label>
+    <div class="col-md-8">
+      <%= f.text_field :city, :class=>"form-control",:placeholder=>"Enter City", :onkeyup=>"check_for_letters(this.value)"%>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-md-4" for="">State</label>
+    <div class="col-md-8">
+      <%= f.text_field :state, :class=>"form-control",:placeholder=>"Enter State", :onkeyup=>"check_for_letters(this.value)"%>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-md-4" for="">Country</label>
+    <div class="col-md-8">
+      <%= f.select :country,options_for_select(["America","Australia","Germany","France","Russia","UK"]),:prompt => "-Select Country",:class=>"form-control"%>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-md-4" for="">Zip</label>
+    <div class="col-md-8">
+      <%= f.text_field :zip, :class=>"form-control",:placeholder=>"Enter Zip", :onkeyup=>"check_for_number(this.value)"%>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-md-4" for="">Username</label>
+    <div class="col-md-8">
+      <%= f.text_field :username, :class=>"form-control",:placeholder=>"Enter Username"%>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-md-4" for="">Email</label>
+    <div class="col-md-8">
+      <%= f.text_field :email, :class=>"form-control",:placeholder=>"Enter Email"%>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-md-4" for="">Password</label>
+    <div class="col-md-8">
+      <%= f.password_field :password, :class=>"form-control",:placeholder=>"Enter Password"%>
+    </div>
+  </div>
+  <div class="form-group">
+      <div class="col-md-8">
+        <div class="g-recaptcha" data-sitekey="6LfJAwsUAAAAAJP5rBdRdnsi-hysY0nrQyCh6vjz"></div>
+      </div>
+    </div>
+    <div class="form-group">
+         <div class="col-md-12">
+           <%= f.submit("Sign Up", :class=>"btn-fb-sign-up js-fb-connect")%>
+        </div>
+      </div>
+  <%end%>
+  </div>
+<script>
+$("#advertiser_country").addClass("form-control");
+
+</script>

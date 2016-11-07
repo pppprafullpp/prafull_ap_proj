@@ -48,3 +48,4 @@ end
 gem 'devise'
 gem 'ionicons-rails'
 gem 'toastr-rails'
+gem 'omniauth-facebook'
