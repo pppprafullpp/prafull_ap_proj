@@ -1310,7 +1310,6 @@ $(document).ready(function(){
     }(document, 'script', 'facebook-jssdk'));
 
 		function get_fb_likes(page_link,returning_id){
-			FB.login();
 		 	FB.api("/"+page_link+"?fields=fan_count",function(response){
 				if(response["fan_count"]!="" ||response["fan_count"]!=undefined){
 					$("#"+returning_id).text(response["fan_count"]);
@@ -1318,6 +1317,17 @@ $(document).ready(function(){
 				if (response["error"]!="" && response["error"]!=undefined && response["error"]["message"]!="") {
 					console.log(response);
 					$("#"+returning_id).text("Error");
+				}
+			});
+		}
+
+		function LoginFB(){
+			FB.login(function(response){
+				if(response["status"] != "connected"){
+						FB.login();
+				}
+				else {
+					toastr.success("Already Connected");
 				}
 			});
 		}
