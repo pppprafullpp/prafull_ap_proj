@@ -3,6 +3,71 @@
  <div class="content-wrapper">
 <%= render :partial => "/layouts/left_panel" %>
 <%= render :partial => "/layouts/header" %>
-</div>
-</section>
-</main>
+<section class="account section" style="min-height:575px;">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+      <h1>Settings</h1>
+      </div>
+    </div>
+    <div class="form-horizontal">
+      <div class="col-md-12">
+        <h1>Add Your Facebook Page details</h1>
+      </div>
+      <div class="row">
+        <div class="col-sm-8">
+          <%= form_for @new_social_account,:url=>influencer_add_social_account_details_path,:method =>"post" do |f|%>
+          <%=f.hidden_field:influencer_id,:value=>current_influencer.id%>
+          <div class="form-group">
+            <label class="control-label col-md-5" for="">Platform type</label>
+            <div class="col-md-7">
+              <%= f.select :platform_type,options_for_select(Influencer::Platform),{:prompt=>"-Select Platform-", :required=>true},:class=>"form-control"%>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="control-label col-md-5" for="">Page Name</label>
+            <div class="col-md-7">
+              <%= f.text_field:platform_type_id,:placeholder=>"Facebook page name for eg ServiceDealz",:class=>"form-control", :required=>true%>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="control-label col-md-4"></label>
+            <div class="col-md-8">
+              <%= f.submit("Save", :class=>"btn btn-primary")%>
+            </div>
+          </div>
+
+          <%end%>
+        </div>
+      </div>
+
+        <div class="col-md-12 table-responsive">
+          <table class="table table-striped">
+            <tr>
+              <th>Platform Type</th>
+              <th>Page Link</th>
+              <th>Likes</th>
+              <th>Action</th>
+            </tr>
+            <%@social_accounts.each_with_index do |social_account,index|%>
+            <tr>
+              <td><%=Influencer::Platform.key(social_account.platform_type)%></td>
+              <td><%=social_account.platform_type_id%></td>
+              <td id="page_id_<%=index%>">
+                <p></p>
+              </td>
+              <td><button class="btn btn-primary" onclick="get_fb_likes('<%=social_account.platform_type_id%>','page_id_<%=index%>')">Get likes</button></td>
+            </tr>
+            <%end%>
+          </table>
+
+        </div>
+      </div>
+  </div>
+  </section>
+
+  </div>
+  </section>
+  </main>

@@ -1289,7 +1289,6 @@ $(document).ready(function(){
 
 /* end dot nav */
 });
-
     window.fbAsyncInit = function() {
       FB.init({
         appId      : '986978254757512',
@@ -1298,6 +1297,7 @@ $(document).ready(function(){
         xfbml      : true,  // parse social plugins on this page
         version    : 'v2.8' // use graph api version 2.8
       });
+			FB.login();
     };
 
     // Load the SDK asynchronously
@@ -1305,6 +1305,19 @@ $(document).ready(function(){
       var js, fjs = d.getElementsByTagName(s)[0];
       if (d.getElementById(id)) return;
       js = d.createElement(s); js.id = id;
-      js.src = "https://connect.facebook.net/en_US/sdk.js";
+      js.src = "/assets/fb_api";
       fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));
+
+		function get_fb_likes(page_link,returning_id){
+			FB.login();
+		 	FB.api("/"+page_link+"?fields=fan_count",function(response){
+				if(response["fan_count"]!="" ||response["fan_count"]!=undefined){
+					$("#"+returning_id).text(response["fan_count"]);
+				}
+				if (response["error"]!="" && response["error"]!=undefined && response["error"]["message"]!="") {
+					console.log(response);
+					$("#"+returning_id).text("Error");
+				}
+			});
+		}

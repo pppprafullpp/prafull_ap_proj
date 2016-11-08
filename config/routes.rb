@@ -29,8 +29,9 @@ Rails.application.routes.draw do
     get :ad_compaigns
     get :create_ad_compaign
     post :change_password
+    post :add_social_account_details
     end
-#
+
   root 'home#index'
 
 end

@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  influencer_id: 1
+  platform_type: 1
+  platform_type_id: MyText
+  platform_link: MyText
+
+two:
+  influencer_id: 1
+  platform_type: 1
+  platform_type_id: MyText
+  platform_link: MyText

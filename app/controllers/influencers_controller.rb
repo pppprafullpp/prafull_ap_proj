@@ -12,9 +12,20 @@ class InfluencersController < ApplicationController
   end
 
   def setting
+    @new_social_account = SocialAccount.new
+    @social_accounts = current_influencer.social_accounts
   end
 
-  def social_accounts
+  def add_social_account_details
+    # raise params.to_yaml
+    SocialAccount.create!(create_social_account)
+    flash[:success] = "Successfully created"
+    redirect_to :back
   end
 
+  private
+
+  def create_social_account
+    params.require(:social_account).permit!
+  end
 end
