@@ -5,7 +5,7 @@ class InfluencersController < ApplicationController
   def index
   end
 
-  def ad_compaigns
+  def ad_requests
   end
 
   def change_password

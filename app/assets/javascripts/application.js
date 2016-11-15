@@ -1297,7 +1297,6 @@ $(document).ready(function(){
         xfbml      : true,  // parse social plugins on this page
         version    : 'v2.8' // use graph api version 2.8
       });
-			FB.login();
     };
 
     // Load the SDK asynchronously
@@ -1324,7 +1323,7 @@ $(document).ready(function(){
 		function LoginFB(){
 			FB.login(function(response){
 				if(response["status"] != "connected"){
-						FB.login();
+						// FB.login();
 				}
 				else {
 					toastr.success("Already Connected");

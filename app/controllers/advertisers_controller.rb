@@ -33,6 +33,7 @@ class AdvertisersController < ApplicationController
 
 
   def create_ad_compaign
+    @new_advertisment = Advertisement.new
   end
 
   def change_password

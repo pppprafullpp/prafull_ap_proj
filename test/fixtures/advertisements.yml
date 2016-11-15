@@ -1,0 +1,29 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  type: 1
+  url: MyText
+  message: MyText
+  title: MyString
+  description: MyText
+  caption: MyText
+  time_post: 1
+  delay: 1
+  advertisement_link: MyText
+  after_complete: MyText
+  repeat: false
+  end_date: MyText
+
+two:
+  type: 1
+  url: MyText
+  message: MyText
+  title: MyString
+  description: MyText
+  caption: MyText
+  time_post: 1
+  delay: 1
+  advertisement_link: MyText
+  after_complete: MyText
+  repeat: false
+  end_date: MyText

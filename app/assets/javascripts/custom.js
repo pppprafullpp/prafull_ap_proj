@@ -1,19 +1,19 @@
 // JavaScript Document
 
 $(document).ready(function() {
-	
+
 	$(".advertiser-btn").click(function(){
 		$(".advetiser-singup").show();
 		$(".influencer-singup").hide();
 	});
-	
+
 	$(".influencer-btn").click(function(){
 		$(".influencer-singup").show();
 		$(".advetiser-singup").hide();
 	});
-	
+
 	/********/
-	
+
 	$(".navIcon1").click(function(){
 		$("#menuzord").hide();
 		$(".navIcon2").show();
@@ -22,7 +22,7 @@ $(document).ready(function() {
 			"margin-left" : "0px"
 		});
 	});
-	
+
 	$(".navIcon2").click(function(){
 		$("#menuzord").show();
 		$(".navIcon1").show();
@@ -31,9 +31,9 @@ $(document).ready(function() {
 			"margin-left" : "230px"
 		});
 	});
-	
+
 	/**** Custom Select Menu ****/
-	
+
 	$(".custom-select").each(function(){
             $(this).wrap("<span class='select-wrapper'></span>");
             $(this).after("<span class='holder'></span>");
@@ -42,9 +42,9 @@ $(document).ready(function() {
             var selectedOption = $(this).find(":selected").text();
             $(this).next(".holder").text(selectedOption);
         }).trigger('change');
-	
+
 	/**** Popup Center ****/
-	
+
 	function centerModals(){
 	  $('.modal').each(function(i){
 		var $clone = $(this).clone().css('display', 'block').appendTo('body');
@@ -56,31 +56,31 @@ $(document).ready(function() {
 	}
 	$('.modal').on('show.bs.modal', centerModals);
 	$(window).on('resize', centerModals);
-	
+
 	/**** Report Options ****/
-	
+
 	$(".title1").click(function(){
-		$(".option1").toggle();		
+		$(".option1").toggle();
 	});
-	
+
 	$(".title2").click(function(){
-		$(".option2").toggle();		
+		$(".option2").toggle();
 	});
-	
+
 	$(".title3").click(function(){
-		$(".option3").toggle();		
+		$(".option3").toggle();
 	});
-	
-	
+
+
 	/**** Change Account ****/
-	
+
 	$(function() {
 	  $('#paymentInfo').change(function(){
 		$('.colors').hide();
 		$('#' + $(this).val()).show();
 	  });
 	});
-	
-	
-	
+
+
+
 });

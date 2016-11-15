@@ -13,8 +13,8 @@
 </div>
 
 <div class="form-horizontal">
-
-<div class="form-group">
+  <%=form_for @new_advertisment,:url=>advertisments_path, :method=>"post" do |f| %>
+        <div class="form-group">
               <label class="control-label col-md-3" for="">Category</label>
               <div class="col-md-5">
               <select name="" class="custom-select form-control">
@@ -37,20 +37,13 @@
             <div class="form-group">
               <label class="control-label col-md-3" for="">Social Influencer</label>
               <div class="col-md-5">
-              <select name="" class="custom-select form-control">
-                <option id="">Select</option>
-                <option id="">Social Influencer1</option>
-                <option id="">Social Influencer2</option>
-                <option id="">Social Influencer3</option>
-                <option id="">Social Influencer4</option>
-                <option id="">Social Influencer5</option>
-              </select>
+                <%=f.select :influencer_id,options_for_select(Influencer.pluck(:name)),:prompt => "-Select-",:class=>"form-control"%>
               <span class="pull-right sm-font"><a href="#">+ Add More</a></span>
               </div>
             </div>
 
 
-<div class="form-group">
+            <div class="form-group">
               <label class="control-label col-md-3" for="">Social Influencer Group</label>
               <div class="col-md-5">
               <select name="" class="custom-select form-control">
@@ -61,22 +54,13 @@
                 <option id="">Group Name4</option>
                 <option id="">Group Name5</option>
               </select>
-              </div>
             </div>
-
-
-
-
+            </div>
 
         <div class="form-group">
           <label class="control-label col-md-3" for="">Media</label>
           <div class="col-md-5">
-          <select name="" class="custom-select form-control">
-            <option id="">Select</option>
-            <option id="facebook">Facebook</option>
-            <option id="Instagram">Instagram</option>
-            <option id="Both">Both</option>
-          </select>
+            <%=f.select :platform,options_for_select(Advertisement::PLATFORMS),:prompt => "-Select-",:class=>"form-control"%>
           </div>
         </div>
 
@@ -85,49 +69,50 @@
           <div class="col-md-12">
                           <!-- Nav tabs -->
         <div class="card">
-          <ul class="nav nav-tabs" role="tablist">
-              <li role="presentation" class="active"><a href="#link" aria-controls="link" role="tab" data-toggle="tab">Link</a></li>
-              <li role="presentation"><a href="#photo" aria-controls="photo" role="tab" data-toggle="tab">Photo</a></li>
-              <li role="presentation"><a href="#video" aria-controls="video" role="tab" data-toggle="tab">Video</a></li>
+          <ul class="nav nav-tabs" id="ad_type" role="tablist">
+              <li role="presentation" onclick="trigger_value_change()" class="active"><a href="#link" aria-controls="link" role="tab" data-toggle="tab">Link</a></li>
+              <li role="presentation" onclick="trigger_value_change()" ><a href="#photo" aria-controls="photo" role="tab" data-toggle="tab">Photo</a></li>
+              <li role="presentation" onclick="trigger_value_change()" ><a href="#video" aria-controls="video" role="tab" data-toggle="tab">Video</a></li>
+              <%=f.hidden_field:type, :value=>1%>
           </ul>
-
         <div class="row">
         <div class="col-md-12">
             <div class="tab-content">
+            <!--#link-->
             <div role="tabpanel" class="tab-pane active" id="link">
 
             <div class="form-group">
             <label class="control-label col-md-3" for="">URL</label>
             <div class="col-md-9">
-            <input placeholder="Link URL" class="form-control input-sm" type="text">
+               <%=f.text_field:advertisement_link,:class=>"form-control input-sm"%>
             </div>
             </div>
 
             <div class="form-group">
             <label class="control-label col-md-3" for="">Message</label>
             <div class="col-md-9">
-            <textarea class="form-control input-sm" placeholder="Type your Message here"></textarea>
+              <%=f.text_field:message,:class=>"form-control input-sm"%>
             </div>
             </div>
 
             <div class="form-group">
             <label class="control-label col-md-3" for="">Title</label>
             <div class="col-md-9">
-            <input placeholder="Title" class="form-control input-sm" type="text">
+              <%=f.text_field:title,:class=>"form-control input-sm"%>
             </div>
             </div>
 
             <div class="form-group">
             <label class="control-label col-md-3" for="">Description</label>
             <div class="col-md-9">
-            <textarea class="form-control input-sm" placeholder="Type your Description here"></textarea>
+              <%=f.text_area:description,:class=>"form-control input-sm"%>
             </div>
             </div>
 
             <div class="form-group">
             <label class="control-label col-md-3" for="">Caption</label>
             <div class="col-md-9">
-            <input placeholder="Caption" class="form-control input-sm" type="text">
+              <%=f.text_field:caption,:class=>"form-control input-sm"%>
             </div>
             </div>
 
@@ -139,43 +124,47 @@
             </div>
 
             </div>
-            <div role="tabpanel" class="tab-pane" id="photo">
-              <div class="form-group">
-                <label class="control-label col-md-3" for="">Description</label>
-                <div class="col-md-9">
-                <textarea class="form-control input-sm" placeholder="Type your Description here"></textarea>
-                </div>
-              </div>
 
-              <div class="form-group">
-                <label class="control-label col-md-3" for="">Upload Image</label>
-                <div class="col-md-9">
-                <input type="file" name="pic" class="form-control-img input-sm">
-                </div>
-              </div>
+            <!--#photo -->
+            <div role="tabpanel" class="tab-pane" id="photo">
+            <div class="form-group">
+            <label class="control-label col-md-3" for="">Description</label>
+            <div class="col-md-9">
+              <%=f.text_area:description,:class=>"form-control input-sm"%>
+            </div>
             </div>
 
+            <div class="form-group">
+            <label class="control-label col-md-3" for="">Upload Image</label>
+            <div class="col-md-9">
+            <input type="file" name="pic" class="form-control-img input-sm">
+            </div>
+            </div>
+            </div>
+
+
+            <!--#video -->
             <div role="tabpanel" class="tab-pane" id="video">
-              <div class="form-group">
-                <label class="control-label col-md-3" for="">Title</label>
-                <div class="col-md-9">
-                <input placeholder="Title" class="form-control input-sm" type="text">
-                </div>
-              </div>
+            <div class="form-group">
+            <label class="control-label col-md-3" for="">Title</label>
+            <div class="col-md-9">
+              <%=f.text_field:title,:class=>"form-control input-sm"%>
+            </div>
+            </div>
 
-              <div class="form-group">
-                <label class="control-label col-md-3" for="">Description</label>
-                <div class="col-md-9">
-                <textarea class="form-control input-sm" placeholder="Type your Description here"></textarea>
-                </div>
-              </div>
+            <div class="form-group">
+            <label class="control-label col-md-3" for="">Description</label>
+            <div class="col-md-9">
+              <%=f.text_area:description,:class=>"form-control input-sm"%>
+            </div>
+            </div>
 
-              <div class="form-group">
-                <label class="control-label col-md-3" for="">URL</label>
-                <div class="col-md-9">
-                <input placeholder="Youtube URL or Facebook public video URL or video URL ending with .mp4/.flv etc" class="form-control input-sm" type="text">
-                </div>
-              </div>
+            <div class="form-group">
+            <label class="control-label col-md-3" for="">URL</label>
+            <div class="col-md-9">
+              <%=f.text_area:advertisement_link,:class=>"form-control input-sm"%>
+            </div>
+            </div>
             </div>
             </div>
         </div>
@@ -264,22 +253,24 @@
 </div>
 </div>
 
+
 <div class="row">
 <div class="col-md-12">
 <div class="form-group">
   <label class="control-label col-md-3" for="">Time Pause</label>
   <div class="col-md-5">
-              <select name="" class="custom-select form-control">
-                <option id="">Select</option>
-                <option id="">15 Minutes</option>
-                <option id="">30 Minutes</option>
-                <option id="">45 Minutes</option>
-                <option id="">60 Minutes</option>
-              </select>
-              </div>
+    <select name="" class="custom-select form-control">
+      <option id="">Select</option>
+      <option id="">15 Minutes</option>
+      <option id="">30 Minutes</option>
+      <option id="">45 Minutes</option>
+      <option id="">60 Minutes</option>
+    </select>
+    </div>
 </div>
 </div>
 </div>
+
 
 <hr>
 
@@ -294,23 +285,24 @@
 </div>
 
 <div class="row">
-<div class="col-md-12">
-<div class="form-group">
-  <label class="control-label col-md-3" for="">Repeat</label>
-  <div class="col-md-5">
-              <select name="" class="custom-select">
-                <option id="">Select</option>
-                <option id="">Once Per Day</option>
-                <option id="">Every Two Day</option>
-                <option id="">Every Three Day</option>
-                <option id="">Every Four Day</option>
-                <option id="">Every Five Day</option>
-                <option id="">Every Six Day</option>
-                <option id="">Once Per Week</option>
-              </select>
-              </div>
-</div>
-</div>
+
+  <div class="col-md-12">
+    <div class="form-group">
+      <label class="control-label col-md-3" for="">Repeat</label>
+        <div class="col-md-5">
+        <select name="" class="custom-select">
+          <option id="">Select</option>
+          <option id="">Once Per Day</option>
+          <option id="">Every Two Day</option>
+          <option id="">Every Three Day</option>
+          <option id="">Every Four Day</option>
+          <option id="">Every Five Day</option>
+          <option id="">Every Six Day</option>
+          <option id="">Once Per Week</option>
+        </select>
+        </div>
+    </div>
+  </div>
 </div>
 
 <div class="row">
@@ -428,21 +420,33 @@
 
 <div class="row">
 <div class="col-md-9 col-md-offset-3">
-  <a class="btn btn-mountain btn-sm btn-round" href="#">Save</a>
+  <%=f.submit "Save", :class=>"btn btn-mountain btn-sm btn-round"%>
   <a class="btn btn-mountain btn-sm btn-round" href="#">Cancel</a>
 </div>
 </div>
-
+<%end%>
 </div>
 <!--<button class="btn btn-mountain-o btn-sm btn-round">Save</button> <button class="btn btn-mountain-o btn-sm btn-round">Cancel</button>		-->
-
 </div>
-
 </div>
 </section>
-
-
-
 </div>
 </section>
 </main>
+<script>
+  $("#advertisement_influencer_id").addClass("form-control");
+  $("#advertisement_platform").addClass("form-control");
+
+function trigger_value_change(){
+  value = $('.nav-tabs .active').text();
+  console.log(value);
+  id = "";
+  switch(value){
+    case "Link": id = 1 ; break;
+    case "Photo": id = 2 ; break;
+    case "Video": id = 3 ; break;
+  }
+console.log(id);
+id="";
+}
+</script>

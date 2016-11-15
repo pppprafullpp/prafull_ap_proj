@@ -5,7 +5,8 @@ class Influencer < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
     has_many :social_accounts
-    
-  Platform = {"Facebook"=>1,"Instagram"=>2}
+    has_many :advertisements
+
+  
 
 end

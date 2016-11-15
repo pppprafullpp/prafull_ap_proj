@@ -11,7 +11,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161107105743) do
+ActiveRecord::Schema.define(version: 20161114072117) do
+
+  create_table "advertisements", force: :cascade do |t|
+    t.integer  "type",               limit: 4
+    t.text     "url",                limit: 65535
+    t.text     "message",            limit: 65535
+    t.string   "title",              limit: 255
+    t.text     "description",        limit: 65535
+    t.text     "caption",            limit: 65535
+    t.integer  "time_post",          limit: 4
+    t.integer  "delay",              limit: 4
+    t.text     "advertisement_link", limit: 65535
+    t.text     "after_complete",     limit: 65535
+    t.boolean  "repeat"
+    t.text     "end_date",           limit: 65535
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
+    t.integer  "advertiser_id",      limit: 4
+    t.integer  "influencer_id",      limit: 4
+    t.integer  "platform",           limit: 4
+  end
 
   create_table "advertisers", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "", null: false
