@@ -85,6 +85,133 @@ Please ensure you restarted your application after installing Devise or setting 
 Tasks: TOP => update_social_data:update_facebook_likes => environment
 (See full trace by running task with --trace)
 rake aborted!
+<<<<<<< HEAD
+SocketError: getaddrinfo: Name or service not known (graph.facebook.com:443)
+/home/servicedealz/.rvm/gems/ruby-2.3.1/gems/httpclient-2.8.2.4/lib/httpclient/session.rb:604:in `initialize'
+/home/servicedealz/.rvm/gems/ruby-2.3.1/gems/httpclient-2.8.2.4/lib/httpclient/session.rb:604:in `new'
+/home/servicedealz/.rvm/gems/ruby-2.3.1/gems/httpclient-2.8.2.4/lib/httpclient/session.rb:604:in `create_socket'
+/home/servicedealz/.rvm/gems/ruby-2.3.1/gems/httpclient-2.8.2.4/lib/httpclient/ssl_socket.rb:18:in `create_socket'
+/home/servicedealz/.rvm/gems/ruby-2.3.1/gems/httpclient-2.8.2.4/lib/httpclient/session.rb:746:in `block in connect'
+/home/servicedealz/.rvm/gems/ruby-2.3.1/gems/httpclient-2.8.2.4/lib/httpclient/session.rb:742:in `connect'
+/home/servicedealz/.rvm/gems/ruby-2.3.1/gems/httpclient-2.8.2.4/lib/httpclient/session.rb:504:in `query'
+/home/servicedealz/.rvm/gems/ruby-2.3.1/gems/httpclient-2.8.2.4/lib/httpclient/session.rb:174:in `query'
+/home/servicedealz/.rvm/gems/ruby-2.3.1/gems/httpclient-2.8.2.4/lib/httpclient.rb:1240:in `do_get_block'
+/home/servicedealz/.rvm/gems/ruby-2.3.1/gems/httpclient-2.8.2.4/lib/httpclient.rb:1017:in `block in do_request'
+/home/servicedealz/.rvm/gems/ruby-2.3.1/gems/httpclient-2.8.2.4/lib/httpclient.rb:1131:in `protect_keep_alive_disconnected'
+/home/servicedealz/.rvm/gems/ruby-2.3.1/gems/httpclient-2.8.2.4/lib/httpclient.rb:1012:in `do_request'
+/home/servicedealz/.rvm/gems/ruby-2.3.1/gems/httpclient-2.8.2.4/lib/httpclient.rb:854:in `request'
+/home/servicedealz/.rvm/gems/ruby-2.3.1/gems/httpclient-2.8.2.4/lib/httpclient.rb:741:in `get'
+/home/servicedealz/.rvm/gems/ruby-2.3.1/gems/fb_graph2-0.8.0/lib/fb_graph2/node.rb:56:in `block in get'
+/home/servicedealz/.rvm/gems/ruby-2.3.1/gems/fb_graph2-0.8.0/lib/fb_graph2/node.rb:104:in `handle_response'
+/home/servicedealz/.rvm/gems/ruby-2.3.1/gems/fb_graph2-0.8.0/lib/fb_graph2/node.rb:55:in `get'
+/home/servicedealz/.rvm/gems/ruby-2.3.1/gems/fb_graph2-0.8.0/lib/fb_graph2/node.rb:19:in `fetch'
+/home/servicedealz/SocialBooker/lib/tasks/update_social_data.rake:8:in `block (3 levels) in <top (required)>'
+/home/servicedealz/.rvm/gems/ruby-2.3.1/gems/activerecord-4.2.6/lib/active_record/relation/delegation.rb:46:in `each'
+/home/servicedealz/.rvm/gems/ruby-2.3.1/gems/activerecord-4.2.6/lib/active_record/relation/delegation.rb:46:in `each'
+/home/servicedealz/SocialBooker/lib/tasks/update_social_data.rake:7:in `block (2 levels) in <top (required)>'
+/home/servicedealz/.rvm/gems/ruby-2.3.1/gems/rake-11.3.0/exe/rake:27:in `<top (required)>'
+/home/servicedealz/.rvm/gems/ruby-2.3.1/bin/ruby_executable_hooks:15:in `eval'
+/home/servicedealz/.rvm/gems/ruby-2.3.1/bin/ruby_executable_hooks:15:in `<main>'
+=======
+NoMethodError: undefined method `[]' for nil:NilClass
+/home/apoorvmittal/Desktop/SocialBooker/lib/tasks/update_social_data.rake:17:in `block (3 levels) in <top (required)>'
+/home/apoorvmittal/.rvm/gems/ruby-2.3.1/gems/activerecord-4.2.6/lib/active_record/relation/delegation.rb:46:in `each'
+/home/apoorvmittal/.rvm/gems/ruby-2.3.1/gems/activerecord-4.2.6/lib/active_record/relation/delegation.rb:46:in `each'
+/home/apoorvmittal/Desktop/SocialBooker/lib/tasks/update_social_data.rake:7:in `block (2 levels) in <top (required)>'
+/home/apoorvmittal/.rvm/gems/ruby-2.3.1/gems/rake-11.3.0/exe/rake:27:in `<top (required)>'
+/home/apoorvmittal/.rvm/gems/ruby-2.3.1/bin/ruby_executable_hooks:15:in `eval'
+/home/apoorvmittal/.rvm/gems/ruby-2.3.1/bin/ruby_executable_hooks:15:in `<main>'
+Tasks: TOP => update_social_data:update_facebook_likes
+(See full trace by running task with --trace)
+rake aborted!
+NoMethodError: undefined method `[]' for nil:NilClass
+/home/apoorvmittal/Desktop/SocialBooker/lib/tasks/update_social_data.rake:17:in `block (3 levels) in <top (required)>'
+/home/apoorvmittal/.rvm/gems/ruby-2.3.1/gems/activerecord-4.2.6/lib/active_record/relation/delegation.rb:46:in `each'
+/home/apoorvmittal/.rvm/gems/ruby-2.3.1/gems/activerecord-4.2.6/lib/active_record/relation/delegation.rb:46:in `each'
+/home/apoorvmittal/Desktop/SocialBooker/lib/tasks/update_social_data.rake:7:in `block (2 levels) in <top (required)>'
+/home/apoorvmittal/.rvm/gems/ruby-2.3.1/gems/rake-11.3.0/exe/rake:27:in `<top (required)>'
+/home/apoorvmittal/.rvm/gems/ruby-2.3.1/bin/ruby_executable_hooks:15:in `eval'
+/home/apoorvmittal/.rvm/gems/ruby-2.3.1/bin/ruby_executable_hooks:15:in `<main>'
+Tasks: TOP => update_social_data:update_facebook_likes
+(See full trace by running task with --trace)
+rake aborted!
+NoMethodError: undefined method `[]' for nil:NilClass
+/home/apoorvmittal/Desktop/SocialBooker/lib/tasks/update_social_data.rake:17:in `block (3 levels) in <top (required)>'
+/home/apoorvmittal/.rvm/gems/ruby-2.3.1/gems/activerecord-4.2.6/lib/active_record/relation/delegation.rb:46:in `each'
+/home/apoorvmittal/.rvm/gems/ruby-2.3.1/gems/activerecord-4.2.6/lib/active_record/relation/delegation.rb:46:in `each'
+/home/apoorvmittal/Desktop/SocialBooker/lib/tasks/update_social_data.rake:7:in `block (2 levels) in <top (required)>'
+/home/apoorvmittal/.rvm/gems/ruby-2.3.1/gems/rake-11.3.0/exe/rake:27:in `<top (required)>'
+/home/apoorvmittal/.rvm/gems/ruby-2.3.1/bin/ruby_executable_hooks:15:in `eval'
+/home/apoorvmittal/.rvm/gems/ruby-2.3.1/bin/ruby_executable_hooks:15:in `<main>'
+Tasks: TOP => update_social_data:update_facebook_likes
+(See full trace by running task with --trace)
+rake aborted!
+NoMethodError: undefined method `[]' for nil:NilClass
+/home/apoorvmittal/Desktop/SocialBooker/lib/tasks/update_social_data.rake:17:in `block (3 levels) in <top (required)>'
+/home/apoorvmittal/.rvm/gems/ruby-2.3.1/gems/activerecord-4.2.6/lib/active_record/relation/delegation.rb:46:in `each'
+/home/apoorvmittal/.rvm/gems/ruby-2.3.1/gems/activerecord-4.2.6/lib/active_record/relation/delegation.rb:46:in `each'
+/home/apoorvmittal/Desktop/SocialBooker/lib/tasks/update_social_data.rake:7:in `block (2 levels) in <top (required)>'
+/home/apoorvmittal/.rvm/gems/ruby-2.3.1/gems/rake-11.3.0/exe/rake:27:in `<top (required)>'
+/home/apoorvmittal/.rvm/gems/ruby-2.3.1/bin/ruby_executable_hooks:15:in `eval'
+/home/apoorvmittal/.rvm/gems/ruby-2.3.1/bin/ruby_executable_hooks:15:in `<main>'
+Tasks: TOP => update_social_data:update_facebook_likes
+(See full trace by running task with --trace)
+rake aborted!
+SyntaxError: /home/apoorvmittal/Desktop/SocialBooker/lib/tasks/update_social_data.rake:17: syntax error, unexpected modifier_rescue, expecting ')'
+...s["location"]["country"] rescue "NA",
+...                               ^
+/home/apoorvmittal/Desktop/SocialBooker/lib/tasks/update_social_data.rake:17: syntax error, unexpected ',', expecting keyword_end
+/home/apoorvmittal/Desktop/SocialBooker/lib/tasks/update_social_data.rake:19: syntax error, unexpected ')', expecting keyword_end
+/home/apoorvmittal/Desktop/SocialBooker/lib/tasks/update_social_data.rake:27: syntax error, unexpected end-of-input, expecting keyword_end
+/home/apoorvmittal/.rvm/gems/ruby-2.3.1/gems/activesupport-4.2.6/lib/active_support/dependencies.rb:268:in `load'
+/home/apoorvmittal/.rvm/gems/ruby-2.3.1/gems/activesupport-4.2.6/lib/active_support/dependencies.rb:268:in `block in load'
+/home/apoorvmittal/.rvm/gems/ruby-2.3.1/gems/activesupport-4.2.6/lib/active_support/dependencies.rb:240:in `load_dependency'
+/home/apoorvmittal/.rvm/gems/ruby-2.3.1/gems/activesupport-4.2.6/lib/active_support/dependencies.rb:268:in `load'
+/home/apoorvmittal/.rvm/gems/ruby-2.3.1/gems/railties-4.2.6/lib/rails/engine.rb:658:in `block in run_tasks_blocks'
+/home/apoorvmittal/.rvm/gems/ruby-2.3.1/gems/railties-4.2.6/lib/rails/engine.rb:658:in `each'
+/home/apoorvmittal/.rvm/gems/ruby-2.3.1/gems/railties-4.2.6/lib/rails/engine.rb:658:in `run_tasks_blocks'
+/home/apoorvmittal/.rvm/gems/ruby-2.3.1/gems/railties-4.2.6/lib/rails/application.rb:452:in `run_tasks_blocks'
+/home/apoorvmittal/.rvm/gems/ruby-2.3.1/gems/railties-4.2.6/lib/rails/engine.rb:453:in `load_tasks'
+/home/apoorvmittal/Desktop/SocialBooker/Rakefile:6:in `<top (required)>'
+/home/apoorvmittal/.rvm/gems/ruby-2.3.1/gems/rake-11.3.0/exe/rake:27:in `<top (required)>'
+/home/apoorvmittal/.rvm/gems/ruby-2.3.1/bin/ruby_executable_hooks:15:in `eval'
+/home/apoorvmittal/.rvm/gems/ruby-2.3.1/bin/ruby_executable_hooks:15:in `<main>'
+(See full trace by running task with --trace)
+rake aborted!
+NoMethodError: undefined method `[]' for nil:NilClass
+/home/apoorvmittal/Desktop/SocialBooker/lib/tasks/update_social_data.rake:18:in `block (3 levels) in <top (required)>'
+/home/apoorvmittal/.rvm/gems/ruby-2.3.1/gems/activerecord-4.2.6/lib/active_record/relation/delegation.rb:46:in `each'
+/home/apoorvmittal/.rvm/gems/ruby-2.3.1/gems/activerecord-4.2.6/lib/active_record/relation/delegation.rb:46:in `each'
+/home/apoorvmittal/Desktop/SocialBooker/lib/tasks/update_social_data.rake:7:in `block (2 levels) in <top (required)>'
+/home/apoorvmittal/.rvm/gems/ruby-2.3.1/gems/rake-11.3.0/exe/rake:27:in `<top (required)>'
+/home/apoorvmittal/.rvm/gems/ruby-2.3.1/bin/ruby_executable_hooks:15:in `eval'
+/home/apoorvmittal/.rvm/gems/ruby-2.3.1/bin/ruby_executable_hooks:15:in `<main>'
+Tasks: TOP => update_social_data:update_facebook_likes
+(See full trace by running task with --trace)
+rake aborted!
+NoMethodError: undefined method `[]=' for nil:NilClass
+/home/apoorvmittal/Desktop/SocialBooker/lib/tasks/update_social_data.rake:13:in `block (3 levels) in <top (required)>'
+/home/apoorvmittal/.rvm/gems/ruby-2.3.1/gems/activerecord-4.2.6/lib/active_record/relation/delegation.rb:46:in `each'
+/home/apoorvmittal/.rvm/gems/ruby-2.3.1/gems/activerecord-4.2.6/lib/active_record/relation/delegation.rb:46:in `each'
+/home/apoorvmittal/Desktop/SocialBooker/lib/tasks/update_social_data.rake:7:in `block (2 levels) in <top (required)>'
+/home/apoorvmittal/.rvm/gems/ruby-2.3.1/gems/rake-11.3.0/exe/rake:27:in `<top (required)>'
+/home/apoorvmittal/.rvm/gems/ruby-2.3.1/bin/ruby_executable_hooks:15:in `eval'
+/home/apoorvmittal/.rvm/gems/ruby-2.3.1/bin/ruby_executable_hooks:15:in `<main>'
+Tasks: TOP => update_social_data:update_facebook_likes
+(See full trace by running task with --trace)
+rake aborted!
+NoMethodError: undefined method `[]' for nil:NilClass
+/home/apoorvmittal/Desktop/SocialBooker/lib/tasks/update_social_data.rake:14:in `block (3 levels) in <top (required)>'
+/home/apoorvmittal/.rvm/gems/ruby-2.3.1/gems/activerecord-4.2.6/lib/active_record/relation/delegation.rb:46:in `each'
+/home/apoorvmittal/.rvm/gems/ruby-2.3.1/gems/activerecord-4.2.6/lib/active_record/relation/delegation.rb:46:in `each'
+/home/apoorvmittal/Desktop/SocialBooker/lib/tasks/update_social_data.rake:7:in `block (2 levels) in <top (required)>'
+/home/apoorvmittal/.rvm/gems/ruby-2.3.1/gems/rake-11.3.0/exe/rake:27:in `<top (required)>'
+/home/apoorvmittal/.rvm/gems/ruby-2.3.1/bin/ruby_executable_hooks:15:in `eval'
+/home/apoorvmittal/.rvm/gems/ruby-2.3.1/bin/ruby_executable_hooks:15:in `<main>'
+>>>>>>> 09d46a000a700b7242fe73ee171df70e62f2601e
+Tasks: TOP => update_social_data:update_facebook_likes
+(See full trace by running task with --trace)
+rake aborted!
 SocketError: getaddrinfo: Name or service not known (graph.facebook.com:443)
 /home/servicedealz/.rvm/gems/ruby-2.3.1/gems/httpclient-2.8.2.4/lib/httpclient/session.rb:604:in `initialize'
 /home/servicedealz/.rvm/gems/ruby-2.3.1/gems/httpclient-2.8.2.4/lib/httpclient/session.rb:604:in `new'
