@@ -51,3 +51,11 @@ gem 'toastr-rails'
 gem 'omniauth-facebook'
 gem 'jquery-cookie-rails'
 gem 'to_csv-rails'
+gem 'will_paginate'
+gem 'fb_graph2'
+gem "koala", "~> 2.2"
+# => "986978254757512|vGvEynp44LE_I_yG6dgAsjlF770"
+# page = FbGraph2::Page.new('ServiceDealz').fetch(
+#   :access_token => "EAACEdEose0cBANuqFcKNMY9vhX5GvuEWyiWDZBZBopIOx1QfOVJYCZBpd8JJTcbThA0N9BDmACekHbbsAKwMxb5ce0KMBd2iGoCurpharqCgdqOUI37JuZBOKOt9cLq2FbGZAouTZAKQCw7GrliI3Tc5OgG3VfSkriJ1MPjofXUl7DpppS4ZAJZC"
+# )
+# page.likes

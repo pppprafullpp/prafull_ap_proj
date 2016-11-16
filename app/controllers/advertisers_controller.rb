@@ -17,10 +17,11 @@ class AdvertisersController < ApplicationController
   end
 
   def social_accounts
-
+    @social_accounts = SocialAccount.all
   end
 
   def ad_compaigns
+    @ads = Advertisement.all.paginate(:page => params[:page], :per_page => 10)
   end
 
   def audience_management

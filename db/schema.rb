@@ -11,10 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161114072117) do
+ActiveRecord::Schema.define(version: 20161116055020) do
 
   create_table "advertisements", force: :cascade do |t|
-    t.integer  "type",               limit: 4
+    t.integer  "ad_type",            limit: 4
     t.text     "url",                limit: 65535
     t.text     "message",            limit: 65535
     t.string   "title",              limit: 255
@@ -31,6 +31,8 @@ ActiveRecord::Schema.define(version: 20161114072117) do
     t.integer  "advertiser_id",      limit: 4
     t.integer  "influencer_id",      limit: 4
     t.integer  "platform",           limit: 4
+    t.integer  "status",             limit: 4
+    t.integer  "category",           limit: 4
   end
 
   create_table "advertisers", force: :cascade do |t|
@@ -106,6 +108,8 @@ ActiveRecord::Schema.define(version: 20161114072117) do
     t.text     "name",                   limit: 65535
     t.datetime "created_at",                                        null: false
     t.datetime "updated_at",                                        null: false
+    t.integer  "facebook_page_count",    limit: 4
+    t.integer  "instagram_page_count",   limit: 4
   end
 
   add_index "influencers", ["email"], name: "index_influencers_on_email", unique: true, using: :btree
@@ -120,12 +124,14 @@ ActiveRecord::Schema.define(version: 20161114072117) do
   end
 
   create_table "social_accounts", force: :cascade do |t|
-    t.integer  "influencer_id",    limit: 4
-    t.integer  "platform_type",    limit: 4
-    t.text     "platform_type_id", limit: 65535
-    t.text     "platform_link",    limit: 65535
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
+    t.integer  "influencer_id",        limit: 4
+    t.integer  "platform_type",        limit: 4
+    t.text     "platform_type_id",     limit: 65535
+    t.text     "platform_link",        limit: 65535
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
+    t.integer  "facebook_page_count",  limit: 4
+    t.integer  "instagram_page_count", limit: 4
   end
 
 end

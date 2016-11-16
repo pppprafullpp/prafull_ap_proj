@@ -18,9 +18,14 @@ class InfluencersController < ApplicationController
 
   def add_social_account_details
     # raise params.to_yaml
-    SocialAccount.create!(create_social_account)
-    flash[:success] = "Successfully created"
-    redirect_to :back
+    if current_influencer.social_account.present?
+      flash[:success] = "Social Account Already exists"
+    else
+      SocialAccount.create!(create_social_account)
+      flash[:success] = "Successfully created"
+
+    end
+        redirect_to :back
   end
 
   private
@@ -28,4 +33,5 @@ class InfluencersController < ApplicationController
   def create_social_account
     params.require(:social_account).permit!
   end
+  
 end
