@@ -5,7 +5,7 @@ namespace :update_social_data do
       all_influencers = Influencer.all
 
       all_influencers.each do |influencer|
-        if influencer.social_accounts.present?
+        if influencer.social_account.present?
           influnencer_social_accounts = influencer.social_account
               influnencer_social_accounts.each do |influencer_social_account|
                 page = FbGraph2::Page.new(influencer_social_account.platform_type_id).fetch(
