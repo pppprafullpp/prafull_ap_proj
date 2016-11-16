@@ -6,7 +6,8 @@
 
 # Ignore bundler config.
 /.bundle
-
+/.cron.log
+/.error.log
 # Ignore the default SQLite database.
 /db/*.sqlite3
 /db/*.sqlite3-journal
