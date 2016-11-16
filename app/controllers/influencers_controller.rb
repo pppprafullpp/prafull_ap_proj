@@ -13,7 +13,7 @@ class InfluencersController < ApplicationController
 
   def setting
     @new_social_account = SocialAccount.new
-    @social_accounts = current_influencer.social_accounts
+    @social_accounts = current_influencer.social_account
   end
 
   def add_social_account_details
@@ -33,5 +33,5 @@ class InfluencersController < ApplicationController
   def create_social_account
     params.require(:social_account).permit!
   end
-  
+
 end
