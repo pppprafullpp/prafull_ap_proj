@@ -85,7 +85,7 @@
 
               <div class="rgt-icon">
                 <div class="center-icon">
-                  <a href="#" data-toggle="tooltip" data-html="true" data-placement="bottom" title="Category: Fitness<br> Top 5 Countries: US, UK, ES  <br>Estimated Reach: 100K <br>See Full Insights(Not Available)"><span class="ion-information"></span></a>
+                  <a href="#" data-toggle="tooltip" data-html="true" data-placement="bottom" title="Category: <%=social_account.category%>,<%=social_account.about.truncate(20)%><br>Estimated Reach: <%=number_to_human(social_account.facebook_page_count.to_i, :format => '%n%u', :units => { :thousand => 'K' })%>"><span class="ion-information"></span></a>
                 </div>
               </div>
 
