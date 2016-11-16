@@ -7,7 +7,9 @@
 #
 # set :output, "/path/to/my/cron_log.log"
 #
-every 2.hours do
+set :output, { error: 'error.log', standard: 'cron.log' }
+
+every 1.minute do
     rake "update_social_data:update_facebook_likes"
 end
 #
