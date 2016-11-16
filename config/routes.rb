@@ -19,6 +19,7 @@ Rails.application.routes.draw do
     get :ad_compaigns
     get :create_ad_compaign
     post :change_password
+    get :influencer_detail
   end
 
   resources :influencers do

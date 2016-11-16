@@ -11,7 +11,12 @@
                 </div>
               <div class="user-nav">
                 <ul>
-                  <li class="lg-font">Your Balance: $350</li>
+                  <%if current_influencer%>
+                  <%wallet = current_influencer.wallet_amount%>
+                  <%elsif current_advertiser%>
+                  <%wallet = current_advertiser.wallet_amount%>
+                  <%end%>
+                  <li class="lg-font">Your Balance: $<%=wallet%></li>
                   <li class="dropdown messages">
                     <span class="badge badge-danager animated bounceIn" id="new-messages">38</span>
                     <a onclick="javascript:$('#notification-dropdown').toggle()" class="dropdown-toggle options topIcon" id="toggle-mail" data-toggle="dropdown">

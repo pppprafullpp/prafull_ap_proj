@@ -32,6 +32,9 @@ class AdvertisersController < ApplicationController
 
   end
 
+  def influencer_detail
+    @social_account_detail = SocialAccount.find(params[:social_account_id])
+  end
 
   def create_ad_compaign
     @new_advertisment = Advertisement.new

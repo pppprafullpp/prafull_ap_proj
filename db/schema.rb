@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161116055020) do
+ActiveRecord::Schema.define(version: 20161116115616) do
 
   create_table "advertisements", force: :cascade do |t|
     t.integer  "ad_type",            limit: 4
@@ -58,6 +58,7 @@ ActiveRecord::Schema.define(version: 20161116055020) do
     t.string   "username",               limit: 255
     t.string   "providerid",             limit: 255
     t.string   "uid",                    limit: 255
+    t.integer  "wallet_amount",          limit: 4
   end
 
   add_index "advertisers", ["email"], name: "index_advertisers_on_email", unique: true, using: :btree
@@ -132,6 +133,7 @@ ActiveRecord::Schema.define(version: 20161116055020) do
     t.datetime "updated_at",                         null: false
     t.integer  "facebook_page_count",  limit: 4
     t.integer  "instagram_page_count", limit: 4
+    t.text     "about",                limit: 65535
   end
 
 end

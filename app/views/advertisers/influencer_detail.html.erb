@@ -1,0 +1,32 @@
+<main>
+ <section id="one-page-side-menu-static" class="one-page-side-menu-static side-menu">
+ <div class="content-wrapper">
+<%= render :partial => "/layouts/left_panel" %>
+<%= render :partial => "/layouts/header" %>
+<section class="account section" style="min-height:575px;">
+<div class="container">
+
+  <div class="row">
+  <div class="col-md-12">
+    <h1>Influencer Details</h1>
+  </div>
+ </div>
+
+  <div class="row">
+          <div class="col-sm-4"><img class="img-responsive" alt="team" src="assets/images/gallery/ad-request.jpg"></div>
+          <div class="col-sm-8">
+            <h4 class="member-name"><%=@social_account_detail.platform_type_id%></h4>
+            <p><strong>About:</strong><%=@social_account_detail.about%></p>
+              <p>
+                <span style="border-bottom:solid 1px #e1e1e1; margin-bottom:10px; padding-bottom:10px; display:block"><strong>Country:</strong> USA</span>
+                <span style="border-bottom:solid 1px #e1e1e1; margin-bottom:10px; padding-bottom:10px; display:block"><strong>Facebook Likes:</strong><%=@social_account_detail.facebook_page_count%></span>
+              </p>
+            </div>
+    </div>
+
+
+</div>
+</section>
+</div>
+</section>
+</main>
