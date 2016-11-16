@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161116115616) do
+ActiveRecord::Schema.define(version: 20161116182714) do
 
   create_table "advertisements", force: :cascade do |t|
     t.integer  "ad_type",            limit: 4
@@ -134,6 +134,9 @@ ActiveRecord::Schema.define(version: 20161116115616) do
     t.integer  "facebook_page_count",  limit: 4
     t.integer  "instagram_page_count", limit: 4
     t.text     "about",                limit: 65535
+    t.text     "facebook_image_url",   limit: 65535
+    t.text     "country",              limit: 65535
+    t.text     "category",             limit: 65535
   end
 
 end

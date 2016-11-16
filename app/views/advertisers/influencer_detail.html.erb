@@ -13,18 +13,17 @@
  </div>
 
   <div class="row">
-          <div class="col-sm-4"><img class="img-responsive" alt="team" src="assets/images/gallery/ad-request.jpg"></div>
+          <div class="col-sm-4"><img class="img-responsive" alt="team" src="<%=@social_account_detail.facebook_image_url%>" width="100%"></div>
           <div class="col-sm-8">
             <h4 class="member-name"><%=@social_account_detail.platform_type_id%></h4>
             <p><strong>About:</strong><%=@social_account_detail.about%></p>
               <p>
-                <span style="border-bottom:solid 1px #e1e1e1; margin-bottom:10px; padding-bottom:10px; display:block"><strong>Country:</strong> USA</span>
+                <span style="border-bottom:solid 1px #e1e1e1; margin-bottom:10px; padding-bottom:10px; display:block"><strong>Country:</strong><%=@social_account_detail.country%></span>
                 <span style="border-bottom:solid 1px #e1e1e1; margin-bottom:10px; padding-bottom:10px; display:block"><strong>Facebook Likes:</strong><%=@social_account_detail.facebook_page_count%></span>
+                <span style="border-bottom:solid 1px #e1e1e1; margin-bottom:10px; padding-bottom:10px; display:block"><strong>Category:</strong><%=@social_account_detail.category%></span>
               </p>
             </div>
     </div>
-
-
 </div>
 </section>
 </div>
