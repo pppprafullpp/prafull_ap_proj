@@ -27,8 +27,7 @@
               <label class="control-label col-md-3" for="">Social Influencer</label>
               <div class="col-md-5">
                 <%=f.select :influencer_id,options_for_select(Influencer.pluck(:name, :id)),:prompt => "-Select-",:class=>"form-control"%>
-              <span class="pull-right sm-font"><a href="#">+ Add More</a></span>
-              </div>
+               </div>
             </div>
 
 
