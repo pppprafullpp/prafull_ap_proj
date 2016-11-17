@@ -15,6 +15,9 @@
  </div>
 
     <div class="row">
+
+      <%@ad_requests.each do |ad_request|%>
+
       <div class="col-md-4 main-content-wrapper">
         <div class="lft-icon">
         <div class="center-icon">
@@ -24,10 +27,10 @@
 
         <div class="price-features">
           <div class="advertiserBox">
-            <img src="assets/images/gallery/ad-request.jpg">
+            <img src="/assets/gallery/ad-request.jpg">
             </div>
-          <h4>Title</h4>
-          <p>Activate's leading technology platform combined with the world's largest influencer network powers effective and measurable social influencer campaigns. </p>
+          <h4><%=ad_request.title%></h4>
+          <p><%=ad_request.description%></p>
           <div class="price-cta">
             <div class="price-number-wrap">
               <div class="price-top"><span class="price-plan-time-unit">Price: </span><span class="price-cta-number">$50</span></div>
@@ -36,19 +39,10 @@
           </div>
         </div>
       </div>
+
+      <%end%>
       </div>
 
-  <div class="row">
-  <div class="col-md-12">
-     <ul class="pagination">
-      <li><a href="#"><< Previous</a></li>
-      <li><a href="#">1</a></li>
-      <li><a href="#">2</a></li>
-      <li><a href="#">3</a></li>
-      <li><a href="#">Next >></a></li>
-    </ul>
-  </div>
-  </div>
       </div>
     </section>
 

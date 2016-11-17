@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  # devise_for :influencers
+  devise_for :admins
+  resources :admins 
   resources :campaigns
   resources :categories
   resources :advertisments
@@ -33,6 +34,7 @@ Rails.application.routes.draw do
     post :change_password
     post :add_social_account_details
     end
+
 
   root 'home#index'
 

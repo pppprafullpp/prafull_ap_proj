@@ -1,8 +1,9 @@
 class AdvertismentsController < ApplicationController
 
   def create
+raise params.to_yaml
     Advertisement.create!(advertisement_params)
-    # raise params.to_yaml
+
     flash[:success] = "Created successfully"
     redirect_to :back
   end

@@ -6,6 +6,7 @@ class InfluencersController < ApplicationController
   end
 
   def ad_requests
+    @ad_requests = Advertisement.where(:influencer_id=>current_influencer.id)
   end
 
   def change_password
