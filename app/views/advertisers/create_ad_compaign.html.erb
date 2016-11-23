@@ -15,7 +15,6 @@
 <div class="form-horizontal">
   <%=form_for @new_advertisment,:url=>advertisments_path, :method=>"post" do |f| %>
   <%=f.hidden_field:advertiser_id, :value=>current_advertiser.id%>
-  <%=f.hidden_field:status, :value=>0%>
         <div class="form-group">
               <label class="control-label col-md-3" for="">Category</label>
               <div class="col-md-5">
@@ -31,7 +30,7 @@
             </div>
 
 
-            <div class="form-group">
+            <div class="form-group hidden">
               <label class="control-label col-md-3" for="">Social Influencer Group</label>
               <div class="col-md-5">
               <select name="" class="custom-select form-control">
@@ -49,111 +48,117 @@
           <label class="control-label col-md-3" for="">Media</label>
           <div class="col-md-5">
             <%=f.select :platform,options_for_select(Advertisement::PLATFORMS),:prompt => "-Select-",:class=>"form-control"%>
-          </div>
+        </div>
         </div>
 
+        <div class="form-group">
+          <label class="control-label col-md-3" for="">Media</label>
+          <div class="col-md-5">
+            <%=select_tag("advertisement[ad_type]",options_for_select(Advertisement::TYPE),:class=>"form-control", :onchange=>"change_ad_type_div()")%>
+          </div>
+        </div>
+        <script>
+        function change_ad_type_div() {
+          id = $("#advertisement_ad_type option:selected").val();
+          switch(id) {
+            case "1": $("#link").show();$("#photo").hide();$("#video").hide();break;
+            case "2": $("#link").hide();$("#photo").show();$("#video").hide();break;
+            case "3": $("#link").hide();$("#photo").hide();$("#video").show();break;
+          }
+        }
+        </script>
+        <hr />
 
         <div class="row">
-          <div class="col-md-12">
-                          <!-- Nav tabs -->
+        <div class="col-md-12">
         <div class="card">
-          <ul class="nav nav-tabs" id="ad_type" role="tablist">
-              <li role="presentation" onclick="trigger_value_change()" class="active"><a href="#link" aria-controls="link" role="tab" data-toggle="tab">Link</a></li>
-              <li role="presentation" onclick="trigger_value_change()" ><a href="#photo" aria-controls="photo" role="tab" data-toggle="tab">Photo</a></li>
-              <li role="presentation" onclick="trigger_value_change()" ><a href="#video" aria-controls="video" role="tab" data-toggle="tab">Video</a></li>
-              <%=f.hidden_field:ad_type, :value=>1%>
-          </ul>
+
+        <!-- <ul class="nav nav-tabs" id="ad_type" role="tablist">
+          <li class="active">
+          <input type="radio" id="ad_type_link" onclick="trigger_value_change(this.value)" name="advertisement[ad_type]" value="1"/>
+          <label for="ad_type_link">Link</label>
+          </li>
+          <li>
+          <input type="radio" id="ad_type_photo" onclick="trigger_value_change(this.value)" name="advertisement[ad_type]" value="2"/>
+          <label for="ad_type_photo">photo</label>
+          </li>
+          <li>
+          <input type="radio" id="ad_type_video" onclick="trigger_value_change(this.value)" name="advertisement[ad_type]" value="3"/>
+          <label for="ad_type_video">Link</label>
+          </li>
+        </ul> -->
+
         <div class="row">
         <div class="col-md-12">
             <div class="tab-content">
-            <!--#link-->
-            <div role="tabpanel" class="tab-pane active" id="link">
+              <!--#link-->
+              <div id="link">
+              <h5>Add link Ads</h5>
+              <div class="form-group">
+              <label class="control-label col-md-3" for="">URL</label>
+              <div class="col-md-9">
+                 <%=f.text_field:advertisement_link,:class=>"form-control input-sm"%>
+              </div>
+              </div>
 
-            <div class="form-group">
-            <label class="control-label col-md-3" for="">URL</label>
-            <div class="col-md-9">
-               <%=f.text_field:advertisement_link,:class=>"form-control input-sm"%>
-            </div>
-            </div>
+              <div class="form-group">
+              <label class="control-label col-md-3" for="">Message</label>
+              <div class="col-md-9">
+                <%=f.text_field:message,:class=>"form-control input-sm"%>
+              </div>
+              </div>
 
-            <div class="form-group">
-            <label class="control-label col-md-3" for="">Message</label>
-            <div class="col-md-9">
-              <%=f.text_field:message,:class=>"form-control input-sm"%>
-            </div>
-            </div>
+              <div class="form-group">
+              <label class="control-label col-md-3" for="">Title</label>
+              <div class="col-md-9">
+                <%=f.text_field:title,:class=>"form-control input-sm"%>
+              </div>
+              </div>
 
-            <div class="form-group">
-            <label class="control-label col-md-3" for="">Title</label>
-            <div class="col-md-9">
+              <div class="form-group">
+              <label class="control-label col-md-3" for="">Caption</label>
+              <div class="col-md-9">
+                <%=f.text_field:caption,:class=>"form-control input-sm"%>
+              </div>
+              </div>
+
+              <div class="form-group">
+              <label class="control-label col-md-3" for="">Upload Image</label>
+              <div class="col-md-9">
+              <input type="file" name="pic" class="form-control-img input-sm">
+              </div>
+              </div>
+
+              </div>
+
+              <!--#photo -->
+              <div id="photo">
+              <h5>Add Photo Ads</h5>
+              <div class="form-group">
+              <label class="control-label col-md-3" for="">Upload Image</label>
+              <div class="col-md-9">
+              <%=f.file_field:ad_image_url,:class=>"form-control"%>
+               </div>
+              </div>
+              </div>
+
+              <!--#video -->
+              <div id="video">
+              <h5>Add video Ads</h5>
+              <div class="form-group">
+              <label class="control-label col-md-3" for="">Title</label>
+              <div class="col-md-9">
               <%=f.text_field:title,:class=>"form-control input-sm"%>
-            </div>
-            </div>
+              </div>
+              </div>
 
-            <div class="form-group">
-            <label class="control-label col-md-3" for="">Description</label>
-            <div class="col-md-9">
-              <%=f.text_area:description,:class=>"form-control input-sm"%>
-            </div>
-            </div>
-
-            <div class="form-group">
-            <label class="control-label col-md-3" for="">Caption</label>
-            <div class="col-md-9">
-              <%=f.text_field:caption,:class=>"form-control input-sm"%>
-            </div>
-            </div>
-
-            <div class="form-group">
-            <label class="control-label col-md-3" for="">Upload Image</label>
-            <div class="col-md-9">
-            <input type="file" name="pic" class="form-control-img input-sm">
-            </div>
-            </div>
-
-            </div>
-
-            <!--#photo -->
-            <div role="tabpanel" class="tab-pane" id="photo">
-            <div class="form-group">
-            <label class="control-label col-md-3" for="">Description</label>
-            <div class="col-md-9">
-              <%=f.text_area:description,:class=>"form-control input-sm"%>
-            </div>
-            </div>
-
-            <div class="form-group">
-            <label class="control-label col-md-3" for="">Upload Image</label>
-            <div class="col-md-9">
-            <input type="file" name="pic" class="form-control-img input-sm">
-            </div>
-            </div>
-            </div>
-
-
-            <!--#video -->
-            <div role="tabpanel" class="tab-pane" id="video">
-            <div class="form-group">
-            <label class="control-label col-md-3" for="">Title</label>
-            <div class="col-md-9">
-              <%=f.text_field:title,:class=>"form-control input-sm"%>
-            </div>
-            </div>
-
-            <div class="form-group">
-            <label class="control-label col-md-3" for="">Description</label>
-            <div class="col-md-9">
-              <%=f.text_area:description,:class=>"form-control input-sm"%>
-            </div>
-            </div>
-
-            <div class="form-group">
-            <label class="control-label col-md-3" for="">URL</label>
-            <div class="col-md-9">
+              <div class="form-group">
+              <label class="control-label col-md-3" for="">URL</label>
+              <div class="col-md-9">
               <%=f.text_area:advertisement_link,:class=>"form-control input-sm"%>
-            </div>
-            </div>
-            </div>
+              </div>
+              </div>
+              </div>
             </div>
         </div>
         </div>
@@ -165,6 +170,12 @@
 <div class="">
 <hr>
 <div class="row">
+  <div class="form-group">
+    <label class="control-label col-md-3" for="">Description</label>
+      <div class="col-md-9">
+        <%=f.text_area:description,:class=>"form-control input-sm"%>
+      </div>
+  </div>
 <div class="col-md-12">
 <div class="form-group">
   <label class="control-label col-md-3" for="">Time Post</label>
@@ -308,110 +319,12 @@
 </div>
 </div>
 
-<hr>
-
-<!--<div class="row">
-<div class="col-md-6">
-  <h4 style="float:left">Select Influencer </h4>
-  <label class="checkbox-inline" style=" margin-left:20px; margin-top:11px;">
-    <input value="" type="checkbox">Select All
-  </label>
-</div>
-<div class="col-md-4 col-xs-12 pull-right">
-  <div id="custom-search-input">
-                  <div class="input-group col-md-12">
-                      <input type="text" class="  search-query form-control" placeholder="Search" />
-                      <span class="input-group-btn">
-                          <button class="btn btn-mountain-flat btn-sm" type="button">
-                              <span class=" glyphicon glyphicon-search"></span>
-                          </button>
-                      </span>
-                  </div>
-              </div>
-</div>
-</div>
-
-<div class="row">
-<div class="col-md-4">
-  <div class="form-group">
-  <label class="checkbox-inline">
-    <input value="" type="checkbox">Social Influencer 1
-  </label>
+  <div class="row">
+    <div class="col-md-9 col-md-offset-3">
+      <%=f.submit "Save", :class=>"btn btn-mountain btn-sm btn-round"%>
+      <a class="btn btn-mountain btn-sm btn-round" href="#">Cancel</a>
+    </div>
   </div>
-</div>
-<div class="col-md-4">
-  <div class="form-group">
-  <label class="checkbox-inline">
-    <input value="" type="checkbox">Social Influencer 2
-  </label>
-  </div>
-</div>
-<div class="col-md-4">
-  <div class="form-group">
-  <label class="checkbox-inline">
-    <input value="" type="checkbox">Social Influencer 3
-  </label>
-  </div>
-</div>
-<div class="col-md-4">
-  <div class="form-group">
-  <label class="checkbox-inline">
-    <input value="" type="checkbox">Social Influencer 4
-  </label>
-  </div>
-</div>
-<div class="col-md-4">
-  <div class="form-group">
-  <label class="checkbox-inline">
-    <input value="" type="checkbox">Social Influencer 5
-  </label>
-  </div>
-</div>
-<div class="col-md-4">
-  <div class="form-group">
-  <label class="checkbox-inline">
-    <input value="" type="checkbox">Social Influencer 6
-  </label>
-  </div>
-</div>
-<div class="col-md-4">
-  <div class="form-group">
-  <label class="checkbox-inline">
-    <input value="" type="checkbox">Social Influencer 7
-  </label>
-  </div>
-</div>
-<div class="col-md-4">
-  <div class="form-group">
-  <label class="checkbox-inline">
-    <input value="" type="checkbox">Social Influencer 8
-  </label>
-  </div>
-</div>
-<div class="col-md-4">
-  <div class="form-group">
-  <label class="checkbox-inline">
-    <input value="" type="checkbox">Social Influencer 9
-  </label>
-  </div>
-</div>
-<div class="col-md-4">
-  <div class="form-group">
-  <label class="checkbox-inline">
-    <input value="" type="checkbox">Social Influencer 10
-  </label>
-  </div>
-</div>
-</div>
-
-<hr>-->
-
-<div class="row">
-<div class="col-md-9 col-md-offset-3">
-  <%=f.submit "Save", :class=>"btn btn-mountain btn-sm btn-round"%>
-  <a class="btn btn-mountain btn-sm btn-round" href="#">Cancel</a>
-</div>
-</div>
 <%end%>
 </div>
 <!--<button class="btn btn-mountain-o btn-sm btn-round">Save</button> <button class="btn btn-mountain-o btn-sm btn-round">Cancel</button>		-->
@@ -428,17 +341,14 @@
   $("#advertisement_influencer_id").addClass("form-control");
   $("#advertisement_platform").addClass("form-control");
 
-function trigger_value_change(){
-  value = $('.nav-tabs .active').text();
-  console.log(value);
-  id = "";
-  switch(value){
-    case "Link": id = 1 ; break;
-    case "Photo": id = 2 ; break;
-    case "Video": id = 3 ; break;
-  }
-console.log(id);
-id="";
-$("#advertisement_ad_type").val(id);
+function trigger_value_change(value){
+//   console.log(value);
+//   id = "";
+//   switch(value){
+//     case  1 : $("#link"). ; break;
+//     case  2 : id = 2 ; break;
+//     case  3 : id = 3 ; break;
+//   }
+// $("#advertisement_ad_type").val(id);
 }
 </script>
