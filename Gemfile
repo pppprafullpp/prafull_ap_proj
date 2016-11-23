@@ -55,3 +55,4 @@ gem 'will_paginate'
 gem 'fb_graph2'
 gem "koala", "~> 2.2"
 gem 'whenever', :require => false
+gem 'cloudinary'
