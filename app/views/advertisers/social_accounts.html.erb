@@ -17,59 +17,37 @@
 
    <div class="row">
     <div class="col-md-12 form-horizontal">
+      <%=form_for @search, :url=>advertiser_social_accounts_path,:method=>"get",:class=>"form-control" do |f|%>
       <div class="borderBox-new">
         <div class="row">
         <div class="col-md-3">
-        <div class="form-group">
-          <label for="Ad type">Ad Type:</label>
-          <select name="" class="form-control custom-select">
-            <option>Select</option>
-            <option>Photo</option>
-            <option>Link</option>
-            <option>Video</option>
-          </select>
-        </div>
+          <div class="form-group">
+            <label for="Ad type">Facebook likes</label>
+            <%=f.select :facebook_page_count,"<option value='htol'>Highest to lowest</option><option value='ltoh'>lowest to Highest</option>".html_safe,:prompt=>"-Select-",:class=>"form-control custom-select"%>
+          </div>
         </div>
 
         <div class="col-md-3">
-        <div class="form-group">
-          <label for="Ad type">Category:</label>
-          <select name="" class="form-control custom-select">
-            <option>Select</option>
-            <option>Celebrity</option>
-            <option>Cars</option>
-            <option>Animals</option>
-            <option>Nature</option>
-            <option>Food</option>
-            <option>Sports</option>
-            <option>Fitness</option>
-            <option>Models</option>
-            <option>Technology</option>
-            <option>Premium</option>
-            <option>Other</option>
-          </select>
-        </div>
-        </div>
-
-        <div class="col-md-3">
-        <div class="form-group">
-          <label for="Ad type">Media Type:</label>
-          <select name="" class="custom-select form-control">
-            <option>Select</option>
-            <option>Facebook</option>
-            <option>Instagram</option>
-            <option>Both</option>
-          </select>
-        </div>
+          <div class="form-group">
+            <label for="Ad type">Category:</label>
+            <%=f.select :category,options_for_select(Category.pluck(:name,:id)),:prompt=>"-Select-",:class=>"form-control custom-select"%>
+          </div>
         </div>
 
         <div class="col-md-2 text-left mgTop25">
         <button type="submit" class="btn btn-primary">Apply</button>
         </div>
+        <div class="col-md-2 text-left mgTop25">
+          <a href="<%=advertiser_social_accounts_path%>" class="btn btn-primary">Reset</a>
         </div>
       </div>
+      <%end%>
+      </div>
     </div>
-         </div>
+    <script>
+    $("#social_account_facebook_page_count").addClass("form-control");
+    $("#social_account_category").addClass("form-control");
+    </script>
 
 
           <div class="row">

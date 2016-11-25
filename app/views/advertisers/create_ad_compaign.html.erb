@@ -18,7 +18,7 @@
         <div class="form-group">
               <label class="control-label col-md-3" for="">Category</label>
               <div class="col-md-5">
-              <%=f.select :category,options_for_select(Category.pluck(:name,:id)),{:prompt=>"-Select Category-"},:class=>"form-control"%>
+                <%=f.select :category,options_for_select(Category.pluck(:name,:id)),{:prompt=>"-Select Category-"},:class=>"form-control"%>
               </div>
             </div>
 
@@ -43,7 +43,6 @@
               </select>
             </div>
             </div>
-
         <div class="form-group">
           <label class="control-label col-md-3" for="">Media</label>
           <div class="col-md-5">
@@ -122,17 +121,17 @@
               </div>
               </div>
 
-              <div class="form-group">
+              <!-- <div class="form-group">
               <label class="control-label col-md-3" for="">Upload Image</label>
               <div class="col-md-9">
               <input type="file" name="pic" class="form-control-img input-sm">
               </div>
-              </div>
+              </div> -->
 
               </div>
 
               <!--#photo -->
-              <div id="photo">
+              <div id="photo" style="display:none">
               <h5>Add Photo Ads</h5>
               <div class="form-group">
               <label class="control-label col-md-3" for="">Upload Image</label>
@@ -143,7 +142,7 @@
               </div>
 
               <!--#video -->
-              <div id="video">
+              <div id="video" style="display:none">
               <h5>Add video Ads</h5>
               <div class="form-group">
               <label class="control-label col-md-3" for="">Title</label>

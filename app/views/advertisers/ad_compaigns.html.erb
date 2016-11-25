@@ -28,8 +28,7 @@
           <th>Date &amp; Time</th>
           <th>Status</th>
           <th>Category</th>
-          <th>Option</th>
-          </tr>
+           </tr>
           </thead>
 
           <tbody>
@@ -48,12 +47,7 @@
             <%end%>
           </td>
           <td><%=Category.find(ad.category).name.titleize%></td>
-          <td>
-          <div class="btn-group">
-          <a href="javascript:void(0);" class="btn btn-default"><span class="ion-edit" title="Edit"></span></a>
-          <a href="javascript:void(0);" class="btn btn-default"><span class="ion-trash-b" title="Delete"></span></a>
-          </div>
-          </td>
+           
           </tr>
           <%end%>
           </tbody>
