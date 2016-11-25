@@ -3,7 +3,9 @@ class AdvertisersController < ApplicationController
   before_filter :authenticate_advertiser!, :except =>[:new, :create]
 
   def index
+
     @current_advertisers_data = current_advertiser
+    @advertisers_ad = current_advertiser.advertisements
   end
 
   def new
@@ -17,7 +19,9 @@ class AdvertisersController < ApplicationController
   end
 
   def social_accounts
-    @social_accounts = SocialAccount.all
+    params[:social_account] = {} unless params[:social_account].present?
+    @search = SocialAccount.new
+    @social_accounts = SocialAccount.search(params[:social_account])
   end
 
   def ad_compaigns

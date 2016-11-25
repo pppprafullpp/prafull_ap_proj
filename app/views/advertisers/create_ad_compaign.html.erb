@@ -18,7 +18,7 @@
         <div class="form-group">
               <label class="control-label col-md-3" for="">Category</label>
               <div class="col-md-5">
-              <%=f.select :category,options_for_select(Category.pluck(:name,:id)),{:prompt=>"-Select Category-"},:class=>"form-control"%>
+                <%=f.select :category,options_for_select(Category.pluck(:name,:id)),{:prompt=>"-Select Category-"},:class=>"form-control"%>
               </div>
             </div>
 
@@ -43,7 +43,6 @@
               </select>
             </div>
             </div>
-
         <div class="form-group">
           <label class="control-label col-md-3" for="">Media</label>
           <div class="col-md-5">
