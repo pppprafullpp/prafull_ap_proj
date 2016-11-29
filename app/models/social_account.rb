@@ -10,11 +10,9 @@ class SocialAccount < ActiveRecord::Base
     condition = conditions.join(' and ')
 
     if params[:facebook_page_count].present? and params[:facebook_page_count] == "htol"
-      self.where(condition)
-      self.order('facebook_page_count DESC')
+      self.where(condition).order('facebook_page_count DESC')
     elsif params[:facebook_page_count].present? and params[:facebook_page_count] == "ltoh"
-      self.where(condition)
-      self.order('facebook_page_count ASC')
+      self.where(condition).order('facebook_page_count ASC')
     else
       self.where(condition)
     end

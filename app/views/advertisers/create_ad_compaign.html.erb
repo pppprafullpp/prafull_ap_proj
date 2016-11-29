@@ -18,19 +18,19 @@
         <div class="form-group">
               <label class="control-label col-md-3" for="">Category</label>
               <div class="col-md-5">
-                <%=f.select :category,options_for_select(Category.pluck(:name,:id)),{:prompt=>"-Select Category-"},:class=>"form-control"%>
+                <%=f.select :category,options_for_select(Category.pluck(:name,:id)),{:prompt=>"-Select Category-"},:class=>"form-control", :required=>true%>
               </div>
             </div>
 
             <div class="form-group">
               <label class="control-label col-md-3" for="">Social Influencer</label>
               <div class="col-md-5">
-                <%=f.select :influencer_id,options_for_select(Influencer.pluck(:name, :id)),:prompt => "-Select-",:class=>"form-control"%>
+                <%=f.select :influencer_id,options_for_select(Influencer.pluck(:name, :id)),:prompt => "-Select-",:class=>"form-control", :required=>true%>
                </div>
             </div>
 
 
-            <div class="form-group hidden">
+            <!-- <div class="form-group hidden">
               <label class="control-label col-md-3" for="">Social Influencer Group</label>
               <div class="col-md-5">
               <select name="" class="custom-select form-control">
@@ -42,11 +42,11 @@
                 <option id="">Group Name5</option>
               </select>
             </div>
-            </div>
+            </div> -->
         <div class="form-group">
           <label class="control-label col-md-3" for="">Media</label>
           <div class="col-md-5">
-            <%=f.select :platform,options_for_select(Advertisement::PLATFORMS),:prompt => "-Select-",:class=>"form-control"%>
+            <%=f.select :platform,options_for_select(Advertisement::PLATFORMS),:prompt => "-Select-",:class=>"form-control", :required=>true%>
         </div>
         </div>
 

@@ -50,40 +50,39 @@
     </script>
 
 
-          <div class="row">
+<div class="row">
 
-            <!-- List Item -->
-            <%@social_accounts.each do |social_account|%>
-            <div class="col-md-4 main-content-wrapper">
-              <div class="lft-icon">
-                <div class="center-icon">
-                  <span class="ion-social-facebook"></span>
-                </div>
-              </div>
+  <!-- List Item -->
+  <%@social_accounts.each do |social_account|%>
+  <div class="col-md-4 main-content-wrapper">
+    <div class="lft-icon">
+      <div class="center-icon">
+        <span class="ion-social-facebook"></span>
+      </div>
+    </div>
 
-              <div class="rgt-icon">
-                <div class="center-icon">
-                  <a href="#" data-toggle="tooltip" data-html="true" data-placement="bottom" title="Category: <%=social_account.category%>,<%=social_account.about.truncate(20) if social_account.about.present?%><br>Estimated Reach: <%=number_to_human(social_account.facebook_page_count.to_i, :format => '%n%u', :units => { :thousand => 'K' })%>"><span class="ion-information"></span></a>
-                </div>
-              </div>
+    <div class="rgt-icon">
+      <div class="center-icon">
+        <a href="#" data-toggle="tooltip" data-html="true" data-placement="bottom" title="Category: <%=social_account.category%>,<%=social_account.about.truncate(20) if social_account.about.present?%><br>Estimated Reach: <%=number_to_human(social_account.facebook_page_count.to_i, :format => '%n%u', :units => { :thousand => 'K' })%>"><span class="ion-information"></span></a>
+      </div>
+    </div>
 
-              <div class="price-features">
-              <div class="advertiserBox">
-                <a href="<%=advertiser_influencer_detail_path(social_account_id:social_account.id)%>"><img src="<%=social_account.facebook_image_url%>" width="100%"></a>
-              </div>
-              <h4><a href="<%=advertiser_influencer_detail_path(social_account_id:social_account.id)%>"><%=social_account.platform_type_id%></a></h4>
-              <div class="price-number-wrap mgBottom30">
-                <div class="price-top">
-                  <p>Followers: <span class="smFollow"><%=social_account.facebook_page_count%></span></br>
-                Recommended Price Tag/Posts: <span class="smPrice">$50</span></p>
-                </div>
-              </div>
-              </div>
-            </div>
-            <%end%>
-
-
+    <div class="price-features">
+    <div class="advertiserBox">
+      <a href="<%=advertiser_influencer_detail_path(social_account_id:social_account.id)%>"><img src="<%=social_account.facebook_image_url%>" width="100%"></a>
+    </div>
+    <h4><a href="<%=advertiser_influencer_detail_path(social_account_id:social_account.id)%>"><%=social_account.platform_type_id%></a></h4>
+    <div class="price-number-wrap mgBottom30">
+      <div class="price-top">
+        <p>Followers: <span class="smFollow"><%=social_account.facebook_page_count%></span></br>
+      Recommended Price Tag/Posts: <span class="smPrice">$50</span></p>
+      </div>
+    </div>
+    </div>
   </div>
+  <%end%>
+</div>
+
   </div>
   </section>
 </div>

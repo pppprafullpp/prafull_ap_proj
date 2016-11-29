@@ -23,7 +23,3 @@ namespace :update_social_data do
           puts "--------------------------------------------------------------------------------------"
       end
     end
-    # page = FbGraph2::Page.new("bbkivines").fetch(
-    #       :access_token => "986978254757512|vGvEynp44LE_I_yG6dgAsjlF770",
-    #       :fields => [:fan_count, :about,:picture,:location,:category]
-    #       )
