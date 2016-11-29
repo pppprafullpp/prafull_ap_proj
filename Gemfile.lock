@@ -130,6 +130,11 @@ GEM
       oauth2 (~> 1.0)
       omniauth (~> 1.2)
     orm_adapter (0.5.0)
+    paypal-sdk-core (0.3.4)
+      multi_json (~> 1.0)
+      xml-simple
+    paypal-sdk-merchant (1.117.2)
+      paypal-sdk-core (~> 0.3.0)
     rack (1.6.4)
     rack-oauth2 (1.4.0)
       activesupport (>= 2.3)
@@ -218,6 +223,7 @@ GEM
     whenever (0.9.7)
       chronic (>= 0.6.3)
     will_paginate (3.1.5)
+    xml-simple (1.1.5)
 
 PLATFORMS
   ruby
@@ -235,6 +241,7 @@ DEPENDENCIES
   koala (~> 2.2)
   mysql2 (~> 0.3.18)
   omniauth-facebook
+  paypal-sdk-merchant
   rails (= 4.2.6)
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
