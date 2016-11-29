@@ -29,6 +29,9 @@ class InfluencersController < ApplicationController
         redirect_to :back
   end
 
+  def profile
+  end
+
   private
 
   def create_social_account
