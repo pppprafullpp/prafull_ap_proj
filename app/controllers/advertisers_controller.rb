@@ -53,8 +53,12 @@ class AdvertisersController < ApplicationController
       flash[:error] = "Wrong Old Password"
       redirect_to :back
      end
-
    end
+
+   def profile
+     
+   end
+
   private
 
   def advertiser_params

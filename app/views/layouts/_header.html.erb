@@ -100,6 +100,15 @@
                     <a class="dropdown-toggle" onclick="javascript:$('#account-dropdown').toggle()" data-toggle="dropdown" href="#"><img src="/assets//member-img.png" class="profile-thumb img-responsive"></a>
                     <ul id="account-dropdown" class="dropdown-menu animated fadeInDown">
                       <li>
+                        <%if current_advertiser%>
+                          <a href="<%=advertiser_profile_path(advertiser_id:current_advertiser.id)%>"><span class="ion-person"></span> Profile</a>
+                        <%elsif current_influencer%>
+                        <a href="<%=influencer_profile_path(influencer_id:current_influencer.id)%>"><span class="ion-person"></span> Profile</a>
+
+                        <%end%>
+
+                      </li>
+                      <li>
                         <a href="#"><span class="ion-person"></span> Account</a>
                       </li>
                       <li>

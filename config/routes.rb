@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   devise_for :admins
-  resources :admins 
+  resources :admins
   resources :campaigns
   resources :categories
   resources :advertisments
@@ -21,6 +21,7 @@ Rails.application.routes.draw do
     get :create_ad_compaign
     post :change_password
     get :influencer_detail
+    get :profile
   end
 
   resources :influencers do
@@ -33,6 +34,7 @@ Rails.application.routes.draw do
     get :create_ad_compaign
     post :change_password
     post :add_social_account_details
+    get :profile
     end
 
 

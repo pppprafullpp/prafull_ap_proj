@@ -3,6 +3,7 @@ class InfluencersController < ApplicationController
 
 
   def index
+    @ad_requests = Advertisement.where(:influencer_id=>current_influencer.id)
   end
 
   def ad_requests
@@ -27,6 +28,9 @@ class InfluencersController < ApplicationController
 
     end
         redirect_to :back
+  end
+
+  def profile
   end
 
   private

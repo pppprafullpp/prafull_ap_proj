@@ -17,9 +17,10 @@ namespace :update_social_data do
                 :about => page.raw_attributes['about'],
                 :facebook_image_url=>page.raw_attributes["picture"]["data"]["url"],
                 :country => country,
-                :category =>page.raw_attributes["category"]
+                :category => page.raw_attributes["category"]
 )
           end
           puts "--------------------------------------------------------------------------------------"
       end
+
     end

@@ -1,0 +1,29 @@
+<main>
+ <section id="one-page-side-menu-static" class="one-page-side-menu-static side-menu">
+  <div class="content-wrapper">
+    <%= render :partial => "/layouts/left_panel" %>
+    <%= render :partial => "/layouts/header" %>
+    <section class="account section" style="min-height:575px;">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+          <h1>Profile</h1>
+          </div>
+        </div>
+         <div class="form-horizontal">
+          <table class="table">
+            <tr>
+              <td><b>Name</b></td>
+              <td><%=eval("current_#{type}").name%></td>
+            </tr>
+            <tr>
+              <td><b>Email</b></td>
+              <td><%=eval("current_#{type}").email%></td>
+            </tr>
+          </table>
+        </div>
+       </div>
+      </section>
+   </div>
+  </section>
+</main>

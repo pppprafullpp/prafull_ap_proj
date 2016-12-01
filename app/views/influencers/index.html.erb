@@ -11,7 +11,7 @@
         <h1>Total Earnings</h1>
       </div>
     </div>
-
+    <%=current_influencer.id%>
     <div class="row">
           <div class="col-md-3 col-sm-6">
               <div class="dashboard-tile detail">
@@ -59,14 +59,14 @@
     <section id="cta2" class="cta2">
       <div class="container">
         <div class="row">
-    <div class="col-md-7">
-    <div class="cta2-text">
-    <h4 class="text-center">You have new Ad request:</h4>
-    </div>
-    </div>
-    <div class="col-md-5 clearfix text-center">
-    <div class="cta2-buttons"><a class="btn btn-mountain btn-sm" href="#">3 Requests</a></div>
-    </div>
+          <div class="col-md-7">
+          <div class="cta2-text">
+          <h4 class="text-center">You have new Ad request:</h4>
+          </div>
+          </div>
+          <div class="col-md-5 clearfix text-center">
+          <div class="cta2-buttons"><a class="btn btn-mountain btn-sm" href="#">3 Requests</a></div>
+          </div>
     </div>
       </div>
     </section>
@@ -74,6 +74,8 @@
     <section id="pricing" class="pricing section section-description">
       <div class="container">
         <div class="row">
+
+          <%@ad_requests.each do |ad_request|%>
           <div class="col-md-4 main-content-wrapper">
             <div class="lft-icon">
             <div class="center-icon">
@@ -82,19 +84,21 @@
             </div>
 
             <div class="price-features">
-            <div class="advertiserBox">
-              <img src="/assets/gallery/ad-request.jpg">
+              <div class="advertiserBox">
+                <img id="<%=ad_request.id%>_img" src="<%=ad_request.ad_image_url%>">
+                </div>
+                  <h4 id="<%=ad_request.id%>_title"><%=ad_request.title%></h4>
+                  <p id="<%=ad_request.id%>_description"><%=ad_request.description%></p>
+                  <div class="price-cta">
+                    <div class="price-number-wrap">
+                      <div class="price-top"><span class="price-plan-time-unit">Price: </span><span class="price-cta-number">$50</span></div>
+                    </div>
+                    <button class="btn btn-mountain-o btn-sm btn-round" onclick=" open_share_dialog(<%=ad_request.id%>)">Approve</button> <button class="btn btn-mountain-o btn-sm btn-round" data-toggle="modal" data-target="#declinePopup">Decline</button> <button class="btn btn-mountain-o btn-sm btn-round fnt-large" data-toggle="modal" data-target="#reportPopup"><span class="ion-android-more-vertical"></span></button>
+                  </div>
             </div>
-            <h4>Title</h4>
-            <p>Activate's leading technology platform combined with the world... </p>
-            <div class="price-cta">
-            <div class="price-number-wrap">
-              <div class="price-top"><span class="price-plan-time-unit">Price: </span><span class="price-cta-number">$50</span></div>
-            </div>
-            <button class="btn btn-mountain-o btn-sm btn-round" data-toggle="modal" data-target="#approvePopup">Approve</button> <button class="btn btn-mountain-o btn-sm btn-round" data-toggle="modal" data-target="#declinePopup">Decline</button> <button class="btn btn-mountain-o btn-sm btn-round fnt-large" data-toggle="modal" data-target="#reportPopup"><span class="ion-android-more-vertical"></span></button>
-            </div>
-            </div>
-       </div>
+          </div>
+
+          <%end%>
         </div>
       </div>
       <!-- Approve Popups -->
@@ -103,9 +107,9 @@
 </div>
 </section>
 </main>
+<!--
 
-
-<div class="modal fade" id="approvePopup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="approvePopup" role="dialog"  >
   <div class="modal-dialog">
   <div class="modal-content">
     <div class="modal-header">
@@ -132,17 +136,18 @@
 
         <div class="price-features-new">
           <div class="advertiserBox-new">
-          <img class="img-responsive" src="/assets/gallery/ad-preview.jpg">
           </div>
-          <h4>Title</h4>
-          <p>Activate's leading technology platform combined with the world. Activate's leading technology platform combined with the world... </p>
         </div>
 
         <div class="price-cta-new">
           <div class="price-number-wrap-new">
           <div class="price-top"><span class="price-plan-time-unit">Price: </span><span class="price-cta-number">$50</span></div>
           </div>
-
+          <button class="btn btn-mountain-o btn-sm btn-round" onclick="open_share_dialog()">Publish</button>
+          <div class="fb-share-button"
+          		data-href="http://www.your-domain.com/your-page.html"
+          		data-layout="button_count">
+          	</div>
           <div>Link: <a href="http://facebook.com/">http://facebook.com/</a></div>
         </div>
       </div>
@@ -150,4 +155,29 @@
     </div>
   </div>
   </div>
-</div>
+</div> -->
+<script>
+function open_share_dialog(id) {
+  console.log(id);
+  title = $("#"+id+"_title").text();
+  description = $("#"+id+"_description").text();
+  image = $("#"+id+"_img").attr("src");
+  console.log(image);
+    FB.api('/me/feed', 'post', {
+     message: title+" "+ description,
+     picture: image,
+     from: 'me',
+     caption:"test",
+     link: "http://www.youtube.com",
+    description: "tesing"
+   }, function(response) {
+     console.log(response);
+    if (!response || response.error) {
+      console.log(response);
+      FB.getLoginStatus();
+    } else {
+      alert('Post ID: ' + response.id );
+    }
+  });
+}
+</script>
