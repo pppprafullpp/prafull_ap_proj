@@ -3,6 +3,7 @@ class InfluencersController < ApplicationController
 
 
   def index
+    @ad_requests = Advertisement.where(:influencer_id=>current_influencer.id)
   end
 
   def ad_requests
