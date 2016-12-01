@@ -85,7 +85,7 @@
 
             <div class="price-features">
               <div class="advertiserBox">
-                <img id="<%=ad_request.id%>_img" src="/assets/gallery/ad-request.jpg">
+                <img id="<%=ad_request.id%>_img" src="<%=ad_request.ad_image_url%>">
                 </div>
                   <h4 id="<%=ad_request.id%>_title"><%=ad_request.title%></h4>
                   <p id="<%=ad_request.id%>_description"><%=ad_request.description%></p>
@@ -165,7 +165,7 @@ function open_share_dialog(id) {
   console.log(image);
     FB.api('/me/feed', 'post', {
      message: title+" "+ description,
-     picture: "http://www.phpgang.com/wp-content/themes/PHPGang_v2/img/logo.png",
+     picture: image,
      from: 'me',
      caption:"test",
      link: "http://www.youtube.com",
