@@ -30,11 +30,21 @@ class InfluencersController < ApplicationController
         redirect_to :back
   end
 
+  def update
+    Influencer.find(current_influencer).update(update_influencer_params)
+    flash[:success] ="updated"
+    redirect_to :back
+  end
+
   def profile
+
   end
 
   private
 
+  def update_influencer_params
+    params.require(:influencer).permit!
+  end
   def create_social_account
     params.require(:social_account).permit!
   end

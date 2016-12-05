@@ -13,14 +13,14 @@ class AdvertismentsController < ApplicationController
     redirect_to :back
   end
 
-  def update_ad_share_url
+  def update_ad_share_url_and_status
     advertisement = Advertisement.find(params[:id])
     if advertisement.platform ==  Advertisement::PLATFORMS["Facebook"]
       prefix = "http://facebook.com/"
     else
       prefix = "http://instagram.com/"
     end
-    Advertisement.find(params[:id]).update_attributes(:advertisement_link=>prefix+params[:post_id])
+    Advertisement.find(params[:id]).update_attributes(:advertisement_link=>prefix+params[:post_id], :status=>Advertisement::STATUS["Published by influencer"])
     render :json => {
       success:true
     }

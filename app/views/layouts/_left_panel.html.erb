@@ -21,14 +21,17 @@
       <i class="ion-android-bulb"></i> <span>Ad Request</span></a></li>
     <li class="<%= 'active' if params[:controller] == 'influencers' and params[:action] =='audience_management' %>"><a href="<%=influencer_audience_management_path(influencer_id:current_influencer.id)%>">
       <i class="ion-person"></i> <span>Insights</span></a></li>
-    <li class="<%= 'active' if params[:controller] == 'influencers' and params[:action] =='social_accounts' %>"><a href="<%=influencer_social_accounts_path(influencer_id:current_influencer.id)%>">
+    <li class="<%= 'active' if params[:controller] == 'influencers' and params[:action] =='accounts' %>">
+      <a href="<%=influencer_social_accounts_path(influencer_id:current_influencer.id)%>">
       <i class="ion-card"></i> <span>Accounts</span></a>
     </li>
-    <li class="<%= 'active' if params[:controller] == 'influencers' and params[:action] =='social_accounts' %>"><a href="<%=influencer_social_accounts_path(influencer_id:current_influencer.id)%>">
+    <li class="<%= 'active' if params[:controller] == 'influencers' and params[:action] =='payments' %>">
+      <a href="<%=influencer_social_accounts_path(influencer_id:current_influencer.id)%>">
       <i class="ion-card"></i> <span>Payments</span></a>
     </li>
-    <li onclick="javascript:LoginFB()" style="cursor:pointer"><a>
-      <i class="ion-card"></i> <span>Facebook Login</span></a>
+    <li class="<%= 'active' if params[:controller] == 'influencers' and params[:action] =='social_accounts' %>">
+      <button class="btn btn-primary" href="#" onclick="javascript:LoginFB()">
+      <i class="icon ion-social-facebook"></i> <span>Facebook Login</span></button>
     </li>
   </ul>
   <%end%>

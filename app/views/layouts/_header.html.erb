@@ -1,14 +1,7 @@
   <div class="topBar">
             <div class="row">
               <div class="userName"><span class="ion-navicon-round navIcon1"></span> <span class="ion-navicon-round navIcon2"></span></div>
-             <div class="userName">
-               <% if current_advertiser.present?%>
-                 <%name = current_advertiser.name%>
-                 <%elsif current_influencer.present?%>
-                  <%name = current_influencer.name%>
-               <%end%>
-                <strong>Hello, <%=name.titleize%></strong>
-                </div>
+
               <div class="user-nav">
                 <ul>
                   <%if current_influencer%>
@@ -16,7 +9,16 @@
                   <%elsif current_advertiser%>
                   <%wallet = current_advertiser.wallet_amount%>
                   <%end%>
-                  <li class="lg-font">Your Balance: $<%=wallet%></li>
+                  <li class="lg-font">
+                    <div class="userName">
+                      <% if current_advertiser.present?%>
+                        <%name = current_advertiser.name%>
+                        <%elsif current_influencer.present?%>
+                         <%name = current_influencer.name%>
+                      <%end%>
+                       <strong>Hello, <%=name.titleize%></strong>
+                       </div>
+                  </li>
                   <li class="dropdown messages">
                     <span class="badge badge-danager animated bounceIn" id="new-messages">38</span>
                     <a onclick="javascript:$('#notification-dropdown').toggle()" class="dropdown-toggle options topIcon" id="toggle-mail" data-toggle="dropdown">
@@ -54,10 +56,6 @@
                       <li><a href="#">Check all Notifications <span class="ion-arrow-right-b"></span></a>
                       </li>
                     </ul>
-
-
-
-
                   </li>
                   <li class="dropdown messages">
                     <span class="badge badge-danager animated bounceIn" id="new-messages">10</span>
@@ -96,8 +94,8 @@
                       </li>
                     </ul>
                   </li>
-                  <li>
-                    <a class="dropdown-toggle" onclick="javascript:$('#account-dropdown').toggle()" data-toggle="dropdown" href="#"><img src="/assets//member-img.png" class="profile-thumb img-responsive"></a>
+                  <li id="user_dropdown" >
+                    <a class="dropdown-toggle" onclick="javascript:$('#user_dropdown').toggleClass('open')" data-toggle="dropdown" href="#"><img src="/assets//member-img.png" class="profile-thumb img-responsive"></a>
                     <ul id="account-dropdown" class="dropdown-menu animated fadeInDown">
                       <li>
                         <%if current_advertiser%>

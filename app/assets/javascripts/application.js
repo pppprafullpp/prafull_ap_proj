@@ -1506,11 +1506,6 @@ $(document).ready(function(){
 /* end dot nav */
 });
 
-
-// JavaScript Document
-
-
-
     window.fbAsyncInit = function() {
       FB.init({
         appId      : '986978254757512',
@@ -1538,17 +1533,6 @@ $(document).ready(function(){
 				if (response["error"]!="" && response["error"]!=undefined && response["error"]["message"]!="") {
 					console.log(response);
 					$("#"+returning_id).text("Error");
-				}
-			});
-		}
-
-		function LoginFB(){
-			FB.login(function(response){
-				if(response["status"] != "connected"){
-						// FB.login();
-				}
-				else {
-					toastr.success("Already Connected");
 				}
 			});
 		}

@@ -6,5 +6,9 @@ class ApplicationController < ActionController::Base
   def sign_up_params
     devise_parameter_sanitizer.sanitize(:sign_up)
   end
-  
+
+  def notify_admin
+    flash[:success] = "New Advertisement created"
+  end
+
 end
