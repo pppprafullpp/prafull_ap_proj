@@ -10,6 +10,7 @@
           <h1>Profile</h1>
           </div>
         </div>
+        <% type =  current_influencer.present? ? "influencer"  : "advertiser"%>
          <div class="form-horizontal">
           <table class="table">
             <tr>
@@ -21,6 +22,22 @@
               <td><%=eval("current_#{type}").email%></td>
             </tr>
           </table>
+        </div>
+          <hr />
+          <h3>Other Details</h3>
+          <div class="col-md-2"></div>
+          <div class="col-md-8 text-center">
+            <%=form_for current_influencer, :url=>influencer_path(id:current_influencer.id), :method=>"put" do |f|%>
+            <table class="table table-striped">
+              <tr>
+                <td><%=f.label:publishing_price%>($)</td>
+                <td><%=f.text_field:publishing_price,:placeholder=>"Enter your publishing price",:class=>"form-control"%></td>
+              </tr>
+            </table>
+            <%=f.submit("Submit", :class=>"btn btn-success")%>
+            <%end%>
+          </div>
+          <div class="col-md-2"></div>
         </div>
        </div>
       </section>

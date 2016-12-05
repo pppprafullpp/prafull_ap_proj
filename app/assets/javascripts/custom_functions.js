@@ -1,6 +1,6 @@
-function update_ad_share_url(id,post_id) {
+function update_ad_share_url_and_status(id,post_id) {
   $.ajax({
-    url:"/advertisments/"+id+"/update_ad_share_url",
+    url:"/advertisments/"+id+"/update_ad_share_url_and_status",
     type:"post",
     data: {
       id:id,
@@ -11,6 +11,7 @@ function update_ad_share_url(id,post_id) {
     }
   })
 }
+
 function open_share_dialog(id) {
   // console.log(id);
   title = $("#"+id+"_title").text();
@@ -26,12 +27,27 @@ function open_share_dialog(id) {
    }, function(response) {
      console.log(response);
     if (!response || response.error) {
-      // console.log(response);
       FB.getLoginStatus();
       toastr.error("Error, please try after some time")
     } else {
-      // alert('Post ID: ' + response.id );
-      update_ad_share_url(id,response.id)
+      update_ad_share_url_and_status(id,response.id)
     }
   });
+}
+
+function LoginFB() {
+//   FB.login(function(response) {
+//     if (response.authResponse) {
+//      console.log('Welcome!  Fetching your information.... ');
+//      FB.api('/me', function(response) {
+//        console.log('Good to see you, ' + response.name + '.');
+//      });
+//     } else {
+//      console.log('User cancelled login or did not fully authorize.');
+//     }
+// });
+
+FB.login(function(response) {
+  console.log(response);
+}, {scope: 'publish_actions',auth_type: 'reauthenticate',});
 }

@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   resources :campaigns
   resources :categories
   resources :advertisments do
-    post :update_ad_share_url
+    post :update_ad_share_url_and_status
   end
   devise_for :advertisers, :controllers => { registrations: 'registrations', passwords: "advertisers/change_password" }
   devise_for :influencers, :controllers => { registrations: 'registrations', passwords: "advertisers/change_password" }
