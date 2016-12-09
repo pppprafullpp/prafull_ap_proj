@@ -1,0 +1,38 @@
+<main>
+ <section id="one-page-side-menu-static" class="one-page-side-menu-static side-menu">
+ <div class="content-wrapper">
+  <%= render :partial => "/layouts/left_panel" %>
+  <%= render :partial => "/layouts/header" %>
+
+  <section class="account section">
+
+  <div class="container">
+    <div class="row">
+    <div class="col-md-12">
+    <h1>Wallet Information</h1>
+    </div>
+    </div>
+
+    <div class="text-center">
+      <h4 class="text-center">
+        Balance : $<%=@wallet_amount%>
+      </h4>
+      <a href="" class="btn btn-mountain btn-sm btn-round">Add Amount</a>
+    </div>
+
+    <div id="add-amount-area" class=" text-center col-md-4">
+      <%=form_tag "#",:method=>"post",:class=>"form" do %>
+      <table class="table">
+        <tr>
+          <td><%=text_field_tag(:amount,"",:placeholder=>"Enter amount(min 100)",:class=>"form-control")%></td>
+          <td><%=submit_tag("Add", :class=>"btn btn-primary")%></td>
+        </tr>
+      </table>
+      <%end%>
+    </div>
+
+  </div>
+ </section>
+</div>
+</section>
+</main>
