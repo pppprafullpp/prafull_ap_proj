@@ -1,11 +1,24 @@
 class AdvertisersController < ApplicationController
 
   before_filter :authenticate_advertiser!, :except =>[:new, :create]
+  before_filter :check_if_verified
+
+  def check_if_verified
+    if !current_advertiser.is_verified
+      reset_session
+      flash[:notice] = "please verify your id"
+      redirect_to root_path
+    end
+    puts "--------------------------------------------checked"
+  end
 
   def index
-
     @current_advertisers_data = current_advertiser
     @advertisers_ad = current_advertiser.advertisements
+  end
+
+  def my_wallet
+    @wallet_amount = current_advertiser.wallet_amount
   end
 
   def new
@@ -56,7 +69,7 @@ class AdvertisersController < ApplicationController
    end
 
    def profile
-     
+
    end
 
   private

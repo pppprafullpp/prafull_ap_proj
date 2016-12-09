@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161205115157) do
+ActiveRecord::Schema.define(version: 20161207070905) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "email",                  limit: 255,   default: "", null: false
@@ -64,18 +64,18 @@ ActiveRecord::Schema.define(version: 20161205115157) do
   end
 
   create_table "advertisers", force: :cascade do |t|
-    t.string   "email",                  limit: 255, default: "", null: false
-    t.string   "encrypted_password",     limit: 255, default: "", null: false
+    t.string   "email",                  limit: 255,   default: "", null: false
+    t.string   "encrypted_password",     limit: 255,   default: "", null: false
     t.string   "reset_password_token",   limit: 255
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          limit: 4,   default: 0,  null: false
+    t.integer  "sign_in_count",          limit: 4,     default: 0,  null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip",     limit: 255
     t.string   "last_sign_in_ip",        limit: 255
-    t.datetime "created_at",                                      null: false
-    t.datetime "updated_at",                                      null: false
+    t.datetime "created_at",                                        null: false
+    t.datetime "updated_at",                                        null: false
     t.string   "name",                   limit: 255
     t.string   "telephone_no",           limit: 255
     t.string   "address",                limit: 255
@@ -88,6 +88,8 @@ ActiveRecord::Schema.define(version: 20161205115157) do
     t.string   "uid",                    limit: 255
     t.integer  "wallet_amount",          limit: 4
     t.string   "advertiser_type",        limit: 255
+    t.text     "token",                  limit: 65535
+    t.boolean  "is_verified"
   end
 
   add_index "advertisers", ["email"], name: "index_advertisers_on_email", unique: true, using: :btree
@@ -166,6 +168,8 @@ ActiveRecord::Schema.define(version: 20161205115157) do
     t.integer  "wallet_amount",          limit: 4
     t.text     "category",               limit: 65535
     t.text     "publishing_price",       limit: 65535
+    t.text     "token",                  limit: 65535
+    t.boolean  "is_verified"
   end
 
   add_index "influencers", ["email"], name: "index_influencers_on_email", unique: true, using: :btree

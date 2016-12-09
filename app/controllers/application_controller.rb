@@ -11,4 +11,10 @@ class ApplicationController < ActionController::Base
     flash[:success] = "New Advertisement created"
   end
 
+  def generate_activation_token
+    a = ('a'..'z').to_a.shuffle.first(10).join
+    b = ('0'..'9').to_a.shuffle.first(10).join
+    token = a + b
+    token
+  end
 end
