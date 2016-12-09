@@ -13,6 +13,8 @@ Rails.application.routes.draw do
     post :sign_up
   end
 
+  get "/activate" => "home#activate"
+  
   resources :advertisers do
     get :social_accounts
     get :ad_requests
@@ -24,6 +26,7 @@ Rails.application.routes.draw do
     post :change_password
     get :influencer_detail
     get :profile
+    get :my_wallet
   end
 
   resources :influencers do
