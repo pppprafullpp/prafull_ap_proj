@@ -7,6 +7,10 @@ class InfluencersController < ApplicationController
   end
 
   def ad_requests
+    @ad_requests = Advertisement.where(:influencer_id=>current_influencer.id,:status=>approved_by_admin)
+  end
+
+  def ad_history
     @ad_requests = Advertisement.where(:influencer_id=>current_influencer.id)
   end
 
@@ -19,15 +23,13 @@ class InfluencersController < ApplicationController
   end
 
   def add_social_account_details
-    # raise params.to_yaml
     if current_influencer.social_account.present?
       flash[:success] = "Social Account Already exists"
     else
       SocialAccount.create!(create_social_account)
       flash[:success] = "Successfully created"
-
     end
-        redirect_to :back
+      redirect_to :back
   end
 
   def update

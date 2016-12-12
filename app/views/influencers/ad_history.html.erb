@@ -1,0 +1,52 @@
+<main>
+ <section id="one-page-side-menu-static" class="one-page-side-menu-static side-menu">
+ <div class="content-wrapper">
+<%= render :partial => "/layouts/left_panel" %>
+<%= render :partial => "/layouts/header" %>
+
+<section id="pricing" class="pricing section section-description">
+      <div class="container">
+
+  <div class="row">
+  <div class="col-md-12">
+    <h1>Ad Request</h1>
+  </div>
+ </div>
+
+    <div class="row">
+
+      <%@ad_requests.each do |ad_request|%>
+        <div class="col-md-4 main-content-wrapper">
+          <div class="price-features">
+            <div class="advertiserBox">
+              <%if ad_request.ad_image_url.present?%>
+              <img id="<%=ad_request.id%>_img" src="<%=ad_request.ad_image_url%>">
+              <%else%>
+              <img id="<%=ad_request.id%>_img" src="/assets/gallery/social-influencer4">
+              <%end%>
+            </div>
+            <div class="caption">
+              <h4 id="<%=ad_request.id%>_title"><%=ad_request.title%></h4>
+              <p id="<%=ad_request.id%>_description"><%=ad_request.description%></p>
+              <div class="price-cta">
+                <div class="price-number-wrap">
+                <div class="price-top"><span class="price-plan-time-unit">Price: </span><span class="price-cta-number">$50</span></div>
+                  <p><b>Current Status</b>:<%=Advertisement::STATUS.key (ad_request.status)%></p>
+                  <%if ad_request.status == declined_by_influencer %>
+                  <p><b>Reason for decline:</b></p>
+                  <p><%=ad_request.reason_for_decline%></p>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      <%end%>
+      </div>
+
+      </div>
+    </section>
+  </div>
+</section>
+</main>

@@ -26,6 +26,19 @@ class AdvertismentsController < ApplicationController
     }
   end
 
+
+  def ad_declined_by_influencer
+    update_advertisement = Advertisement.find(params[:ad_id]).update_attributes(:status=>declined_by_influencer,:reason_for_decline=>params[:reason_for_decline])
+    if update_advertisement
+      response = true
+    else
+      response = false
+    end
+    render :json => {
+      success:response
+    }
+  end
+
 private
 
   def advertisement_params

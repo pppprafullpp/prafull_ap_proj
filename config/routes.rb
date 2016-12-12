@@ -3,9 +3,14 @@ Rails.application.routes.draw do
   resources :admins
   resources :campaigns
   resources :categories
+
   resources :advertisments do
     post :update_ad_share_url_and_status
+    collection do
+      post :ad_declined_by_influencer
+    end
   end
+
   devise_for :advertisers, :controllers => { registrations: 'registrations', passwords: "advertisers/change_password" }
   devise_for :influencers, :controllers => { registrations: 'registrations', passwords: "advertisers/change_password" }
 
@@ -14,7 +19,7 @@ Rails.application.routes.draw do
   end
 
   get "/activate" => "home#activate"
-  
+
   resources :advertisers do
     get :social_accounts
     get :ad_requests
@@ -40,6 +45,7 @@ Rails.application.routes.draw do
     post :change_password
     post :add_social_account_details
     get :profile
+    get :ad_history
     end
 
 

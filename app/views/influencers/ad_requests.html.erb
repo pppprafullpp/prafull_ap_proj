@@ -18,7 +18,7 @@
 
       <%@ad_requests.each do |ad_request|%>
         <div class="col-md-4 main-content-wrapper">
-        <div class="lft-icon">
+        <div class="lft-icon">social_accounts
         <div class="center-icon">
         <span class="ion-social-facebook"></span>
         </div>
@@ -39,7 +39,10 @@
         <div class="price-number-wrap">
         <div class="price-top"><span class="price-plan-time-unit">Price: </span><span class="price-cta-number">$50</span></div>
         </div>
-        <button class="btn btn-mountain-flat btn-sm violet-btn" onclick=" open_share_dialog(<%=ad_request.id%>)">Approve</button> <button class="btn btn-mountain-flat btn-sm" data-toggle="modal" data-target="#declinePopup">Decline</button> <button class="btn btn-mountain-o btn-sm btn-round fnt-large" data-toggle="modal" data-target="#reportPopup"><span class="ion-android-more-vertical"></span></button>
+        <button class="btn btn-mountain-flat btn-sm violet-btn" onclick="open_share_dialog(<%=ad_request.id%>)">Approve</button>
+        <button class="btn btn-mountain-flat btn-sm" data-toggle="modal" onclick="show_decline_modal(<%=ad_request.id%>)" >Decline</button>
+        <button class="btn btn-mountain-o btn-sm btn-round fnt-large" data-toggle="modal" data-target="#reportPopup">
+          <span class="ion-android-more-vertical"></span></button>
 
         </div>
         </div>
@@ -55,3 +58,34 @@
 </div>
 </section>
 </main>
+
+
+<div class="modal fade" id="declinePopup">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+      <h4 class="modal-title" id="myModalLabel">Ad Decline</h4>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-lg-12">
+          <%=form_tag "#",:class=>"form" do |f|%>
+            <%=hidden_field_tag(:declined_ad_id,"")%>
+            <%=text_area_tag(:reason_for_ad_decline,"",:placeholder=>"Enter Reason for declining the ad ",:class=>"form-control",:required=>true)%>
+            <%=submit_tag("Submit", :class=>"btn btn-mountain btn-sm btn-round",:onclick=>"decline_ad_by_influencer()")%>
+          <%end%>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <script>
+    function show_decline_modal(id){
+      event.preventDefault();
+      $("#declined_ad_id").val(id);
+      $("#declinePopup").modal("show");
+    }
+
+  </script>

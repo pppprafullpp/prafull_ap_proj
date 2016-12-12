@@ -22,6 +22,10 @@
     <li class="<%= 'active' if params[:controller] == 'influencers' and params[:action] =='index'%>"><a href="/influencers"><i class="ion-home"></i><span>Dashboard</span></a></li>
     <li class="<%= 'active' if params[:controller] == 'influencers' and params[:action] =='ad_requests'%>"><a href="<%=influencer_ad_requests_path(influencer_id:current_influencer.id)%>">
       <i class="ion-android-bulb"></i> <span>Ad Request</span></a></li>
+    <li class="<%= 'active' if params[:controller] == 'influencers' and params[:action] =='ad_history' %>">
+      <a href="<%=influencer_ad_history_path(influencer_id:current_influencer.id)%>">
+      <i class="ion-card"></i> <span>Ads history</span></a>
+    </li>
     <li class="<%= 'active' if params[:controller] == 'influencers' and params[:action] =='audience_management' %>"><a href="<%=influencer_audience_management_path(influencer_id:current_influencer.id)%>">
       <i class="ion-person"></i> <span>Insights</span></a></li>
     <li class="<%= 'active' if params[:controller] == 'influencers' and params[:action] =='accounts' %>">
