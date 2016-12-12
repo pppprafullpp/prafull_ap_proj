@@ -13,22 +13,24 @@ function update_ad_share_url_and_status(id,post_id) {
 }
 
 function open_share_dialog(id) {
-  // console.log(id);
   title = $("#"+id+"_title").text();
   description = $("#"+id+"_description").text();
+  caption = $("#"+id+"_caption").text();
   image = $("#"+id+"_img").attr("src");
-    FB.api('/me/feed', 'post', {
-     message: title+" "+ description,
-     picture: image,
-     from: 'me',
-     caption:"test",
-     link: "http://www.youtube.com",
-    description: "tesing"
+  photo_click_link = $("#"+id+"_photo_click_link").text();
+  console.log(photo_click_link);
+     FB.api('/me/feed', 'post', {
+     message : title+" "+ description,
+     picture : image,
+     from : 'me',
+     caption : caption,
+     link : photo_click_link,
+    description: description
    }, function(response) {
      console.log(response);
     if (!response || response.error) {
-      FB.getLoginStatus();
-      toastr.error("Error, please try after some time")
+      // LoginFB();
+      toastr.error("Error, please click on facebook login and try again")
     } else {
       update_ad_share_url_and_status(id,response.id)
     }

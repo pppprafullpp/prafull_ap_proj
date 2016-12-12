@@ -1,19 +1,19 @@
 ---
 development:
-  cloud_name: drrla92sh
-  api_key: '679824314598265'
-  api_secret: MqWNdYS2GmsGOtlnzn_ntY3kjFY
+  cloud_name: dhdl31ov5
+  api_key: '744871436812119'
+  api_secret: NNXRU7AMwaq2mwGaHYuoRh-alMM
   enhance_image_tag: true
   static_image_support: false
 production:
-  cloud_name: drrla92sh
-  api_key: '679824314598265'
-  api_secret: MqWNdYS2GmsGOtlnzn_ntY3kjFY
+  cloud_name: dhdl31ov5
+  api_key: '744871436812119'
+  api_secret: NNXRU7AMwaq2mwGaHYuoRh-alMM
   enhance_image_tag: true
   static_image_support: true
 test:
-  cloud_name: drrla92sh
-  api_key: '679824314598265'
-  api_secret: MqWNdYS2GmsGOtlnzn_ntY3kjFY
+  cloud_name: dhdl31ov5
+  api_key: '744871436812119'
+  api_secret: NNXRU7AMwaq2mwGaHYuoRh-alMM
   enhance_image_tag: true
   static_image_support: false

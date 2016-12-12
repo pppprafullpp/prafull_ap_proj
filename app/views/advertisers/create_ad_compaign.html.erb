@@ -100,26 +100,6 @@
               </div>
               </div>
 
-              <div class="form-group">
-              <label class="control-label col-md-3" for="">Message</label>
-              <div class="col-md-9">
-                <%=f.text_field:message,:class=>"form-control input-sm"%>
-              </div>
-              </div>
-
-              <div class="form-group">
-              <label class="control-label col-md-3" for="">Title</label>
-              <div class="col-md-9">
-                <%=f.text_field:title,:class=>"form-control input-sm"%>
-              </div>
-              </div>
-
-              <div class="form-group">
-              <label class="control-label col-md-3" for="">Caption</label>
-              <div class="col-md-9">
-                <%=f.text_field:caption,:class=>"form-control input-sm"%>
-              </div>
-              </div>
 
               <!-- <div class="form-group">
               <label class="control-label col-md-3" for="">Upload Image</label>
@@ -134,12 +114,18 @@
               <div id="photo" style="display:none">
               <h5>Add Photo Ads</h5>
               <div class="form-group">
-              <label class="control-label col-md-3" for="">Upload Image</label>
-              <div class="col-md-9">
-              <%=f.file_field:ad_image_url,:class=>"form-control"%>
-               </div>
+                <label class="control-label col-md-3" for="">Upload Image</label>
+                <div class="col-md-5">
+                  <%=f.file_field:ad_image_url,:class=>"form-control"%>
+                </div>
               </div>
+              <div class="form-group">
+                  <label class="control-label col-md-3" for="photo_click_link">Photo Click link</label>
+                  <div class="col-md-5">
+                  <%=f.text_field:photo_click_link,:class=>"form-control"%>
+                  </div>
               </div>
+             </div>
 
               <!--#video -->
               <div id="video" style="display:none">
@@ -166,37 +152,58 @@
   </div>
 
 
-<div class="">
-<hr>
-<div class="row">
-  <div class="form-group">
-    <label class="control-label col-md-3" for="">Description</label>
-      <div class="col-md-9">
-        <%=f.text_area:description,:class=>"form-control input-sm"%>
+    <div class="">
+    <hr>
+    <div class="row">
+      <div class="form-group">
+        <label class="control-label col-md-3" for="">Description</label>
+          <div class="col-md-9">
+            <%=f.text_area:description,:class=>"form-control input-sm"%>
+          </div>
       </div>
-  </div>
-</div>
+    </div>
 
-<div class="row">
-<div class="col-md-12">
-<div class="form-group">
-  <label class="control-label col-md-3" for="">Delay</label>
-  <div class="col-md-5">
-              <select name="" class="custom-select form-control">
-                <option id="">Select</option>
-                <option id="">50 Second</option>
-                <option id="">60 Second</option>
-                <option id="">65 Second</option>
-                <option id="">70 Second</option>
-                <option id="">75 Second</option>
-                <option id="">80 Second</option>
-              </select>
-              </div>
-</div>
-</div>
-</div>
+    <!-- <div class="form-group">
+      <label class="control-label col-md-3" for="">Message</label>
+      <div class="col-md-9">
+        <%=f.text_field:message,:class=>"form-control input-sm"%>
+      </div>
+    </div> -->
 
-<div class="row">
+    <div class="form-group">
+      <label class="control-label col-md-3" for="">Title</label>
+      <div class="col-md-9">
+        <%=f.text_field:title,:class=>"form-control input-sm"%>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="control-label col-md-3" for="">Caption</label>
+      <div class="col-md-9">
+        <%=f.text_field:caption,:class=>"form-control input-sm"%>
+      </div>
+    </div>
+
+    <!-- <div class="row">
+      <div class="col-md-12">
+        <div class="form-group">
+          <label class="control-label col-md-3" for="">Delay</label>
+          <div class="col-md-5">
+            <select name="" class="custom-select form-control">
+              <option id="">Select</option>
+              <option id="">50 Second</option>
+              <option id="">60 Second</option>
+              <option id="">65 Second</option>
+              <option id="">70 Second</option>
+              <option id="">75 Second</option>
+              <option id="">80 Second</option>
+            </select>
+            </div>
+        </div>
+      </div>
+    </div> -->
+
+<!-- <div class="row">
 <div class="col-md-12">
   <div class="form-group">
   <label class="checkbox-inline col-md-offset-3" style="padding-left:35px;">
@@ -207,11 +214,11 @@
   </label>
   </div>
 </div>
-</div>
+</div> -->
 
 <hr>
 
-<div class="row">
+<!-- <div class="row">
 <div class="col-md-12">
   <div class="form-group">
   <label class="checkbox-inline col-md-offset-3" style="padding-left:35px;">
@@ -219,9 +226,9 @@
   </label>
   </div>
 </div>
-</div>
+</div> -->
 
-<div class="row">
+<!-- <div class="row">
 <div class="col-md-12">
 <div class="form-group">
   <label class="control-label col-md-3" for="">After Complete</label>
@@ -237,11 +244,11 @@
       </div>
 </div>
 </div>
-</div>
+</div> -->
 
 <hr>
 
-<div class="row">
+<!-- <div class="row">
 <div class="col-md-12">
   <div class="form-group">
   <label class="checkbox-inline col-md-offset-3" style="padding-left:35px;">
@@ -249,9 +256,9 @@
   </label>
   </div>
 </div>
-</div>
+</div> -->
 
-<div class="row">
+<!-- <div class="row">
 
   <div class="col-md-12">
     <div class="form-group">
@@ -270,8 +277,8 @@
         </div>
     </div>
   </div>
-</div>
-
+</div> -->
+<!--
 <div class="row">
 <div class="col-md-12">
 <div class="form-group">
@@ -285,7 +292,7 @@
   </div>
 </div>
 </div>
-</div>
+</div> -->
 
   <div class="row">
     <div class="col-md-9 col-md-offset-3">

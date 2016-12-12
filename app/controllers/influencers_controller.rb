@@ -3,7 +3,7 @@ class InfluencersController < ApplicationController
 
 
   def index
-    @ad_requests = Advertisement.where(:influencer_id=>current_influencer.id,:status=>Advertisement::STATUS["Approved by Admin"])
+    @ad_requests = Advertisement.where(:influencer_id=>current_influencer.id,:status=>approved_by_admin)
   end
 
   def ad_requests

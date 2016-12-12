@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161212051357) do
+ActiveRecord::Schema.define(version: 20161212093221) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "email",                  limit: 255,   default: "", null: false
@@ -62,6 +62,7 @@ ActiveRecord::Schema.define(version: 20161212051357) do
     t.integer  "category",           limit: 4
     t.text     "ad_image_url",       limit: 65535
     t.text     "reason_for_decline", limit: 65535
+    t.text     "photo_click_link",   limit: 65535
   end
 
   create_table "advertisers", force: :cascade do |t|

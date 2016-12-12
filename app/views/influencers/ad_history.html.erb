@@ -20,14 +20,14 @@
           <div class="price-features">
             <div class="advertiserBox">
               <%if ad_request.ad_image_url.present?%>
-              <img id="<%=ad_request.id%>_img" src="<%=ad_request.ad_image_url%>">
+              <img id="<%=ad_request.id%>_img" height="143px" src="<%=ad_request.ad_image_url%>">
               <%else%>
-              <img id="<%=ad_request.id%>_img" src="/assets/gallery/social-influencer4">
+              <img id="<%=ad_request.id%>_img" height="143px" src="/assets/gallery/social-influencer4">
               <%end%>
             </div>
             <div class="caption">
               <h4 id="<%=ad_request.id%>_title"><%=ad_request.title%></h4>
-              <p id="<%=ad_request.id%>_description"><%=ad_request.description%></p>
+              <p id="<%=ad_request.id%>_description" class="word-wrap"> <%=ad_request.description%></p>
               <div class="price-cta">
                 <div class="price-number-wrap">
                 <div class="price-top"><span class="price-plan-time-unit">Price: </span><span class="price-cta-number">$50</span></div>
