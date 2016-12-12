@@ -38,7 +38,7 @@ class AdvertisersController < ApplicationController
   end
 
   def ad_compaigns
-    @ads = Advertisement.all.paginate(:page => params[:page], :per_page => 10)
+    @ads = Advertisement.where(:advertiser_id=>current_advertiser.id).order("Id DESC").paginate(:page => params[:page], :per_page => 10)
   end
 
   def audience_management

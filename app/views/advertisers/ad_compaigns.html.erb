@@ -24,10 +24,11 @@
           <tr>
           <th>Ad Type</th>
           <th>Ad Platform</th>
-          <th>Name</th>
+          <th>Name & email</th>
           <th>Date &amp; Time</th>
           <th>Status</th>
           <th>Category</th>
+          <th>Reason for decline</th>
            </tr>
           </thead>
 
@@ -37,7 +38,7 @@
           <tr>
           <td><%= Advertisement::TYPE.key(ad.ad_type.to_i) %></td>
           <td><%= Advertisement::PLATFORMS.key(ad.platform.to_i) %></td>
-          <td><%= Influencer.find(ad.influencer_id).name %></td>
+          <td><%= Influencer.find(ad.influencer_id).name %>(<%=Influencer.find(ad.influencer_id).email %>)</td>
           <td><%= ad.created_at %></td>
           <td>
             <%if ad.status == 0%>
@@ -47,7 +48,7 @@
             <%end%>
           </td>
           <td><%=Category.find(ad.category).name.titleize%></td>
-           
+          <td><%=ad.reason_for_decline%></td>
           </tr>
           <%end%>
           </tbody>
