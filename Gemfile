@@ -57,3 +57,4 @@ gem "koala", "~> 2.2"
 gem 'whenever', :require => false
 gem 'cloudinary'
 gem 'paypal-sdk-merchant'
+gem 'pusher'

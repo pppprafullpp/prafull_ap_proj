@@ -5,6 +5,10 @@ class Advertiser < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
      has_many :advertisements
 
-# CITIES =[""]
+    after_save :update_notification
+
+    def update_notification
+      ApplicationController.new.add_notification(Notification::ACTIVITY_TYPE["advertiser_sign_up"],"#{self.name} signed up as influencer",:viewed=>false)
+    end
 
 end

@@ -8,6 +8,7 @@ class Influencer < ActiveRecord::Base
 
     has_one :social_account
     has_many :advertisements
+    after_save :update_notification
 
 
     def self.online?
@@ -16,6 +17,10 @@ class Influencer < ActiveRecord::Base
       else
         false
       end
+    end
+
+    def update_notification
+      ApplicationController.new.add_notification(Notification::ACTIVITY_TYPE["influencer_sign_up"],"#{self.name} signed up as influencer",:viewed=>false)
     end
 
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161212093221) do
+ActiveRecord::Schema.define(version: 20161215052733) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "email",                  limit: 255,   default: "", null: false
@@ -183,6 +183,14 @@ ActiveRecord::Schema.define(version: 20161212093221) do
     t.integer  "advertiser_id", limit: 4
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
+  end
+
+  create_table "notifications", force: :cascade do |t|
+    t.text     "activity_type", limit: 65535
+    t.text     "activity",      limit: 65535
+    t.boolean  "viewed"
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
   end
 
   create_table "roles", force: :cascade do |t|
