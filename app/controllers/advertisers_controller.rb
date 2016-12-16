@@ -14,7 +14,7 @@ class AdvertisersController < ApplicationController
 
   def index
     @current_advertisers_data = current_advertiser
-    @advertisers_ad = current_advertiser.advertisements
+    @advertisers_ad = current_advertiser.advertisements.paginate(:page=>params[:page],:per_page=> 10)
   end
 
   def my_wallet

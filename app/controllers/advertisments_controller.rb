@@ -9,6 +9,7 @@ class AdvertismentsController < ApplicationController
          upload_image =  Cloudinary::Uploader.upload(params[:advertisement][:ad_image_url])
         new_record.update_attributes(:ad_image_url=>upload_image["url"])
       end
+      ApplicationController.new.add_notification(Notification::ACTIVITY_TYPE["new_ad_creation"],"New Ad created",:viewed=>false)
     flash[:success] = "Created successfully"
     redirect_to :back
   end
@@ -23,7 +24,6 @@ class AdvertismentsController < ApplicationController
     Advertisement.find(params[:id]).update_attributes(:advertisement_link=>prefix+params[:post_id], :status=>Advertisement::STATUS["Published by influencer"])
     influencer_name = Influencer.find(Advertisement.find(params[:id]).influencer_id).name
     ApplicationController.new.add_notification(Notification::ACTIVITY_TYPE["new_ad_published"],"New Ad published by #{influencer_name}",:viewed=>false)
-
     render :json => {
       success:true
     }

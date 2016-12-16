@@ -228,6 +228,8 @@ GEM
     whenever (0.9.7)
       chronic (>= 0.6.3)
     will_paginate (3.1.5)
+    will_paginate-bootstrap (1.0.1)
+      will_paginate (>= 3.0.3)
     xml-simple (1.1.5)
 
 PLATFORMS
@@ -259,6 +261,7 @@ DEPENDENCIES
   web-console (~> 2.0)
   whenever
   will_paginate
+  will_paginate-bootstrap
 
 BUNDLED WITH
    1.13.6
