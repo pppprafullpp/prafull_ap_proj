@@ -9,7 +9,19 @@
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
   <script src='https://www.google.com/recaptcha/api.js'></script>
+  <script src="http://js.pusherapp.com/1.9/pusher.min.js"></script>
+  <script>
+  Pusher.logToConsole = true;
 
+    var pusher = new Pusher('8a6db1144940a1e554b7', {
+      encrypted: true
+    });
+
+    var channel = pusher.subscribe('my-channel');
+    channel.bind('my-event', function(data) {
+      console.log(data.message);
+    });
+   </script>
     <link rel="manifest" href="/manifest.json">
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="assets/images/favicons/ms-icon-144x144.png">

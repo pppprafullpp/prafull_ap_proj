@@ -21,6 +21,9 @@ class AdvertismentsController < ApplicationController
       prefix = "http://instagram.com/"
     end
     Advertisement.find(params[:id]).update_attributes(:advertisement_link=>prefix+params[:post_id], :status=>Advertisement::STATUS["Published by influencer"])
+    influencer_name = Influencer.find(Advertisement.find(params[:id]).influencer_id).name
+    ApplicationController.new.add_notification(Notification::ACTIVITY_TYPE["new_ad_published"],"New Ad published by #{influencer_name}",:viewed=>false)
+
     render :json => {
       success:true
     }
