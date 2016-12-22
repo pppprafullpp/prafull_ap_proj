@@ -6,7 +6,6 @@ class HomeController < ApplicationController
       flash[:success] = "Logged In Successfully"
       redirect_to "/influencers"
     end
-    @activities = PublicActivity::Activity.all
   end
 
   def activate
