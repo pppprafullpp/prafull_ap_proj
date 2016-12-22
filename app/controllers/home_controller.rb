@@ -1,7 +1,12 @@
 class HomeController < ApplicationController
 
   def index
-
+    if params[:code].present?
+      $instagram_access_code = params[:code]
+      flash[:success] = "Logged In Successfully"
+      redirect_to "/influencers"
+    end
+    @activities = PublicActivity::Activity.all
   end
 
   def activate

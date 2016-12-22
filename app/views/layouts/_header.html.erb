@@ -1,106 +1,178 @@
-  <div class="topBar">
-            <div class="row">
-              <div class="userName"><span class="ion-navicon-round navIcon1"></span> <span class="ion-navicon-round navIcon2"></span></div>
+<div class="topBar">
+  <div class="row">
+    <div class="userName"><span class="ion-navicon-round navIcon1"></span> <span class="ion-navicon-round navIcon2"></span></div>
 
-              <div class="user-nav">
-                <ul>
-                  <%if current_influencer%>
-                  <%wallet = current_influencer.wallet_amount%>
-                  <%elsif current_advertiser%>
-                  <%wallet = current_advertiser.wallet_amount%>
-                  <%end%>
-                  <li class="lg-font">
-                    <div class="userName">
-                      <% if current_advertiser.present?%>
-                        <%name = current_advertiser.name%>
-                        <%elsif current_influencer.present?%>
-                         <%name = current_influencer.name%>
-                      <%end%>
-                       <strong>Hello, <%=name.titleize%></strong>
-                    </div>
-                  </li>
-                  <!-- <li class="dropdown messages">
-                    <span class="badge badge-danager animated bounceIn" id="new-messages">38</span>
-                    <a onclick="javascript:$('#notification-dropdown').toggle()" class="dropdown-toggle options topIcon" id="toggle-mail" data-toggle="dropdown">
-                    <span class="ion-ios-bell"></span>
-                    </a>
-
-                     <ul id="notification-dropdown" class="dropdown-menu alert animated fadeInDown">
-                      <li>
-                        <h1>You have <strong>38</strong> new Notification</h1>
-                      </li>
-                      <li>
-                        <a href="#">
-                          <div class="profile-photo">
-                            <img src="/assets/profile-img.png" alt="" class="img-circle">
-                          </div>
-                          <div class="message-info">
-                            <span class="sender">James Bond</span>
-                            <span class="time">30 mins</span>
-                            <div class="message-content">Lorem ipsum dolor sit amet, elit rutrum felis sed erat augue fusce...</div>
-                          </div>
-                        </a>
-                      </li>
-
-                      <li><a href="#">Check all Notifications <span class="ion-arrow-right-b"></span></a>
-                      </li>
-                    </ul>
-                  </li> -->
-                  <li class="dropdown messages">
-                    <span class="badge badge-danager animated bounceIn" id="new-messages">10</span>
-                    <a onclick="javascript:$('#mailer-dropdown').toggle()" class="dropdown-toggle options topIcon" id="toggle-mail" data-toggle="dropdown">
-                    <span class="ion-android-mail"></span>
-                    </a>
-                  <ul id="mailer-dropdown" class="dropdown-menu alert animated fadeInDown">
-                      <li>
-                        <h1>You have <strong>10</strong> new messages</h1>
-                      </li>
-                      <li>
-                        <a href="#">
-                          <div class="profile-photo">
-                            <img src="/assets/profile-img.png" alt="" class="img-circle">
-                          </div>
-                          <div class="message-info">
-                            <span class="sender">James Bond</span>
-                            <span class="time">30 mins</span>
-                            <div class="message-content">Lorem ipsum dolor sit amet, elit rutrum felis sed erat augue fusce...</div>
-                          </div>
-                        </a>
-                      </li>
-                       <li><a href="#">Check all messages <span class="ion-arrow-right-b"></span></a>
-                      </li>
-                      <li><a href="#">Check all messages <span class="ion-arrow-right-b"></span></a>
-                     </li>
-                    </ul>
-                  </li>
-                  <li id="user_dropdown" >
-                    <a class="dropdown-toggle" onclick="javascript:$('#user_dropdown').toggleClass('open')" data-toggle="dropdown" href="#"><img src="/assets//member-img.png" class="profile-thumb img-responsive"></a>
-                    <ul id="account-dropdown" class="dropdown-menu animated fadeInDown">
-                      <li>
-                        <%if current_advertiser%>
-                          <a href="<%=advertiser_profile_path(advertiser_id:current_advertiser.id)%>"><span class="ion-person"></span> Profile</a>
-                        <%elsif current_influencer%>
-                        <a href="<%=influencer_profile_path(influencer_id:current_influencer.id)%>"><span class="ion-person"></span> Profile</a>
-
-                        <%end%>
-
-                      </li>
-                      <li>
-                        <a href="#"><span class="ion-person"></span> Account</a>
-                      </li>
-                      <li>
-                        <%if current_advertiser%>
-                          <a href="<%=advertiser_setting_path(advertiser_id:current_advertiser.id)%>"><span class="ion-gear-b"></span> Settings</a>
-                          <%elsif current_influencer%>
-                          <a href="<%=influencer_setting_path(influencer_id:current_influencer.id)%>"><span class="ion-gear-b"></span> Settings</a>
-                        <%end%>
-                      </li>
-                      <li>
-                        <%=link_to "<span class='ion-power'></span>&nbsp;Logout".html_safe, destroy_advertiser_session_path ,method: :delete  %>
-                      </li>
-                    </ul>
-                  </li>
-                </ul>
-              </div>
-            </div>
+    <div class="user-nav">
+      <ul>
+        <%if current_influencer%>
+        <%wallet = current_influencer.wallet_amount%>
+        <%elsif current_advertiser%>
+        <%wallet = current_advertiser.wallet_amount%>
+        <%end%>
+        <li class="lg-font">
+          <div class="userName">
+            <% if current_advertiser.present?%>
+              <%name = current_advertiser.name%>
+              <%elsif current_influencer.present?%>
+               <%name = current_influencer.name%>
+            <%end%>
+             <strong>Hello, <%=name.titleize%></strong>
           </div>
+        </li>
+        <!-- <li><i class="fa fa-refresh fa-2x" style="cursor:pointer" onclick="get_pending_notifications()"></i><li> -->
+          <li class="dropdown messages">
+          <span class="badge badge-danager animated bounceIn" id="pending_notifications_count_id">0</span>
+          <a onclick="javascript:$('#notification-dropdown').toggle()" class="dropdown-toggle options topIcon"
+          id="toggle-mail" data-toggle="dropdown">
+          <span class="fa fa-bell"></span>
+          </a>
+
+          <ul id="notification-dropdown" class="dropdown-menu alert animated fadeInDown">
+          </ul>
+
+          </li>
+
+          <li class="dropdown messages">
+          <span class="badge badge-danager animated bounceIn" id="new-messages">10</span>
+          <a onclick="javascript:$('#mailer-dropdown').toggle()" class="dropdown-toggle options topIcon" id="toggle-mail" data-toggle="dropdown">
+          <span class="ion-android-mail"></span>
+          </a>
+
+          <ul id="mailer-dropdown" class="dropdown-menu alert animated fadeInDown">
+          <li>
+          <h1>You have <strong id="messages-count">10</strong> new messages</h1>
+
+          <a href="#">
+          <div class="profile-photo">
+          <img src="/assets/profile-img.png" alt="" class="img-circle">
+          </div>
+          <div class="message-info">
+            <span class="sender">James Bond</span>
+            <span class="time">30 mins</span>
+            <div class="message-content">Lorem ipsum dolor sit amet, elit rutrum felis sed erat augue fusce...</div>
+          </div>
+          </a>
+          </li>
+          <li><a href="#">Check all messages <span class="ion-arrow-right-b"></span></a> <a href="javascript.void(0)" onclick="show_modal()">Create Message</a>
+          </li>
+          </ul>
+
+          </li>
+        <li id="user_dropdown" >
+          <a class="dropdown-toggle" onclick="javascript:$('#user_dropdown').toggleClass('open')" data-toggle="dropdown" href="#"><img src="/assets//member-img.png" class="profile-thumb img-responsive"></a>
+          <ul id="account-dropdown" class="dropdown-menu animated fadeInDown">
+            <li>
+              <%if current_advertiser%>
+                <a href="<%=advertiser_profile_path(advertiser_id:current_advertiser.id)%>"><span class="ion-person"></span> Profile</a>
+              <%elsif current_influencer%>
+              <a href="<%=influencer_profile_path(influencer_id:current_influencer.id)%>"><span class="ion-person"></span> Profile</a>
+
+              <%end%>
+
+            </li>
+            <li>
+              <a href="#"><span class="ion-person"></span> Account</a>
+            </li>
+            <li>
+              <%if current_advertiser%>
+                <a href="<%=advertiser_setting_path(advertiser_id:current_advertiser.id)%>"><span class="ion-gear-b"></span> Settings</a>
+                <%elsif current_influencer%>
+                <a href="<%=influencer_setting_path(influencer_id:current_influencer.id)%>"><span class="ion-gear-b"></span> Settings</a>
+              <%end%>
+            </li>
+            <li>
+              <%=link_to "<span class='ion-power'></span>&nbsp;Logout".html_safe, destroy_advertiser_session_path ,method: :delete  %>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="createMessagepopup">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+      <h4 class="modal-title" id="myModalLabel">Create Message</h4>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-lg-12">
+          <%=form_tag messages_path,:class=>"form" do |f|%>
+          <div class="form-group">
+            <%if current_advertiser.present?%>
+            <p>Select Influencer to Send Message</p>
+            <%=select_tag :advertiser_id,options_for_select(Influencer.pluck(:name,:id)),{:class=>"form-control"}%>
+            <%else%>
+            <p>Select Advertiser to Send Message</p>
+            <%=select_tag :advertiser_id,options_for_select(Advertiser.pluck(:name,:id)),{:class=>"form-control"}%>
+            <%end%>
+          </div>
+          <%=text_area_tag :message, :class=>"form-control"%>
+          <%end%>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+$(document).ready(get_pending_notifications);
+// setInterval(get_pending_notifications,4000)
+function show_modal(){
+  event.preventDefault();
+  $('#createMessagepopup').modal('show')
+}
+  function get_messages(){
+    $.ajax({
+      url:"/get_messages",
+      type:"POST",
+      data: {
+        type:"<%= current_advertiser.present? ? 'advertiser' : 'influencer'%>",
+        id:"<%= current_advertiser.present? ? current_advertiser.id : current_influencer.id%>"
+      },
+      success: function(response){
+        console.log(response);
+      }
+    })
+  }
+
+  function get_pending_notifications(){
+    $.ajax({
+      url:"/get_pending_notification",
+      type:"POST",
+      data:{
+        current_user_type:"<%= current_advertiser.present? ? 'advertiser' : 'influencer' %>",
+        id:"<%=current_advertiser.present? ? current_advertiser.id : current_influencer.id%>"
+      },
+      success: function(response){
+          if ($("#notification-dropdown > li").length < 5){
+           for(i=0;i<response["pending_notifications"].length;i++){
+            $("#notification-dropdown").append("<li onclick=update_pending_notification("+response["pending_notifications"][i]["id"]+")>"+"<a href='javascript.void(0)'><div class='message-info'><div class='message-content'> "+response["pending_notifications"][i]["notification_text"]+"</div></div></a>"+"</li>")
+          }
+          $("#pending_notifications_count_id").removeClass("bounceIn").text(parseInt($("#pending_notifications_count_id").text())+parseInt(response["pending_notifications"].length)).addClass("animated bounceIn");
+        }
+        else {
+
+        }
+      }
+    });
+  }
+  function update_pending_notification(rid){
+    event.preventDefault();
+    $.ajax({
+      url:"/reset_pending_notification",
+      type:"POST",
+      data:{
+        current_user_type:"<%= current_advertiser.present? ? 'advertiser' : 'influencer' %>",
+        id:"<%=current_advertiser.present? ? current_advertiser.id : current_influencer.id%>",
+        row_id:rid
+      },
+      success: function(response){
+          console.log(response)
+      }
+    });
+  }
+</script>

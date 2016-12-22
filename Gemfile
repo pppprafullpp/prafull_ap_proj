@@ -58,3 +58,6 @@ gem 'whenever', :require => false
 gem 'cloudinary'
 gem 'paypal-sdk-merchant'
 gem 'pusher'
+gem 'will_paginate-bootstrap'
+gem 'instagram'
+ 

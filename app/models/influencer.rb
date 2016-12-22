@@ -8,7 +8,7 @@ class Influencer < ActiveRecord::Base
 
     has_one :social_account
     has_many :advertisements
-    after_save :update_notification
+    # after_save :update_notification
 
 
     def self.online?

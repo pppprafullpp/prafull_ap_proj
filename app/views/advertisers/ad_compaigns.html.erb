@@ -41,14 +41,10 @@
           <td><%= Influencer.find(ad.influencer_id).name %>(<%=Influencer.find(ad.influencer_id).email %>)</td>
           <td><%= ad.created_at %></td>
           <td>
-            <%if ad.status == 0%>
-            <div class="progress-bar progress-bar-red"><%=Advertisement::STATUS.key(ad.status)%></div>
-            <%else%>
-            <div class="progress-bar progress-bar-green"><%=Advertisement::STATUS.key(ad.status)%></div>
-            <%end%>
+           <%=Advertisement::STATUS.key(ad.status)%>
           </td>
           <td><%=Category.find(ad.category).name.titleize%></td>
-          <td><%=ad.reason_for_decline%></td>
+          <td><%=ad.reason_for_decline.present? ? ad.reason_for_decline : "Not Applicable"%></td>
           </tr>
           <%end%>
           </tbody>
@@ -57,7 +53,7 @@
     </div>
   </div>
 
- <%=will_paginate @ads%>
+ <%=will_paginate @ads, renderer: BootstrapPagination::Rails%>
 
 </div>
 </section>

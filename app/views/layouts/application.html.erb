@@ -22,6 +22,14 @@
       console.log(data.message);
     });
    </script>
+   <% unless flash.empty? %>
+    <script type="text/javascript">
+        <% flash.each do |f| %>
+        <% type = f[0].to_s.gsub('alert', 'error').gsub('notice', 'info') %>
+         toastr['<%= type %>']('<%= f[1] %>');
+        <% end %>
+    </script>
+   <% end %>
     <link rel="manifest" href="/manifest.json">
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="assets/images/favicons/ms-icon-144x144.png">
@@ -31,22 +39,15 @@
       paceOptions = {
           ajax: false,
           document: true,
-          restartOnPushState: false,
-          restartOnRequestAfter: false
+          restartOnPushState: true,
+          restartOnRequestAfter: true
       }
     </script>
 
 </head>
 <body>
-  <% unless flash.empty? %>
-   <script type="text/javascript">
-       <% flash.each do |f| %>
-       <% type = f[0].to_s.gsub('alert', 'error').gsub('notice', 'info') %>
-        toastr['<%= type %>']('<%= f[1] %>');
-       <% end %>
-   </script>
-  <% end %>
-    <%= yield %>
+
+  <%= yield %>
 
 </body>
 </html>
