@@ -44,7 +44,7 @@
            <%=Advertisement::STATUS.key(ad.status)%>
           </td>
           <td><%=Category.find(ad.category).name.titleize%></td>
-          <td><%=ad.reason_for_decline%></td>
+          <td><%=ad.reason_for_decline.present? ? ad.reason_for_decline : "Not Applicable"%></td>
           </tr>
           <%end%>
           </tbody>

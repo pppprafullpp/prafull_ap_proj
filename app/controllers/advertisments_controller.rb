@@ -10,6 +10,11 @@ class AdvertismentsController < ApplicationController
         new_record.update_attributes(:ad_image_url=>upload_image["url"])
       end
       ApplicationController.new.add_notification(Notification::ACTIVITY_TYPE["new_ad_creation"],"New Ad created",:viewed=>false)
+      PendingNotification.create!(
+      influencer_id:new_record.influencer_id,
+      advertiser_id:new_record.advertiser_id,
+      notification_type:Advertisement::STATUS.key(1),
+      notification_text:Advertisement::STATUS_TEXT[Advertisement::STATUS["Initiated"]-1],:viewed=>false)
     flash[:success] = "Created successfully"
     redirect_to :back
   end

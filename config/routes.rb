@@ -17,8 +17,12 @@ Rails.application.routes.draw do
   resources :registrations do
     post :sign_up
   end
-
+  post "/get_messages" => "messages#get_messages"
   get "/activate" => "home#activate"
+  match "/get_pending_notification" => "notifications#get_pending_notification", :via=>["post"]
+  match "/reset_pending_notification" => "notifications#reset_pending_notification", :via=>["post"]
+
+  resources :messages
 
   resources :advertisers do
     get :social_accounts
