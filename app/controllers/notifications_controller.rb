@@ -1,14 +1,11 @@
 class NotificationsController < ApplicationController
+  # STATUS =  {"Initiated" => 1,"Approved by Admin" => 2,"Approved by influencer" => 3,"Declined by Admin" => 4, "Declined by influencer"=>5,"Published by influencer"=>6}
 
   def get_pending_notification
-    # raise params.to_yaml
-    # eval(params[:current_user_type].camelcase).find(params[:id])
     if params[:current_user_type] == "influencer"
-      pending_notifications = PendingNotification.where(:influencer_id=>params[:id],:viewed=>false)
-      # PendingNotification.where(:influencer_id => params[:id]).update_all(:viewed=>true )
+      pending_notifications = PendingNotification.find_by_sql("SELECT * FROM pending_notifications WHERE influencer_id = #{params[:id]} and notification_type = 2 and viewed=false ORDER BY ID DESC")
     else
-      pending_notifications = PendingNotification.where(:advertiser_id=>params[:id],:viewed=>false)
-      # PendingNotification.where(:advertiser_id => params[:id]).update_all(:viewed=>true )
+       pending_notifications = PendingNotification.find_by_sql("SELECT * FROM pending_notifications WHERE advertiser_id=#{params[:id]} and viewed=false and notification_type IN (2,3,4,5,6) ORDER BY ID DESC")
     end
 
     render :json =>{
@@ -18,7 +15,6 @@ class NotificationsController < ApplicationController
   end
 
   def reset_pending_notification
-    
     PendingNotification.find(params[:row_id]).update(:viewed=>true)
     render :json =>{
       success:true,

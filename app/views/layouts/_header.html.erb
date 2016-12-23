@@ -150,7 +150,8 @@ function show_modal(){
       success: function(response){
           if ($("#notification-dropdown > li").length < 5){
            for(i=0;i<response["pending_notifications"].length;i++){
-            $("#notification-dropdown").append("<li onclick=update_pending_notification("+response["pending_notifications"][i]["id"]+")>"+"<a href='javascript.void(0)'><div class='message-info'><div class='message-content'> "+response["pending_notifications"][i]["notification_text"]+"</div></div></a>"+"</li>")
+            $("#notification-dropdown").append("<li id="+response["pending_notifications"][i]["id"]+" onclick=update_pending_notification("+response["pending_notifications"][i]["id"]+")>"+
+            "<a href='javascript.void(0)'><div class='message-info'><div class='message-content'> "+response["pending_notifications"][i]["notification_text"]+response["pending_notifications"][i]["advertisement_id"]+"</div></div></a>"+"</li>")
           }
           $("#pending_notifications_count_id").removeClass("bounceIn").text(parseInt($("#pending_notifications_count_id").text())+parseInt(response["pending_notifications"].length)).addClass("animated bounceIn");
         }
