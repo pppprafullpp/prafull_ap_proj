@@ -14,7 +14,9 @@ class AdvertismentsController < ApplicationController
       influencer_id:new_record.influencer_id,
       advertiser_id:new_record.advertiser_id,
       notification_type:Advertisement::STATUS.key(1),
-      notification_text:Advertisement::STATUS_TEXT[Advertisement::STATUS["Initiated"]-1],:viewed=>false)
+      notification_text:Advertisement::STATUS_TEXT[Advertisement::STATUS["Initiated"]-1],
+      advertisement_id:new_record.id,
+      :viewed=>false)
     flash[:success] = "Created successfully"
     redirect_to :back
   end
