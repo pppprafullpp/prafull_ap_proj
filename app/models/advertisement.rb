@@ -7,10 +7,4 @@ class Advertisement < ActiveRecord::Base
   STATUS_TEXT = ["A new Advertisement for You","Advertisement Approved By Admin","Advertisement Approved By Influencer","Advertisement Declined By Admin","Declined By Influencer","Published By Influencer"]
 
   has_many :advertisements
-
-  # after_save :update_notification
-  #
-  # def update_notification
-  #   ApplicationController.new.add_notification(Notification::ACTIVITY_TYPE["new_ad_creation"],"new ad created",:viewed=>false)
-  # end
 end

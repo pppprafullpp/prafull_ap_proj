@@ -5,33 +5,134 @@
   <%= render :partial => "/layouts/header" %>
 
   <section class="account section">
+    <div class="form-horizontal">
+     <div class="row">
+        <div class="col-sm-8">
 
-  <div class="container">
-    <div class="row">
-    <div class="col-md-12">
-    <h1>Wallet Information</h1>
+          <%=form_tag init_transaction_wallets_path,:method=>"post" do%>
+
+          <div class="form-group">
+          <label class="control-label col-md-5" for="">Payment Method</label>
+            <div class="col-md-7">
+            <select name="payment_type" class="custom-select">
+                <option id="facebook" selected>Credit Card</option>
+                <option id="Instagram">Cash</option>
+            </select>
+          </div>
+          </div>
+
+          <div class="form-group">
+          <label class="control-label col-md-5" for="">Card Type</label>
+            <div class="col-md-7">
+            <select name="card_type" class="custom-select">
+                <option id="facebook" value="Mastercard" selected>Mastercard</option>
+                <option id="Instagram"value="visa" >Visa</option>
+            </select>
+          </div>
+          </div>
+
+          <div class="form-group">
+            <label class="control-label col-md-5" for="card_holder_name">Name on Card</label>
+            <div class="col-md-7">
+              <input type="text" class="form-control" name="card_holder_name" id="card-holder-name" placeholder="Card Holder's Name">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-md-5" for="card_number">Card Number</label>
+            <div class="col-md-7">
+              <input type="text" class="form-control" name="card_number" id="card-number" placeholder="Debit/Credit Card Number",maxlength=16>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-md-5" for="expiry_month">Expiration Date</label>
+            <div class="col-md-7">
+              <div class="row">
+                <div class="col-xs-3">
+                  <select class="form-control col-sm-2" name="expiry_month" id="expiry-month">
+                    <option>Month</option>
+                    <option value="01">Jan (01)</option>
+                    <option value="02">Feb (02)</option>
+                    <option value="03">Mar (03)</option>
+                    <option value="04">Apr (04)</option>
+                    <option value="05">May (05)</option>
+                    <option value="06">June (06)</option>
+                    <option value="07">July (07)</option>
+                    <option value="08">Aug (08)</option>
+                    <option value="09">Sep (09)</option>
+                    <option value="10">Oct (10)</option>
+                    <option value="11">Nov (11)</option>
+                    <option value="12">Dec (12)</option>
+                  </select>
+                </div>
+                <div class="col-xs-3">
+                  <select class="form-control" name="expiry_year">
+                    <option value="2013">2013</option>
+                    <option value="2014">2014</option>
+                    <option value="2015">2015</option>
+                    <option value="2016">2016</option>
+                    <option value="2017">2017</option>
+                    <option value="2018">2018</option>
+                    <option value="2019">2019</option>
+                    <option value="2020">2020</option>
+                    <option value="2021">2021</option>
+                    <option value="2022">2022</option>
+                    <option value="2023">2023</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-md-5" for="cvv">Card CVV</label>
+            <div class="col-sm-3">
+              <input type="text" class="form-control" name="cvv" id="cvv" placeholder="Security Code">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="control-label col-md-5" for="first_nam">First Name</label>
+            <div class="col-sm-3">
+              <input type="text" class="form-control" name="first_name" id="cvv" placeholder="First Name">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="control-label col-md-5" for="last_nam">Last Name</label>
+            <div class="col-sm-3">
+              <input type="text" class="form-control" name="last_name" id="cvv" placeholder="Last Name">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="control-label col-md-5" for="">Billing Address</label>
+            <div class="col-md-7">
+              <textarea placeholder="Billing Address" name="billing_address" class="form-control"></textarea>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-md-5" for="">Amount</label>
+            <div class="col-md-7">
+              <input type="text" class="form-control" name="amount" id="" placeholder="Total Amount">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="control-label col-md-5" for="">Description</label>
+            <div class="col-md-7">
+              <textarea placeholder="Desciption" name="description" class="form-control"></textarea>
+            </div>
+          </div>
+
+        <div class="col-md-7 col-md-offset-5 mgTop30">
+          <%=submit_tag(:save,:class=>"btn btn-mountain btn-sm btn-round")%>
+          <a class="btn btn-mountain btn-sm btn-round" href="#">Cancel</a>
+          </div>
+       <%end%>
+        <!--<button class="btn btn-mountain-o btn-sm btn-round">Save</button> <button class="btn btn-mountain-o btn-sm btn-round">Cancel</button>        -->
+      </div>
     </div>
     </div>
 
-    <div class="text-center">
-      <h4 class="text-center">
-        Balance : $<%=@wallet_amount%>
-      </h4>
-      <a href="" class="btn btn-mountain btn-sm btn-round">Add Amount</a>
-    </div>
-
-    <div id="add-amount-area" class=" text-center col-md-4">
-      <%=form_tag "#",:method=>"post",:class=>"form" do %>
-      <table class="table">
-        <tr>
-          <td><%=text_field_tag(:amount,"",:placeholder=>"Enter amount(min 100)",:class=>"form-control")%></td>
-          <td><%=submit_tag("Add", :class=>"btn btn-primary")%></td>
-        </tr>
-      </table>
-      <%end%>
-    </div>
-
-  </div>
  </section>
 </div>
 </section>

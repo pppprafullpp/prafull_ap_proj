@@ -5,9 +5,8 @@ class NotificationsController < ApplicationController
     if params[:current_user_type] == "influencer"
       pending_notifications = PendingNotification.find_by_sql("SELECT * FROM pending_notifications WHERE influencer_id = #{params[:id]} and notification_type = 2 and viewed=false ORDER BY ID DESC")
     else
-       pending_notifications = PendingNotification.find_by_sql("SELECT * FROM pending_notifications WHERE advertiser_id=#{params[:id]} and viewed=false and notification_type IN (2,3,4,5,6) ORDER BY ID DESC")
+       pending_notifications = PendingNotification.find_by_sql("SELECT * FROM pending_notifications WHERE advertiser_id=#{params[:id]} and viewed=false and notification_type IN (2,3,45,6) ORDER BY ID DESC")
     end
-
     render :json =>{
       success:true,
       pending_notifications:pending_notifications

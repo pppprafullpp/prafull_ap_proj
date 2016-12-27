@@ -9,8 +9,7 @@ class AdvertisersController < ApplicationController
       flash[:notice] = "please verify your id"
       redirect_to root_path
     end
-    puts "--------------------------------------------checked"
-  end
+   end
 
   def index
     @current_advertisers_data = current_advertiser

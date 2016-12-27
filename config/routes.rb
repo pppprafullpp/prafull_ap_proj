@@ -14,6 +14,12 @@ Rails.application.routes.draw do
   devise_for :advertisers, :controllers => { registrations: 'registrations', passwords: "advertisers/change_password" }
   devise_for :influencers, :controllers => { registrations: 'registrations', passwords: "advertisers/change_password" }
 
+  resources :wallets do
+    collection do
+      post :init_transaction
+    end
+  end
+
   resources :registrations do
     post :sign_up
   end

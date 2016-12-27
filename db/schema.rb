@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161223045020) do
+ActiveRecord::Schema.define(version: 20161227085104) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "trackable_id",   limit: 4
@@ -255,6 +255,15 @@ ActiveRecord::Schema.define(version: 20161223045020) do
     t.text     "facebook_image_url",   limit: 65535
     t.text     "country",              limit: 65535
     t.text     "category",             limit: 65535
+  end
+
+  create_table "wallet_transactions", force: :cascade do |t|
+    t.integer  "advertiser_id",           limit: 4
+    t.text     "paypal_transaction_id",   limit: 65535
+    t.integer  "transaction_amount",      limit: 4
+    t.text     "transaction_description", limit: 65535
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
   end
 
 end

@@ -1,5 +1,9 @@
 class AdvertismentsController < ApplicationController
 
+  def index
+    
+  end
+
   def create
     # raise params.to_yaml
     params[:advertisement][:ad_type] = params[:advertisement][:ad_type].to_s
