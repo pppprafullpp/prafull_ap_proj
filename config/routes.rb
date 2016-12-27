@@ -42,6 +42,9 @@ Rails.application.routes.draw do
     get :influencer_detail
     get :profile
     get :my_wallet
+    collection do
+      post :get_wallet_status
+    end
   end
 
   resources :influencers do

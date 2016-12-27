@@ -11,7 +11,7 @@
 <h1>Create Ad Campaigns</h1>
 </div>
 </div>
-
+<%if current_advertiser.wallet_amount >100%>
 <div class="form-horizontal">
   <%=form_for @new_advertisment,:url=>advertisments_path, :method=>"post" do |f| %>
   <%=f.hidden_field:advertiser_id, :value=>current_advertiser.id%>
@@ -25,24 +25,11 @@
             <div class="form-group">
               <label class="control-label col-md-3" for="">Social Influencer</label>
               <div class="col-md-5">
-                <%=f.select :influencer_id,options_for_select(Influencer.pluck(:name, :id)),:prompt => "-Select-",:class=>"form-control", :required=>true%>
+                <%=f.select :influencer_id,options_for_select(Influencer.pluck(:name, :id)),:prompt => "-Select-",:onchange=>"check_wallet_status(this.id)",:class=>"form-control", :required=>true%>
+                <p id="check_wallet_msg" style="color:red"></p>
                </div>
             </div>
 
-
-            <!-- <div class="form-group hidden">
-              <label class="control-label col-md-3" for="">Social Influencer Group</label>
-              <div class="col-md-5">
-              <select name="" class="custom-select form-control">
-                <option id="">Select</option>
-                <option id="">Group Name1</option>
-                <option id="">Group Name2</option>
-                <option id="">Group Name3</option>
-                <option id="">Group Name4</option>
-                <option id="">Group Name5</option>
-              </select>
-            </div>
-            </div> -->
         <div class="form-group">
           <label class="control-label col-md-3" for="">Media</label>
           <div class="col-md-5">
@@ -65,6 +52,32 @@
             case "3": $("#link").hide();$("#photo").hide();$("#video").show();break;
           }
         }
+        $("#advertisement_influencer_id").on("change",check_wallet_status);
+        function check_wallet_status(){
+          selected_influencer_id = $("#advertisement_influencer_id option:selected").val();
+          $.ajax({
+            url:"/advertisers/get_wallet_status",
+            type:"POST",
+            data: {
+              id:"<%=current_advertiser.id%>",
+              influencer_id:selected_influencer_id
+            },
+            success: function(response){
+              console.log(response);
+              if (!response["success"]){
+                $("#create_ad_btn").hide();
+                $("#check_wallet_msg").text("You cannot post this ad since you have less balance is low");
+                $("#dynamic-area-1").hide();
+                $("#dynamic-area-2").hide()
+              }
+              else {
+                $("#create_ad_btn").show();
+                $("#dynamic-area-1").show();
+                $("#dynamic-area-2").show()
+              }
+            }
+          })
+        }
         </script>
         <hr />
 
@@ -72,25 +85,9 @@
         <div class="col-md-12">
         <div class="card">
 
-        <!-- <ul class="nav nav-tabs" id="ad_type" role="tablist">
-          <li class="active">
-          <input type="radio" id="ad_type_link" onclick="trigger_value_change(this.value)" name="advertisement[ad_type]" value="1"/>
-          <label for="ad_type_link">Link</label>
-          </li>
-          <li>
-          <input type="radio" id="ad_type_photo" onclick="trigger_value_change(this.value)" name="advertisement[ad_type]" value="2"/>
-          <label for="ad_type_photo">photo</label>
-          </li>
-          <li>
-          <input type="radio" id="ad_type_video" onclick="trigger_value_change(this.value)" name="advertisement[ad_type]" value="3"/>
-          <label for="ad_type_video">Link</label>
-          </li>
-        </ul> -->
-
-        <div class="row">
+        <div class="row" id="dynamic-area-1">
         <div class="col-md-12">
             <div class="tab-content">
-              <!--#link-->
               <div id="link">
               <h5>Add link Ads</h5>
               <div class="form-group">
@@ -99,14 +96,6 @@
                  <%=f.text_field:advertisement_link,:class=>"form-control input-sm"%>
               </div>
               </div>
-
-
-              <!-- <div class="form-group">
-              <label class="control-label col-md-3" for="">Upload Image</label>
-              <div class="col-md-9">
-              <input type="file" name="pic" class="form-control-img input-sm">
-              </div>
-              </div> -->
 
               </div>
 
@@ -152,7 +141,7 @@
   </div>
 
 
-    <div class="">
+    <div class="" id="dynamic-area-2">
     <hr>
     <div class="row">
       <div class="form-group">
@@ -162,13 +151,6 @@
           </div>
       </div>
     </div>
-
-    <!-- <div class="form-group">
-      <label class="control-label col-md-3" for="">Message</label>
-      <div class="col-md-9">
-        <%=f.text_field:message,:class=>"form-control input-sm"%>
-      </div>
-    </div> -->
 
     <div class="form-group">
       <label class="control-label col-md-3" for="">Title</label>
@@ -184,126 +166,18 @@
       </div>
     </div>
 
-    <!-- <div class="row">
-      <div class="col-md-12">
-        <div class="form-group">
-          <label class="control-label col-md-3" for="">Delay</label>
-          <div class="col-md-5">
-            <select name="" class="custom-select form-control">
-              <option id="">Select</option>
-              <option id="">50 Second</option>
-              <option id="">60 Second</option>
-              <option id="">65 Second</option>
-              <option id="">70 Second</option>
-              <option id="">75 Second</option>
-              <option id="">80 Second</option>
-            </select>
-            </div>
-        </div>
-      </div>
-    </div> -->
-
-<!-- <div class="row">
-<div class="col-md-12">
-  <div class="form-group">
-  <label class="checkbox-inline col-md-offset-3" style="padding-left:35px;">
-    <input value="" type="checkbox">Random post accounts
-  </label>
-  <label class="checkbox-inline" style="padding-left:25px;">
-    <input value="" type="checkbox">Delete after finished
-  </label>
-  </div>
-</div>
-</div> -->
-
-<hr>
-
-<!-- <div class="row">
-<div class="col-md-12">
-  <div class="form-group">
-  <label class="checkbox-inline col-md-offset-3" style="padding-left:35px;">
-    <input value="" type="checkbox">Auto pause posts
-  </label>
-  </div>
-</div>
-</div> -->
-
-<!-- <div class="row">
-<div class="col-md-12">
-<div class="form-group">
-  <label class="control-label col-md-3" for="">After Complete</label>
-  <div class="col-md-5  ">
-      <select name="" class="custom-select form-control">
-        <option id="">Select</option>
-        <option id="">1 Post</option>
-        <option id="">2 Post</option>
-        <option id="">3 Post</option>
-        <option id="">4 Post</option>
-        <option id="">5 Post</option>
-      </select>
-      </div>
-</div>
-</div>
-</div> -->
-
-<hr>
-
-<!-- <div class="row">
-<div class="col-md-12">
-  <div class="form-group">
-  <label class="checkbox-inline col-md-offset-3" style="padding-left:35px;">
-    <input value="" type="checkbox">Repeat post
-  </label>
-  </div>
-</div>
-</div> -->
-
-<!-- <div class="row">
-
-  <div class="col-md-12">
-    <div class="form-group">
-      <label class="control-label col-md-3" for="">Repeat</label>
-        <div class="col-md-5">
-        <select name="" class="custom-select">
-          <option id="">Select</option>
-          <option id="">Once Per Day</option>
-          <option id="">Every Two Day</option>
-          <option id="">Every Three Day</option>
-          <option id="">Every Four Day</option>
-          <option id="">Every Five Day</option>
-          <option id="">Every Six Day</option>
-          <option id="">Once Per Week</option>
-        </select>
-        </div>
-    </div>
-  </div>
-</div> -->
-<!--
-<div class="row">
-<div class="col-md-12">
-<div class="form-group">
-  <label class="control-label col-md-3" for="">End Day</label>
-  <div class="col-md-9">
-  <div class="input-group date form_datetime input-sm-new" data-date="1979-09-16T05:25:07Z" data-date-format="dd MM yyyy - HH:ii p" data-link-field="dtp_input1">
-  <input class="form-control" size="16" type="text" value="">
-  <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
-  <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
-  </div>
-  </div>
-</div>
-</div>
-</div> -->
-
   <div class="row">
     <div class="col-md-9 col-md-offset-3">
-      <%=f.submit "Save", :class=>"btn btn-mountain btn-sm btn-round"%>
+      <%=f.submit "Save",:id=>"create_ad_btn", :class=>"btn btn-mountain btn-sm btn-round"%>
       <a class="btn btn-mountain btn-sm btn-round" href="#">Cancel</a>
     </div>
   </div>
 <%end%>
 </div>
-<!--<button class="btn btn-mountain-o btn-sm btn-round">Save</button> <button class="btn btn-mountain-o btn-sm btn-round">Cancel</button>		-->
-</div>
+ </div>
+<%else%>
+  <div class="col-md-12 text-center"><h4>Either no Balance or Balance < $100</h4></div>
+<%end%>
 </div>
 </section>
 <%= render :partial => "layouts/footer"%>
