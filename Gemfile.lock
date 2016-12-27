@@ -142,6 +142,9 @@ GEM
       xml-simple
     paypal-sdk-merchant (1.117.2)
       paypal-sdk-core (~> 0.3.0)
+    paypal-sdk-rest (1.6.0)
+      multi_json (~> 1.0)
+      xml-simple
     pusher (1.3.0)
       httpclient (~> 2.7)
       multi_json (~> 1.0)
@@ -257,6 +260,7 @@ DEPENDENCIES
   mysql2 (~> 0.3.18)
   omniauth-facebook
   paypal-sdk-merchant
+  paypal-sdk-rest
   pusher
   rails (= 4.2.6)
   sass-rails (~> 5.0)

@@ -9,8 +9,7 @@ class AdvertisersController < ApplicationController
       flash[:notice] = "please verify your id"
       redirect_to root_path
     end
-    puts "--------------------------------------------checked"
-  end
+   end
 
   def index
     @current_advertisers_data = current_advertiser
@@ -70,6 +69,20 @@ class AdvertisersController < ApplicationController
 
    def profile
 
+   end
+
+   def get_wallet_status
+     wallet_amount = Advertiser.find(params[:id]).wallet_amount.to_i
+     publishing_price = Influencer.find(params[:influencer_id]).publishing_price.to_i
+     if wallet_amount > publishing_price
+       success = true
+     else
+       success = false
+     end
+     render :json => {
+       success:success,
+       wallet_amount:wallet_amount
+     }
    end
 
   private

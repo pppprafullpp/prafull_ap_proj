@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  advertiser_id: 1
+  paypal_transaction_id: MyText
+  transaction_amount: 1
+  transaction_description: MyText
+
+two:
+  advertiser_id: 1
+  paypal_transaction_id: MyText
+  transaction_amount: 1
+  transaction_description: MyText

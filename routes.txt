@@ -78,6 +78,15 @@ advertisment_update_ad_share_url_and_status POST   /advertisments/:advertisment_
                                             PATCH  /influencers(.:format)                                                   registrations#update
                                             PUT    /influencers(.:format)                                                   registrations#update
                                             DELETE /influencers(.:format)                                                   registrations#destroy
+                   init_transaction_wallets POST   /wallets/init_transaction(.:format)                                      wallets#init_transaction
+                                    wallets GET    /wallets(.:format)                                                       wallets#index
+                                            POST   /wallets(.:format)                                                       wallets#create
+                                 new_wallet GET    /wallets/new(.:format)                                                   wallets#new
+                                edit_wallet GET    /wallets/:id/edit(.:format)                                              wallets#edit
+                                     wallet GET    /wallets/:id(.:format)                                                   wallets#show
+                                            PATCH  /wallets/:id(.:format)                                                   wallets#update
+                                            PUT    /wallets/:id(.:format)                                                   wallets#update
+                                            DELETE /wallets/:id(.:format)                                                   wallets#destroy
                        registration_sign_up POST   /registrations/:registration_id/sign_up(.:format)                        registrations#sign_up
                               registrations GET    /registrations(.:format)                                                 registrations#index
                                             POST   /registrations(.:format)                                                 registrations#create
@@ -89,6 +98,8 @@ advertisment_update_ad_share_url_and_status POST   /advertisments/:advertisment_
                                             DELETE /registrations/:id(.:format)                                             registrations#destroy
                                get_messages POST   /get_messages(.:format)                                                  messages#get_messages
                                    activate GET    /activate(.:format)                                                      home#activate
+                   get_pending_notification POST   /get_pending_notification(.:format)                                      notifications#get_pending_notification
+                 reset_pending_notification POST   /reset_pending_notification(.:format)                                    notifications#reset_pending_notification
                                    messages GET    /messages(.:format)                                                      messages#index
                                             POST   /messages(.:format)                                                      messages#create
                                 new_message GET    /messages/new(.:format)                                                  messages#new
@@ -108,6 +119,7 @@ advertisment_update_ad_share_url_and_status POST   /advertisments/:advertisment_
                advertiser_influencer_detail GET    /advertisers/:advertiser_id/influencer_detail(.:format)                  advertisers#influencer_detail
                          advertiser_profile GET    /advertisers/:advertiser_id/profile(.:format)                            advertisers#profile
                        advertiser_my_wallet GET    /advertisers/:advertiser_id/my_wallet(.:format)                          advertisers#my_wallet
+              get_wallet_status_advertisers GET    /advertisers/get_wallet_status(.:format)                                 advertisers#get_wallet_status
                                 advertisers GET    /advertisers(.:format)                                                   advertisers#index
                                             POST   /advertisers(.:format)                                                   advertisers#create
                              new_advertiser GET    /advertisers/new(.:format)                                               advertisers#new
