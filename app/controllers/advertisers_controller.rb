@@ -81,7 +81,8 @@ class AdvertisersController < ApplicationController
      end
      render :json => {
        success:success,
-       wallet_amount:wallet_amount
+       wallet_amount:wallet_amount,
+       publishing_price:publishing_price
      }
    end
 

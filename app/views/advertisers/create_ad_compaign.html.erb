@@ -63,10 +63,9 @@
               influencer_id:selected_influencer_id
             },
             success: function(response){
-              console.log(response);
-              if (!response["success"]){
+               if (!response["success"]){
                 $("#create_ad_btn").hide();
-                $("#check_wallet_msg").text("You cannot post this ad since you have less balance");
+                $("#check_wallet_msg").text("You need minimum $"+response["publishing_price"]+" to post this Ad");
                 $("#dynamic-area-1").hide();
                 $("#dynamic-area-2").hide()
               }
