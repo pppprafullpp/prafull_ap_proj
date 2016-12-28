@@ -9,19 +9,21 @@
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => false %>
   <%= csrf_meta_tags %>
   <script src='https://www.google.com/recaptcha/api.js'></script>
-  <script src="http://js.pusherapp.com/1.9/pusher.min.js"></script>
-  <script>
-  Pusher.logToConsole = true;
-
-    var pusher = new Pusher('8a6db1144940a1e554b7', {
-      encrypted: true
-    });
-
-    var channel = pusher.subscribe('my-channel');
-    channel.bind('my-event', function(data) {
-      console.log(data.message);
-    });
-   </script>
+  <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async='async'></script>
+   <script>
+     var OneSignal = window.OneSignal || [];
+     OneSignal.push(["init", {
+       appId: "e5025d60-e8b8-4086-a58c-66b02684ea36",
+       autoRegister: false, /* Set to true to automatically prompt visitors */
+       subdomainName: 'https://socialbooker.onesignal.com',
+       httpPermissionRequest: {
+         enable: true
+       },
+       notifyButton: {
+           enable: true /* Set to false to hide */
+       }
+     }]);
+     </script>
    <% unless flash.empty? %>
     <script type="text/javascript">
         <% flash.each do |f| %>
