@@ -1,6 +1,6 @@
 function statusChangeCallback(response) {
-  console.log('statusChangeCallback');
-  console.log(response);
+  // console.log('statusChangeCallback');
+  // console.log(response);
   // The response object is returned with a status field that lets the
   // app know the current login status of the person.
   // Full docs on the response object can be found in the documentation
@@ -57,14 +57,14 @@ FB.getLoginStatus(function(response) {
 // successful.  See statusChangeCallback() for when this call is made.
 function testAPI() {
   FB.login();
-  console.log('Welcome!  Fetching your information.... ');
+  // console.log('Welcome!  Fetching your information.... ');
   FB.api('/me', function(response) {
-    console.log('Successful login for: ' + response.name);
+    // console.log('Successful login for: ' + response.name);
     document.getElementById('status').innerHTML =
       'Thanks for logging in, ' + response.name + '!';
   });
   FB.api("/1115405461908086/comments",function(response){
-    console.log(response);
+    // console.log(response);
   })
 }
 
@@ -89,7 +89,7 @@ function open_share_dialog(id) {
     caption = $("#" + id + "_caption").text();
     image = $("#" + id + "_img").attr("src");
     photo_click_link = $("#" + id + "_photo_click_link").text();
-    console.log(photo_click_link);
+    // console.log(photo_click_link);
     FB.api('/me/feed', 'post', {
         message: title + " " + description,
         picture: image,
@@ -98,7 +98,7 @@ function open_share_dialog(id) {
         link: photo_click_link,
         description: description
     }, function(response) {
-        console.log(response);
+        // console.log(response);
         if (!response || response.error) {
             // LoginFB();
             toastr.error("Error, please click on facebook login and try again")
@@ -110,7 +110,7 @@ function open_share_dialog(id) {
 
 function LoginFB() {
     FB.login(function(response) {
-        console.log(response);
+        // console.log(response);
     }, {
         scope: 'publish_actions',
         auth_type: 'reauthenticate',
@@ -122,7 +122,7 @@ function decline_ad_by_influencer() {
     event.preventDefault();
     ad_id = $("#declined_ad_id").val();
     ad_decline_reason = $("#reason_for_ad_decline").val();
-    console.log(ad_id + "" + ad_decline_reason);
+    // console.log(ad_id + "" + ad_decline_reason);
     $.ajax({
         url: "/advertisments/ad_declined_by_influencer/",
         method: "post",
@@ -149,7 +149,7 @@ function decline_ad_by_influencer() {
             }
         }
     });
-    console.log(ad_decline_reason);
+    // console.log(ad_decline_reason);
 }
 
 function instagram_login(){

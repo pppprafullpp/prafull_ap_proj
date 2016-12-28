@@ -15,30 +15,13 @@
     						<input class="advertiser-btn" type="radio" id="radio1" name="radios" value="" checked>
     						<label for="radio1" class="btn-label">Advertisers</label>
     						<input class="influencer-btn" type="radio" id="radio2" name="radios" value="">
-    						<label for="radio2" class="btn-label">Social Influencers</label>
+    						<label for="radio2" class="btn-label">Influencers</label>
     					</div>
   					</div>
 				  </div>
 				    <%= render :partial => "advertiser"%>
             <%= render :partial => "influencer"%>
-				</div>
-
-				<button class="btn-fb-sign-up js-fb-connect" data-qa-id="btn-fb-sign-up" data-context="signup">
-					<div class="btn-fb-wrapper">
-						<div class="signup-spinner"></div>
-						<div class="facebook-button-icon"></div>
-						<span class="fb-signup-btn-text">Continue with Facebook</span>
-					  </div>
-					</button>
-
-					<button class="btn-gp-sign-up js-gp-connect" data-qa-id="btn-gp-sign-up" data-context="signup">
-					<div class="btn-gp-wrapper">
-						<div class="signup-spinner"></div>
-						<div class="gp-button-icon"></div>
-						<span class="gp-signup-btn-text">Continue with Google</span>
-					  </div>
-					</button>
-
+            <div class="g-recaptcha" data-sitekey="6LfJAwsUAAAAAJP5rBdRdnsi-hysY0nrQyCh6vjz"></div>
 				</div>
             </div>
           </div>
@@ -52,10 +35,13 @@
           }
         }
         function check_for_letters(value) {
-          if(isNaN(value[value.length-1]) == false){
+          if(isNaN(value[value.length-1]) == false && value[value.length-1]!=" "){
             alert("enter only letters please")
           }
+        }
 
+         function check_validation(e){
+           e.preventDefault();
         }
 
       </script>
