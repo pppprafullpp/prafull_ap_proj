@@ -3,7 +3,7 @@
   <div class="form-group">
   <label class="control-label col-md-4" for="">Name</label>
     <div class="col-md-8">
-      <%= f.text_field:name, :class=>"form-control", :placeholder=>"Name", :onkeyup=>"check_for_letters(this.value)"%>
+      <%= f.text_field:name, :class=>"form-control", :placeholder=>"Name", :onkeyup=>"check_for_letters(this.value,false)"%>
     </div>
   </div>
 
@@ -29,7 +29,7 @@
   <div class="form-group">
     <label class="control-label col-md-4" for="">Email</label>
        <div class="col-md-8">
-        <%= f.text_field:email, :class=>"form-control", :placeholder=>"Email"%>
+        <%= f.text_field:email, :class=>"form-control", :placeholder=>"Email",:onblur=>"check_exising_user1(this.value)"%>
       </div>
   </div>
 
@@ -41,23 +41,77 @@
       </div>
   </div>
 
-
-    <div class="form-group">
-      <label class="control-label col-md-4" for="">Password</label>
-        <div class="col-md-8">
-          <%=f.password_field:password, :class=>"form-control",:placeholder=>"password"%>
-        </div>
+  <div class="form-group">
+    <div class="col-md-8" id="influencer_form_captcha">
+      <!-- <div class="g-recaptcha" data-sitekey="6LfJAwsUAAAAAJP5rBdRdnsi-hysY0nrQyCh6vjz"></div> -->
     </div>
-<div class="form-group">
-  <div class="col-md-8">
-    <div class="g-recaptcha" data-sitekey="6LfJAwsUAAAAAJP5rBdRdnsi-hysY0nrQyCh6vjz"></div>
   </div>
-    </div>
+
   <div class="form-group">
        <div class="col-md-12">
-         <%= f.submit("Sign Up", :class=>"btn-fb-sign-up js-fb-connect")%>
+         <%= f.submit("Sign Up", :class=>"btn-fb-sign-up js-fb-connect",:id=>"create_influencer_btn")%>
       </div>
   </div>
   </div>
   <!-- <%= f.submit "SIGN UP", :class=>"btn btn-mountain btn-block"%> -->
   <%end%>
+  <script>
+
+      function check_exising_user1(value,respond){
+        if (isValidEmailAddress(value)){
+          status = false;
+          $.ajax({
+            url:"/check_existing_user",
+            type:"POST",
+            data: {
+              type:"influencer",
+              email:value
+            },
+            success : function(response) {
+               if (response["status"] == "error"){
+                alert("Email Already Registered");
+              }
+              else {
+                  status = true;
+              }
+            }
+          })
+        }
+        else {
+           alert("This is not a valid email");
+        }
+        if (respond){
+           return status;
+        }
+      }
+
+  $("#create_influencer_btn").on("click",function(event){
+    event.preventDefault();
+    name = $("#influencer_name").val();
+    email = $("#influencer_email").val();
+    password = $("#influencer_password").val();
+    if (name!="" && email!="" && password!="") {
+        $.ajax({
+         url:"/check_existing_user",
+         type:"POST",
+         data: {
+           type:"influencer",
+           email:email
+         },
+         success : function(response) {
+            if (response["status"] != "error"){
+              $("#new_influencer").submit();
+           }
+           else {
+             alert("email already registered");
+             event.preventDefault();
+           }
+         }
+       })
+     }
+    else {
+      alert("Enter All Fields");
+    }
+  });
+
+  </script>

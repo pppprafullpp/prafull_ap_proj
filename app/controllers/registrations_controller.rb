@@ -22,6 +22,18 @@ class RegistrationsController < ApplicationController
     redirect_to root_path
   end
 
+  def check_existing_user
+    search = eval(params[:type].camelcase).find_by_email(params[:email])
+    if search
+      status = "error"
+    else
+      status = "ok"
+    end
+    render :json=>{
+      status:status
+    }
+  end
+
   private
 
   def advertiser_params

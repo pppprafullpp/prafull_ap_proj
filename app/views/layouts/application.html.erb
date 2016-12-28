@@ -8,8 +8,7 @@
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => false %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => false %>
   <%= csrf_meta_tags %>
-  <script src='https://www.google.com/recaptcha/api.js'></script>
-  <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async='async'></script>
+   <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async='async'></script>
    <script>
      var OneSignal = window.OneSignal || [];
      OneSignal.push(["init", {
@@ -32,19 +31,20 @@
         <% end %>
     </script>
    <% end %>
+   <!-- <script src="https://www.google.com/recaptcha/api.js"></script> -->
     <link rel="manifest" href="/manifest.json">
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="assets/images/favicons/ms-icon-144x144.png">
     <meta name="theme-color" content="#ffffff">
 
-    <script type="text/javascript">
+    <!-- <script type="text/javascript">
       paceOptions = {
           ajax: false,
           document: true,
           restartOnPushState: true,
           restartOnRequestAfter: true
       }
-    </script>
+    </script> -->
 
 </head>
 <body>

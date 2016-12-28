@@ -6,6 +6,21 @@
     <%= f.text_field :name, :class=>"form-control",:placeholder=>"Enter Name", :onkeyup=>"check_for_letters(this.value)"%>
     </div>
   </div>
+
+  <div class="form-group">
+    <label class="control-label col-md-4" for="">Email</label>
+    <div class="col-md-8">
+      <%= f.text_field :email, :class=>"form-control",:placeholder=>"Enter Email",:onblur=>"check_exising_user(this.value)"%>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="control-label col-md-4" for="">Password</label>
+    <div class="col-md-8">
+      <%= f.password_field :password, :class=>"form-control",:placeholder=>"Enter Password"%>
+    </div>
+  </div>
+
   <div class="form-group">
     <label class="control-label col-md-4" for="">Address</label>
     <div class="col-md-8">
@@ -34,7 +49,7 @@
   <div class="form-group">
     <label class="control-label col-md-4" for="">Country</label>
     <div class="col-md-8">
-      <%= f.select :country,options_for_select(["America","Australia","Germany","France","Russia","UK"]),:prompt => "-Select Country",:class=>"form-control"%>
+      <%= f.select :country,options_for_select(Country.pluck(:country_name)),:prompt => "-Select Country",:class=>"form-control"%>
     </div>
   </div>
   <div class="form-group">
@@ -43,37 +58,79 @@
       <%= f.text_field :zip, :class=>"form-control",:placeholder=>"Enter Zip", :onkeyup=>"check_for_number(this.value)"%>
     </div>
   </div>
-  <div class="form-group">
+  <!-- <div class="form-group">
     <label class="control-label col-md-4" for="">Username</label>
     <div class="col-md-8">
-      <%= f.text_field :username, :class=>"form-control",:placeholder=>"Enter Username"%>
+      <%#= f.text_field :username, :class=>"form-control",:placeholder=>"Enter Username"%>
     </div>
-  </div>
+  </div> -->
+
   <div class="form-group">
-    <label class="control-label col-md-4" for="">Email</label>
-    <div class="col-md-8">
-      <%= f.text_field :email, :class=>"form-control",:placeholder=>"Enter Email"%>
-    </div>
-  </div>
-  <div class="form-group">
-    <label class="control-label col-md-4" for="">Password</label>
-    <div class="col-md-8">
-      <%= f.password_field :password, :class=>"form-control",:placeholder=>"Enter Password"%>
-    </div>
-  </div>
-  <div class="form-group">
-      <div class="col-md-8">
-        <div class="g-recaptcha" data-sitekey="6LfJAwsUAAAAAJP5rBdRdnsi-hysY0nrQyCh6vjz"></div>
+      <div class="col-md-8" id="advertiser_form_captcha">
+        <!-- <div class="g-recaptcha" data-sitekey="6LfJAwsUAAAAAJP5rBdRdnsi-hysY0nrQyCh6vjz"></div> -->
       </div>
     </div>
     <div class="form-group">
          <div class="col-md-12">
-           <%= f.submit("Sign Up", :class=>"btn-fb-sign-up js-fb-connect")%>
+           <%= f.submit("Sign Up", :class=>"btn-fb-sign-up js-fb-connect",:id=>"create_advertiser_btn")%>
         </div>
       </div>
   <%end%>
   </div>
 <script>
-$("#advertiser_country").addClass("form-control");
+$("#create_advertiser_btn").on("click",function(event){
+  event.preventDefault();
+  name = $("#advertiser_name").val();
+  email = $("#advertiser_email").val();
+  password = $("#advertiser_password").val();
+  telephone = $("#advertiser_telephone").val();
+  city = $("#advertiser_city").val();
+  state = $("#advertiser_state").val();
+  country  = $("#advertiser_country options:selected").val();
+  zip = $("#advertiser_zip").val();
+  if (name!="" && email!="" && password!="" && telephone!="" && city!="" && state!="" && country!="" &&  zip!="") {
+    $.ajax({
+      url:"/check_existing_user",
+      type:"POST",
+      data: {
+        type:"advertiser",
+        email:email
+      },
+      success : function(response) {
+        console.log(response);
+        if (response["status"] != "error"){
+          $("#new_advertiser").submit();
+        }
+      }
+    })
+  }
+  else {
+    alert("Enter All Fields");
+  }
+});
 
+  function check_exising_user(value){
+    if (isValidEmailAddress(value)){
+      $.ajax({
+        url:"/check_existing_user",
+        type:"POST",
+        data: {
+          type:"advertiser",
+          email:value
+        },
+        success : function(response) {
+          console.log(response);
+          if (response["status"] == "error")
+          {
+            alert("Email Already Exists");
+            $("#advertiser_email").focus();
+          }
+        }
+      })
+    }
+    else {
+       alert("This is not a valid email");
+    }
+  }
+$("#advertiser_country").addClass("form-control");
 </script>
