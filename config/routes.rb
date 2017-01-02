@@ -11,8 +11,8 @@ Rails.application.routes.draw do
     end
   end
 
-  devise_for :advertisers, :controllers => { registrations: 'registrations', passwords: "advertisers/change_password" }
-  devise_for :influencers, :controllers => { registrations: 'registrations', passwords: "advertisers/change_password" }
+  devise_for :advertisers, :controllers => { registrations: 'registrations', passwords: 'passwords' }
+  devise_for :influencers, :controllers => { registrations: 'registrations', passwords: 'passwords' }
 
   resources :wallets do
     collection do
@@ -20,6 +20,11 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :passwords do
+    collection do
+      post :change_password
+    end
+  end
   resources :registrations do
     post :sign_up
   end

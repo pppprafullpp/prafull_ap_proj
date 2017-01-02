@@ -34,6 +34,10 @@ class RegistrationsController < ApplicationController
     }
   end
 
+  def forgot_password
+    
+  end
+
   private
 
   def advertiser_params

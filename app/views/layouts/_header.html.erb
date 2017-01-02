@@ -120,7 +120,7 @@
 
 <script>
 $(document).ready(get_pending_notifications);
-// setInterval(get_pending_notifications,4000)
+setInterval(get_pending_notifications,4000)
 function show_modal(){
   event.preventDefault();
   $('#createMessagepopup').modal('show')
@@ -150,11 +150,15 @@ function show_modal(){
       success: function(response){
           if ($("#notification-dropdown > li").length < 5){
            for(i=0;i<response["pending_notifications"].length;i++){
-            $("#notification-dropdown").append("<li id="+response["pending_notifications"][i]["id"]+" onclick=update_pending_notification("+response["pending_notifications"][i]["id"]+")>"+
-            "<a href='javascript.void(0)'><div class='message-info'><div class='message-content'> "+response["pending_notifications"][i]["notification_text"]+response["pending_notifications"][i]["advertisement_id"]+"</div></div></a>"+"</li>")
+              if($("#notification_"+response["pending_notifications"][i]["id"] )!="" && $("#notification_"+response["pending_notifications"][i]["id"] ).length == 0) {
+               $("#notification-dropdown").append("<li id=notification_"+response["pending_notifications"][i]["id"]+">"+
+               "<a href='/advertisments?advertisement_id="+response["pending_notifications"][i]["advertisement_id"]+"&pn_id="+response["pending_notifications"][i]["id"]+"'><div class='message-info'><div class='message-content'> "+response["pending_notifications"][i]["notification_text"]+"</div></div></a>"+"</li>")
+             }
           }
-          $("#pending_notifications_count_id").removeClass("bounceIn").text(parseInt($("#pending_notifications_count_id").text())+parseInt(response["pending_notifications"].length)).addClass("animated bounceIn");
-        }
+          // if($("#notification_"+response["pending_notifications"][i]["id"]).length != 0) {
+          $("#pending_notifications_count_id").removeClass("bounceIn").text($("#notification-dropdown > li").length).addClass("animated bounceIn");
+         }
+        // }
         else {
 
         }

@@ -20,3 +20,6 @@
 #toast-container{
   top: 70px;
 }
+.error-border {
+  border: 1px solid red;
+}

@@ -37,7 +37,7 @@
   <div class="form-group">
     <label class="control-label col-md-4" for="">City</label>
     <div class="col-md-8">
-      <%= f.text_field :city, :class=>"form-control",:placeholder=>"Enter City", :onkeyup=>"check_for_letters(this.value)"%>
+      <%= f.text_field :city, :class=>"form-control",:placeholder=>"Enter City", :onkeyup=>"check_for_letters(this)"%>
     </div>
   </div>
   <div class="form-group">
@@ -46,24 +46,20 @@
       <%= f.text_field :state, :class=>"form-control",:placeholder=>"Enter State", :onkeyup=>"check_for_letters(this.value)"%>
     </div>
   </div>
+
   <div class="form-group">
     <label class="control-label col-md-4" for="">Country</label>
     <div class="col-md-8">
       <%= f.select :country,options_for_select(Country.pluck(:country_name)),:prompt => "-Select Country",:class=>"form-control"%>
     </div>
   </div>
+
   <div class="form-group">
     <label class="control-label col-md-4" for="">Zip</label>
     <div class="col-md-8">
-      <%= f.text_field :zip, :class=>"form-control",:placeholder=>"Enter Zip", :onkeyup=>"check_for_number(this.value)"%>
+      <%= f.text_field :zip, :class=>"form-control",:placeholder=>"Enter Zip", :onkeyup=>"check_for_number(this.value)", :maxlength=>8%>
     </div>
   </div>
-  <!-- <div class="form-group">
-    <label class="control-label col-md-4" for="">Username</label>
-    <div class="col-md-8">
-      <%#= f.text_field :username, :class=>"form-control",:placeholder=>"Enter Username"%>
-    </div>
-  </div> -->
 
   <div class="form-group">
       <div class="col-md-8" id="advertiser_form_captcha">
@@ -88,7 +84,7 @@ $("#create_advertiser_btn").on("click",function(event){
   state = $("#advertiser_state").val();
   country  = $("#advertiser_country options:selected").val();
   zip = $("#advertiser_zip").val();
-  if (name!="" && email!="" && password!="" && telephone!="" && city!="" && state!="" && country!="" &&  zip!="") {
+  if (name!="" && email!="" && password!="" && telephone!="" && city!="" && state!="" && country!="" &&  zip!="" && grecaptcha.getResponse() != "") {
     $.ajax({
       url:"/check_existing_user",
       type:"POST",
@@ -105,11 +101,12 @@ $("#create_advertiser_btn").on("click",function(event){
     })
   }
   else {
-    alert("Enter All Fields");
+      $("#error-msg").addClass("alert alert-danger").text("Enter All Fields & validate captcha");
   }
 });
 
   function check_exising_user(value){
+
     if (isValidEmailAddress(value)){
       $.ajax({
         url:"/check_existing_user",
@@ -122,14 +119,17 @@ $("#create_advertiser_btn").on("click",function(event){
           console.log(response);
           if (response["status"] == "error")
           {
-            alert("Email Already Exists");
-            $("#advertiser_email").focus();
+            $("#error-msg").addClass("alert alert-danger").text("Email Already Exists");
+            // $("#advertiser_email").focus();
           }
         }
       })
     }
     else {
-       alert("This is not a valid email");
+      if(value.length>=3)
+      {
+      $("#error-msg").addClass("alert alert-danger").text("This is not a valid email");
+      }
     }
   }
 $("#advertiser_country").addClass("form-control");

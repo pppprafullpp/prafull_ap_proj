@@ -25,11 +25,20 @@
             </div>
           </div>
 
-          <div class="form-group">
-            <label class="control-label col-md-5" for="">Page Name</label>
+          <!-- <div class="form-group">
+            <label class="control-label col-md-5" for="">Profile ID</label>
             <div class="col-md-7">
-              <%= f.text_field:platform_type_id,:placeholder=>"Facebook page name for eg ServiceDealz",:class=>"form-control", :required=>true%>
+              <%#= f.text_field:facebook_profile_id,:placeholder=>"Facebook page name for eg ServiceDealz",:class=>"form-control", :required=>true%>
             </div>
+          </div> -->
+
+          <div class="form-group">
+            <label class="control-label col-md-5" for="">Page ID</label>
+            <div class="col-md-7">
+              <%= f.text_field:facebook_page_id,:placeholder=>"Facebook page ID",:class=>"form-control", :required=>true,:onkeyup=>"check_for_number(this)"%>
+              <span id="error-cross" class="fa fa-remove 2x form-control-feedback hidden" style="margin:3%;color:red"></span>
+              <span id="check-cross" class="fa fa-check 2x form-control-feedback hidden" style="margin:3%;color:green"></span>
+             </div>
           </div>
 
           <div class="form-group">
@@ -46,14 +55,22 @@
         <div class="col-md-12 table-responsive">
           <table class="table table-striped">
             <tr>
+              <th>Image</th>
               <th>Platform Type</th>
-              <th>Page Link</th>
               <th>Likes</th>
-              <th>Action</th>
-            </tr>
+              <th>Page Id</th>
+           </tr>
+            <%if @social_account.present?%>
 
+               <tr>
+                <td><img src="<%=@social_account.facebook_image_url%>" /></td>
+                <td><%=Advertisement::PLATFORMS.key(@social_account.platform_type)%></td>
+                <td><%=@social_account.facebook_page_count%></td>
+                <td><%=@social_account.facebook_page_id%></td>
+               <tr>
+
+            <%end%>
           </table>
-
         </div>
       </div>
   </div>
@@ -62,3 +79,15 @@
   </div>
   </section>
   </main>
+<script>
+function check_for_number(obj) {
+   if(isNaN(obj.value[obj.value.length-1])){
+    $("#error-cross").removeClass("hidden");
+    $("#check-cross").addClass("hidden");
+  }
+  else {
+   $("#error-cross").addClass("hidden");
+   $("#check-cross").removeClass("hidden");
+  }
+}
+</script>

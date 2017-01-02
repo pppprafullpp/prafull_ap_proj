@@ -22,8 +22,17 @@
     <label class="control-label col-md-4" for="">Link</label>
       <div class="col-md-8">
         <input id="" type="text" placeholder="Link" class="form-control"/>
-        <span class="pull-right sm-font"><a href="#">+ Add More</a></span>
+        <span class="pull-right sm-font"><a onclick="add_link_row()" href="javascript:void(0)">+ Add More</a></span>
       </div>
+  </div>
+<script>
+function add_link_row(){
+$("#dynamic-links").append("<div class='form-group'><label class='control-label col-md-4' >Link</label><div class='col-md-8'><input name='link_"+makeid()+"' type ='text' placeholder=' link' class='form-control'/></div></div>");
+}
+</script>
+
+  <div id="dynamic-links">
+
   </div>
 
   <div class="form-group">
@@ -69,7 +78,7 @@
             },
             success : function(response) {
                if (response["status"] == "error"){
-                alert("Email Already Registered");
+                $("#error-msg").text("Email Already Registered");
               }
               else {
                   status = true;
@@ -78,7 +87,10 @@
           })
         }
         else {
-           alert("This is not a valid email");
+          if(value.length>=3)
+          {
+          $("#error-msg").addClass("alert alert-danger").text("This is not a valid email");
+          }
         }
         if (respond){
            return status;
@@ -90,7 +102,7 @@
     name = $("#influencer_name").val();
     email = $("#influencer_email").val();
     password = $("#influencer_password").val();
-    if (name!="" && email!="" && password!="") {
+    if (name!="" && email!="" && password!="" && grecaptcha.getResponse() != "") {
         $.ajax({
          url:"/check_existing_user",
          type:"POST",
@@ -103,14 +115,14 @@
               $("#new_influencer").submit();
            }
            else {
-             alert("email already registered");
+            $("#error-msg").addClass("alert alert-danger").text("email already registered");
              event.preventDefault();
            }
          }
        })
      }
     else {
-      alert("Enter All Fields");
+    $("#error-msg").addClass("alert alert-danger").text("Enter All Fields");
     }
   });
 

@@ -8,4 +8,10 @@ class NotificationMailer < ApplicationMailer
     subject = "Welcome to Social Booker"
     mail(:to=>@user.email,:subject=>subject).deliver!
   end
+
+  def reset_password(type,email)
+    @type = type
+    @user = eval(type.camelcase).find_by_email(email)
+    mail(:to=>@user.email,:subject=>"SocialBooker:Password reset").deliver!
+  end
 end
