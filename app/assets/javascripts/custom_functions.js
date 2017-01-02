@@ -60,8 +60,8 @@ function testAPI() {
   // console.log('Welcome!  Fetching your information.... ');
   FB.api('/me', function(response) {
     // console.log('Successful login for: ' + response.name);
-    document.getElementById('status').innerHTML =
-      'Thanks for logging in, ' + response.name + '!';
+    // document.getElementById('status').innerHTML =
+    //   'Thanks for logging in, ' + response.name + '!';
   });
   FB.api("/1115405461908086/comments",function(response){
     // console.log(response);
@@ -69,7 +69,7 @@ function testAPI() {
 }
 
 
-function update_ad_share_url_and_status(id, post_id) {
+function update_ad_share_url_and_status(id, post_id,type) {
     $.ajax({
         url: "/advertisments/" + id + "/update_ad_share_url_and_status",
         type: "post",
@@ -78,12 +78,12 @@ function update_ad_share_url_and_status(id, post_id) {
             post_id: post_id
         },
         success: function(response) {
-            toastr.success("Posted successfully");
+            toastr.success("Posted successfully on "+type);
         }
     })
 }
 
-function open_share_dialog(id) {
+function open_share_dialog_to_profile(id) {
     title = $("#" + id + "_title").text();
     description = $("#" + id + "_description").text();
     caption = $("#" + id + "_caption").text();
@@ -98,21 +98,47 @@ function open_share_dialog(id) {
         link: photo_click_link,
         description: description
     }, function(response) {
-        // console.log(response);
+        console.log(response);
         if (!response || response.error) {
             // LoginFB();
             toastr.error("Error, please click on facebook login and try again")
         } else {
-            update_ad_share_url_and_status(id, response.id)
+            update_ad_share_url_and_status(id, response.id,"profile")
+        }
+    });
+}
+
+function open_share_dialog_to_page(id) {
+    title = $("#" + id + "_title").text();
+    description = $("#" + id + "_description").text();
+    caption = $("#" + id + "_caption").text();
+    image = $("#" + id + "_img").attr("src");
+    photo_click_link = $("#" + id + "_photo_click_link").text();
+    page_id= $("#"+id+"_page_id").val();
+    console.log(page_id);
+    FB.api('/'+page_id+"/feed/", 'post', {
+        message: title + " " + description,
+        picture: image,
+        from: 'me',
+        caption: caption,
+        link: photo_click_link,
+        description: description
+    }, function(response) {
+         if (!response || response.error) {
+            // LoginFB();
+            toastr.error("Error, please click on facebook login and try again")
+        } else {
+            update_ad_share_url_and_status(id, response.id,"page")
         }
     });
 }
 
 function LoginFB() {
+  console.log("Dd");
     FB.login(function(response) {
-        // console.log(response);
+        console.log(response);
     }, {
-        scope: 'publish_actions',
+        scope: 'publish_actions,publish_pages,manage_pages',
         auth_type: 'reauthenticate',
     });
 }

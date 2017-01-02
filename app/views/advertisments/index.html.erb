@@ -1,0 +1,36 @@
+<main>
+ <section id="one-page-side-menu-static" class="one-page-side-menu-static side-menu">
+ <div class="content-wrapper">
+<%= render :partial => "/layouts/left_panel" %>
+<%= render :partial => "/layouts/header" %>
+<section class="account section" style="min-height:575px;">
+<div class="container">
+
+  <div class="row">
+  <div class="col-md-12">
+    <h1>Advertisement Details</h1>
+  </div>
+ </div>
+
+  <div class="row">
+          <div class="col-sm-4"><img class="img-responsive" alt="team" src="<%=@advertisement.ad_image_url%>" width="100%"></div>
+          <div class="col-sm-8">
+            <h4 class="member-name"><%#=@advertisement></h4>
+            <p><strong>About:</strong><%#=@social_account_detail.about%></p>
+              <p>
+                <span style="border-bottom:solid 1px #e1e1e1; margin-bottom:10px; padding-bottom:10px; display:block"><strong>Posted By: </strong><%=Advertiser.find(@advertisement.advertiser_id).name%></span>
+                <span style="border-bottom:solid 1px #e1e1e1; margin-bottom:10px; padding-bottom:10px; display:block"><strong>Platform: </strong><%=Advertisement::PLATFORMS.key(@advertisement.platform)%></span>
+                <span style="border-bottom:solid 1px #e1e1e1; margin-bottom:10px; padding-bottom:10px; display:block"><strong>Category: </strong><%=Category.find(@advertisement.category).name%></span>
+                <span style="border-bottom:solid 1px #e1e1e1; margin-bottom:10px; padding-bottom:10px; display:block"><strong>desctiption: </strong><%=@advertisement.description %></span>
+                <span style="border-bottom:solid 1px #e1e1e1; margin-bottom:10px; padding-bottom:10px; display:block"><strong>caption: </strong><%=@advertisement.caption %></span>
+                <span style="border-bottom:solid 1px #e1e1e1; margin-bottom:10px; padding-bottom:10px; display:block"><strong>Title: </strong><%=@advertisement.title %></span>
+                <span style="border-bottom:solid 1px #e1e1e1; margin-bottom:10px; padding-bottom:10px; display:block"><strong>Created On: </strong><%=@advertisement.created_at %></span>
+
+              </p>
+            </div>
+    </div>
+</div>
+</section>
+</div>
+</section>
+</main>

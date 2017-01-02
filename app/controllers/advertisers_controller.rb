@@ -70,6 +70,7 @@ class AdvertisersController < ApplicationController
    def profile
 
    end
+ 
 
    def get_wallet_status
      wallet_amount = Advertiser.find(params[:id]).wallet_amount.to_i

@@ -21,7 +21,8 @@
 				  </div>
 				    <%= render :partial => "advertiser"%>
             <%= render :partial => "influencer"%>
-            <div class="g-recaptcha" data-sitekey="6LfJAwsUAAAAAJP5rBdRdnsi-hysY0nrQyCh6vjz"></div>
+            <div class="g-recaptcha" required data-sitekey="6LfJAwsUAAAAAJP5rBdRdnsi-hysY0nrQyCh6vjz"></div>
+            <p id="error-msg"></p>
 				</div>
             </div>
           </div>
@@ -31,12 +32,13 @@
       <script>
         function check_for_number(value) {
           if(isNaN(value)){
-            alert("enter only numbers please");
+              $("#error-msg").addClass("alert alert-danger").text("enter only numbers please");
           }
         }
-        function check_for_letters(value) {
-          if(isNaN(value[value.length-1]) == false && value[value.length-1]!=" "){
-            alert("enter only letters please")
+        function check_for_letters(obj) {
+          console.log(isNaN(obj.value[obj.value.length-1]));
+          if((isNaN(obj.value[obj.value.length-1]) == false)  && obj.value!=" "){
+            $("#error-msg").addClass("alert alert-danger").text("enter only characters ");
           }
         }
 

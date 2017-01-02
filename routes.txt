@@ -51,11 +51,11 @@ advertisment_update_ad_share_url_and_status POST   /advertisments/:advertisment_
                      new_advertiser_session GET    /advertisers/sign_in(.:format)                                           devise/sessions#new
                          advertiser_session POST   /advertisers/sign_in(.:format)                                           devise/sessions#create
                  destroy_advertiser_session DELETE /advertisers/sign_out(.:format)                                          devise/sessions#destroy
-                        advertiser_password POST   /advertisers/password(.:format)                                          advertisers/change_password#create
-                    new_advertiser_password GET    /advertisers/password/new(.:format)                                      advertisers/change_password#new
-                   edit_advertiser_password GET    /advertisers/password/edit(.:format)                                     advertisers/change_password#edit
-                                            PATCH  /advertisers/password(.:format)                                          advertisers/change_password#update
-                                            PUT    /advertisers/password(.:format)                                          advertisers/change_password#update
+                        advertiser_password POST   /advertisers/password(.:format)                                          passwords#create
+                    new_advertiser_password GET    /advertisers/password/new(.:format)                                      passwords#new
+                   edit_advertiser_password GET    /advertisers/password/edit(.:format)                                     passwords#edit
+                                            PATCH  /advertisers/password(.:format)                                          passwords#update
+                                            PUT    /advertisers/password(.:format)                                          passwords#update
              cancel_advertiser_registration GET    /advertisers/cancel(.:format)                                            registrations#cancel
                     advertiser_registration POST   /advertisers(.:format)                                                   registrations#create
                 new_advertiser_registration GET    /advertisers/sign_up(.:format)                                           registrations#new
@@ -66,11 +66,11 @@ advertisment_update_ad_share_url_and_status POST   /advertisments/:advertisment_
                      new_influencer_session GET    /influencers/sign_in(.:format)                                           devise/sessions#new
                          influencer_session POST   /influencers/sign_in(.:format)                                           devise/sessions#create
                  destroy_influencer_session DELETE /influencers/sign_out(.:format)                                          devise/sessions#destroy
-                        influencer_password POST   /influencers/password(.:format)                                          advertisers/change_password#create
-                    new_influencer_password GET    /influencers/password/new(.:format)                                      advertisers/change_password#new
-                   edit_influencer_password GET    /influencers/password/edit(.:format)                                     advertisers/change_password#edit
-                                            PATCH  /influencers/password(.:format)                                          advertisers/change_password#update
-                                            PUT    /influencers/password(.:format)                                          advertisers/change_password#update
+                        influencer_password POST   /influencers/password(.:format)                                          passwords#create
+                    new_influencer_password GET    /influencers/password/new(.:format)                                      passwords#new
+                   edit_influencer_password GET    /influencers/password/edit(.:format)                                     passwords#edit
+                                            PATCH  /influencers/password(.:format)                                          passwords#update
+                                            PUT    /influencers/password(.:format)                                          passwords#update
              cancel_influencer_registration GET    /influencers/cancel(.:format)                                            registrations#cancel
                     influencer_registration POST   /influencers(.:format)                                                   registrations#create
                 new_influencer_registration GET    /influencers/sign_up(.:format)                                           registrations#new
@@ -87,6 +87,15 @@ advertisment_update_ad_share_url_and_status POST   /advertisments/:advertisment_
                                             PATCH  /wallets/:id(.:format)                                                   wallets#update
                                             PUT    /wallets/:id(.:format)                                                   wallets#update
                                             DELETE /wallets/:id(.:format)                                                   wallets#destroy
+                  change_password_passwords POST   /passwords/change_password(.:format)                                     passwords#change_password
+                                  passwords GET    /passwords(.:format)                                                     passwords#index
+                                            POST   /passwords(.:format)                                                     passwords#create
+                               new_password GET    /passwords/new(.:format)                                                 passwords#new
+                              edit_password GET    /passwords/:id/edit(.:format)                                            passwords#edit
+                                   password GET    /passwords/:id(.:format)                                                 passwords#show
+                                            PATCH  /passwords/:id(.:format)                                                 passwords#update
+                                            PUT    /passwords/:id(.:format)                                                 passwords#update
+                                            DELETE /passwords/:id(.:format)                                                 passwords#destroy
                        registration_sign_up POST   /registrations/:registration_id/sign_up(.:format)                        registrations#sign_up
                               registrations GET    /registrations(.:format)                                                 registrations#index
                                             POST   /registrations(.:format)                                                 registrations#create
@@ -96,6 +105,7 @@ advertisment_update_ad_share_url_and_status POST   /advertisments/:advertisment_
                                             PATCH  /registrations/:id(.:format)                                             registrations#update
                                             PUT    /registrations/:id(.:format)                                             registrations#update
                                             DELETE /registrations/:id(.:format)                                             registrations#destroy
+                        check_existing_user POST   /check_existing_user(.:format)                                           registrations#check_existing_user
                                get_messages POST   /get_messages(.:format)                                                  messages#get_messages
                                    activate GET    /activate(.:format)                                                      home#activate
                    get_pending_notification POST   /get_pending_notification(.:format)                                      notifications#get_pending_notification
@@ -119,7 +129,7 @@ advertisment_update_ad_share_url_and_status POST   /advertisments/:advertisment_
                advertiser_influencer_detail GET    /advertisers/:advertiser_id/influencer_detail(.:format)                  advertisers#influencer_detail
                          advertiser_profile GET    /advertisers/:advertiser_id/profile(.:format)                            advertisers#profile
                        advertiser_my_wallet GET    /advertisers/:advertiser_id/my_wallet(.:format)                          advertisers#my_wallet
-              get_wallet_status_advertisers GET    /advertisers/get_wallet_status(.:format)                                 advertisers#get_wallet_status
+              get_wallet_status_advertisers POST   /advertisers/get_wallet_status(.:format)                                 advertisers#get_wallet_status
                                 advertisers GET    /advertisers(.:format)                                                   advertisers#index
                                             POST   /advertisers(.:format)                                                   advertisers#create
                              new_advertiser GET    /advertisers/new(.:format)                                               advertisers#new

@@ -4,7 +4,7 @@ class InfluencersController < ApplicationController
 
   def index
     @ad_requests = Advertisement.where(:influencer_id=>current_influencer.id,:status=>approved_by_admin)
-  
+
   end
 
   def ad_requests
@@ -12,7 +12,7 @@ class InfluencersController < ApplicationController
   end
 
   def ad_history
-    @ad_requests = Advertisement.where(:influencer_id=>current_influencer.id)
+    @ad_requests = Advertisement.where(:influencer_id=>current_influencer.id).order("ID DESC")
   end
 
   def change_password
@@ -20,11 +20,11 @@ class InfluencersController < ApplicationController
 
   def setting
     @new_social_account = SocialAccount.new
-    @social_accounts = current_influencer.social_account
+    @social_account = current_influencer.social_account
   end
 
   def add_social_account_details
-    if current_influencer.social_account.present?
+     if current_influencer.social_account.present?
       flash[:success] = "Social Account Already exists"
     else
       SocialAccount.create!(create_social_account)

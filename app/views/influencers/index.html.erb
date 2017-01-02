@@ -74,8 +74,8 @@
         <div class="row">
 
           <%@ad_requests.each do |ad_request|%>
-            <div class="col-md-4 main-content-wrapper">
-            <div class="lft-icon">social_accounts
+            <div id="div_<%=ad_request.id%>" class="col-md-4 main-content-wrapper">
+            <div class="lft-icon">
             <div class="center-icon">
             <span class="ion-social-facebook"></span>
             </div>
@@ -96,10 +96,14 @@
               <b>Photo Click Link:</b><p id="<%=ad_request.id%>_photo_click_link"><%=ad_request.photo_click_link%></p>
               <div class="price-cta">
                 <div class="price-number-wrap">
-                  <div class="price-top"><span class="price-plan-time-unit">Price: </span><span class="price-cta-number">$50</span></div>
+                  <div class="price-top"><span class="price-plan-time-unit">Price: </span><span class="price-cta-number"><h5>$<span class="h5">50</h5></span></div>
                 </div>
-                <button class="btn btn-mountain-flat btn-sm violet-btn" onclick="open_share_dialog(<%=ad_request.id%>)">Approve</button>
-                <button class="btn btn-mountain-flat btn-sm" data-toggle="modal" onclick="show_decline_modal(<%=ad_request.id%>)" >Decline</button>
+                <button class="btn btn-mountain-flat btn-sm violet-btn" onclick="open_share_dialog_to_profile(<%=ad_request.id%>)">Post to Profile</button>
+                <button class="btn btn-mountain-flat btn-sm violet-btn" onclick="open_share_dialog_to_page(<%=ad_request.id%>)">Post to Page</button>
+                <button class="btn btn-mountain-flat btn-sm" data-toggle="modal" onclick="show_decline_modal(<%=ad_request.id%>)">Decline</button>
+                <%if current_influencer.social_account.facebook_page_id.present?%>
+                  <input type="hidden" id="<%=ad_request.id%>_page_id" value="<%=current_influencer.social_account.facebook_page_id%>"/>
+                <%end%>
                 <button class="btn btn-mountain-o btn-sm btn-round fnt-large" data-toggle="modal" data-target="#reportPopup">
                 <span class="ion-android-more-vertical"></span></button>
               </div>
@@ -108,6 +112,11 @@
             </div>
           <%end%>
         </div>
+        <script>
+        function post_to_page(ad_id){
+        }
+        </script>
+
       </div>
       <!-- Approve Popups -->
     </section>
