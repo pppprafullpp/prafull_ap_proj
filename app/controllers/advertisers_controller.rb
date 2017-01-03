@@ -14,6 +14,10 @@ class AdvertisersController < ApplicationController
   def index
     @current_advertisers_data = current_advertiser
     @advertisers_ad = current_advertiser.advertisements.paginate(:page=>params[:page],:per_page=> 10)
+    @spent_today = spent_today("advertiser",current_advertiser.id)
+    @spent_this_month = spent_monthly("advertiser",current_advertiser.id)
+    @published_ad_count = published_ad_count(current_advertiser.id)
+    @influencer_count = Influencer.count
   end
 
   def my_wallet
@@ -53,6 +57,7 @@ class AdvertisersController < ApplicationController
   end
 
   def create_ad_compaign
+    flash[:success] = "Created successfully , you are charged"
     @new_advertisment = Advertisement.new
   end
 
@@ -70,7 +75,7 @@ class AdvertisersController < ApplicationController
    def profile
 
    end
- 
+
 
    def get_wallet_status
      wallet_amount = Advertiser.find(params[:id]).wallet_amount.to_i

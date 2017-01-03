@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170102083812) do
+ActiveRecord::Schema.define(version: 20170103091110) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "email",                  limit: 255,   default: "", null: false
@@ -245,6 +245,16 @@ ActiveRecord::Schema.define(version: 20170102083812) do
     t.text     "country",              limit: 65535
     t.text     "category",             limit: 65535
     t.text     "facebook_page_id",     limit: 65535
+  end
+
+  create_table "transactions", force: :cascade do |t|
+    t.integer  "advertisement_id", limit: 4
+    t.integer  "influencer_id",    limit: 4
+    t.integer  "advertiser_id",    limit: 4
+    t.text     "amount",           limit: 65535
+    t.integer  "status",           limit: 4
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
   end
 
   create_table "wallet_transactions", force: :cascade do |t|
