@@ -14,19 +14,29 @@ class AdvertismentsController < ApplicationController
     params[:advertisement][:ad_type] = params[:advertisement][:ad_type].to_s
     new_record = Advertisement.create!(advertisement_params)
     new_record.update_attributes(:status=>Advertisement::STATUS["Initiated"])
-      if params[:advertisement][:ad_type].to_s == Advertisement::TYPE["Photo"].to_s
-         upload_image =  Cloudinary::Uploader.upload(params[:advertisement][:ad_image_url])
-        new_record.update_attributes(:ad_image_url=>upload_image["url"])
-      end
-      ApplicationController.new.add_notification(Notification::ACTIVITY_TYPE["new_ad_creation"],"New Ad created",:viewed=>false)
-      PendingNotification.create!(
-      influencer_id:new_record.influencer_id,
-      advertiser_id:new_record.advertiser_id,
-      notification_type:Advertisement::STATUS["Initiated"],
-      notification_text:Advertisement::STATUS_TEXT[Advertisement::STATUS["Initiated"]-1],
-      advertisement_id:new_record.id,
-      :viewed=>false)
-    flash[:success] = "Created successfully"
+    if params[:advertisement][:ad_type].to_s == Advertisement::TYPE["Photo"].to_s
+       upload_image =  Cloudinary::Uploader.upload(params[:advertisement][:ad_image_url])
+      new_record.update_attributes(:ad_image_url=>upload_image["url"])
+    end
+    ApplicationController.new.add_notification(Notification::ACTIVITY_TYPE["new_ad_creation"],"New Ad created",:viewed=>false)
+
+    PendingNotification.create!(
+    influencer_id:new_record.influencer_id,
+    advertiser_id:new_record.advertiser_id,
+    notification_type:Advertisement::STATUS["Initiated"],
+    notification_text:Advertisement::STATUS_TEXT[Advertisement::STATUS["Initiated"]-1],
+    advertisement_id:new_record.id,
+    :viewed=>false)
+
+    Transaction.create!(
+    :advertisement_id=>new_record.id,
+    :influencer_id=>new_record.influencer_id,
+    :advertiser_id=>new_record.advertiser_id,
+    :status=>new_record.status,
+    :amount=>params[:advertisement_cost])
+    new_wallet_amount = current_advertiser.wallet_amount.to_i - params[:advertisement_cost].to_i;
+    current_advertiser.update_attributes(:wallet_amount=>new_wallet_amount)
+    flash[:success] = "Created successfully , you are charged $ #{params[:advertisement_cost]}, Check your wallet"
     redirect_to :back
   end
 

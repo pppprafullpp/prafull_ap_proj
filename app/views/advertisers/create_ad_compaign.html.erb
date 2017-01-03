@@ -27,6 +27,7 @@
               <div class="col-md-5">
                 <%=f.select :influencer_id,options_for_select(Influencer.pluck(:name, :id)),:prompt => "-Select-",:onchange=>"check_wallet_status(this.id)",:class=>"form-control", :required=>true%>
                 <p id="check_wallet_msg" style="color:red"></p>
+                <%=hidden_field_tag(:advertisement_cost)%>
                </div>
             </div>
 
@@ -72,7 +73,9 @@
               else {
                 $("#create_ad_btn").show();
                 $("#dynamic-area-1").show();
-                $("#dynamic-area-2").show()
+                $("#dynamic-area-2").show();
+                $("#advertisement_cost").val(response["publishing_price"]);
+                console.log(response["publishing_price"]);
               }
             }
           })
