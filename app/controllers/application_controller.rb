@@ -67,4 +67,15 @@ class ApplicationController < ActionController::Base
     published_ads
   end
 
+  def published_by_influencer_count(influencer_id)
+    published_ads_count = Advertisement.where(:status=>6,:influencer_id=>influencer_id).count
+    published_ads_count
+  end
+
+  def uncoming_ads(influencer_id)
+    uncoming_ads_count = Advertisement.where(:status=>1,:influencer_id=>influencer_id).count
+    uncoming_ads_count
+  end
+
+
 end

@@ -15,7 +15,7 @@
           <div class="col-md-3 col-sm-6">
               <div class="dashboard-tile detail">
                   <div class="content">
-                      <h1 class="text-left timer">$50</h1>
+                      <h1 class="text-left timer">$ <%=@earned_today%></h1>
                       <p>Today</p>
                   </div>
                   <div class="icon"><span class="ion-social-usd"></span></div>
@@ -25,8 +25,8 @@
           <div class="col-md-3 col-sm-6">
               <div class="dashboard-tile detail">
                   <div class="content">
-                      <h1 class="text-left timer">$115</h1>
-                      <p>Yesterday</p>
+                      <h1 class="text-left timer">$ <%=@earned_monthly%></h1>
+                      <p>This Month</p>
                   </div>
                   <div class="icon"><span class="ion-social-usd"></span></div>
               </div>
@@ -35,8 +35,8 @@
           <div class="col-md-3 col-sm-6">
               <div class="dashboard-tile detail">
                   <div class="content">
-                      <h1 class="text-left timer">$415</h1>
-                      <p>This Month</p>
+                      <h1 class="text-left timer"><%=@published_ads_count%></h1>
+                      <p>Published Ads</p>
                   </div>
                   <div class="icon"><span class="ion-social-usd"></span></div>
               </div>
@@ -44,8 +44,8 @@
           <div class="col-md-3 col-sm-6">
               <div class="dashboard-tile detail">
                   <div class="content">
-                      <h1 class="text-left timer">$540</h1>
-                      <p>Pending</p>
+                      <h1 class="text-left timer"><%=@upcoming_ads%></h1>
+                      <p>Ads coming(Not Approved By Admin)</p>
                   </div>
                   <div class="icon"><span class="ion-android-time"></span></div>
               </div>
