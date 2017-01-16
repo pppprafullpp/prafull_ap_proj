@@ -4,7 +4,10 @@ class InfluencersController < ApplicationController
 
   def index
     @ad_requests = Advertisement.where(:influencer_id=>current_influencer.id,:status=>approved_by_admin)
-
+    @earned_today = today_earning("influencer",current_influencer.id)
+    @earned_monthly = monthly_earning("influencer",current_influencer.id)
+    @published_ads_count = published_by_influencer_count(current_influencer.id)
+    @upcoming_ads = uncoming_ads(current_influencer.id)
   end
 
   def ad_requests

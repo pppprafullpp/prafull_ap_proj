@@ -44,43 +44,7 @@
             <%=select_tag("advertisement[ad_type]",options_for_select(Advertisement::TYPE),:class=>"form-control", :onchange=>"change_ad_type_div()")%>
           </div>
         </div>
-        <script>
-        function change_ad_type_div() {
-          id = $("#advertisement_ad_type option:selected").val();
-          switch(id) {
-            case "1": $("#link").show();$("#photo").hide();$("#video").hide();break;
-            case "2": $("#link").hide();$("#photo").show();$("#video").hide();break;
-            case "3": $("#link").hide();$("#photo").hide();$("#video").show();break;
-          }
-        }
-        $("#advertisement_influencer_id").on("change",check_wallet_status);
-        function check_wallet_status(){
-          selected_influencer_id = $("#advertisement_influencer_id option:selected").val();
-          $.ajax({
-            url:"/advertisers/get_wallet_status",
-            type:"POST",
-            data: {
-              id:"<%=current_advertiser.id%>",
-              influencer_id:selected_influencer_id
-            },
-            success: function(response){
-               if (!response["success"]){
-                $("#create_ad_btn").hide();
-                $("#check_wallet_msg").text("You need minimum $"+response["publishing_price"]+" to post this Ad");
-                $("#dynamic-area-1").hide();
-                $("#dynamic-area-2").hide()
-              }
-              else {
-                $("#create_ad_btn").show();
-                $("#dynamic-area-1").show();
-                $("#dynamic-area-2").show();
-                $("#advertisement_cost").val(response["publishing_price"]);
-                console.log(response["publishing_price"]);
-              }
-            }
-          })
-        }
-        </script>
+
         <hr />
 
         <div class="row">
@@ -170,7 +134,7 @@
 
   <div class="row">
     <div class="col-md-9 col-md-offset-3">
-      <%=f.submit "Save",:id=>"create_ad_btn", :class=>"btn btn-mountain btn-sm btn-round"%>
+      <%=f.submit "Save",:id=>"create_ad_btn",:onclick=>"check_file_format()", :class=>"btn btn-mountain btn-sm btn-round"%>
       <a class="btn btn-mountain btn-sm btn-round" href="#">Cancel</a>
     </div>
   </div>
@@ -192,14 +156,50 @@
   $("#advertisement_influencer_id").addClass("form-control");
   $("#advertisement_platform").addClass("form-control");
 
-function trigger_value_change(value){
-//   console.log(value);
-//   id = "";
-//   switch(value){
-//     case  1 : $("#link"). ; break;
-//     case  2 : id = 2 ; break;
-//     case  3 : id = 3 ; break;
-//   }
-// $("#advertisement_ad_type").val(id);
+  function check_file_format() {
+    event.preventDefault();
+    console.log("dd");
+    if ($("#advertisement_ad_type option:selected").val()==2 && ($("#advertisement_ad_image_url").val()[1]!="png" || $("#advertisement_ad_image_url").val()[1]!="jpg")) {
+      alert("upload only .png or .jpg file")
+    }
+    else {
+      $("#new_advertisement").submit();
+    }
+  }
+
+function change_ad_type_div() {
+  id = $("#advertisement_ad_type option:selected").val();
+  switch(id) {
+    case "1": $("#link").show();$("#photo").hide();$("#video").hide();break;
+    case "2": $("#link").hide();$("#photo").show();$("#video").hide();break;
+    case "3": $("#link").hide();$("#photo").hide();$("#video").show();break;
+  }
+}
+$("#advertisement_influencer_id").on("change",check_wallet_status);
+function check_wallet_status(){
+  selected_influencer_id = $("#advertisement_influencer_id option:selected").val();
+  $.ajax({
+    url:"/advertisers/get_wallet_status",
+    type:"POST",
+    data: {
+      id:"<%=current_advertiser.id%>",
+      influencer_id:selected_influencer_id
+    },
+    success: function(response){
+       if (!response["success"]){
+        $("#create_ad_btn").hide();
+        $("#check_wallet_msg").text("You need minimum $"+response["publishing_price"]+" to post this Ad");
+        $("#dynamic-area-1").hide();
+        $("#dynamic-area-2").hide()
+      }
+      else {
+        $("#create_ad_btn").show();
+        $("#dynamic-area-1").show();
+        $("#dynamic-area-2").show();
+        $("#advertisement_cost").val(response["publishing_price"]);
+        console.log(response["publishing_price"]);
+      }
+    }
+  })
 }
 </script>
