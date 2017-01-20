@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170103091110) do
+ActiveRecord::Schema.define(version: 20170120092524) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "email",                  limit: 255,   default: "", null: false
@@ -178,6 +178,7 @@ ActiveRecord::Schema.define(version: 20170103091110) do
     t.text     "publishing_price",       limit: 65535
     t.text     "token",                  limit: 65535
     t.boolean  "is_verified"
+    t.text     "profile_image_url",      limit: 65535
   end
 
   add_index "influencers", ["email"], name: "index_influencers_on_email", unique: true, using: :btree

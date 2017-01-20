@@ -5,11 +5,13 @@
     <li><a href="/advertisers"><i class="ion-home"></i> <span>Dashboard</span></a></li>
     <li><a href="<%=advertiser_ad_compaigns_path(advertiser_id:current_advertiser.id)%>">
       <i class="ion-android-bulb"></i> <span>Ad Campaigns</span></a></li>
+      <li><a href="<%=advertiser_show_influencers_path(advertiser_id:current_advertiser.id)%>">
+        <i class="ion-person"></i> <span>Influencers</span></a></li>
     <li><a href="<%=advertiser_audience_management_path(advertiser_id:current_advertiser.id)%>">
-      <i class="ion-person"></i> <span>Audience Management</span></a></li>
-    <li><a href="<%=advertiser_social_accounts_path(advertiser_id:current_advertiser.id)%>">
+      <i class="ion-person"></i> <span>Audience</span></a></li>
+    <!-- <li><a href="<%#=advertiser_social_accounts_path(advertiser_id:current_advertiser.id)%>">
       <i class="ion-card"></i> <span>Social Accounts</span></a>
-    </li>
+    </li> -->
     <li><a href="<%=advertiser_my_wallet_path(advertiser_id:current_advertiser.id)%>">
       <i class="ion-card"></i> <span>My Wallet($<%=current_advertiser.wallet_amount%>)</span></a>
     </li>

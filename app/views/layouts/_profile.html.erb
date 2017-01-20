@@ -5,24 +5,45 @@
     <%= render :partial => "/layouts/header" %>
     <section class="account section" style="min-height:575px;">
       <div class="container">
-        <div class="row">
-          <div class="col-md-12">
-          <h1>Profile</h1>
-          </div>
-        </div>
         <% type = current_influencer.present? ? "influencer"  : "advertiser"%>
-          <div class="form-horizontal">
-          <table class="table">
-            <tr>
-              <td><b>Name</b></td>
-              <td><%=eval("current_#{type}").name%></td>
-            </tr>
-            <tr>
-              <td><b>Email</b></td>
-              <td><%=eval("current_#{type}").email%></td>
-            </tr>
-          </table>
+        <div class="row">
+          <div class="col-md-3">
+            <div class="advertiserBox">
+              <%if current_influencer.present? && current_influencer.profile_image_url.present? %>
+                <a href="#"><img src="<%=current_influencer.profile_image_url%>"></a>
+                <%else%>
+                <a href="#"><img src="/assets/default-user"></a>
+              <%end%>
+              <%if type == "influencer"%>
+              <h5>Update Photo</h5>
+              <%=form_tag "/update_influencer_profile_photo",:method=>"post",:multipart=>true do %>
+                <%=file_field_tag(:influencer_profile_photo,:class=>"form-control")%>
+                <br />
+                <p align="center"><%=submit_tag "Update",:class=>"btn btn-success"%></p>
+                <%end%>
+
+              <%end%>
+            </div>
+          </div>
+          <div class="col-md-8">
+            <div class="form-horizontal">
+              <h3>Profiles</h3>
+              <table class="table">
+                <tr>
+                  <td><b>Name</b></td>
+                  <td><%=eval("current_#{type}").name%></td>
+                </tr>
+                <tr>
+                  <td><b>Email</b></td>
+                  <td><%=eval("current_#{type}").email%></td>
+                </tr>
+
+              </table>
+            </div>
+          </div>
+          <div class="col-md-1"></div>
         </div>
+
           <hr />
           <%if current_influencer%>
           <h3>Other Details</h3>
