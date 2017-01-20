@@ -1,16 +1,16 @@
-<div id="menuzord" class="menuzord clearfix menuzord-single navigationbar-animation solid sideBar">
+<div id="menuzord" class="menuzord clearfix menuzord-single navigationbar-animation solid sideBar" >
   <%if current_advertiser%>
     <a href="/advertisers" class="menuzord-brand"><%= image_tag "header/menu-logo-blue.png"  ,:class=>"dark-logo"%></a>
-  <ul class="nav menuzord-menu">
-    <li class="<%= 'active' if params[:controller] == 'advertisers' and params[:action] =='index'%>"><a href="/advertisers"><i class="ion-home"></i> <span>Dashboard</span></a></li>
-    <li class="<%= 'active' if params[:controller] == 'advertisers' and params[:action] =='ad_compaigns'%>"><a href="<%=advertiser_ad_compaigns_path(advertiser_id:current_advertiser.id)%>">
+  <ul class="nav menuzord-menu menuzord-indented scrollable">
+    <li><a href="/advertisers"><i class="ion-home"></i> <span>Dashboard</span></a></li>
+    <li><a href="<%=advertiser_ad_compaigns_path(advertiser_id:current_advertiser.id)%>">
       <i class="ion-android-bulb"></i> <span>Ad Campaigns</span></a></li>
-    <li class="<%= 'active' if params[:controller] == 'advertisers' and params[:action] =='audience_management' %>"><a href="<%=advertiser_audience_management_path(advertiser_id:current_advertiser.id)%>">
+    <li><a href="<%=advertiser_audience_management_path(advertiser_id:current_advertiser.id)%>">
       <i class="ion-person"></i> <span>Audience Management</span></a></li>
-    <li class="<%= 'active' if params[:controller] == 'advertisers' and params[:action] =='social_accounts' %>"><a href="<%=advertiser_social_accounts_path(advertiser_id:current_advertiser.id)%>">
+    <li><a href="<%=advertiser_social_accounts_path(advertiser_id:current_advertiser.id)%>">
       <i class="ion-card"></i> <span>Social Accounts</span></a>
     </li>
-    <li class="<%= 'active' if params[:controller] == 'advertisers' and params[:action] =='my_wallet' %>"><a href="<%=advertiser_my_wallet_path(advertiser_id:current_advertiser.id)%>">
+    <li><a href="<%=advertiser_my_wallet_path(advertiser_id:current_advertiser.id)%>">
       <i class="ion-card"></i> <span>My Wallet($<%=current_advertiser.wallet_amount%>)</span></a>
     </li>
   </ul>
@@ -18,21 +18,21 @@
 
   <%if current_influencer%>
     <a href="/influencer" class="menuzord-brand"><%= image_tag "header/menu-logo-blue.png"  ,:class=>"dark-logo"%></a>
-    <ul class="nav menuzord-menu">
-    <li class="<%= 'active' if params[:controller] == 'influencers' and params[:action] =='index'%>"><a href="/influencers"><i class="ion-home"></i><span>Dashboard</span></a></li>
-    <li class="<%= 'active' if params[:controller] == 'influencers' and params[:action] =='ad_requests'%>"><a href="<%=influencer_ad_requests_path(influencer_id:current_influencer.id)%>">
+    <ul class="nav menuzord-menu menuzord-indented scrollable">
+    <li><a href="/influencers"><i class="ion-home"></i><span>Dashboard</span></a></li>
+    <li><a href="<%=influencer_ad_requests_path(influencer_id:current_influencer.id)%>">
       <i class="ion-android-bulb"></i> <span>Ad Request</span></a></li>
-    <li class="<%= 'active' if params[:controller] == 'influencers' and params[:action] =='ad_history' %>">
+    <li>
       <a href="<%=influencer_ad_history_path(influencer_id:current_influencer.id)%>">
       <i class="ion-card"></i> <span>Ads history</span></a>
     </li>
-    <li class="<%= 'active' if params[:controller] == 'influencers' and params[:action] =='audience_management' %>"><a href="<%=influencer_audience_management_path(influencer_id:current_influencer.id)%>">
+    <li><a href="<%=influencer_audience_management_path(influencer_id:current_influencer.id)%>">
       <i class="ion-person"></i> <span>Insights</span></a></li>
-    <li class="<%= 'active' if params[:controller] == 'influencers' and params[:action] =='accounts' %>">
+    <li>
       <a href="<%=influencer_social_accounts_path(influencer_id:current_influencer.id)%>">
       <i class="ion-card"></i> <span>Accounts</span></a>
     </li>
-    <li class="<%= 'active' if params[:controller] == 'influencers' and params[:action] =='payments' %>">
+    <li>
       <a href="<%=influencer_social_accounts_path(influencer_id:current_influencer.id)%>">
       <i class="ion-card"></i> <span>Payments</span></a>
     </li>

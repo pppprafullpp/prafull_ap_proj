@@ -4,13 +4,18 @@
   <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>SocialBooker</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => false %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => false %>
-  <%= csrf_meta_tags %>
+    <title>SocialBooker</title>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
    <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async='async'></script>
+   <meta name="turbolinks-cache-control" content="no-cache">
+
    <script>
+   document.addEventListener("page:restore", function() {
+     app.init();
+    });
      var OneSignal = window.OneSignal || [];
      OneSignal.push(["init", {
        appId: "57ad2410-e850-4023-95a9-8d740e124773",
@@ -40,11 +45,13 @@
     <!-- <script type="text/javascript">
       paceOptions = {
           ajax: false,
-          document: true,
-          restartOnPushState: true,
-          restartOnRequestAfter: true
-      }
-    </script> -->
+          document: false,
+          restartOnPushState: false,
+          restartOnRequestAfter: false,
+          lagThreshold: 10
+
+      } -->
+    </script>
 
 </head>
 <body>

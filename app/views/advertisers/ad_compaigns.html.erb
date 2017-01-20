@@ -51,7 +51,7 @@
             <td><%=ad.id%></td>
             <td><%= Advertisement::TYPE.key(ad.ad_type.to_i) %></td>
             <td><%= Advertisement::PLATFORMS.key(ad.platform.to_i) %></td>
-            <td><%#= Influencer.find(ad.influencer_id).name %>(<%#=Influencer.find(ad.influencer_id).email %>)</td>
+            <td><%= Influencer.find(ad.influencer_id).name %>(<%=Influencer.find(ad.influencer_id).email %>)</td>
             <td><%= ad.created_at %></td>
             <td><%=Advertisement::STATUS.key(ad.status)%></td>
             <td><%#=Category.find(ad.category).name.titleize%></td>

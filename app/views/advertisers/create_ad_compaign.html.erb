@@ -157,14 +157,14 @@
   $("#advertisement_platform").addClass("form-control");
 
   function check_file_format() {
-    // event.preventDefault();
-    // console.log("dd");
-    // if ($("#advertisement_ad_type option:selected").val()==2 && ($("#advertisement_ad_image_url").val()[1]!="png" || $("#advertisement_ad_image_url").val()[1]!="jpg")) {
-    //   alert("upload only .png or .jpg file")
-    // }
-    // else {
-    //   $("#new_advertisement").submit();
-    // }
+    event.preventDefault();
+    console.log("dd");
+    if ($("#advertisement_ad_type option:selected").val()==2 && $("#advertisement_ad_image_url").val().split(".")[1]!="png" && $("#advertisement_ad_image_url").val().split(".")[1]!="jpg") {
+      alert("upload only .png or .jpg file")
+    }
+    else {
+      $("#new_advertisement").submit();
+    }
   }
 
 function change_ad_type_div() {

@@ -1,0 +1,34 @@
+<main>
+ <section id="one-page-side-menu-static" class="one-page-side-menu-static side-menu">
+ <div class="content-wrapper">
+  <%= render :partial => "/layouts/left_panel" %>
+  <%= render :partial => "/layouts/header" %>
+<section class="account section">
+  <div class="form-horizontal">
+   <div class="row">
+     <div class="col-md-2"></div>
+      <div class="col-sm-8">
+        <% if @success%>
+        <p class="alert alert-success"> Payment Success full </p>
+          <table class="table table-striped">
+            <tr><td>Payment ID:<%=@payment.id%></td></tr>
+           </table>
+           <p>Wallet Amount: $<%=current_advertiser.wallet_amount%></p>
+          <%#=@payment.to_json%>
+
+          <%end%>
+          <% if !@success%>
+            <p class="alert alert-danger"> Payment failed </p>
+            <div>
+              <p><%=@error["details"][0]["issue"]%></p>
+              <p><%=@error["details"][1]["issue"] rescue nil%></p>
+            </div>
+            <%end%>
+      </div>
+      <div class="col-md-2"></div>
+    </div>
+    </div>
+  </section>
+</section>
+
+</main>

@@ -16,10 +16,10 @@ Rails.application.routes.draw do
 
   resources :wallets do
     collection do
-      post :init_transaction
+      match :init_transaction, :via => [:post]
     end
   end
-
+  get "/capture_transaction" => "wallets#init_transaction"
   resources :passwords do
     collection do
       post :change_password
