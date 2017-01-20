@@ -25,7 +25,7 @@
         <table class="table table-striped">
           <tr>
             <td><b>Registered on</b> : <%=@influencer_details.created_at.strftime("%d/%m/%Y")%></td>
-            <td><b>Category</b> : <%=@influencer_details.category.camelcase%></td>
+            <td><b>Category</b> : <%=@influencer_details.category.camelcase rescue nil%></td>
           </tr>
         </table>
         <h3> Social Account(information on Facebook) </h3>
