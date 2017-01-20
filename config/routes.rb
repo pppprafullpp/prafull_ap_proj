@@ -10,6 +10,7 @@ Rails.application.routes.draw do
       post :ad_declined_by_influencer
     end
   end
+  post "/update_influencer_profile_photo" =>"influencers#update_influencer_profile_photo"
 
   devise_for :advertisers, :controllers => { registrations: 'registrations', passwords: 'passwords' }
   devise_for :influencers, :controllers => { registrations: 'registrations', passwords: 'passwords' }
@@ -46,10 +47,12 @@ Rails.application.routes.draw do
     get :create_ad_compaign
     post :change_password
     get :influencer_detail
+    get :show_influencers
     get :profile
     get :my_wallet
     collection do
       post :get_wallet_status
+      get :show_influencer_details
     end
   end
 

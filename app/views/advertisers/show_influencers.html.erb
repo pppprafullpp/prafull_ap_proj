@@ -1,0 +1,132 @@
+<main>
+ <section id="one-page-side-menu-static" class="one-page-side-menu-static side-menu">
+ <div class="content-wrapper">
+<%= render :partial => "/layouts/left_panel" %>
+<%= render :partial => "/layouts/header" %>
+<section class="account section">
+<div class="container">
+  <div class="row">
+    <div class="col-md-2">
+      <form>
+        <input type="text" placeholder="Search..." class="form-control-new">
+      </form>
+    </div>
+    <div class="col-md-10 text-right">
+
+      <form class="form-inline extraMargin" action="#" role="form">
+      <button class="btn btn-default btn-sm" onclick="to_list()"><span class="glyphicon glyphicon-th-list"> </span>List</button>
+      <button class="btn btn-default btn-sm" onclick="to_grid()"><span  class="glyphicon glyphicon-th"></span>Grid</button>
+      <div class="form-group extraControl wd105 clearfix">
+      <select name="" class="custom-select">
+      <option>Channel</option>
+      <option>All</option>
+      <option>Facebook</option>
+      </select>
+      </div>
+
+      <div class="form-group extraControl wd150 clearfix">
+      <select name="" class="custom-select">
+        <option>Filter by Category</option>
+        <option>Cars</option>
+        <option>Animals</option>
+        <option>Nature</option>
+        <option>Food</option>
+        <option>Sports</option>
+        <option>Fitness</option>
+        <option>Models</option>
+        <option>Technology</option>
+        <option>Premium</option>
+        <option>Other</option>
+      </select>
+      </div>
+      <div class="form-group extraControl wd140 clearfix">
+        <select name="" class="custom-select">
+          <option>Filter by Price($)</option>
+          <option>10</option>
+          <option>20</option>
+          <option>50</option>
+          <option>100</option>
+          <option>500</option>
+        </select>
+    </div>
+
+      <div class="form-group">
+        <a href="javascript:void(0)" id="list" onclick="javascript:window.location.reload()" class="btn btn-default btn-sm"><span class="ion-loop"></span></a>
+      </div>
+
+   </form>
+    </div>
+  </div>
+</div>
+<!-- Influencer(id: integer, email: string, encrypted_password: string, reset_password_token: string, reset_password_sent_at: datetime, remember_created_at: datetime, sign_in_count: integer, current_sign_in_at: datetime, last_sign_in_at: datetime, current_sign_in_ip: string, last_sign_in_ip: string, name: text, created_at: datetime, updated_at: datetime, facebook_page_count: integer, instagram_page_count: integer, wallet_amount: integer, category: text, publishing_price: text, token: text, is_verified: boolean)  -->
+<!-- 2.3.1 :003 >  -->
+
+<div class="container mgTop10">
+  <div id="products" class="row list-group">
+    <!-- List Item -->
+    <% @influencers.each do |influencer|%>
+    <div class="item col-xs-12 col-lg-4 main-content-wrapper">
+      <%if influencer.social_account.present?%>
+      <div class="lft-icon">
+      <div class="center-icon">
+      <span class="ion-social-facebook"></span>
+      </div>
+      </div>
+      <%end%>
+
+      <div class="price-features">
+      <div class="advertiserBox">
+        <% if influencer.profile_image_url%>
+        <a href="<%=show_influencer_details_advertisers_path(id:influencer.id)%>"><img height="250px" src="<%=influencer.profile_image_url%>"></a>
+        <%else%>
+        <a href="<%=show_influencer_details_advertisers_path(id:influencer.id)%>"><img height="250px" src="/assets/default-user"></a>
+        <%end%>
+      </div>
+      <div class="caption">
+        <h4><a href="influencer-detail.html"><%=influencer.name%></a></h4>
+        <div class="price-number-wrap mgBottom30">
+          <div class="price-top">
+          <p><%=influencer.social_account.about.truncate(10) rescue "Not Provided"%></p>
+          <p><strong>Followers:</strong> <span class="smFollow"><%=influencer.social_account.facebook_page_count rescue '0'%></span></br>
+          <strong>Recommended Price Tag/Posts:</strong> <span class="smPrice">$<%=influencer.publishing_price%></span></p>
+          </div>
+          <div>
+          <hr>
+          <%if influencer.social_account.present?%>
+          <div class="wid-social-icons pull-left">
+          <ul>
+            <li><a href="javascript:void(0)"><span class="ion-social-facebook"></span></a></li>
+           </ul>
+          </div>
+          <%end%>
+          <div class="pull-right">
+          <p class="btn-list">
+            <a href="#" class="btn btn-mountain-flat btn-sm violet-btn">Post Now</a>
+            <a href="<%=show_influencer_details_advertisers_path(id:influencer.id)%>" class="btn btn-mountain-flat btn-sm">Details</a></p>
+          </div>
+          </div>
+        </div>
+
+      </div>
+      </div>
+
+    </div>
+    <%end%>
+
+    <div class="col-md-12">
+    <%=will_paginate @influencers%>
+  </div>
+  </div>
+</div>
+</section>
+<script>
+function to_list(event){
+  $("#products > div").removeClass("item col-xs-12 col-lg-4 main-content-wrapper grid-group-item").addClass("item col-xs-12 col-lg-4 main-content-wrapper grid-group-item list-group-item");
+}
+function to_grid(event){
+  $("#products > div").removeClass("item col-xs-12 col-lg-4 main-content-wrapper grid-group-item list-group-item").addClass("item col-xs-12 col-lg-4 main-content-wrapper grid-group-item");
+}
+</script>
+
+</section>
+</main>

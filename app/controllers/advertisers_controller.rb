@@ -11,6 +11,10 @@ class AdvertisersController < ApplicationController
     end
    end
 
+   def show_influencers
+      @influencers = Influencer.all.paginate(:page=>params[:page],:per_page=>10)
+   end
+
   def index
     @current_advertisers_data = current_advertiser
     @advertisers_ad = current_advertiser.advertisements.paginate(:page=>params[:page],:per_page=> 10)
@@ -76,7 +80,6 @@ class AdvertisersController < ApplicationController
 
    end
 
-
    def get_wallet_status
      wallet_amount = Advertiser.find(params[:id]).wallet_amount.to_i
      publishing_price = Influencer.find(params[:influencer_id]).publishing_price.to_i
@@ -90,6 +93,11 @@ class AdvertisersController < ApplicationController
        wallet_amount:wallet_amount,
        publishing_price:publishing_price
      }
+   end
+
+   def show_influencer_details
+     @influencer_details = Influencer.find(params[:id])
+     @social_account = @influencer_details.social_account
    end
 
   private

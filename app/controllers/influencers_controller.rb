@@ -46,6 +46,13 @@ class InfluencersController < ApplicationController
 
   end
 
+  def update_influencer_profile_photo
+    upload_image =  Cloudinary::Uploader.upload(params[:influencer_profile_photo])
+    current_influencer.update_attributes(:profile_image_url=>upload_image["url"])
+    flash[:success] = "Updated"
+    redirect_to :back
+  end
+
   private
 
   def update_influencer_params

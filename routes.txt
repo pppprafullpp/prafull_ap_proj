@@ -48,6 +48,7 @@ advertisment_update_ad_share_url_and_status POST   /advertisments/:advertisment_
                                             PATCH  /advertisments/:id(.:format)                                             advertisments#update
                                             PUT    /advertisments/:id(.:format)                                             advertisments#update
                                             DELETE /advertisments/:id(.:format)                                             advertisments#destroy
+            update_influencer_profile_photo POST   /update_influencer_profile_photo(.:format)                               influencers#update_influencer_profile_photo
                      new_advertiser_session GET    /advertisers/sign_in(.:format)                                           devise/sessions#new
                          advertiser_session POST   /advertisers/sign_in(.:format)                                           devise/sessions#create
                  destroy_advertiser_session DELETE /advertisers/sign_out(.:format)                                          devise/sessions#destroy
@@ -87,6 +88,7 @@ advertisment_update_ad_share_url_and_status POST   /advertisments/:advertisment_
                                             PATCH  /wallets/:id(.:format)                                                   wallets#update
                                             PUT    /wallets/:id(.:format)                                                   wallets#update
                                             DELETE /wallets/:id(.:format)                                                   wallets#destroy
+                        capture_transaction GET    /capture_transaction(.:format)                                           wallets#init_transaction
                   change_password_passwords POST   /passwords/change_password(.:format)                                     passwords#change_password
                                   passwords GET    /passwords(.:format)                                                     passwords#index
                                             POST   /passwords(.:format)                                                     passwords#create
@@ -127,9 +129,11 @@ advertisment_update_ad_share_url_and_status POST   /advertisments/:advertisment_
               advertiser_create_ad_compaign GET    /advertisers/:advertiser_id/create_ad_compaign(.:format)                 advertisers#create_ad_compaign
                  advertiser_change_password POST   /advertisers/:advertiser_id/change_password(.:format)                    advertisers#change_password
                advertiser_influencer_detail GET    /advertisers/:advertiser_id/influencer_detail(.:format)                  advertisers#influencer_detail
+                advertiser_show_influencers GET    /advertisers/:advertiser_id/show_influencers(.:format)                   advertisers#show_influencers
                          advertiser_profile GET    /advertisers/:advertiser_id/profile(.:format)                            advertisers#profile
                        advertiser_my_wallet GET    /advertisers/:advertiser_id/my_wallet(.:format)                          advertisers#my_wallet
               get_wallet_status_advertisers POST   /advertisers/get_wallet_status(.:format)                                 advertisers#get_wallet_status
+        show_influencer_details_advertisers GET    /advertisers/show_influencer_details(.:format)                           advertisers#show_influencer_details
                                 advertisers GET    /advertisers(.:format)                                                   advertisers#index
                                             POST   /advertisers(.:format)                                                   advertisers#create
                              new_advertiser GET    /advertisers/new(.:format)                                               advertisers#new
