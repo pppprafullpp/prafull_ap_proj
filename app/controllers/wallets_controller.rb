@@ -37,19 +37,19 @@ class WalletsController < ApplicationController
 
         # Create Payment and return the status(true or false)
         if @payment.create
-          @payment.id     # Payment Id
-          response = JSON.parse(@payment.to_json)
-          transaction_id = response["id"]
-          # Transaction(id: integer, advertiser_id: integer, amount: integer, paypal_transaction_id: integer, transaction_description: text, created_at: datetime, updated_at: datetime)
-          WalletTransaction.create!(:advertiser_id=>current_advertiser.id,:paypal_transaction_id=>transaction_id,:transaction_description=>params[:description],:transaction_amount=>params[:amount])
-          flash[:success] = "Successfully added"
-          exiting_amount = current_advertiser.wallet_amount
-          new_amount = exiting_amount.to_i + params[:amount].to_i
-          current_advertiser.update_attributes(:wallet_amount=>new_amount)
+            response = JSON.parse(@payment.to_json)
+            transaction_id = response["id"]
+            WalletTransaction.create!(:advertiser_id=>current_advertiser.id,:paypal_transaction_id=>transaction_id,:transaction_description=>params[:description],:transaction_amount=>params[:amount])
+            flash[:success] = "Successfully added"
+            exiting_amount = current_advertiser.wallet_amount
+            new_amount = exiting_amount.to_i + params[:amount].to_i
+            current_advertiser.update_attributes(:wallet_amount=>new_amount)
+            @success = true
+            byebug
         else
-          @payment.error  # Error Hash
-          flash[:success] = "Error Occured"
+          @error = @payment.error
+          @success = false
         end
-        redirect_to :back
   end
+
 end
