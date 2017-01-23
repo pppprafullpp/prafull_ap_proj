@@ -4,7 +4,7 @@ class Advertiser < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
      has_many :advertisements
-
+     has_one :group_mapping, dependent: :destroy
     after_save :update_notification
 
     def update_notification

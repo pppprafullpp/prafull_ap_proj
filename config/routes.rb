@@ -53,6 +53,8 @@ Rails.application.routes.draw do
     collection do
       post :get_wallet_status
       get :show_influencer_details
+      post :create_audience_group
+      post :destroy_group
     end
   end
 

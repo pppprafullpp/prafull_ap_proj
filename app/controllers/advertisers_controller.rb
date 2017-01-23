@@ -28,6 +28,20 @@ class AdvertisersController < ApplicationController
     @wallet_amount = current_advertiser.wallet_amount
   end
 
+  def create_audience_group
+       length = params[:influencer_group][:influencer_id].length
+      new_group = GroupMapping.create!(advertiser_id:current_advertiser.id,group_name:params[:influencer_group][:group_name])
+      rows = params[:influencer_group][:influencer_id]
+      current_advertiser_id = current_advertiser.id
+      rows.each do |influencer_id|
+        InfluencerGroup.create!(advertiser_id: current_advertiser_id, influencer_id:influencer_id, group_name:new_group.group_name,
+        category_id: params[:influencer_group][:category_id],group_mapping_id:new_group.id) if influencer_id.present?
+      end
+      # byebug
+      redirect_to :back
+
+  end
+
   def new
     @new_advertiser = Advertiser.new
   end
@@ -44,12 +58,20 @@ class AdvertisersController < ApplicationController
     @social_accounts = SocialAccount.search(params[:social_account])
   end
 
+  def destroy_group
+    GroupMapping.find(params[:id]).destroy 
+    render :json => {
+      success:true
+    }
+  end
+
   def ad_compaigns
     @ads = Advertisement.where(:advertiser_id=>current_advertiser.id).order("Id DESC").paginate(:page => params[:page], :per_page => 10)
   end
 
   def audience_management
-
+    @new_group = InfluencerGroup.new
+    @all_groups = current_advertiser.group_mapping.influencer_groups.paginate(:page=>params[:page],:per_page=>10) rescue nil
   end
 
   def setting

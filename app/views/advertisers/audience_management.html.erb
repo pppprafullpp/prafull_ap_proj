@@ -14,56 +14,40 @@
 </div>
 
 <div class="form-horizontal">
+  <%=form_for @new_group,:url=>create_audience_group_advertisers_path, :method=>"post" do |f|%>
 <div class="row">
 <div class="col-sm-8">
-<div class="form-group">
-  <label class="control-label col-md-5" for="">Social Influencer Group Name</label>
-  <div class="col-md-7">
-    <input type="text" class="form-control" placeholder="Group Name">
-  </div>
-  </div>
+    <div class="form-group">
+      <label class="control-label col-md-5" for="">Social Influencer Group Name</label>
+        <div class="col-md-7">
+          <!-- <input type="text" class="form-control" placeholder="Group Name"> -->
+          <%=f.text_field:group_name,:class=>"form-control"%>
+        </div>
+      </div>
 
-  <div class="form-group">
-    <label class="control-label col-md-5" for="">Category:</label>
-    <div class="col-md-7">
-    <select name="" class="custom-select form-control">
-      <option>Select</option>
-      <option>Celebrity</option>
-      <option>Cars</option>
-      <option>Animals</option>
-      <option>Nature</option>
-      <option>Food</option>
-      <option>Sports</option>
-      <option>Fitness</option>
-      <option>Models</option>
-      <option>Technology</option>
-      <option>Premium</option>
-      <option>Other</option>
-    </select>
-  </div>
-  </div>
+      <div class="form-group">
+        <label class="control-label col-md-5" for="">Category:</label>
+        <div class="col-md-7">
+          <%=f.select :category_id,options_for_select(Category.pluck(:name,:id)),{:prompt=>"-Select Category-"},:class=>"form-control", :required=>true%>
+        </div>
+      </div>
 
-<div class="form-group">
-  <label class="control-label col-md-5" for="">Choose Social Influencer</label>
-  <div class="col-md-7">
-  <select class="multiple-select form-control" id="my-select" name="character" multiple="multiple">
-    <option value="Peter">Peter</option>
-    <option value="Lois">Lois</option>
-    <option value="Chris">Chris</option>
-    <option value="Mike">Mike</option>
-  </select>
-  </div>
-  </div>
+      <div class="form-group">
+        <label class="control-label col-md-5" for="">Choose Social Influencer</label>
+          <div class="col-md-7">
+             <%= f.select :influencer_id, options_for_select(Influencer.all.map {|i| [i.name+"(#{i.email})",i.id]}), { }, {:multiple => true,:class => "form-control", :style => "width:450px;" } %>
+          </div>
+      </div>
 
-
-
-  <div class="col-md-7 col-md-offset-5">
-  <a class="btn btn-mountain btn-sm btn-round" href="#">Save</a>
-<a class="btn btn-mountain btn-sm btn-round" href="#">Cancel</a>
-</div>
-
-<!--<button class="btn btn-mountain-o btn-sm btn-round">Save</button> <button class="btn btn-mountain-o btn-sm btn-round">Cancel</button>		-->
-</div>
+      <div class="col-md-7 col-md-offset-5">
+      <%=f.submit "ADD", :class=>"btn btn-mountain btn-sm btn-round"%>
+      <a class="btn btn-mountain btn-sm btn-round" href="#">Cancel</a>
+      <%end%>
+    </div>
+<script>
+$(".chzn-select").chosen({ max_selected_options: 5 });
+</script>
+ </div>
 </div>
 </div>
 
@@ -78,40 +62,44 @@
         <thead>
           <tr>
           <th>Group Name</th>
-          <th>Member Name</th>
-          <th>Starting Date & Time</th>
+          <th>Members</th>
           <th>Option</th>
           </tr>
         </thead>
 
         <tbody>
-        <tr>
-          <td>Hollywood Stars</td>
-          <td>Peter, Louis, Mike, Henry</td>
-          <td>Thu, 01 Sep 2016, 9:30 AM</td>
-          <td>
-          <div class="btn-group">
-          <a href="javascript:void(0);" class="btn btn-default"><span class="ion-edit" title="Edit"></span></a>
-          <a href="javascript:void(0);" class="btn btn-default"><span class="ion-trash-b" title="Delete"></span></a>
-          </div>
-          </td>
-        </tr>
+          <%@all_groups.each do |group_data|%>
+          <tr id="group_id_<%=group_data. group_mapping_id%>" class="cursor-pointer">
+            <td><%=group_data.group_name%></td>
+            <td><%=@all_groups.count%></td>
+            <td>
+            <div class="btn-group">
+            <a href="javascript:void(0);" class="btn btn-default"><span class="ion-edit" title="Edit"></span></a>
+            <a  href="javascript:void(0);" onclick="delete_group(<%=group_data. group_mapping_id%>)" class="btn btn-default"><span class="ion-trash-b" title="Delete"></span></a>
+            </div>
+            </td>
+          </tr>
+        <%end%>
         </tbody>
-        
         </table>
       </div>
     </div>
   </div>
-
+<script>
+function delete_group(id){
+  $.ajax({
+    url:"<%=destroy_group_advertisers_path%>?id="+id,
+    method: "POST",
+    success: function(response){
+      toastr.success("deleted");
+      $("#group_id_"+id).hide(500);
+    }
+  })
+}
+</script>
 <div class="row">
 <div class="col-md-12">
- <ul class="pagination">
-  <li><a href="#"><< Previous</a></li>
-  <li><a href="#">1</a></li>
-  <li><a href="#">2</a></li>
-  <li><a href="#">3</a></li>
-  <li><a href="#">Next >></a></li>
-</ul>
+ <%=will_paginate @all_groups%>
 </div>
 </div>
 
