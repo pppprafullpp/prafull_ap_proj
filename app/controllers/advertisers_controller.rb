@@ -61,7 +61,6 @@ class AdvertisersController < ApplicationController
   end
 
   def create_ad_compaign
-    flash[:success] = "Created successfully , you are charged"
     @new_advertisment = Advertisement.new
   end
 
