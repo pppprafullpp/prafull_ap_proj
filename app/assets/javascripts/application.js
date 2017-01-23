@@ -43,7 +43,7 @@ var app = function() {
     var init = function() {
 
         tooltips();
-        toggleMenuLeft();
+        // toggleMenuLeft();
         toggleMenuRight();
         menu();
         togglePanel();
@@ -62,17 +62,17 @@ var app = function() {
 
     };
 
-    var toggleMenuLeft = function() {
-        $('#toggle-left').bind('click', function(e) {
-            if (!$('.sidebarRight').hasClass('.sidebar-toggle-right')) {
-                $('.sidebarRight').removeClass('sidebar-toggle-right');
-                $('.main-content-wrapper').removeClass('main-content-toggle-right');
-            }
-            $('.sidebar').toggleClass('sidebar-toggle');
-            $('.main-content-wrapper').toggleClass('main-content-toggle-left');
-            e.stopPropagation();
-        });
-    };
+    // var toggleMenuLeft = function() {
+    //     $('#toggle-left').bind('click', function(e) {
+    //         if (!$('.sidebarRight').hasClass('.sidebar-toggle-right')) {
+    //             $('.sidebarRight').removeClass('sidebar-toggle-right');
+    //             $('.main-content-wrapper').removeClass('main-content-toggle-right');
+    //         }
+    //         $('.sidebar').toggleClass('sidebar-toggle');
+    //         $('.main-content-wrapper').toggleClass('main-content-toggle-left');
+    //         e.stopPropagation();
+    //     });
+    // };
 
     var toggleMenuRight = function() {
         $('#toggle-right').bind('click', function(e) {

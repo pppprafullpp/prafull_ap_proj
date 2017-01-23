@@ -29,19 +29,10 @@
        }
      }]);
      </script>
-     <% unless flash.empty? %>
-       <script type="text/javascript">
-          <% flash.each do |f| %>
-              <% type = f[0].to_s.gsub('alert','error').gsub('notice','info') %>
-                toastr.<%=type%>("<%=f[1]%>");
-          <% end %>
-      </script>
-  <% end %>
    <!-- <script src="https://www.google.com/recaptcha/api.js"></script> -->
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="assets/images/favicons/ms-icon-144x144.png">
     <meta name="theme-color" content="#ffffff">
-
     <!-- <script type="text/javascript">
       paceOptions = {
           ajax: false,
@@ -51,11 +42,22 @@
           lagThreshold: 10
 
       } -->
-    </script>
-
+    <!-- </script> -->
+    <script type="text/javascript">
+    var onloadCallback = function() {
+    console.log("grecaptcha is ready!");
+  };
+</script>
 </head>
 <body>
-
+   <% if flash.present? %>
+    <script type="text/javascript">
+       <% flash.each do |f| %>
+           <% type = f[0].to_s.gsub('alert','error').gsub('notice','info') %>
+             toastr.<%=type%>("<%=f[1]%>");
+       <% end %>
+   </script>
+<% end %>
   <%= yield %>
 
 </body>
