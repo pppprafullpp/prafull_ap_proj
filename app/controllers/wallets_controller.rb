@@ -45,7 +45,6 @@ class WalletsController < ApplicationController
             new_amount = exiting_amount.to_i + params[:amount].to_i
             current_advertiser.update_attributes(:wallet_amount=>new_amount)
             @success = true
-            byebug
         else
           @error = @payment.error
           @success = false

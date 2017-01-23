@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170120092524) do
+ActiveRecord::Schema.define(version: 20170123172928) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "trackable_id",   limit: 4
@@ -173,6 +173,24 @@ ActiveRecord::Schema.define(version: 20170120092524) do
   end
 
   add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
+
+  create_table "group_mappings", force: :cascade do |t|
+    t.integer  "advertiser_id",       limit: 4
+    t.integer  "influencer_group_id", limit: 4
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
+    t.text     "group_name",          limit: 65535
+  end
+
+  create_table "influencer_groups", force: :cascade do |t|
+    t.integer  "advertiser_id",    limit: 4
+    t.string   "influencer_id",    limit: 255
+    t.text     "group_name",       limit: 65535
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.integer  "category_id",      limit: 4
+    t.integer  "group_mapping_id", limit: 4
+  end
 
   create_table "influencers", force: :cascade do |t|
     t.string   "email",                  limit: 255,   default: "", null: false
