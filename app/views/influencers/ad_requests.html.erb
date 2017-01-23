@@ -42,10 +42,12 @@
               <div class="price-top"><span class="price-plan-time-unit">Price: </span><span class="price-cta-number">$50</span></div>
             </div>
             <button class="btn btn-mountain-flat btn-sm violet-btn" onclick="open_share_dialog_to_profile(<%=ad_request.id%>)">Post to Facebook Profile</button>
+            <%if current_influencer.social_account.present? and current_influencer.social_account.facebook_page_id.present?%>
             <button class="btn btn-mountain-flat btn-sm violet-btn" onclick="open_share_dialog_to_page(<%=ad_request.id%>)">Post to Facebook Page</button>
+            <%end%>
             <button class="btn btn-mountain-flat btn-sm" data-toggle="modal" onclick="show_decline_modal(<%=ad_request.id%>)">Decline</button>
-            <%if current_influencer.social_account.facebook_page_id.present?%>
-              <input type="hidden" id="<%=ad_request.id%>_page_id" value="<%=current_influencer.social_account.facebook_page_id%>"/>
+            <%if current_influencer.social_account.present? and current_influencer.social_account.facebook_page_id.present?%>
+              <input type="hidden" id="<%=ad_request.id%>_page_id" value="<%=current_influencer.social_account.facebook_page_id rescu%>"/>
             <%end%>
             <button class="btn btn-mountain-o btn-sm btn-round fnt-large" data-toggle="modal" data-target="#reportPopup">
             <span class="ion-android-more-vertical"></span></button>

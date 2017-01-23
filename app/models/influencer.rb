@@ -1,7 +1,7 @@
 class Influencer < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  PLATFORMS = {"Facebook"=>1,"Instagram"=>2, "Both" => 3}
+  PLATFORMS = {"Facebook"=>1 }
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable

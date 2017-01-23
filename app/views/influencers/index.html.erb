@@ -74,7 +74,7 @@
         <div class="row">
 
           <%@ad_requests.each do |ad_request|%>
-            <div id="div_<%=ad_request.id%>" class="col-md-4 main-content-wrapper">
+            <div id="ad_request_<%=ad_request.id%>" class="col-md-4 main-content-wrapper">
             <div class="lft-icon">
             <div class="center-icon">
             <span class="ion-social-facebook"></span>
@@ -99,13 +99,13 @@
                   <div class="price-top"><span class="price-plan-time-unit">Price: </span><span class="price-cta-number"><h5>$<span class="h5">50</h5></span></div>
                 </div>
                 <button class="btn btn-mountain-flat btn-sm violet-btn" onclick="open_share_dialog_to_profile(<%=ad_request.id%>)">Post to facebook Profile</button>
+                <%if current_influencer.social_account.present? and current_influencer.social_account.facebook_page_id.present?%>
                 <button class="btn btn-mountain-flat btn-sm violet-btn" onclick="open_share_dialog_to_page(<%=ad_request.id%>)">Post to facebook Page</button>
+                <%end%>
                 <button class="btn btn-mountain-flat btn-sm" data-toggle="modal" onclick="show_decline_modal(<%=ad_request.id%>)">Decline</button>
-                <%if current_influencer.social_account.facebook_page_id.present?%>
+                <%if current_influencer.social_account.present? and current_influencer.social_account.facebook_page_id.present?%>
                   <input type="hidden" id="<%=ad_request.id%>_page_id" value="<%=current_influencer.social_account.facebook_page_id%>"/>
                 <%end%>
-                <button class="btn btn-mountain-o btn-sm btn-round fnt-large" data-toggle="modal" data-target="#reportPopup">
-                <span class="ion-android-more-vertical"></span></button>
               </div>
             </div>
             </div>
@@ -115,6 +115,12 @@
         <script>
         function post_to_page(ad_id){
         }
+        $(document).ajaxStart(function() {
+
+        });
+        $(document).ajaxStop(function() {
+
+        });
         </script>
 
       </div>
@@ -123,4 +129,32 @@
    <%= render :partial => "/layouts/footer" %>
 </div>
 </section>
+<div class="modal fade" id="declinePopup">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+      <h4 class="modal-title" id="myModalLabel">Ad Decline</h4>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-lg-12">
+          <%=form_tag "#",:class=>"form" do |f|%>
+            <%=hidden_field_tag(:declined_ad_id,"")%>
+            <%=text_area_tag(:reason_for_ad_decline,"",:placeholder=>"Enter Reason for declining the ad ",:class=>"form-control",:required=>true)%>
+            <%=submit_tag("Submit", :class=>"btn btn-mountain btn-sm btn-round",:onclick=>"decline_ad_by_influencer()")%>
+          <%end%>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  function show_decline_modal(id){
+    event.preventDefault();
+    $("#declined_ad_id").val(id);
+    $("#declinePopup").modal("show");
+  }
+
+</script>
 </main>
