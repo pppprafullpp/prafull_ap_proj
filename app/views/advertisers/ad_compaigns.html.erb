@@ -49,11 +49,11 @@
             <tr style="background-color:#fdfecc">
             <%end%>
             <td><%=ad.id%></td>
-            <td><%= Advertisement::TYPE.key(ad.ad_type.to_i) %></td>
-            <td><%= Advertisement::PLATFORMS.key(ad.platform.to_i) %></td>
-            <td><%= Influencer.find(ad.influencer_id).name %>(<%=Influencer.find(ad.influencer_id).email %>)</td>
-            <td><%= ad.created_at %></td>
-            <td><%=Advertisement::STATUS.key(ad.status)%></td>
+            <td><%= Advertisement::TYPE.key(ad.ad_type.to_i)  rescue nil%></td>
+            <td><%= Advertisement::PLATFORMS.key(ad.platform.to_i)  rescue nil%></td>
+            <td><%= Influencer.find(ad.influencer_id).name rescue nil%>(<%=Influencer.find(ad.influencer_id).email rescue nil%>)</td>
+            <td><%= ad.created_at  rescue nil%></td>
+            <td><%=Advertisement::STATUS.key(ad.status) rescue nil%></td>
             <td><%#=Category.find(ad.category).name.titleize%></td>
             <td><b><%="$"+Transaction.find_by_advertisement_id(ad.id).amount rescue "NA"%></b></td>
             <td><%=ad.reason_for_decline.present? ? ad.reason_for_decline : "Not Applicable"%></td>

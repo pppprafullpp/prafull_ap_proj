@@ -1,7 +1,8 @@
 <div id="menuzord" class="menuzord clearfix menuzord-single navigationbar-animation solid sideBar" >
+
   <%if current_advertiser%>
     <a href="/advertisers" class="menuzord-brand"><%= image_tag "header/menu-logo-blue.png"  ,:class=>"dark-logo"%></a>
-  <ul class="nav menuzord-menu menuzord-indented scrollable">
+  <ul class="nav menuzord-menu menuzord-indented scrollable" id="showhide">
     <li><a href="/advertisers"><i class="ion-home"></i> <span>Dashboard</span></a></li>
     <li><a href="<%=advertiser_ad_compaigns_path(advertiser_id:current_advertiser.id)%>">
       <i class="ion-android-bulb"></i> <span>Ad Campaigns</span></a></li>
@@ -20,7 +21,7 @@
 
   <%if current_influencer%>
     <a href="/influencer" class="menuzord-brand"><%= image_tag "header/menu-logo-blue.png"  ,:class=>"dark-logo"%></a>
-    <ul class="nav menuzord-menu menuzord-indented scrollable">
+    <ul class="nav menuzord-menu menuzord-indented scrollable" id="showhide1"">
     <li><a href="/influencers"><i class="ion-home"></i><span>Dashboard</span></a></li>
     <li><a href="<%=influencer_ad_requests_path(influencer_id:current_influencer.id)%>">
       <i class="ion-android-bulb"></i> <span>Ad Request</span></a></li>
