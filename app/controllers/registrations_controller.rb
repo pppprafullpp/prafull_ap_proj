@@ -19,7 +19,8 @@ class RegistrationsController < ApplicationController
       NotificationMailer.welcome_mail("influencer",new_influencer.id).deliver!
     end
     flash[:success] = "Successfully signed up, please login"
-    redirect_to root_path
+    forward_to = params[:advertiser].present? ? "/advertisers/sign_in" :  "/influencers/sign_in"
+    redirect_to forward_to
   end
 
   def check_existing_user
@@ -35,7 +36,7 @@ class RegistrationsController < ApplicationController
   end
 
   def forgot_password
-    
+
   end
 
   private

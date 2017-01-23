@@ -71,6 +71,6 @@ Rails.application.routes.draw do
     end
 
 
-  root 'home#index'
+  root 'registrations#new'
 
 end
