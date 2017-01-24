@@ -7,7 +7,8 @@
 
         <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
           <div class="form-group">
-            <%= f.email_field :email,:placeholder=>"Enter Email", autofocus: true, :class=>"form-control" %>
+            <%= f.email_field :email,:placeholder=>"Enter Email",:autofocus=>true,:class=>"form-control":onblur=>"check_email_existing('#{resource_name}',this.value)" %>
+             <span class="sm-Txt hidden"  id="error-msg">asdf sdf</span>
           </div>
 
           <div class="form-group">
@@ -25,9 +26,29 @@
             <%= f.submit "Log in", :class=>"btn btn-success" %>
           </div>
         <% end %>
-        <%=flash[:success]%>
         <%= render "devise/shared/links" %>
       </div>
       <div class="col-md-4"></div>
   </div>
 </div>
+<script>
+function check_email_existing(t,e) {
+  $.ajax({
+    url:"/check_email_existing",
+    type: "POST",
+    data: {
+      type:t,
+      email:e
+    },
+    success: function(response) {
+      if(response["present"]) {
+        $("#error-msg").removeClass("hidden").text("not available");
+      }
+      else {
+        $("#error-msg").addClass("hidden");
+      }
+    }
+  })
+}
+</script>
+;

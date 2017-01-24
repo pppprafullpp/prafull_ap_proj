@@ -34,7 +34,7 @@ Rails.application.routes.draw do
   get "/activate" => "home#activate"
   match "/get_pending_notification" => "notifications#get_pending_notification", :via=>["post"]
   match "/reset_pending_notification" => "notifications#reset_pending_notification", :via=>["post"]
-
+  post "/check_email_existing" => "home#check_email_existing"
   resources :messages
 
   resources :advertisers do
