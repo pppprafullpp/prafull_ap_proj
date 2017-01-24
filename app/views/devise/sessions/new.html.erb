@@ -41,8 +41,8 @@ function check_email_existing(t,e) {
       email:e
     },
     success: function(response) {
-      if(response["present"]) {
-        $("#error-msg").removeClass("hidden").text("not available");
+      if(response["present"] == false) {
+        $("#error-msg").removeClass("hidden").text("not yet registered");
       }
       else {
         $("#error-msg").addClass("hidden");
