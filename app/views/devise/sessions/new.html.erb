@@ -42,10 +42,11 @@ function check_email_existing(t,e) {
     },
     success: function(response) {
       if(response["present"]) {
-        $("#error-msg").removeClass("hidden").text("not available");
+          $("#error-msg").addClass("hidden");
       }
       else {
-        $("#error-msg").addClass("hidden");
+        $("#error-msg").removeClass("hidden").text("not yet registered");
+
       }
     }
   })

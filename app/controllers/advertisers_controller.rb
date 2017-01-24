@@ -12,7 +12,26 @@ class AdvertisersController < ApplicationController
    end
 
    def show_influencers
-      @influencers = Influencer.all.paginate(:page=>params[:page],:per_page=>10)
+      if params[:publishing_price].present? && params[:category].present?
+         @influencers = Influencer.where(:publishing_price=>params[:publishing_price],:category_id=>params[:category])
+         puts ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>1"
+       elsif params[:category].present?
+         @influencers = Influencer.where(:category_id=>params[:category])
+         puts ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>2"
+       elsif params[:publishing_price].present?
+         @influencers = Influencer.where(:publishing_price=>params[:publishing_price])
+         puts ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>3"
+       else
+          @influencers = Influencer.all
+     end
+     @influencers = @influencers.order("name ASC").paginate(:page=>params[:page],:per_page=>10)
+   end
+
+   def update_advertiser_profile_photo
+     upload_image =  Cloudinary::Uploader.upload(params[:advertiser_profile_photo])
+     current_advertiser.update_attributes(:profile_photo_url=>upload_image["url"])
+     flash[:success] = "Updated"
+     redirect_to :back
    end
 
   def index
@@ -59,7 +78,7 @@ class AdvertisersController < ApplicationController
   end
 
   def destroy_group
-    GroupMapping.find(params[:id]).destroy 
+    GroupMapping.find(params[:id]).destroy
     render :json => {
       success:true
     }

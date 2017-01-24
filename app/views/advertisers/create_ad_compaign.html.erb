@@ -113,7 +113,7 @@
       <div class="form-group">
         <label class="control-label col-md-3" for="">Description</label>
           <div class="col-md-9">
-            <%=f.text_area:description,:class=>"form-control input-sm"%>
+            <%=f.text_area:description,:class=>"form-control input-sm", :required=>true%>
           </div>
       </div>
     </div>
@@ -121,20 +121,20 @@
     <div class="form-group">
       <label class="control-label col-md-3" for="">Title</label>
       <div class="col-md-9">
-        <%=f.text_field:title,:class=>"form-control input-sm"%>
+        <%=f.text_field:title,:class=>"form-control input-sm", :required=>true%>
       </div>
     </div>
 
     <div class="form-group">
       <label class="control-label col-md-3" for="">Caption</label>
       <div class="col-md-9">
-        <%=f.text_field:caption,:class=>"form-control input-sm"%>
+        <%=f.text_field:caption,:class=>"form-control input-sm", :required=>true%>
       </div>
     </div>
 
   <div class="row">
     <div class="col-md-9 col-md-offset-3">
-      <%=f.submit "Save",:id=>"create_ad_btn",:onclick=>"check_file_format()", :class=>"btn btn-mountain btn-sm btn-round"%>
+      <%=f.submit "Save",:id=>"create_ad_btn",:onclick=>"check_validations()", :class=>"btn btn-mountain btn-sm btn-round"%>
       <a class="btn btn-mountain btn-sm btn-round" href="#">Cancel</a>
     </div>
   </div>
@@ -156,14 +156,21 @@
   $("#advertisement_influencer_id").addClass("form-control");
   $("#advertisement_platform").addClass("form-control");
 
-  function check_file_format() {
+  function check_validations() {
     event.preventDefault();
-    console.log("dd");
-    if ($("#advertisement_ad_type option:selected").val()==2 && $("#advertisement_ad_image_url").val().split(".")[1]!="png" && $("#advertisement_ad_image_url").val().split(".")[1]!="jpg") {
-      alert("upload only .png or .jpg file")
+    //  if ($("#advertisement_ad_type option:selected").val()==2 && $("#advertisement_ad_image_url").val().split(".")[1]!="png" && $("#advertisement_ad_image_url").val().split(".")[1]!="jpg") {
+    //   alert("upload only .png or .jpg file");
+    //   console.log("Ddd");
+    // }
+    // else {
+    //   $("#new_advertisement").submit();
+    // }
+    if($("#advertisement_ad_type option:selected").val()==2 && $("#advertisement_ad_image_url").val()==""){
+      alert("upload a photo please")
     }
     else {
       $("#new_advertisement").submit();
+
     }
   }
 
@@ -188,7 +195,7 @@ function check_wallet_status(){
     success: function(response){
        if (!response["success"]){
         $("#create_ad_btn").hide();
-        $("#check_wallet_msg").text("You need minimum $"+response["publishing_price"]+" to post this Ad");
+        alert("You need minimum $"+response["publishing_price"]+" to post this Ad");
         $("#dynamic-area-1").hide();
         $("#dynamic-area-2").hide()
       }
@@ -199,6 +206,8 @@ function check_wallet_status(){
         $("#advertisement_cost").val(response["publishing_price"]);
         console.log(response["publishing_price"]);
       }
+      console.log(response["publishing_price"]);
+      $("#check_wallet_msg").text("Cost $"+response["publishing_price"]);
     }
   })
 }

@@ -62,7 +62,7 @@
         <li id="user_dropdown" >
           <a class="dropdown-toggle" onclick="javascript:$('#user_dropdown').toggleClass('open')" data-toggle="dropdown" href="#">
             <%if current_advertiser%>
-            <img src="<%=current_advertiser.profile_image_url rescue '/assets/default-user' %>" class="profile-thumb img-responsive"></a>
+            <img src="<%=current_advertiser.profile_photo_url rescue '/assets/default-user' %>" class="profile-thumb img-responsive"></a>
             <%else%>
             <img src="<%=current_influencer.profile_image_url%>" class="profile-thumb img-responsive"></a>
             <%end%>

@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     end
   end
   post "/update_influencer_profile_photo" =>"influencers#update_influencer_profile_photo"
+  post "/update_advertiser_profile_photo" =>"advertisers#update_advertiser_profile_photo"
 
   devise_for :advertisers, :controllers => { registrations: 'registrations', passwords: 'passwords' }
   devise_for :influencers, :controllers => { registrations: 'registrations', passwords: 'passwords' }

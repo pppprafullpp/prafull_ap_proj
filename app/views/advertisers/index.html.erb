@@ -82,7 +82,7 @@
      <td>
       <%=Advertisement::STATUS.key(ad.status)%>
     </td>
-    <td><%=Category.find(ad.category).name.titleize%></td>
+    <td><%=Category.find(ad.category).name.titleize rescue nil%></td>
     </tr>
     <%end%>
     </tbody>
@@ -98,7 +98,7 @@
 </div>
 </section>
 
-         <%= render :partial => "/layouts/footer" %>
+  <%= render :partial => "/layouts/footer" %>
 </div>
 </main>
 <script>
