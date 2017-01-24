@@ -56,6 +56,9 @@ Rails.application.routes.draw do
       get :show_influencer_details
       post :create_audience_group
       post :destroy_group
+      get :group_details
+      post :delete_group_member
+      post :check_existing_group
     end
   end
 

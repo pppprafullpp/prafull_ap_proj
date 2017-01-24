@@ -34,9 +34,7 @@ class AdvertismentsController < ApplicationController
     :advertiser_id=>new_record.advertiser_id,
     :status=>new_record.status,
     :amount=>params[:advertisement_cost])
-    new_wallet_amount = current_advertiser.wallet_amount.to_i - params[:advertisement_cost].to_i;
-    current_advertiser.update_attributes(:wallet_amount=>new_wallet_amount)
-    flash[:success] = "Created successfully , you are charged $ #{params[:advertisement_cost]}, Check your wallet"
+    flash[:success] = "Ad created , you will be charged when you ad goes live"
     redirect_to advertiser_ad_compaigns_path(advertiser_id:current_advertiser.id)
   end
 
@@ -50,11 +48,29 @@ class AdvertismentsController < ApplicationController
     Advertisement.find(params[:id]).update_attributes(:advertisement_link=>prefix+params[:post_id], :status=>Advertisement::STATUS["Published by influencer"])
     influencer_name = Influencer.find(Advertisement.find(params[:id]).influencer_id).name
     ApplicationController.new.add_notification(Notification::ACTIVITY_TYPE["new_ad_published"],"New Ad published by #{influencer_name}",:viewed=>false)
+
+    advertiser = Advertiser.find(advertisement.advertiser_id)
+
+    current_wallet_amount = advertiser.wallet_amount
+
+    advertisement_cost = Transaction.find_by_advertisement_id(advertisement.id).amount
+
+    new_wallet_amount = current_wallet_amount - advertisement_cost.to_i;
+
+    advertiser.update_attributes(:wallet_amount=>new_wallet_amount)
+
+    PendingNotification.create!(
+    influencer_id:advertisement.influencer_id,
+    advertiser_id:advertisement.advertiser_id,
+    notification_type:Advertisement::STATUS["Published by influencer"],
+    notification_text:Advertisement::STATUS_TEXT[Advertisement::STATUS["Published by influencer"]-1],
+    advertisement_id:advertisement.id,
+    :viewed=>false)
+
     render :json => {
       success:true
     }
   end
-
 
   def ad_declined_by_influencer
     update_advertisement = Advertisement.find(params[:ad_id]).update_attributes(:status=>declined_by_influencer,:reason_for_decline=>params[:reason_for_decline])

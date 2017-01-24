@@ -1,0 +1,45 @@
+<main>
+ <section id="one-page-side-menu-static" class="one-page-side-menu-static side-menu">
+   <div class="content-wrapper">
+    <%= render :partial => "/layouts/left_panel" %>
+    <%= render :partial => "/layouts/header" %>
+
+    <section class="account section" style="min-height:575px;">
+    <div class="container">
+      <h3><%=@group_details.group_name%></h3>
+      <h4>Members</h4>
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <tr>
+            <th>Member Name</th>
+            <th>Category</th>
+            <th>Action</th>
+          </tr>
+          <%@member_data.each do |member|%>
+          <tr id="member_id_<%=member.id%>">
+            <td><%=Influencer.find(member.influencer_id).name%></td>
+            <td><%=Influencer.find(member.influencer_id).category rescue "NA"%></td>
+            <td><a onclick="delete_group_member(<%=member.id%>)" href="javascript:void(0)" class="red">
+              <i class="fa fa-trash" title="Delete"></i></a></td>
+          </tr>
+          <%end%>
+        </table>
+      </div>
+    </div>
+   </section>
+  </div>
+</section>
+</main>
+<script>
+function delete_group_member(influencer_group_id){
+  $.ajax({
+    url:"<%=delete_group_member_advertisers_path%>?id="+influencer_group_id,
+    type:"POST",
+    success:function(response){
+      console.log(response);
+      toastr.success("deleted");
+      $("#member_id_"+influencer_group_id).hide(500);
+    }
+  })
+}
+</script>

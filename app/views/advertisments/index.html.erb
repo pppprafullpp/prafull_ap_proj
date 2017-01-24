@@ -25,7 +25,7 @@
                 <span style="border-bottom:solid 1px #e1e1e1; margin-bottom:10px; padding-bottom:10px; display:block"><strong>caption: </strong><%=@advertisement.caption %></span>
                 <span style="border-bottom:solid 1px #e1e1e1; margin-bottom:10px; padding-bottom:10px; display:block"><strong>Title: </strong><%=@advertisement.title %></span>
                 <span style="border-bottom:solid 1px #e1e1e1; margin-bottom:10px; padding-bottom:10px; display:block"><strong>Created On: </strong><%=@advertisement.created_at %></span>
-
+                <span style="border-bottom:solid 1px #e1e1e1; margin-bottom:10px; padding-bottom:10px; display:block"><strong>Status: </strong><b><%=Advertisement::STATUS.key(@advertisement.status) %></b></span>
               </p>
             </div>
     </div>

@@ -48,7 +48,7 @@ class AdvertisersController < ApplicationController
   end
 
   def create_audience_group
-       length = params[:influencer_group][:influencer_id].length
+      length = params[:influencer_group][:influencer_id].length
       new_group = GroupMapping.create!(advertiser_id:current_advertiser.id,group_name:params[:influencer_group][:group_name])
       rows = params[:influencer_group][:influencer_id]
       current_advertiser_id = current_advertiser.id
@@ -90,7 +90,7 @@ class AdvertisersController < ApplicationController
 
   def audience_management
     @new_group = InfluencerGroup.new
-    @all_groups = current_advertiser.group_mapping.influencer_groups.paginate(:page=>params[:page],:per_page=>10) rescue nil
+    @all_groups = current_advertiser.group_mappings
   end
 
   def setting
@@ -123,7 +123,7 @@ class AdvertisersController < ApplicationController
    def get_wallet_status
      wallet_amount = Advertiser.find(params[:id]).wallet_amount.to_i
      publishing_price = Influencer.find(params[:influencer_id]).publishing_price.to_i
-     if wallet_amount > publishing_price
+     if wallet_amount >= publishing_price
        success = true
      else
        success = false
@@ -138,6 +138,33 @@ class AdvertisersController < ApplicationController
    def show_influencer_details
      @influencer_details = Influencer.find(params[:id])
      @social_account = @influencer_details.social_account
+   end
+
+   def group_details
+     @group_details = GroupMapping.find(params[:id])
+     @member_data = GroupMapping.find(params[:id]).influencer_groups
+   end
+
+   def delete_group_member
+     InfluencerGroup.find(params[:id]).destroy
+     render :json=> {
+       success:true
+     }
+   end
+
+   def check_existing_group
+     search = GroupMapping.find_by_group_name(params[:name])
+     if search
+       present = true
+     else
+       present = false
+     end
+     render :json=>{
+       status:present
+     }
+   end
+
+   def add_member_to_existing_group
    end
 
   private

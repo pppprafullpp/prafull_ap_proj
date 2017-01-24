@@ -7,4 +7,5 @@ class Advertisement < ActiveRecord::Base
   STATUS_TEXT = ["A new Advertisement for You","Advertisement Approved By Admin","Advertisement Approved By Influencer","Advertisement Declined By Admin","Declined By Influencer","Published By Influencer"]
 
   has_many :advertisements
+  # has_one :transaction
 end

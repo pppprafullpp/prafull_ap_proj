@@ -61,15 +61,17 @@
           </li> -->
         <li id="user_dropdown" >
           <a class="dropdown-toggle" onclick="javascript:$('#user_dropdown').toggleClass('open')" data-toggle="dropdown" href="#">
-            <%if current_advertiser%>
-            <img src="<%=current_advertiser.profile_photo_url rescue '/assets/default-user' %>" class="profile-thumb img-responsive"></a>
-            <%else%>
-            <img src="<%=current_influencer.profile_image_url%>" class="profile-thumb img-responsive"></a>
+            <%if current_advertiser && current_advertiser.profile_photo_url%>
+              <img src="<%=current_advertiser.profile_photo_url %>" class="profile-thumb img-responsive"></a>
+            <%elsif current_influencer && current_influencer.profile_image_url%>
+              <img src="<%=current_influencer.profile_image_url%>" class="profile-thumb img-responsive"></a>
+              <%else%>
+              <img src="/assets/default-user" class="profile-thumb img-responsive"></a>
             <%end%>
 
           <ul id="account-dropdown" class="dropdown-menu animated fadeInDown">
             <li>
-              <%if current_advertiser%>
+              <%if current_advertiser %>
                 <a href="<%=advertiser_profile_path(advertiser_id:current_advertiser.id)%>"><span class="ion-person"></span> Profile</a>
               <%elsif current_influencer%>
               <a href="<%=influencer_profile_path(influencer_id:current_influencer.id)%>"><span class="ion-person"></span> Profile</a>

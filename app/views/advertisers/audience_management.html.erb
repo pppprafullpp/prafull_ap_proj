@@ -21,10 +21,30 @@
       <label class="control-label col-md-5" for="">Social Influencer Group Name</label>
         <div class="col-md-7">
           <!-- <input type="text" class="form-control" placeholder="Group Name"> -->
-          <%=f.text_field:group_name,:class=>"form-control"%>
+          <%=f.text_field:group_name,:class=>"form-control",:onblur=>"check_existing_group(this.value)"%>
+          <span class="hidden" id="error-msg"> </span>
         </div>
       </div>
+<script>
+function check_existing_group(group_name) {
+  console.log(group_name);
+  $.ajax({
+    url:"<%=check_existing_group_advertisers_path%>?name="+group_name,
+    type:"POST",
+    success: function(response){
+      console.log(response);
+      if (response["status"]){
+        $("#error-msg").removeClass("hidden").text("group already Exists");
+      $("#influencer_group_group_name").focus();
+      }
+      else {
+        $("#error-msg").addClass("hidden")
+      }
+    }
+  });
 
+}
+</script>
       <div class="form-group">
         <label class="control-label col-md-5" for="">Category:</label>
         <div class="col-md-7">
@@ -58,30 +78,35 @@ $(".chzn-select").chosen({ max_selected_options: 5 });
   <div class="row">
     <div class="col-md-12">
       <div class="table-responsive">
+        <%if @all_groups.present?%>
+
         <table class="table table-striped" width="100%" cellspacing="0">
         <thead>
           <tr>
           <th>Group Name</th>
-          <th>Members</th>
           <th>Option</th>
           </tr>
         </thead>
-
         <tbody>
+          <% if @all_groups.present?%>
           <%@all_groups.each do |group_data|%>
-          <tr id="group_id_<%=group_data. group_mapping_id%>" class="cursor-pointer">
+          <tr onclick="window.open('<%=group_details_advertisers_url%>?id=<%=group_data.id%>','_self')" class="cursor-pointer">
             <td><%=group_data.group_name%></td>
-            <td><%=@all_groups.count%></td>
-            <td>
+             <td>
             <div class="btn-group">
             <a href="javascript:void(0);" class="btn btn-default"><span class="ion-edit" title="Edit"></span></a>
-            <a  href="javascript:void(0);" onclick="delete_group(<%=group_data. group_mapping_id%>)" class="btn btn-default"><span class="ion-trash-b" title="Delete"></span></a>
+            <a href="javascript:void(0);" onclick="delete_group(<%=group_data.id%>)" class="btn btn-default"><span class="ion-trash-b" title="Delete"></span></a>
             </div>
             </td>
           </tr>
-        <%end%>
+          <%end%>
+          <%end%>
         </tbody>
         </table>
+        <%else%>
+        <h4 class="alert alert-danger"> No Groups Yet!!</h4>
+        <%end%>
+
       </div>
     </div>
   </div>
@@ -99,7 +124,7 @@ function delete_group(id){
 </script>
 <div class="row">
 <div class="col-md-12">
- <%=will_paginate @all_groups%>
+ <%=will_paginate @all_groups rescue nil%>
 </div>
 </div>
 
