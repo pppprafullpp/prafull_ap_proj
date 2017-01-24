@@ -7,7 +7,7 @@
 
         <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
           <div class="form-group">
-            <%= f.email_field :email,:placeholder=>"Enter Email",:autofocus=>true,:class=>"form-control":onblur=>"check_email_existing('#{resource_name}',this.value)" %>
+            <%= f.email_field :email,:placeholder=>"Enter Email",:autofocus=>true,:class=>"form-control",:onblur=>"check_email_existing('#{resource_name}',this.value)" %>
              <span class="sm-Txt hidden"  id="error-msg">asdf sdf</span>
           </div>
 
