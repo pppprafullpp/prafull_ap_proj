@@ -1405,9 +1405,9 @@ var mtnTab = function() {
 /*---------------------------------------------------
     WOW Initialization when pace loader is done
 ----------------------------------------------------*/
-Pace.on('done', function(event){
-    new WOW().init();
-});
+// Pace.on('done', function(event){
+//     new WOW().init();
+// });
 
 
 // Navigation bar animation

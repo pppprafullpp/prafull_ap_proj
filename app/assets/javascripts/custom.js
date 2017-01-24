@@ -31,34 +31,8 @@ $(document).ready(function() {
 
 	/********/
 
-	$(".navIcon1").click(function(){
-		$("#menuzord").hide();
-		$(".navIcon2").show();
-		$(".navIcon1").hide();
-		$(".content-wrapper").css({
-			"margin-left" : "0px"
-		});
-	});
-
-	$(".navIcon2").click(function(){
-		$("#menuzord").show();
-		$(".navIcon1").show();
-		$(".navIcon2").hide();
-		$(".content-wrapper").css({
-			"margin-left" : "230px"
-		});
-	});
 
 	/**** Custom Select Menu ****/
-
-	$(".custom-select").each(function(){
-            $(this).wrap("<span class='select-wrapper'></span>");
-            $(this).after("<span class='holder'></span>");
-        });
-        $(".custom-select").change(function(){
-            var selectedOption = $(this).find(":selected").text();
-            $(this).next(".holder").text(selectedOption);
-        }).trigger('change');
 
 	/**** Popup Center ****/
 

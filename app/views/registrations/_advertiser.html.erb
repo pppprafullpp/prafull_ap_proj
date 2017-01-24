@@ -11,6 +11,8 @@
     <label class="control-label col-md-4" for="">Email</label>
     <div class="col-md-8">
       <%= f.text_field :email, :class=>"form-control",:placeholder=>"Enter Email",:onblur=>"check_exising_user(this.value)"%>
+      <span class="sm-Txt hidden"  id="error-msg"></span>
+
     </div>
   </div>
 
@@ -101,7 +103,7 @@ $("#create_advertiser_btn").on("click",function(event){
     })
   }
   else {
-      $("#error-msg").addClass("alert alert-danger").text("Enter All Fields & validate captcha");
+      $("#error-msg").removeClass("hidden").text("Enter All Fields & validate captcha");
   }
 });
 
@@ -119,8 +121,12 @@ $("#create_advertiser_btn").on("click",function(event){
           console.log(response);
           if (response["status"] == "error")
           {
-            $("#error-msg").addClass("alert alert-danger").text("Email Already Exists");
+            $("#error-msg").removeClass("hidden").text("Email Already Exists");
+            $("#advertiser_email").focus();
             // $("#advertiser_email").focus();
+          }
+          else {
+              $("#error-msg").addClass("hidden");
           }
         }
       })

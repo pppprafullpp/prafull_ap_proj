@@ -37,7 +37,7 @@ class AdvertismentsController < ApplicationController
     new_wallet_amount = current_advertiser.wallet_amount.to_i - params[:advertisement_cost].to_i;
     current_advertiser.update_attributes(:wallet_amount=>new_wallet_amount)
     flash[:success] = "Created successfully , you are charged $ #{params[:advertisement_cost]}, Check your wallet"
-    redirect_to :back
+    redirect_to advertiser_ad_compaigns_path(advertiser_id:current_advertiser.id)
   end
 
   def update_ad_share_url_and_status

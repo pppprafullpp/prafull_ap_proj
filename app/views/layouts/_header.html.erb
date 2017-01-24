@@ -187,4 +187,22 @@ function show_modal(){
       }
     });
   }
+  $(".navIcon1").click(function(){
+    $("#menuzord").hide();
+    $(".navIcon2").show();
+    $(".navIcon1").hide();
+    $(".content-wrapper").css({
+      "margin-left" : "0px"
+    });
+  });
+
+  $(".navIcon2").click(function(){
+    $("#menuzord").show();
+    $(".navIcon1").show();
+    $(".navIcon2").hide();
+    $(".content-wrapper").css({
+      "margin-left" : "230px"
+    });
+  });
+
 </script>
