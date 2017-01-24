@@ -19,4 +19,17 @@ class HomeController < ApplicationController
        flash[:success] = "token invalid, new token will be issued and send to you"
      end
   end
+
+  def check_email_existing
+      old_user = eval(params[:type].camelcase).find_by_email(params[:email])
+      if old_user
+        present = true
+      else
+        present = false
+    end
+    render :json=> {
+        :success => true,
+        :present => present
+    }
+  end
 end

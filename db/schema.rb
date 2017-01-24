@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170123172928) do
+ActiveRecord::Schema.define(version: 20170124063503) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "trackable_id",   limit: 4
@@ -109,6 +109,7 @@ ActiveRecord::Schema.define(version: 20170123172928) do
     t.string   "advertiser_type",        limit: 255
     t.text     "token",                  limit: 65535
     t.boolean  "is_verified"
+    t.text     "profile_photo_url",      limit: 65535
   end
 
   add_index "advertisers", ["email"], name: "index_advertisers_on_email", unique: true, using: :btree
