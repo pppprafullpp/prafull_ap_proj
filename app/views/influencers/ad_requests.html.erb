@@ -4,7 +4,6 @@
 <%= render :partial => "/layouts/left_panel" %>
 <%= render :partial => "/layouts/header" %>
 
-
 <section id="pricing" class="pricing section section-description">
       <div class="container">
 
@@ -17,7 +16,7 @@
     <div class="row">
 
       <%@ad_requests.each do |ad_request|%>
-        <div id="div_<%=ad_request.id%>" class="col-md-4 main-content-wrapper">
+        <div id="div_<%=ad_request.id%>" class="col-md-3 main-content-wrapper">
         <div class="lft-icon">
         <div class="center-icon">
         <span class="ion-social-facebook"></span>
@@ -39,7 +38,7 @@
           <b>Photo Click Link:</b><p id="<%=ad_request.id%>_photo_click_link"><%=ad_request.photo_click_link%></p>
           <div class="price-cta">
             <div class="price-number-wrap">
-              <div class="price-top"><span class="price-plan-time-unit">Price: </span><span class="price-cta-number">$50</span></div>
+              <div class="price-top"><span class="price-plan-time-unit">Price: </span><span class="price-cta-number">$<%=current_influencer.publishing_price%></span></div>
             </div>
             <button class="btn btn-mountain-flat btn-sm violet-btn" onclick="open_share_dialog_to_profile(<%=ad_request.id%>)">Post to Facebook Profile</button>
             <%if current_influencer.social_account.present? and current_influencer.social_account.facebook_page_id.present?%>

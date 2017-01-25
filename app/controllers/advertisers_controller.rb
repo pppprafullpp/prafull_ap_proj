@@ -14,13 +14,10 @@ class AdvertisersController < ApplicationController
    def show_influencers
       if params[:publishing_price].present? && params[:category].present?
          @influencers = Influencer.where(:publishing_price=>params[:publishing_price],:category_id=>params[:category])
-         puts ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>1"
        elsif params[:category].present?
          @influencers = Influencer.where(:category_id=>params[:category])
-         puts ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>2"
        elsif params[:publishing_price].present?
          @influencers = Influencer.where(:publishing_price=>params[:publishing_price])
-         puts ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>3"
        else
           @influencers = Influencer.all
      end
@@ -56,9 +53,7 @@ class AdvertisersController < ApplicationController
         InfluencerGroup.create!(advertiser_id: current_advertiser_id, influencer_id:influencer_id, group_name:new_group.group_name,
         category_id: params[:influencer_group][:category_id],group_mapping_id:new_group.id) if influencer_id.present?
       end
-      # byebug
-      redirect_to :back
-
+       redirect_to :back
   end
 
   def new

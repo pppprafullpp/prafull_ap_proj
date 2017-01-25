@@ -8,48 +8,25 @@
     <div class="container">
 
   <div class="row">
-  <div class="col-md-6">
-    <h1>Ad History</h1>
-  </div>
-  <div class="col-md-6 text-right">
-
-    <div class="form-inline extraMargin">
-    <button class="btn btn-default btn-sm" onclick="to_list()"><span class="glyphicon glyphicon-th-list"> </span>List</button>
-    <button class="btn btn-default btn-sm" onclick="to_grid()"><span  class="glyphicon glyphicon-th"></span>Grid</button>
-    <!-- <div class="form-group extraControl wd105 clearfix">
-    <select name="" class="custom-select">
-    <option>Channel</option>
-    <option>All</option>
-    <option>Facebook</option>
-    </select>
-    </div> -->
-    <%if params[:category].present? && params[:publishing_price].present?%>
-    <div class="form-group extraControl wd150 clearfix hidden">
-      <%=select_tag :category_id,options_for_select(Category.pluck(:name,:id),params[:category_id]),{:include_blank=>"-Select Category-",:class=>"form-control",:onchange=>"filter('category',this)"} %>
+    <div class="col-md-6">
+      <h1>Ad History</h1>
     </div>
-    <div class="form-group extraControl wd140 clearfix hidden">
-      <%=select_tag :publishing_price,options_for_select(Influencer.pluck(:publishing_price).uniq,params[:publishing_price]),{:include_blank=>"-Publishing Price-",:class=>"form-control",:onchange=>"filter('publishing_price',this)"} %>
-  </div>
-    <%else%>
-    <div class="form-group extraControl wd150 clearfix">
-      <%=select_tag :category_id,options_for_select(Category.pluck(:name,:id),params[:category_id]),{:include_blank=>"-Select Category-",:class=>"form-control",:onchange=>"filter('category',this)"} %>
+    <div class="col-md-6 text-right">
+      <div class="form-inline extraMargin">
+      <div class="form-group extraControl wd150 clearfix  ">
+        <%=select_tag :status,options_for_select([["Published By You",6],["Declined By you",5]]),{:include_blank=>"-Ad Status-",:class=>"form-control",:onchange=>"filter(this,'#{current_influencer.id}')"} %>
+      </div>
+      <div class="form-group">
+        <a href="" id="list" onclick="javascript:window.open('<%=influencer_ad_history_path(influencer_id:current_influencer.id)%>','_self')" class="btn btn-default btn-sm"><span class="ion-loop"></span></a>
+      </div>
+   </div>
     </div>
-    <div class="form-group extraControl wd140 clearfix">
-      <%=select_tag :publishing_price,options_for_select(Influencer.pluck(:publishing_price).uniq,params[:publishing_price]),{:include_blank=>"-Publishing Price-",:class=>"form-control",:onchange=>"filter('publishing_price',this)"} %>
-  </div>
-  <%end%>
-    <div class="form-group">
-      <a href="" id="list" onclick="javascript:window.location.reload()" class="btn btn-default btn-sm"><span class="ion-loop"></span></a>
-    </div>
-
- </div>
-  </div>
  </div>
 
     <div class="row">
 
       <%@ad_requests.each do |ad_request|%>
-        <div class="col-md-4 main-content-wrapper">
+        <div class="col-md-3 main-content-wrapper">
           <div class="price-features">
             <div class="advertiserBox">
               <%if ad_request.ad_image_url.present?%>
@@ -63,7 +40,7 @@
               <p id="<%=ad_request.id%>_description" class="word-wrap"> <%=ad_request.description%></p>
               <div class="price-cta">
                 <div class="price-number-wrap">
-                <div class="price-top"><span class="price-plan-time-unit">Price: </span><span class="price-cta-number">$50</span></div>
+                <div class="price-top"><span class="price-plan-time-unit">Price: </span><span class="price-cta-number">$<%=current_influencer.publishing_price%></span></div>
                   <p><b>Current Status</b>:<%=Advertisement::STATUS.key (ad_request.status)%></p>
                   <%if ad_request.status == declined_by_influencer %>
                   <p><b>Reason for decline:</b></p>
@@ -83,3 +60,18 @@
   </div>
 </section>
 </main>
+<script>
+function filter(obj,influencer_id){
+   console.log($("#"+obj.id+" option:selected").val());
+  window.open("<%=influencer_ad_history_path(influencer_id:current_influencer.id)%>?status="+$("#"+obj.id+" option:selected").val(),"_self");
+}
+
+function to_list(event){
+  $("#products > div").removeClass("item col-xs-12 col-lg-4 main-content-wrapper grid-group-item").addClass("item col-xs-12 col-lg-4 main-content-wrapper grid-group-item list-group-item");
+}
+function to_grid(event){
+  $("#products > div").removeClass("item col-xs-12 col-lg-4 main-content-wrapper grid-group-item list-group-item").addClass("item col-xs-12 col-lg-4 main-content-wrapper grid-group-item");
+}
+Tipped.create('.fb-icon', 'Some tooltip text');
+
+</script>

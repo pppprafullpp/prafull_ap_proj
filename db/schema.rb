@@ -11,7 +11,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170124093852) do
+ActiveRecord::Schema.define(version: 20170125081138) do
+
+  create_table "activities", force: :cascade do |t|
+    t.integer  "trackable_id",   limit: 4
+    t.string   "trackable_type", limit: 255
+    t.integer  "owner_id",       limit: 4
+    t.string   "owner_type",     limit: 255
+    t.string   "key",            limit: 255
+    t.text     "parameters",     limit: 65535
+    t.integer  "recipient_id",   limit: 4
+    t.string   "recipient_type", limit: 255
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "activities", ["owner_id", "owner_type"], name: "index_activities_on_owner_id_and_owner_type", using: :btree
+  add_index "activities", ["recipient_id", "recipient_type"], name: "index_activities_on_recipient_id_and_recipient_type", using: :btree
+  add_index "activities", ["trackable_id", "trackable_type"], name: "index_activities_on_trackable_id_and_trackable_type", using: :btree
 
   create_table "admins", force: :cascade do |t|
     t.string   "email",                  limit: 255,   default: "", null: false
@@ -166,6 +183,28 @@ ActiveRecord::Schema.define(version: 20170124093852) do
     t.text     "group_name",          limit: 65535
   end
 
+  create_table "influencer_financial_data", force: :cascade do |t|
+    t.integer  "influencer_id", limit: 4
+    t.text     "bank_name",     limit: 65535
+    t.text     "bank_branch",   limit: 65535
+    t.text     "ifsc_code",     limit: 65535
+    t.text     "ac_type",       limit: 65535
+    t.text     "ac_number",     limit: 65535
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+  end
+
+  create_table "influencer_financial_infos", force: :cascade do |t|
+    t.integer  "influencer_id", limit: 4
+    t.text     "bank_name",     limit: 65535
+    t.text     "bank_branch",   limit: 65535
+    t.text     "ifsc_code",     limit: 65535
+    t.text     "ac_type",       limit: 65535
+    t.text     "ac_number",     limit: 65535
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+  end
+
   create_table "influencer_groups", force: :cascade do |t|
     t.integer  "advertiser_id",    limit: 4
     t.string   "influencer_id",    limit: 255
@@ -199,6 +238,9 @@ ActiveRecord::Schema.define(version: 20170124093852) do
     t.boolean  "is_verified"
     t.text     "profile_image_url",      limit: 65535
     t.integer  "category_id",            limit: 4
+    t.integer  "gender",                 limit: 4
+    t.integer  "age",                    limit: 4
+    t.text     "country",                limit: 65535
   end
 
   add_index "influencers", ["email"], name: "index_influencers_on_email", unique: true, using: :btree

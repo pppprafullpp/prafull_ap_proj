@@ -38,6 +38,14 @@
                                             PATCH  /categories/:id(.:format)                                                categories#update
                                             PUT    /categories/:id(.:format)                                                categories#update
                                             DELETE /categories/:id(.:format)                                                categories#destroy
+                 influencer_financial_infos GET    /influencer_financial_infos(.:format)                                    influencer_financial_infos#index
+                                            POST   /influencer_financial_infos(.:format)                                    influencer_financial_infos#create
+              new_influencer_financial_info GET    /influencer_financial_infos/new(.:format)                                influencer_financial_infos#new
+             edit_influencer_financial_info GET    /influencer_financial_infos/:id/edit(.:format)                           influencer_financial_infos#edit
+                  influencer_financial_info GET    /influencer_financial_infos/:id(.:format)                                influencer_financial_infos#show
+                                            PATCH  /influencer_financial_infos/:id(.:format)                                influencer_financial_infos#update
+                                            PUT    /influencer_financial_infos/:id(.:format)                                influencer_financial_infos#update
+                                            DELETE /influencer_financial_infos/:id(.:format)                                influencer_financial_infos#destroy
 advertisment_update_ad_share_url_and_status POST   /advertisments/:advertisment_id/update_ad_share_url_and_status(.:format) advertisments#update_ad_share_url_and_status
     ad_declined_by_influencer_advertisments POST   /advertisments/ad_declined_by_influencer(.:format)                       advertisments#ad_declined_by_influencer
                               advertisments GET    /advertisments(.:format)                                                 advertisments#index
@@ -140,6 +148,7 @@ advertisment_update_ad_share_url_and_status POST   /advertisments/:advertisment_
                   destroy_group_advertisers POST   /advertisers/destroy_group(.:format)                                     advertisers#destroy_group
                   group_details_advertisers GET    /advertisers/group_details(.:format)                                     advertisers#group_details
             delete_group_member_advertisers POST   /advertisers/delete_group_member(.:format)                               advertisers#delete_group_member
+           check_existing_group_advertisers POST   /advertisers/check_existing_group(.:format)                              advertisers#check_existing_group
                                 advertisers GET    /advertisers(.:format)                                                   advertisers#index
                                             POST   /advertisers(.:format)                                                   advertisers#create
                              new_advertiser GET    /advertisers/new(.:format)                                               advertisers#new

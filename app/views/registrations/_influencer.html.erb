@@ -10,7 +10,7 @@
   <div class="form-group">
     <label class="control-label col-md-4" for="">Social Account</label>
     <div class="col-md-8">
-      <select name="" class="custom-select">
+      <select name="" class="custom-select form-control">
         <option>Please Select</option>
         <option>Facebook</option>
       </select>
@@ -63,8 +63,8 @@ $("#dynamic-links").append("<div class='form-group'><label class='control-label 
   </div>
   <!-- <%= f.submit "SIGN UP", :class=>"btn btn-mountain btn-block"%> -->
   <%end%>
+  <span class="sm-Txt hidden"  id="error-msg"></span>
   <script>
-
       function check_exising_user1(value,respond){
         if (isValidEmailAddress(value)){
           status = false;
@@ -98,9 +98,11 @@ $("#dynamic-links").append("<div class='form-group'><label class='control-label 
 
   $("#create_influencer_btn").on("click",function(event){
     event.preventDefault();
+    console.log("dd");
     name = $("#influencer_name").val();
     email = $("#influencer_email").val();
     password = $("#influencer_password").val();
+    console.log(name+email+password);
     if (name!="" && email!="" && password!="" && grecaptcha.getResponse() != "") {
         $.ajax({
          url:"/check_existing_user",
@@ -110,11 +112,12 @@ $("#dynamic-links").append("<div class='form-group'><label class='control-label 
            email:email
          },
          success : function(response) {
+           console.log(response);
             if (response["status"] != "error"){
               $("#new_influencer").submit();
            }
            else {
-            $("#error-msg").addClass("alert alert-danger").text("email already registered");
+            $("#error-msg").removeClass("hidden").addClass("alert alert-danger").text("Email already registered");
              event.preventDefault();
            }
          }

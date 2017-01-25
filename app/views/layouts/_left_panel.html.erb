@@ -35,8 +35,8 @@
   <%end%>
 
   <%if current_influencer%>
-    <a href="/influencer" class="menuzord-brand"><%= image_tag "header/menu-logo-blue.png"  ,:class=>"dark-logo"%></a>
-    <ul class="nav menuzord-menu menuzord-indented scrollable" id="showhide1">
+    <a href="/influencers" class="menuzord-brand"><%= image_tag "header/menu-logo-blue.png"  ,:class=>"dark-logo"%></a>
+    <ul class="nav menuzord-menu menuzord-indented scrollable" id="showhide">
       <li class="<%='active' if params[:action] == 'index' %>">
         <a href="/influencers"><i class="ion-home">
       </i><span>Dashboard</span></a>

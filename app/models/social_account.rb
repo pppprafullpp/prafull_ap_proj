@@ -1,6 +1,5 @@
 class SocialAccount < ActiveRecord::Base
-  belongs_to :influencers
-
+ 
   def self.search(params)
     # raise params.to_yaml
     conditions = []

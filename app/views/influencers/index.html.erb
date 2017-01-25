@@ -74,7 +74,7 @@
         <div class="row">
 
           <%@ad_requests.each do |ad_request|%>
-            <div id="ad_request_<%=ad_request.id%>" class="col-md-4 main-content-wrapper">
+            <div id="ad_request_<%=ad_request.id%>" class="col-md-3 main-content-wrapper">
             <div class="lft-icon">
             <div class="center-icon">
             <span class="ion-social-facebook"></span>
@@ -96,7 +96,8 @@
               <b>Photo Click Link:</b><p id="<%=ad_request.id%>_photo_click_link"><%=ad_request.photo_click_link%></p>
               <div class="price-cta">
                 <div class="price-number-wrap">
-                  <div class="price-top"><span class="price-plan-time-unit">Price: </span><span class="price-cta-number"><h5>$<span class="h5">50</h5></span></div>
+                  <div class="price-top"><span class="price-plan-time-unit">Price: </span><span class="price-cta-number"><h5>$
+                    <%=current_influencer.publishing_price%><span class="h5"></h5></span></div>
                 </div>
                 <button class="btn btn-mountain-flat btn-sm violet-btn" onclick="open_share_dialog_to_profile(<%=ad_request.id%>)">Post to facebook Profile</button>
                 <%if current_influencer.social_account.present? and current_influencer.social_account.facebook_page_id.present?%>
@@ -133,6 +134,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span class="fa fa-close"></span></button>
       <h4 class="modal-title" id="myModalLabel">Ad Decline</h4>
       </div>
       <div class="modal-body">
@@ -141,7 +143,7 @@
           <%=form_tag "#",:class=>"form" do |f|%>
             <%=hidden_field_tag(:declined_ad_id,"")%>
             <%=text_area_tag(:reason_for_ad_decline,"",:placeholder=>"Enter Reason for declining the ad ",:class=>"form-control",:required=>true)%>
-            <%=submit_tag("Submit", :class=>"btn btn-mountain btn-sm btn-round",:onclick=>"decline_ad_by_influencer()")%>
+            <%=submit_tag("Submit", :class=>"btn btn-mountain btn-sm btn-round mgTop30",:onclick=>"decline_ad_by_influencer()")%>
           <%end%>
           </div>
         </div>

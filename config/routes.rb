@@ -3,14 +3,16 @@ Rails.application.routes.draw do
   resources :admins
   resources :campaigns
   resources :categories
-
+  resources :influencer_financial_infos
   resources :advertisments do
     post :update_ad_share_url_and_status
     collection do
       post :ad_declined_by_influencer
     end
   end
-  post "/update_influencer_profile_photo" =>"influencers#update_influencer_profile_photo"
+
+  post "/update_financial_data" => "influencer_financial_infos#create"
+   post "/update_influencer_profile_photo" =>"influencers#update_influencer_profile_photo"
   post "/update_advertiser_profile_photo" =>"advertisers#update_advertiser_profile_photo"
 
   devise_for :advertisers, :controllers => { registrations: 'registrations', passwords: 'passwords' }

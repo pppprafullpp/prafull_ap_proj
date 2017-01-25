@@ -19,16 +19,19 @@
               <%end%>
 
 
-
-
               <%if type == "advertiser"%>
                 <h5>Update Photo</h5>
                 <%=form_tag "/update_advertiser_profile_photo",:method=>"post",:multipart=>true do %>
-                  <%=file_field_tag(:advertiser_profile_photo,:class=>"form-control")%>
+                  <%=file_field_tag(:advertiser_profile_photo,:class=>"form-control",:required=>true)%>
                   <br />
-                  <p align="center"><%=submit_tag "Update",:class=>"btn btn-success"%></p>
+                  <p align="center"><%=submit_tag "Update Profile Photo",:class=>"btn btn-success"%></p>
                   <%end%>
                   <%else%>
+                  <%=form_tag "/update_influencer_profile_photo",:method=>"post",:multipart=>true do %>
+                    <%=file_field_tag(:influencer_profile_photo,:class=>"form-control",:required=>true)%>
+                    <br />
+                    <p align="center"><%=submit_tag "Update Profile Photo",:class=>"btn btn-success"%></p>
+                    <%end%>
               <%end%>
             </div>
           </div>
@@ -45,10 +48,26 @@
                   <td><%=eval("current_#{type}").email%></td>
                 </tr>
                 <%if current_influencer%>
-                <tr>
-                  <td><b>Category</b></td>
-                  <td><%=Category.find(eval("current_#{type}").category_id).name rescue "NA"%></td>
-                </tr>
+                <%=form_for current_influencer,:method=>"put" do |f|%>
+
+                  <tr>
+                    <td><b>Category</b></td>
+                    <td><%=f.select :category_id,options_for_select(Category.pluck(:name,:id),eval("current_#{type}").category_id),{:prompt=>"-Category-"},:class=>"form-control", :required=>true%></td>
+                   </tr>
+                  <tr>
+                    <td><b>Gender</b></td>
+                    <td><%=f.select :gender,options_for_select(Influencer::GENDERS),{:prompt=>"-Gender-"},:class=>"form-control", :required=>true%></td>
+                  </tr>
+                  <tr>
+                    <td><b>Age</b></td>
+                    <td>
+                      <%=f.text_field:age,:class=>"form-control"%>
+                   </tr>
+                    <tr>
+                      <td colspan="2"><p align="center"><%=submit_tag "Update",:class=>"btn btn-success"%></p></td>
+                    </tr>
+
+                  <%end%>
                 <%end%>
               </table>
             </div>
@@ -58,21 +77,50 @@
 
           <hr />
           <%if current_influencer%>
-          <h3>Other Details</h3>
+          <h3>Financial Details</h3>
+          <div class="row">
+          <div class="col-md-2"></div>
+          <div class="col-md-8 text-center">
+            <%=form_for @financial_data,:url=>"/update_financial_data",:method=>"post" do |f|%>
+            <%=f.hidden_field:influencer_id,:value=>current_influencer.id%>
+            <table class="table table-striped">
+              <tr>
+                <td><%=f.label:bank_name%></td>
+                <td><%=f.text_field:bank_name,:placeholder=>"Enter Bank Name",:class=>"form-control", :required=>true%></td>
+              </tr>
+              <tr>
+                <td><%=f.label:bank_branch%></td>
+                <td><%=f.text_field:bank_branch,:placeholder=>"Enter Bank Branch",:class=>"form-control", :required=>true%></td>
+              </tr>
+               <tr>
+                <td><%=f.label:ifsc_code%></td>
+                <td><%=f.text_field:bank_name,:placeholder=>"Enter IFSC Code",:class=>"form-control", :required=>true%></td>
+              </tr>
+              <tr>
+                <td><%=f.label:ac_type%></td>
+                 <td><%=f.select :ac_type,options_for_select(InfluencerFinancialInfosController::AC_TYPES),{:prompt=>"-AC TYPE-"},:class=>"form-control", :required=>true%></td>
+              </tr>
+              <tr>
+                <td><%=f.label:ac_number%></td>
+                <td><%=f.text_field:ac_number,:placeholder=>"Enter Bank Name",:class=>"form-control", :required=>true%></td>
+              </tr>
+            </table>
+            <%=f.submit("Update Fiancial Details", :class=>"btn btn-success")%>
+            <%end%>
+          </div>
+          <div class="col-md-2"></div>
+        </div>
+          <h3>Publishing Details</h3>
           <div class="col-md-2"></div>
           <div class="col-md-8 text-center">
             <%=form_for current_influencer, :url=>influencer_path(id:current_influencer.id), :method=>"put" do |f|%>
             <table class="table table-striped">
               <tr>
-                <td><%=f.label:category_id%></td>
-                <td><%=f.select :category_id,options_for_select(Category.pluck(:name,:id)),{:prompt=>"-Select Category-"},:class=>"form-control", :required=>true%></td>
-              </tr>
-              <tr>
                 <td><%=f.label:publishing_price%>($)</td>
                 <td><%=f.text_field:publishing_price,:placeholder=>"Enter your publishing price",:class=>"form-control"%></td>
               </tr>
             </table>
-            <%=f.submit("Submit", :class=>"btn btn-success")%>
+            <%=f.submit("Update Publishing Details", :class=>"btn btn-success")%>
             <%end%>
           </div>
           <div class="col-md-2"></div>

@@ -1,7 +1,6 @@
 class InfluencersController < ApplicationController
   before_filter :authenticate_influencer!
 
-
   def index
     @ad_requests = Advertisement.where(:influencer_id=>current_influencer.id,:status=>approved_by_admin).limit(3)
     @earned_today = today_earning("influencer",current_influencer.id)
@@ -15,27 +14,29 @@ class InfluencersController < ApplicationController
   end
 
   def ad_history
-    @ad_requests = Advertisement.where(:influencer_id=>current_influencer.id).order("ID DESC")
+    status = params[:status].present? ? params[:status].to_i : 6
+    @ad_requests = Advertisement.where(:influencer_id=>current_influencer.id,:status=>status).order("ID DESC")
   end
 
   def change_password
   end
 
   def setting
-    @new_social_account = current_influencer.social_account
+    @new_social_account = current_influencer.social_account || SocialAccount.new
     @social_account = current_influencer.social_account
   end
 
   def add_social_account_details
      if current_influencer.social_account.present?
       current_influencer.social_account.update_attributes(:facebook_page_id=>params[:social_account][:facebook_page_id])
-      flash[:success] = "Social Account Updated"
+      flash[:success] = "Social Account Updated, Data from Facebook will be pulled in 24 hours"
     else
       SocialAccount.create!(create_social_account)
-      flash[:success] = "Successfully created"
+      flash[:success] = "Successfully created, Data from Facebook will be pulled in 24 hours"
     end
       redirect_to :back
   end
+
 
   def update
     Influencer.find(current_influencer).update(update_influencer_params)
@@ -44,7 +45,7 @@ class InfluencersController < ApplicationController
   end
 
   def profile
-
+    @financial_data = current_influencer.influencer_financial_info.present? ? current_influencer.influencer_financial_info : InfluencerFinancialInfo.new
   end
 
   def update_influencer_profile_photo

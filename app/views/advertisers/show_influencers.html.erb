@@ -14,13 +14,6 @@
       <div class="form-inline extraMargin">
       <button class="btn btn-default btn-sm" onclick="to_list()"><span class="glyphicon glyphicon-th-list"> </span>List</button>
       <button class="btn btn-default btn-sm" onclick="to_grid()"><span  class="glyphicon glyphicon-th"></span>Grid</button>
-      <!-- <div class="form-group extraControl wd105 clearfix">
-      <select name="" class="custom-select">
-      <option>Channel</option>
-      <option>All</option>
-      <option>Facebook</option>
-      </select>
-      </div> -->
       <%if params[:category].present? && params[:publishing_price].present?%>
       <div class="form-group extraControl wd150 clearfix hidden">
         <%=select_tag :category_id,options_for_select(Category.pluck(:name,:id),params[:category_id]),{:include_blank=>"-Select Category-",:class=>"form-control",:onchange=>"filter('category',this)"} %>
@@ -68,7 +61,7 @@ function filter(type,obj){
   <div id="products" class="row list-group">
     <!-- List Item -->
     <% @influencers.each do |influencer|%>
-    <div class="item col-xs-12 col-lg-4 main-content-wrapper">
+    <div class="item col-xs-12 col-lg-3 main-content-wrapper">
       <%if influencer.social_account.present?%>
       <div class="lft-icon">
       <div class="center-icon">

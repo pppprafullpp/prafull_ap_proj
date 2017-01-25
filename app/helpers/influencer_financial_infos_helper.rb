@@ -1,0 +1,2 @@
+module InfluencerFinancialInfosHelper
+end

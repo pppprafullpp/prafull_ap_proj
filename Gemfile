@@ -61,3 +61,4 @@ gem 'pusher'
 gem 'will_paginate-bootstrap'
 gem 'instagram'
 gem 'paypal-sdk-rest'
+gem "rails-erd"
