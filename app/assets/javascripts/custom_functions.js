@@ -96,7 +96,8 @@ function open_share_dialog_to_profile(id) {
         console.log(response);
         if (!response || response.error) {
             // LoginFB();
-            toastr.error("Error, please click on facebook login and try again")
+            toastr.error("Error,"+response["error"]["message"]);
+            // toastr.error("Error, please click on facebook login and try again")
         } else {
             update_ad_share_url_and_status(id, response.id,"profile")
         }
@@ -111,6 +112,13 @@ function open_share_dialog_to_page(id) {
     photo_click_link = $("#" + id + "_photo_click_link").text();
     page_id= $("#"+id+"_page_id").val();
     console.log(page_id);
+
+    console.log(image);
+    console.log(caption);
+    console.log(photo_click_link);
+    console.log(description);
+    console.log(title);
+
     FB.api('/'+page_id+"/feed/", 'post', {
         message: title + " " + description,
         picture: image,
@@ -120,8 +128,8 @@ function open_share_dialog_to_page(id) {
         description: description
     }, function(response) {
          if (!response || response.error) {
-            // LoginFB();
-            toastr.error("Error, please click on facebook login and try again")
+            console.log(response["error"]["message"]);
+            toastr.error("Error,"+response["error"]["message"]);
         } else {
             update_ad_share_url_and_status(id, response.id,"page");
         }

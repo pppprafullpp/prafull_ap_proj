@@ -98,13 +98,12 @@ function filter(type,obj){
           <%if influencer.social_account.present?%>
           <div class="wid-social-icons pull-left">
           <ul>
-            <li><a href="javascript:void(0)"><span class="ion-social-facebook"></span></a></li>
+            <li><a class="fb-icon" title="Facebook page Exists" href="javascript:void(0)"><span class="ion-social-facebook"></span></a></li>
            </ul>
           </div>
           <%end%>
           <div class="pull-right">
           <p class="btn-list">
-            <a href="#" class="btn btn-mountain-flat btn-sm violet-btn">Post Now</a>
             <a href="<%=show_influencer_details_advertisers_path(id:influencer.id)%>" class="btn btn-mountain-flat btn-sm">Details</a></p>
           </div>
           </div>
@@ -129,6 +128,8 @@ function to_list(event){
 function to_grid(event){
   $("#products > div").removeClass("item col-xs-12 col-lg-4 main-content-wrapper grid-group-item list-group-item").addClass("item col-xs-12 col-lg-4 main-content-wrapper grid-group-item");
 }
+Tipped.create('.fb-icon', 'Some tooltip text');
+
 </script>
 
 </section>

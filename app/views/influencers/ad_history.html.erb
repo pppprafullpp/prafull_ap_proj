@@ -5,11 +5,44 @@
 <%= render :partial => "/layouts/header" %>
 
 <section id="pricing" class="pricing section section-description">
-      <div class="container">
+    <div class="container">
 
   <div class="row">
-  <div class="col-md-12">
-    <h1>Ad Request</h1>
+  <div class="col-md-6">
+    <h1>Ad History</h1>
+  </div>
+  <div class="col-md-6 text-right">
+
+    <div class="form-inline extraMargin">
+    <button class="btn btn-default btn-sm" onclick="to_list()"><span class="glyphicon glyphicon-th-list"> </span>List</button>
+    <button class="btn btn-default btn-sm" onclick="to_grid()"><span  class="glyphicon glyphicon-th"></span>Grid</button>
+    <!-- <div class="form-group extraControl wd105 clearfix">
+    <select name="" class="custom-select">
+    <option>Channel</option>
+    <option>All</option>
+    <option>Facebook</option>
+    </select>
+    </div> -->
+    <%if params[:category].present? && params[:publishing_price].present?%>
+    <div class="form-group extraControl wd150 clearfix hidden">
+      <%=select_tag :category_id,options_for_select(Category.pluck(:name,:id),params[:category_id]),{:include_blank=>"-Select Category-",:class=>"form-control",:onchange=>"filter('category',this)"} %>
+    </div>
+    <div class="form-group extraControl wd140 clearfix hidden">
+      <%=select_tag :publishing_price,options_for_select(Influencer.pluck(:publishing_price).uniq,params[:publishing_price]),{:include_blank=>"-Publishing Price-",:class=>"form-control",:onchange=>"filter('publishing_price',this)"} %>
+  </div>
+    <%else%>
+    <div class="form-group extraControl wd150 clearfix">
+      <%=select_tag :category_id,options_for_select(Category.pluck(:name,:id),params[:category_id]),{:include_blank=>"-Select Category-",:class=>"form-control",:onchange=>"filter('category',this)"} %>
+    </div>
+    <div class="form-group extraControl wd140 clearfix">
+      <%=select_tag :publishing_price,options_for_select(Influencer.pluck(:publishing_price).uniq,params[:publishing_price]),{:include_blank=>"-Publishing Price-",:class=>"form-control",:onchange=>"filter('publishing_price',this)"} %>
+  </div>
+  <%end%>
+    <div class="form-group">
+      <a href="" id="list" onclick="javascript:window.location.reload()" class="btn btn-default btn-sm"><span class="ion-loop"></span></a>
+    </div>
+
+ </div>
   </div>
  </div>
 

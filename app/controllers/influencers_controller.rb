@@ -22,13 +22,14 @@ class InfluencersController < ApplicationController
   end
 
   def setting
-    @new_social_account = SocialAccount.new
+    @new_social_account = current_influencer.social_account
     @social_account = current_influencer.social_account
   end
 
   def add_social_account_details
      if current_influencer.social_account.present?
-      flash[:success] = "Social Account Already exists"
+      current_influencer.social_account.update_attributes(:facebook_page_id=>params[:social_account][:facebook_page_id])
+      flash[:success] = "Social Account Updated"
     else
       SocialAccount.create!(create_social_account)
       flash[:success] = "Successfully created"

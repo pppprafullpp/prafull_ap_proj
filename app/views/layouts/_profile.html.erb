@@ -12,15 +12,13 @@
 
               <%if current_influencer.present? && current_influencer.profile_image_url.present? %>
                 <a href="#"><img src="<%=current_influencer.profile_image_url%>"></a>
+                <%elsif current_advertiser.present? && current_advertiser.profile_photo_url.present?%>
+                <a href="#"><img src="<%=current_advertiser.profile_photo_url%>"></a>
                 <%else%>
                 <a style="display:none" href="#"><img src="/assets/default-user"></a>
               <%end%>
 
-              <%if current_advertiser.present? && current_advertiser.profile_photo_url.present? %>
-                <a href="#"><img src="<%=current_advertiser.profile_photo_url%>"></a>
-                <%else%>
-                <a href="#"><img src="/assets/default-user"></a>
-              <%end%>
+
 
 
               <%if type == "advertiser"%>
@@ -49,7 +47,7 @@
                 <%if current_influencer%>
                 <tr>
                   <td><b>Category</b></td>
-                  <td><%=Category.find(eval("current_#{type}").category_id).name rescue nil%></td>
+                  <td><%=Category.find(eval("current_#{type}").category_id).name rescue "NA"%></td>
                 </tr>
                 <%end%>
               </table>
@@ -66,7 +64,7 @@
             <%=form_for current_influencer, :url=>influencer_path(id:current_influencer.id), :method=>"put" do |f|%>
             <table class="table table-striped">
               <tr>
-                <td><%=f.label:category_id%>($)</td>
+                <td><%=f.label:category_id%></td>
                 <td><%=f.select :category_id,options_for_select(Category.pluck(:name,:id)),{:prompt=>"-Select Category-"},:class=>"form-control", :required=>true%></td>
               </tr>
               <tr>
