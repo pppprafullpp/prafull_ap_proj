@@ -25,37 +25,36 @@
           <span class="hidden" id="error-msg"> </span>
         </div>
       </div>
-<script>
-function check_existing_group(group_name) {
-  console.log(group_name);
-  $.ajax({
-    url:"<%=check_existing_group_advertisers_path%>?name="+group_name,
-    type:"POST",
-    success: function(response){
-      console.log(response);
-      if (response["status"]){
-        $("#error-msg").removeClass("hidden").text("group already Exists");
-      $("#influencer_group_group_name").focus();
-      }
-      else {
-        $("#error-msg").addClass("hidden")
-      }
-    }
-  });
-
-}
-</script>
+      <script>
+        function check_existing_group(group_name) {
+          console.log(group_name);
+          $.ajax({
+            url:"<%=check_existing_group_advertisers_path%>?name="+group_name,
+            type:"POST",
+            success: function(response){
+              console.log(response);
+              if (response["status"]){
+                $("#error-msg").removeClass("hidden").text("group already Exists");
+              $("#influencer_group_group_name").focus();
+              }
+              else {
+                $("#error-msg").addClass("hidden")
+              }
+            }
+          });
+        }
+  </script>
       <div class="form-group">
         <label class="control-label col-md-5" for="">Category:</label>
         <div class="col-md-7">
-          <%=f.select :category_id,options_for_select(Category.pluck(:name,:id)),{:prompt=>"-Select Category-"},:class=>"form-control", :required=>true%>
+          <%=f.select :category_id,options_for_select(Category.pluck(:name,:id)),{:prompt=>"-Select Category-", :required=>true},:class=>"form-control"%>
         </div>
       </div>
 
       <div class="form-group">
         <label class="control-label col-md-5" for="">Choose Social Influencer</label>
           <div class="col-md-7">
-             <%= f.select :influencer_id, options_for_select(Influencer.all.map {|i| [i.name+"(#{i.email})",i.id]}), { }, {:multiple => true,:class => "form-control", :style => "width:450px;" } %>
+             <%= f.select :influencer_id, options_for_select(Influencer.all.map {|i| [i.name+"(#{i.email})",i.id]}), { }, {:multiple => true,:class => "form-control chosen-select", :style => "width:450px;",:placeholder=>"select Influencers" } %>
           </div>
       </div>
 
@@ -65,7 +64,8 @@ function check_existing_group(group_name) {
       <%end%>
     </div>
 <script>
-$(".chzn-select").chosen({ max_selected_options: 5 });
+  // $(".chzn-select").chosen({ max_selected_options: 5 });
+  $("#influencer_group_influencer_id").chosen();
 </script>
  </div>
 </div>
@@ -90,9 +90,9 @@ $(".chzn-select").chosen({ max_selected_options: 5 });
         <tbody>
           <% if @all_groups.present?%>
           <%@all_groups.each do |group_data|%>
-          <tr onclick="window.open('<%=group_details_advertisers_url%>?id=<%=group_data.id%>','_self')" class="cursor-pointer">
-            <td><%=group_data.group_name%></td>
-             <td>
+          <tr  class="cursor-pointer">
+            <td onclick="window.open('<%=group_details_advertisers_url%>?id=<%=group_data.id%>','_self')"><%=group_data.group_name%></td>
+            <td>
             <div class="btn-group">
             <a href="javascript:void(0);" class="btn btn-default"><span class="ion-edit" title="Edit"></span></a>
             <a href="javascript:void(0);" onclick="delete_group(<%=group_data.id%>)" class="btn btn-default"><span class="ion-trash-b" title="Delete"></span></a>
@@ -112,12 +112,14 @@ $(".chzn-select").chosen({ max_selected_options: 5 });
   </div>
 <script>
 function delete_group(id){
+  event.preventDefault;
   $.ajax({
     url:"<%=destroy_group_advertisers_path%>?id="+id,
     method: "POST",
     success: function(response){
       toastr.success("deleted");
       $("#group_id_"+id).hide(500);
+      event.preventDefault;
     }
   })
 }

@@ -46,6 +46,10 @@ GEM
     builder (3.2.2)
     byebug (9.0.6)
     choice (0.2.0)
+    chosen-rails (1.5.2)
+      coffee-rails (>= 3.2)
+      railties (>= 3.0)
+      sass-rails (>= 3.2)
     chronic (0.10.2)
     cloudinary (1.2.2)
       aws_cf_signer
@@ -257,6 +261,7 @@ PLATFORMS
 
 DEPENDENCIES
   byebug
+  chosen-rails
   cloudinary
   coffee-rails (~> 4.1.0)
   devise

@@ -1,7 +1,6 @@
 /*--------------------------------------------------------------
 # Normalize
 --------------------------------------------------------------*/
-
 @import url(https://fonts.googleapis.com/css?family=Poppins:300,400,500,700);
 @import url(https://fonts.googleapis.com/css?family=Montserrat:400,700);
 @import url(https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic);
@@ -4378,8 +4377,8 @@ footer .social-icons .footer-social:hover {
 
 .price-features {
   /*padding: 30px 20px 1px;*/
-  border:solid 1px #f3f2f2;
-  box-shadow: 5px 5px 2px -4px rgba(0,0,0,0.1);
+  border: 1px solid #f3f2f2;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
 }
 
 .price-features {
@@ -9156,7 +9155,7 @@ h3.media-page-header {
   top: -17px;
 }
 
-.user-nav ul li.dropdown.messages .dropdown-menu > li:last-child a {
+/*.user-nav ul li.dropdown.messages .dropdown-menu > li:last-child a {
   background-color: #3598DB; color:#fff;
   font-weight: 400;
   font-size: 12px;
@@ -9172,7 +9171,7 @@ h3.media-page-header {
 .user-nav ul li.dropdown.messages .dropdown-menu > li:last-child a:hover {
   background: #337ab7;
   color: #fff;
-}
+}*/
 .user-nav ul li.dropdown.messages .dropdown-menu > li > a {
   margin: 10px;
   -webkit-border-radius: 3px;
@@ -9219,6 +9218,7 @@ h3.media-page-header {
   padding: 10px;
   font-weight: 400;
   color: white;
+  text-align:right;
 }
 
 
@@ -9565,7 +9565,7 @@ h3.media-page-header {
 		float: left;
 		display: inline-block;
 		border: 1px solid rgba(0, 0, 0, 0.1); border-radius:3px;
-		background: url("../images/dropdown-sprite.png") no-repeat right 0 transparent;
+		background: url("/assets/dropdown-sprite.png") no-repeat right 0 transparent;
 		cursor: pointer;
 
 	}
@@ -9715,7 +9715,7 @@ table em{
 }
 
 .extraControl select{
-	height:30px;
+	height:30px; font-size:12px;
 }
 
 .extraControl  .select-wrapper, .extraControl  .select-wrapper select{
@@ -9886,10 +9886,16 @@ table em{
 }
 }
 img.img-thumb {
-    max-width: 75px;
+    max-width: 60px;
 }
 .img-thumb {
     border: 1px solid #dddddd;
     padding: 3px;
-    width: 75px;
+    width: 60px;
 }
+
+.sm-Txt{
+	font-size:11px; color:#d51d1d;
+}
+
+.wd150 { font-size:11px;}

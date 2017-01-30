@@ -17,6 +17,7 @@
 //= require custom
 //= require bootstrap-datetimepicker
 //= require toastr
+//= require chosen-jquery
 //= require_tree
 
 toastr.options = {
@@ -920,76 +921,76 @@ $( document ).ready(function() {
     Flickr widget
 ========================================================*/
 
-
-var flickerAPI = "https://api.flickr.com/services/rest/?api_key=7a2dc9bed9dc21700704f273faaf89d7&format=json&nojsoncallback=1";
-  $.get( flickerAPI, {
-    method: "flickr.people.findByUsername",
-    format: "json",
-    username: 'Dullface'
-  })
-    .done(function(data ) {
-         //console.log(data.user.nsid);
-      var flickerAPI = "https://api.flickr.com/services/rest/?api_key=7a2dc9bed9dc21700704f273faaf89d7&format=json&nojsoncallback=1";
-      $.getJSON( flickerAPI, {
-        format: "json",
-        user_id : data.user.nsid,
-         method: "flickr.people.getPublicPhotos",
-         extras : "url_t, url_s, url_q, url_m, url_n, url_z, url_c, url_l, url_o"
-      })
-    .done(function( data ) {
-        //console.log(data);
-        var photos = data.photos.photo;
-      $.each( photos, function( i, item ) {
-        if(item.url_m){
-          var singleImgWrap = "<a class='gallery-popup' href="+item.url_o+"><img class='img-responsive' src="+item.url_q+" /></a>";
-          $(".flickr-photo-wrap").append(singleImgWrap)
-        }
-        if ( i === 11 ) {
-            //magnific popup
-            $('.gallery-popup').magnificPopup({
-                type:'image',
-                // delegate: 'a',
-                removalDelay: 300,
-                mainClass: 'mfp-fade',
-                 gallery:{
-                    enabled:true
-                  }
-                // callbacks: {
-                //     buildControls: function(){
-                //         this.$('.img-box').append(this.arrowLeft.add(this.arrowRight));
-                //     }
-                // }
-            });
-          return false;
-        }
-      });
-    });
-    }).fail(function(error){
-
-    });
-
-
-    $('.gallery-popup').magnificPopup({
-                type:'image',
-                removalDelay: 300,
-                mainClass: 'mfp-fade',
-                 gallery:{
-                    enabled:true
-                  }
-            });
-
-    $('.inline-popup').magnificPopup({
-        type:'inline',
-        removalDelay: 300,
-        mainClass: 'mfp-fade',
-         gallery:{
-            enabled:true
-          }
-    });
-
-    $('.popup-youtube').magnificPopup({
-        type:'iframe'
-    });
+//
+// var flickerAPI = "https://api.flickr.com/services/rest/?api_key=7a2dc9bed9dc21700704f273faaf89d7&format=json&nojsoncallback=1";
+//   $.get( flickerAPI, {
+//     method: "flickr.people.findByUsername",
+//     format: "json",
+//     username: 'Dullface'
+//   })
+//     .done(function(data ) {
+//          //console.log(data.user.nsid);
+//       var flickerAPI = "https://api.flickr.com/services/rest/?api_key=7a2dc9bed9dc21700704f273faaf89d7&format=json&nojsoncallback=1";
+//       $.getJSON( flickerAPI, {
+//         format: "json",
+//         user_id : data.user.nsid,
+//          method: "flickr.people.getPublicPhotos",
+//          extras : "url_t, url_s, url_q, url_m, url_n, url_z, url_c, url_l, url_o"
+//       })
+//     .done(function( data ) {
+//         //console.log(data);
+//         var photos = data.photos.photo;
+//       $.each( photos, function( i, item ) {
+//         if(item.url_m){
+//           var singleImgWrap = "<a class='gallery-popup' href="+item.url_o+"><img class='img-responsive' src="+item.url_q+" /></a>";
+//           $(".flickr-photo-wrap").append(singleImgWrap)
+//         }
+//         if ( i === 11 ) {
+//             //magnific popup
+//             $('.gallery-popup').magnificPopup({
+//                 type:'image',
+//                 // delegate: 'a',
+//                 removalDelay: 300,
+//                 mainClass: 'mfp-fade',
+//                  gallery:{
+//                     enabled:true
+//                   }
+//                 // callbacks: {
+//                 //     buildControls: function(){
+//                 //         this.$('.img-box').append(this.arrowLeft.add(this.arrowRight));
+//                 //     }
+//                 // }
+//             });
+//           return false;
+//         }
+//       });
+//     });
+//     }).fail(function(error){
+//
+//     });
+//
+//
+//     $('.gallery-popup').magnificPopup({
+//                 type:'image',
+//                 removalDelay: 300,
+//                 mainClass: 'mfp-fade',
+//                  gallery:{
+//                     enabled:true
+//                   }
+//             });
+//
+//     $('.inline-popup').magnificPopup({
+//         type:'inline',
+//         removalDelay: 300,
+//         mainClass: 'mfp-fade',
+//          gallery:{
+//             enabled:true
+//           }
+//     });
+//
+//     $('.popup-youtube').magnificPopup({
+//         type:'iframe'
+//     });
 
 /*=====================================================
     twitter widget

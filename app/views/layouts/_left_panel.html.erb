@@ -3,21 +3,20 @@
   <%if current_advertiser%>
   <a href="/advertisers" class="menuzord-brand"><%= image_tag "header/menu-logo-blue.png"  ,:class=>"dark-logo"%></a>
 
-
   <ul class="nav menuzord-menu menuzord-indented scrollable" style="max-height: 400px;">
 
-    <li class="<%='active' if params[:action] == 'index' %>"><a href="/advertisers"><i class="ion-home"></i> <span>Dashboard</span></a></li>
+    <li class="<%='active' if params[:action] == 'index' %> reloading_class"><a href="/advertisers"><i class="ion-home"></i> <span>Dashboard</span></a></li>
 
-    <li class="<%='active' if params[:action] == 'ad_compaigns' %>"><a href="<%=advertiser_ad_compaigns_path(advertiser_id:current_advertiser.id)%>"><i class="ion-android-bulb"></i> <span>Ad Campaigns</span></a></li>
+    <li class="<%='active' if params[:action] == 'ad_compaigns' %> reloading_class"><a href="<%=advertiser_ad_compaigns_path(advertiser_id:current_advertiser.id)%>"><i class="ion-android-bulb"></i> <span>Ad Campaigns</span></a></li>
 
-    <li class="<%='active' if params[:action] == 'show_influencers' %>"><a href="<%=advertiser_show_influencers_path(advertiser_id:current_advertiser.id)%>"><i class="ion-person"></i> <span>Influencers</span></a></li>
+    <li class="<%='active' if params[:action] == 'show_influencers' %> reloading_class"><a href="<%=advertiser_show_influencers_path(advertiser_id:current_advertiser.id)%>"><i class="ion-person"></i> <span>Influencers</span></a></li>
 
-    <li class="<%='active' if params[:action] == 'audience_management' %>"><a href="<%=advertiser_audience_management_path(advertiser_id:current_advertiser.id)%>"><i class="ion-person"></i> <span>Audience</span></a></li>
+    <li class="<%='active' if params[:action] == 'audience_management' %> reloading_class"><a href="<%=advertiser_audience_management_path(advertiser_id:current_advertiser.id)%>"><i class="ion-person"></i> <span>Audience</span></a></li>
 
      <!-- <li><a href="<%#=advertiser_social_accounts_path(advertiser_id:current_advertiser.id)%>">
       <i class="ion-card"></i> <span>Social Accounts</span></a>
     </li> -->
-    <li class="<%='active' if params[:action] == 'my_wallet' %>" ><a href="<%=advertiser_my_wallet_path(advertiser_id:current_advertiser.id)%>">
+    <li class="<%='active' if params[:action] == 'my_wallet' %> reloading_class" ><a href="<%=advertiser_my_wallet_path(advertiser_id:current_advertiser.id)%>">
       <i class="ion-card"></i> <span>My Wallet($<%=current_advertiser.wallet_amount%>)</span></a>
     </li>
   </ul>
@@ -35,39 +34,25 @@
   <%end%>
 
   <%if current_influencer%>
-    <a href="/influencers" class="menuzord-brand"><%= image_tag "header/menu-logo-blue.png"  ,:class=>"dark-logo"%></a>
+    <!-- <a href="/influencers" class="menuzord-brand"><%= image_tag "header/menu-logo-blue.png"  ,:class=>"dark-logo"%></a> -->
     <ul class="nav menuzord-menu menuzord-indented scrollable" id="showhide">
-      <li class="<%='active' if params[:action] == 'index' %>">
+      <li class="<%='active' if params[:action] == 'index' %> reloading_class">
         <a href="/influencers"><i class="ion-home">
       </i><span>Dashboard</span></a>
     </li>
-    <li class="<%='active 'if params[:action] == 'ad_requests' %>"%>
+    <li class="<%='active 'if params[:action] == 'ad_requests' %> reloading_class"%>
       <a href="<%=influencer_ad_requests_path(influencer_id:current_influencer.id)%>">
         <i class="ion-android-bulb"></i> <span>Ad Request</span></a>
       </li>
-    <li class="<%='active' if params[:action] == 'ad_history' %>">
+    <li class="<%='active' if params[:action] == 'ad_history' %> reloading_class">
       <a href="<%=influencer_ad_history_path(influencer_id:current_influencer.id)%>">
+
       <i class="ion-card"></i> <span>Ads history</span></a>
     </li>
-    <!-- <li><a href="<%=influencer_audience_management_path(influencer_id:current_influencer.id)%>">
-      <i class="ion-person"></i> <span>Insights</span></a></li>
-    <li> -->
-    <!--   <a href="<%=influencer_social_accounts_path(influencer_id:current_influencer.id)%>">
-      <i class="ion-card"></i> <span>Accounts</span></a>
-    </li>-->
-    <!-- <li>
-      <a href="<%=influencer_social_accounts_path(influencer_id:current_influencer.id)%>">
-      <i class="ion-card"></i> <span>Payments</span></a>
-    </li> -->
     <li>
       <button class="btn btn-primary" href="#" onclick="javascript:LoginFB()">
       <i class="icon ion-social-facebook"></i> <span>Facebook Login</span></button>
     </li>
-
-    <li class="hidden">
-      <a class="btn-instagram" href="#" onclick="instagram_login()">Instagram Login</a>
-    </li>
-
   </ul>
   <%end%>
 </div>

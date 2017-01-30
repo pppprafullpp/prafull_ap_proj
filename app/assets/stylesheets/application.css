@@ -15,6 +15,7 @@
  *= require ionicons
  *= require_style
  *= require toastr
+ *= require chosen
  */
 @import 'ionicons';
 #toast-container{

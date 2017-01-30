@@ -12,20 +12,20 @@
     <div class="col-md-10 text-right">
 
       <div class="form-inline extraMargin">
-      <button class="btn btn-default btn-sm" onclick="to_list()"><span class="glyphicon glyphicon-th-list"> </span>List</button>
-      <button class="btn btn-default btn-sm" onclick="to_grid()"><span  class="glyphicon glyphicon-th"></span>Grid</button>
+      <button class="btn btn-default btn-sm" onclick="to_list()"><span class="fa fa-bars"> </span>List</button>
+      <button class="btn btn-default btn-sm" onclick="to_grid()"><span  class="fa fa-th-large"></span>Grid</button>
       <%if params[:category].present? && params[:publishing_price].present?%>
       <div class="form-group extraControl wd150 clearfix hidden">
-        <%=select_tag :category_id,options_for_select(Category.pluck(:name,:id),params[:category_id]),{:include_blank=>"-Select Category-",:class=>"form-control",:onchange=>"filter('category',this)"} %>
+        <%=select_tag :category_id,options_for_select(Category.order("name ASC").pluck(:name,:id),params[:category_id]),{:include_blank=>"-Select Category-",:class=>"form-control",:onchange=>"filter('category',this)"} %>
       </div>
-      <div class="form-group extraControl wd140 clearfix hidden">
+      <div class="form-group extraControl wd150 clearfix hidden">
         <%=select_tag :publishing_price,options_for_select(Influencer.pluck(:publishing_price).uniq,params[:publishing_price]),{:include_blank=>"-Publishing Price-",:class=>"form-control",:onchange=>"filter('publishing_price',this)"} %>
     </div>
       <%else%>
       <div class="form-group extraControl wd150 clearfix">
-        <%=select_tag :category_id,options_for_select(Category.pluck(:name,:id),params[:category_id]),{:include_blank=>"-Select Category-",:class=>"form-control",:onchange=>"filter('category',this)"} %>
+        <%=select_tag :category_id,options_for_select(Category.order("name ASC").pluck(:name,:id),params[:category_id]),{:include_blank=>"-Select Category-",:class=>"form-control",:onchange=>"filter('category',this)"} %>
       </div>
-      <div class="form-group extraControl wd140 clearfix">
+      <div class="form-group extraControl wd150 clearfix">
         <%=select_tag :publishing_price,options_for_select(Influencer.pluck(:publishing_price).uniq,params[:publishing_price]),{:include_blank=>"-Publishing Price-",:class=>"form-control",:onchange=>"filter('publishing_price',this)"} %>
     </div>
     <%end%>

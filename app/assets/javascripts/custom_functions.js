@@ -1,7 +1,7 @@
 function statusChangeCallback(response) {
   if (response.status === 'connected') {
     // Logged into your app and Facebook.
-    testAPI();
+    // testAPI();
   } else if (response.status === 'not_authorized') {
     // The person is logged into Facebook, but not your app.
     document.getElementById('status').innerHTML = 'Please log ' +
@@ -13,10 +13,6 @@ function statusChangeCallback(response) {
       'into Facebook.';
   }
 }
-
-// This function is called when someone finishes with the Login
-// Button.  See the onlogin handler attached to it in the sample
-// code below.
 function checkLoginState() {
   FB.getLoginStatus(function(response) {
     statusChangeCallback(response);
@@ -49,18 +45,14 @@ FB.getLoginStatus(function(response) {
 
 // Here we run a very simple test of the Graph API after login is
 // successful.  See statusChangeCallback() for when this call is made.
-function testAPI() {
-  FB.login();
-  // console.log('Welcome!  Fetching your information.... ');
-  FB.api('/me', function(response) {
-    // console.log('Successful login for: ' + response.name);
-    // document.getElementById('status').innerHTML =
-    //   'Thanks for logging in, ' + response.name + '!';
-  });
-  FB.api("/1115405461908086/comments",function(response){
-    // console.log(response);
-  })
-}
+// function testAPI() {
+//   FB.login();
+//   // console.log('Welcome!  Fetching your information.... ');
+//   FB.api('/me', function(response) {  });
+//   FB.api("/1115405461908086/comments",function(response){
+//     // console.log(response);
+//   })
+// }
 
 
 function update_ad_share_url_and_status(id, post_id,type) {
