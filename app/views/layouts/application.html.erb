@@ -63,17 +63,17 @@
   <%= yield %>
 <script>
 $("#menuzord").menuzord();
-
-$(document).resize(function(){
-        l = $(".showhide").length;
-        if( l>1){
-            $(".showhide:first").parent().remove();
-            $("#menuzord").menuzord();
-        }
-        else {
-          $("#menuzord").menuzord();
-        }
-   });
+// 
+// $(document).resize(function(){
+//         l = $(".showhide").length;
+//         if( l>1){
+//             $(".showhide:first").parent().remove();
+//             $("#menuzord").menuzord();
+//         }
+//         else {
+//           $("#menuzord").menuzord();
+//         }
+//    });
 
 </script>
 </body>

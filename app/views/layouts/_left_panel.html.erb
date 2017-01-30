@@ -20,9 +20,9 @@
       <i class="ion-card"></i> <span>My Wallet($<%=current_advertiser.wallet_amount%>)</span></a>
     </li>
   </ul>
-<!--
-   <a href="/advertisers" class="menuzord-brand"><%= image_tag "header/menu-logo-blue.png"  ,:class=>"dark-logo"%></a>
 
+   <a href="/advertisers" class="menuzord-brand"><%= image_tag "header/menu-logo-blue.png"  ,:class=>"dark-logo"%></a>
+<!--
 <ul class="nav menuzord-menu menuzord-indented scrollable" style="max-height: 400px;">
    <li><a href="/advertisers"><i class="ion-home"></i> <span>Dashboard</span></a></li>
    <li><a href="ad-request.html"><i class="ion-android-open"></i> <span>Ad Request</span></a></li>
@@ -34,7 +34,7 @@
   <%end%>
 
   <%if current_influencer%>
-    <!-- <a href="/influencers" class="menuzord-brand"><%= image_tag "header/menu-logo-blue.png"  ,:class=>"dark-logo"%></a> -->
+    <a href="/influencers" class="menuzord-brand"><%= image_tag "header/menu-logo-blue.png"  ,:class=>"dark-logo"%></a>
     <ul class="nav menuzord-menu menuzord-indented scrollable" id="showhide">
       <li class="<%='active' if params[:action] == 'index' %> reloading_class">
         <a href="/influencers"><i class="ion-home">
