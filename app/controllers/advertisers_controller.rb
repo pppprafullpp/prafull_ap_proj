@@ -33,7 +33,7 @@ class AdvertisersController < ApplicationController
 
   def index
     @current_advertisers_data = current_advertiser
-    @advertisers_ad = current_advertiser.advertisements.paginate(:page=>params[:page],:per_page=> 10)
+    @advertisers_ad = current_advertiser.advertisements.order("updated_at DESC").paginate(:page=>params[:page],:per_page=> 10)
     @spent_today = spent_today("advertiser",current_advertiser.id)
     @spent_this_month = spent_monthly("advertiser",current_advertiser.id)
     @published_ad_count = published_ad_count(current_advertiser.id)

@@ -48,9 +48,7 @@
             <%if current_influencer.social_account.present? and current_influencer.social_account.facebook_page_id.present?%>
               <input type="hidden" id="<%=ad_request.id%>_page_id" value="<%=current_influencer.social_account.facebook_page_id rescue nil%>"/>
             <%end%>
-            <button class="btn btn-mountain-o btn-sm btn-round fnt-large" data-toggle="modal" data-target="#reportPopup">
-            <span class="ion-android-more-vertical"></span></button>
-          </div>
+           </div>
         </div>
         </div>
         </div>

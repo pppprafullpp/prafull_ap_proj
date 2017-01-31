@@ -28,7 +28,7 @@
             <td><b>Category</b> : <%=@influencer_details.category.camelcase rescue nil%></td>
           </tr>
         </table>
-        <h3> Social Account(information on Facebook) </h3>
+        <h3> Social Account (Information On Facebook) </h3>
          <%if @social_account.present?%>
              <p><b>Facebook followers :</b><%=@social_account.facebook_page_count%></p>
              <p><b>Facebook page Id :</b> <%=@social_account.facebook_profile_id || "NA"%></p>

@@ -22,15 +22,15 @@
           <table class="table table-striped" width="100%" cellspacing="0">
           <thead>
           <tr>
-          <th>Ad ID</th>
+          <!-- <th>Ad ID</th> -->
           <th>Ad Type</th>
           <th>Ad Media</th>
-          <th>Name & email</th>
+          <th>Name & Email</th>
           <th>Date &amp; Time</th>
           <th>Status</th>
           <th>Category</th>
           <th>Cost</th>
-          <th>Reason for decline</th>
+          <th>Reason For Decline</th>
            </tr>
           </thead>
 
@@ -48,13 +48,13 @@
               <%else%>
             <tr style="background-color:#fdfecc">
             <%end%>
-            <td><%=ad.id%></td>
+            <!-- <td><%#=ad.id%></td> -->
             <td><%= Advertisement::TYPE.key(ad.ad_type.to_i)  rescue nil%></td>
             <td><%= Advertisement::PLATFORMS.key(ad.platform.to_i)  rescue nil%></td>
-            <td><%= Influencer.find(ad.influencer_id).name rescue nil%>(<%=Influencer.find(ad.influencer_id).email rescue nil%>)</td>
+            <td><%= Influencer.find(ad.influencer_id).name rescue nil%> (<%=Influencer.find(ad.influencer_id).email rescue nil%>)</td>
             <td><%= ad.created_at  rescue nil%></td>
             <td><%=Advertisement::STATUS.key(ad.status) rescue nil%></td>
-            <td><%#=Category.find(ad.category).name.titleize%></td>
+            <td><%=Category.find(ad.category).name.titleize rescue nil%></td>
             <td><b><%="$"+Transaction.find_by_advertisement_id(ad.id).amount rescue "NA"%></b></td>
             <td><%=ad.reason_for_decline.present? ? ad.reason_for_decline : "Not Applicable"%></td>
           </tr>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170125081138) do
+ActiveRecord::Schema.define(version: 20170131095714) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "trackable_id",   limit: 4
@@ -80,6 +80,7 @@ ActiveRecord::Schema.define(version: 20170125081138) do
     t.text     "ad_image_url",       limit: 65535
     t.text     "reason_for_decline", limit: 65535
     t.text     "photo_click_link",   limit: 65535
+    t.text     "posting_link",       limit: 65535
   end
 
   create_table "advertisers", force: :cascade do |t|

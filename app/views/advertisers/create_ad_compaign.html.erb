@@ -7,18 +7,18 @@
 <div class="container">
 
 <div class="row">
-<div class="col-md-12">
-<h1>Create Ad Campaigns</h1>
+  <div class="col-md-12">
+    <h1>Create Ad Campaigns</h1>
+  </div>
 </div>
-</div>
-<%if current_advertiser.wallet_amount.present? &&   current_advertiser.wallet_amount.to_i>=100%>
+ <%if current_advertiser.wallet_amount.present? &&   current_advertiser.wallet_amount.to_i>=100%>
 <div class="form-horizontal">
   <%=form_for @new_advertisment,:url=>advertisments_path, :method=>"post" do |f| %>
   <%=f.hidden_field:advertiser_id, :value=>current_advertiser.id%>
         <div class="form-group">
               <label class="control-label col-md-3" for="">Category</label>
               <div class="col-md-5">
-                <%=f.select :category,options_for_select(Category.pluck(:name,:id)),{:prompt=>"-Select Category-"},:class=>"form-control", :required=>true%>
+                <%=f.select :category,options_for_select(Category.order("name ASC").pluck(:name,:id)),{:prompt=>"-Select Category-"},:class=>"form-control", :required=>true%>
               </div>
             </div>
 
@@ -54,15 +54,16 @@
         <div class="row" id="dynamic-area-1">
         <div class="col-md-12">
             <div class="tab-content">
-              <div id="link">
-              <h5>Add link Ads</h5>
-              <div class="form-group">
-              <label class="control-label col-md-3" for="">URL</label>
-              <div class="col-md-9">
-                 <%=f.text_field:advertisement_link,:class=>"form-control input-sm"%>
-              </div>
-              </div>
 
+              <!-- link -->
+              <div id="link">
+                <h5>Add link Ads</h5>
+                <div class="form-group">
+                  <label class="control-label col-md-3" for="">URL</label>
+                    <div class="col-md-9">
+                       <%=f.text_field :posting_link,:class=>"form-control input-sm"%>
+                    </div>
+                </div>
               </div>
 
               <!--#photo -->
@@ -165,8 +166,9 @@
     // else {
     //   $("#new_advertisement").submit();
     // }
+    // toastr.error("Enter All the fields");
     if($("#advertisement_ad_type option:selected").val()==2 && $("#advertisement_ad_image_url").val()==""){
-      alert("upload a photo please")
+      alert("upload a photo please");
     }
     else {
       $("#new_advertisement").submit();

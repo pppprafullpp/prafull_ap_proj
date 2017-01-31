@@ -89,40 +89,54 @@
               <img id="<%=ad_request.id%>_img" height="143px" src="/assets/gallery/social-influencer4">
               <%end%>
             </div>
+            <%if ad_request.ad_type.to_i ==2%>
+
             <div class="caption">
               <b>Title:</b><h4 id="<%=ad_request.id%>_title"><%=ad_request.title%></h4>
               <b>Description:</b><p id="<%=ad_request.id%>_description" class="word-wrap"><%=ad_request.description%></p>
               <b>Caption:</b><p id="<%=ad_request.id%>_caption"><%=ad_request.caption%></p>
               <b>Photo Click Link:</b><p id="<%=ad_request.id%>_photo_click_link"><%=ad_request.photo_click_link%></p>
+
               <div class="price-cta">
                 <div class="price-number-wrap">
                   <div class="price-top"><span class="price-plan-time-unit">Price: </span><span class="price-cta-number"><h5>$
                     <%=current_influencer.publishing_price%><span class="h5"></h5></span></div>
                 </div>
-                <button class="btn btn-mountain-flat btn-sm violet-btn" onclick="open_share_dialog_to_profile(<%=ad_request.id%>)">Post to facebook Profile</button>
+
+                <button class="btn btn-mountain-flat btn-sm violet-btn" onclick="open_share_dialog_to_profile(<%=ad_request.id%>,<%=ad_request.ad_type%>)">Post to facebook Profile</button>
+
                 <%if current_influencer.social_account.present? and current_influencer.social_account.facebook_page_id.present?%>
-                <button class="btn btn-mountain-flat btn-sm violet-btn" onclick="open_share_dialog_to_page(<%=ad_request.id%>)">Post to facebook Page</button>
+                  <button class="btn btn-mountain-flat btn-sm violet-btn" onclick="open_share_dialog_to_page(<%=ad_request.id%>,<%=ad_request.ad_type%>)">Post to facebook Page</button>
                 <%end%>
-                <button class="btn btn-mountain-flat btn-sm" data-toggle="modal" onclick="show_decline_modal(<%=ad_request.id%>)">Decline</button>
-                <%if current_influencer.social_account.present? and current_influencer.social_account.facebook_page_id.present?%>
-                  <input type="hidden" id="<%=ad_request.id%>_page_id" value="<%=current_influencer.social_account.facebook_page_id%>"/>
-                <%end%>
+                  <button class="btn btn-mountain-flat btn-sm" data-toggle="modal" onclick="show_decline_modal(<%=ad_request.id%>)">Decline</button>
+                <%#if current_influencer.social_account.present? and current_influencer.social_account.facebook_page_id.present?%>
+                  <!-- <input type="hidden" id="<%=ad_request.id%>_page_id" value="<%#=current_influencer.social_account.facebook_page_id%>"/> -->
+                <%#end%>
+
               </div>
             </div>
+            <%elsif ad_request.ad_type.to_i ==1%>
+
+            <div class="caption">
+             <h4>Link to be shared</h4>
+             <b id="posting_link_<%=ad_request.id%>"><%=ad_request.posting_link%></b>
+             <hr />
+
+             <button class="btn btn-mountain-flat btn-sm violet-btn" onclick="open_share_dialog_to_profile(<%=ad_request.id%>,<%=ad_request.ad_type%>)">
+               Post to facebook Profile</button>
+
+             <%if current_influencer.social_account.present? and current_influencer.social_account.facebook_page_id.present?%>
+               <button class="btn btn-mountain-flat btn-sm violet-btn" onclick="open_share_dialog_to_page(<%=ad_request.id%>,<%=ad_request.ad_type%>)">
+                 Post to facebook Page</button>
+             <%end%>
+               <button class="btn btn-mountain-flat btn-sm" data-toggle="modal" onclick="show_decline_modal(<%=ad_request.id%>)">Decline</button>
+           </div>
+
+            <%end%>
             </div>
             </div>
           <%end%>
         </div>
-        <script>
-        function post_to_page(ad_id){
-        }
-        $(document).ajaxStart(function() {
-
-        });
-        $(document).ajaxStop(function() {
-
-        });
-        </script>
 
       </div>
       <!-- Approve Popups -->
