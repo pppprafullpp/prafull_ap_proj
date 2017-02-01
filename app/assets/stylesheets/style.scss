@@ -116,7 +116,7 @@ figure {
 
 hr {
   box-sizing: content-box;
-  height: 0;
+  height: 0; border-top:solid 1px #ddd;
 }
 
 pre {
@@ -9716,11 +9716,11 @@ table em{
 }
 
 .extraControl{
-	margin-top:-14px;
+	margin-top:-16px;
 }
 
 .extraControl select{
-	height:30px; font-size:12px;
+	height:28px; font-size:12px;
 }
 
 .extraControl  .select-wrapper, .extraControl  .select-wrapper select{
@@ -9913,3 +9913,6 @@ img.img-thumb {
 	background:#004b8c !important;
 }
 
+.profile-img{
+	width:100%;
+}

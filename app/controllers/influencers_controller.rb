@@ -7,6 +7,7 @@ class InfluencersController < ApplicationController
     @earned_monthly = monthly_earning("influencer",current_influencer.id)
     @published_ads_count = published_by_influencer_count(current_influencer.id)
     @upcoming_ads = uncoming_ads(current_influencer.id)
+    @total_spent = spent_total("influencer",current_influencer.id)
   end
 
   def ad_requests

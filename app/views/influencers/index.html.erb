@@ -15,7 +15,7 @@
           <div class="col-md-3 col-sm-6">
               <div class="dashboard-tile detail">
                   <div class="content">
-                      <h1 class="text-left timer">$ <%=@earned_today%></h1>
+                      <h1 class="text-left timer">$ <%= number_to_human(@earned_today, :format => '%n%u', :units => { :thousand => 'K' })%></h1>
                       <p>Today</p>
                   </div>
                   <div class="icon"><span class="ion-social-usd"></span></div>
@@ -25,7 +25,7 @@
           <div class="col-md-3 col-sm-6">
               <div class="dashboard-tile detail">
                   <div class="content">
-                      <h1 class="text-left timer">$ <%=@earned_monthly%></h1>
+                      <h1 class="text-left timer">$ <%=number_to_human(@earned_monthly, :format => '%n%u', :units => { :thousand => 'K' }) %></h1>
                       <p>This Month</p>
                   </div>
                   <div class="icon"><span class="ion-social-usd"></span></div>
@@ -44,10 +44,10 @@
           <div class="col-md-3 col-sm-6">
               <div class="dashboard-tile detail">
                   <div class="content">
-                      <h1 class="text-left timer"><%=@upcoming_ads%></h1>
-                      <p>Ads coming(Not Approved By Admin)</p>
+                      <h1 class="text-left timer"><%=number_to_human(@total_spent, :format => '%n%u', :units => { :thousand => 'K' }) %></h1>
+                      <p>Recieved Total</p>
                   </div>
-                  <div class="icon"><span class="ion-android-time"></span></div>
+                  <div class="icon"><span class="ion-social-usd"></span></div>
               </div>
           </div>
     </div>
@@ -72,6 +72,7 @@
     <section id="pricing" class="pricing section section-description">
       <div class="container">
         <div class="row">
+          <% if @ad_requests.length >0%>
 
           <%@ad_requests.each do |ad_request|%>
             <div id="ad_request_<%=ad_request.id%>" class="col-md-3 main-content-wrapper">
@@ -135,6 +136,9 @@
             <%end%>
             </div>
             </div>
+          <%end%>
+          <%else%>
+          <h3>No Ads Exists</h3>
           <%end%>
         </div>
 

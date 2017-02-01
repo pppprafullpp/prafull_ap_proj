@@ -63,7 +63,7 @@ function open_share_dialog_to_profile(id,type) {
     }, function(response) {
         if (!response || response.error) {
             LoginFB();
-            toastr.error("Error,"+response["error"]["message"]);
+            toastr.error("Error,"+response["error"]["message"]+", Please check if photo click link exists");
         } else {
             update_ad_share_url_and_status(id, response.id,"profile")
         }
@@ -86,7 +86,7 @@ function open_share_dialog_to_profile(id,type) {
     }, function(response) {
         if (!response || response.error) {
             LoginFB();
-            toastr.error("Error,"+response["error"]["message"]);
+            toastr.error("Error,"+response["error"]["message"]+", Please check if photo click link exists");
         } else {
             update_ad_share_url_and_status(id, response.id,"profile")
         }
@@ -147,6 +147,8 @@ function decline_ad_by_influencer() {
           success: function(response) {
               if (response["success"]) {
                   toastr.success("updated");
+                  $("#ad_request_"+ad_id).fadeOut(1000);
+                  console.log("dd");
                   $("#declinePopup").modal("hide");
               } else {
                   toastr.info("error");

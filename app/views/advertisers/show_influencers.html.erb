@@ -74,9 +74,9 @@ function filter(type,obj){
       <div class="price-features">
       <div class="advertiserBox">
         <% if influencer.profile_image_url%>
-        <a href="<%=show_influencer_details_advertisers_path(id:influencer.id)%>"><img height="250px" src="<%=influencer.profile_image_url%>"></a>
+        <a href="<%=show_influencer_details_advertisers_path(id:influencer.id)%>"><img src="<%=influencer.profile_image_url%>"></a>
         <%else%>
-        <a href="<%=show_influencer_details_advertisers_path(id:influencer.id)%>"><img height="250px" src="/assets/default-user"></a>
+        <a href="<%=show_influencer_details_advertisers_path(id:influencer.id)%>"><img src="/assets/default-user"></a>
         <%end%>
       </div>
       <div class="caption">

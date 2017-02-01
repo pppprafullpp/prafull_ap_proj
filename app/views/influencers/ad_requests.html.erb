@@ -15,8 +15,9 @@
 
     <div class="row">
 
+      <%if @ad_requests.length > 0%>
       <%@ad_requests.each do |ad_request|%>
-        <div id="div_<%=ad_request.id%>" class="col-md-3 main-content-wrapper">
+        <div id="ad_request_<%=ad_request.id%>" class="col-md-3 main-content-wrapper">
         <div class="lft-icon">
         <div class="center-icon">
         <span class="ion-social-facebook"></span>
@@ -40,20 +41,22 @@
             <div class="price-number-wrap">
               <div class="price-top"><span class="price-plan-time-unit">Price: </span><span class="price-cta-number">$<%=current_influencer.publishing_price%></span></div>
             </div>
-            <button class="btn btn-mountain-flat btn-sm violet-btn" onclick="open_share_dialog_to_profile(<%=ad_request.id%>)">Post to Facebook Profile</button>
+            <button class="btn btn-mountain-flat btn-sm violet-btn" onclick="open_share_dialog_to_profile(<%=ad_request.id%>,<%=ad_request.ad_type%>)">Post to facebook Profile</button>
+
             <%if current_influencer.social_account.present? and current_influencer.social_account.facebook_page_id.present?%>
-            <button class="btn btn-mountain-flat btn-sm violet-btn" onclick="open_share_dialog_to_page(<%=ad_request.id%>)">Post to Facebook Page</button>
+              <button class="btn btn-mountain-flat btn-sm violet-btn" onclick="open_share_dialog_to_page(<%=ad_request.id%>,<%=ad_request.ad_type%>)">Post to facebook Page</button>
             <%end%>
-            <button class="btn btn-mountain-flat btn-sm" data-toggle="modal" onclick="show_decline_modal(<%=ad_request.id%>)">Decline</button>
-            <%if current_influencer.social_account.present? and current_influencer.social_account.facebook_page_id.present?%>
-              <input type="hidden" id="<%=ad_request.id%>_page_id" value="<%=current_influencer.social_account.facebook_page_id rescue nil%>"/>
-            <%end%>
+              <button class="btn btn-mountain-flat btn-sm" data-toggle="modal" onclick="show_decline_modal(<%=ad_request.id%>)">Decline</button>
            </div>
         </div>
         </div>
         </div>
 
       <%end%>
+      <%else%>
+      <h4>No Ad Exists</h4>
+      <%end%>
+
       </div>
 
       </div>
