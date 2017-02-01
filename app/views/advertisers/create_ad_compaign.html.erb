@@ -13,7 +13,7 @@
 </div>
  <%if current_advertiser.wallet_amount.present? &&   current_advertiser.wallet_amount.to_i>=100%>
 <div class="form-horizontal">
-  <%=form_for @new_advertisment,:url=>advertisments_path, :method=>"post" do |f| %>
+  <%=form_for @new_advertisment,:url=>advertisments_path, :method=>"post",:novalidate=>true do |f| %>
   <%=f.hidden_field:advertiser_id, :value=>current_advertiser.id%>
         <div class="form-group">
               <label class="control-label col-md-3" for="">Category</label>
@@ -41,7 +41,7 @@
         <div class="form-group">
           <label class="control-label col-md-3" for="">Ad type</label>
           <div class="col-md-5">
-            <%=select_tag("advertisement[ad_type]",options_for_select(Advertisement::TYPE),:class=>"form-control", :onchange=>"change_ad_type_div()")%>
+            <%=select_tag("advertisement[ad_type]",options_for_select(Advertisement::TYPE),:class=>"form-control", :onchange=>"change_ad_type_div()",:prompt=>"Select Media")%>
           </div>
         </div>
 
@@ -57,9 +57,9 @@
 
               <!-- link -->
               <div id="link">
-                <h5>Add link Ads</h5>
+                <h4>Add link Ads</h4>
                 <div class="form-group">
-                  <label class="control-label col-md-3" for="">URL</label>
+                  <label class="control-label col-md-3" for="">URL to Share</label>
                     <div class="col-md-9">
                        <%=f.text_field :posting_link,:class=>"form-control input-sm"%>
                     </div>
@@ -68,7 +68,7 @@
 
               <!--#photo -->
               <div id="photo" style="display:none">
-              <h5>Add Photo Ads</h5>
+              <h4>Add Photo Ads</h4>
               <div class="form-group">
                 <label class="control-label col-md-3" for="">Upload Image</label>
                 <div class="col-md-5">
@@ -83,7 +83,7 @@
               </div>
              </div>
 
-              <!--#video -->
+              <!--#video  
               <div id="video" style="display:none">
               <h5>Add video Ads</h5>
               <div class="form-group">
@@ -94,12 +94,12 @@
               </div>
 
               <div class="form-group">
-              <label class="control-label col-md-3" for="">URL</label>
+              <label class="control-label col-md-3" for="">URL </label>
               <div class="col-md-9">
               <%=f.text_area:advertisement_link,:class=>"form-control input-sm"%>
               </div>
               </div>
-              </div>
+            </div>-->
             </div>
         </div>
         </div>
@@ -110,14 +110,12 @@
 
     <div class="" id="dynamic-area-2">
     <hr>
-    <div class="row">
       <div class="form-group">
         <label class="control-label col-md-3" for="">Description</label>
           <div class="col-md-9">
             <%=f.text_area:description,:class=>"form-control input-sm", :required=>true%>
           </div>
       </div>
-    </div>
 
     <div class="form-group">
       <label class="control-label col-md-3" for="">Title</label>
@@ -133,14 +131,13 @@
       </div>
     </div>
 
-  <div class="row">
+</div>
+
     <div class="col-md-9 col-md-offset-3">
-      <%=f.submit "Save",:id=>"create_ad_btn",:onclick=>"check_validations()", :class=>"btn btn-mountain btn-sm btn-round"%>
+      <%=f.submit "Create",:id=>"create_ad_btn",:onclick=>"check_validations()", :class=>"btn btn-mountain btn-sm btn-round"%>
       <a class="btn btn-mountain btn-sm btn-round" href="#">Cancel</a>
     </div>
-  </div>
-<%end%>
-</div>
+  <%end%>
  </div>
 <%else%>
   <div class="col-md-12 text-center"><h4>Please Add Amount balance to My Wallet(min $100)</h4></div>
@@ -156,7 +153,7 @@
 <script>
   $("#advertisement_influencer_id").addClass("form-control");
   $("#advertisement_platform").addClass("form-control");
-
+  $("#new_advertisement").attr("novalidate","novalidate")
   function check_validations() {
     event.preventDefault();
     //  if ($("#advertisement_ad_type option:selected").val()==2 && $("#advertisement_ad_image_url").val().split(".")[1]!="png" && $("#advertisement_ad_image_url").val().split(".")[1]!="jpg") {
@@ -167,8 +164,14 @@
     //   $("#new_advertisement").submit();
     // }
     // toastr.error("Enter All the fields");
-    if($("#advertisement_ad_type option:selected").val()==2 && $("#advertisement_ad_image_url").val()==""){
-      alert("upload a photo please");
+    if($("#advertisement_ad_type option:selected").val()=="") {
+      toastr.error("Select Media Type");
+    }
+    else if($("#advertisement_ad_type option:selected").val()==2 && $("#advertisement_ad_image_url").val()==""){
+       toastr.error("upload a photo please");
+     }
+    else if ($("#advertisement_ad_type option:selected").val()==1 && $("#advertisement_posting_link").val()==""){
+      toastr.error("Enter Posting URL Please");
     }
     else {
       $("#new_advertisement").submit();
@@ -179,8 +182,8 @@
 function change_ad_type_div() {
   id = $("#advertisement_ad_type option:selected").val();
   switch(id) {
-    case "1": $("#link").show();$("#photo").hide();$("#video").hide();break;
-    case "2": $("#link").hide();$("#photo").show();$("#video").hide();break;
+    case "1": $("#link").show();$("#photo").hide();$("#video").hide();$("#dynamic-area-2").children().addClass("hidden");break;
+    case "2": $("#link").hide();$("#photo").show();$("#video").hide();$("#dynamic-area-2").children().removeClass("hidden");break;
     case "3": $("#link").hide();$("#photo").hide();$("#video").show();break;
   }
 }

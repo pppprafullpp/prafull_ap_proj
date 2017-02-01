@@ -9,10 +9,12 @@ html {
   -webkit-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;
   -webkit-font-smoothing: antialiased;
+  position:relative;
+  min-height:100%;
 }
 
 body {
-  margin: 0;
+  margin: 0; margin-bottom:100px;
 }
 
 article,
@@ -235,7 +237,7 @@ p{
 }
 
 body {
-  position: relative;
+  /*position: relative;*/
 }
 
 .section, .cta3, .testimonial {
@@ -3122,7 +3124,11 @@ ul.feature-list-item li i {
 footer {
   padding: 25px 0px;
   background-color: #000;
-  /*position: relative;*/
+  position: absolute;
+  width:100%;
+  margin-left:-230px;
+  bottom:0;
+  height:100px;
 }
 
 @media (max-width: 47.9rem) {
@@ -3133,7 +3139,7 @@ footer {
 
 footer p {
   color: #fff;
-  font-weight: 400;
+  font-weight: 400; margin-left:230px;
 }
 
 footer p span {
@@ -9649,9 +9655,8 @@ h3.media-page-header {
 	font-size:16px !important;
 }
 
-
 .profile-thumb{
-	width:40px; height:40px; border:solid 1px #ccc;display:block; border-radius:50px; -moz-border-radius:50px; -webkit-border-radius:50px; -o-border-radius:50px;
+	width:40px; height:40px; border:solid 1px #ccc; display:block; border-radius:50px; -moz-border-radius:50px; -webkit-border-radius:50px; -o-border-radius:50px;
 }
 
 table em{
@@ -9900,4 +9905,11 @@ img.img-thumb {
 
 .wd150 { font-size:11px;}
 
-.fb-btn{ background:#186DB6; color:#fff; border-top:solid 1px #fff;}.fb-btn:hover{ background:#004b8c !important;}
+.fb-btn{
+	background:#186DB6; color:#fff; border-top:solid 1px #fff;
+}
+
+.fb-btn:hover{
+	background:#004b8c !important;
+}
+

@@ -8,7 +8,7 @@
 
         <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
           <div class="form-group">
-            <%= f.email_field :email,:placeholder=>"Enter Email",:autofocus=>true,:class=>"form-control",:onblur=>"check_email_existing('#{resource_name}',this.value)" %>
+            <%= f.email_field :email,:placeholder=>"Enter Email",:autofocus=>true,:class=>"form-control",:autocomplete=>"off",:onblur=>"check_email_existing('#{resource_name}',this.value)" %>
              <span class="sm-Txt hidden"  id="error-msg">asdf sdf</span>
           </div>
 
@@ -34,23 +34,24 @@
 </div>
 <script>
 function check_email_existing(t,e) {
-  $.ajax({
-    url:"/check_email_existing",
-    type: "POST",
-    data: {
-      type:t,
-      email:e
-    },
-    success: function(response) {
-      if(response["present"] == false) {
-        $("#error-msg").removeClass("hidden").text("Not Yet Registered");
-       }
-      else {
-        // $("#error-msg").removeClass("hidden")
-
+  if (e.length>10){
+    $.ajax({
+      url:"/check_email_existing",
+      type: "POST",
+      data: {
+        type:t,
+        email:e
+      },
+      success: function(response) {
+        if(response["present"] == false) {
+          $("#error-msg").removeClass("hidden").text("Not Yet Registered");
+         }
+        else {
+          $("#error-msg").addClass("hidden")
+        }
       }
-    }
-  })
+    })
+  }
 }
 </script>
 <%else%>

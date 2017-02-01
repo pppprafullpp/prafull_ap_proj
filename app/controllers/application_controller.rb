@@ -52,6 +52,10 @@ class ApplicationController < ActionController::Base
     amount
   end
 
+  def spent_total(type,id)
+    amount = Transaction.where(eval(":#{type}_id")=>id).sum(:amount)
+    amount
+  end
 
   def spent_today(type,id)
     amount = Transaction.where("created_at >= ? and #{type}_id = ?", Time.zone.now.beginning_of_day,id).sum(:amount)

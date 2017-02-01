@@ -7,9 +7,9 @@
 <div class="container">
   <div class="row">
     <div class="col-md-2">
-
-    </div>
-    <div class="col-md-10 text-right">
+          <h1>Influencers</h1>
+      </div>
+     <div class="col-md-10 text-right">
 
       <div class="form-inline extraMargin">
       <button class="btn btn-default btn-sm" onclick="to_list()"><span class="fa fa-bars"> </span>List</button>
@@ -58,7 +58,7 @@ function filter(type,obj){
 <!-- 2.3.1 :003 >  -->
 
 <div class="container mgTop10">
-  <h4>Influencers</h4>
+
   <div id="products" class="row list-group">
     <!-- List Item -->
     <% @influencers.each do |influencer|%>
@@ -125,6 +125,7 @@ function to_grid(event){
 Tipped.create('.fb-icon', 'Some tooltip text');
 
 </script>
+<%= render :partial => "/layouts/footer" %>
 
 </section>
 </main>

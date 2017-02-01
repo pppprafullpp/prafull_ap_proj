@@ -1,0 +1,813 @@
+-- MySQL dump 10.13  Distrib 5.5.52, for debian-linux-gnu (x86_64)
+--
+-- Host: localhost    Database: socialbooker
+-- ------------------------------------------------------
+-- Server version	5.5.52-0ubuntu0.14.04.1
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `activities`
+--
+
+DROP TABLE IF EXISTS `activities`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `activities` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `trackable_id` int(11) DEFAULT NULL,
+  `trackable_type` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `owner_id` int(11) DEFAULT NULL,
+  `owner_type` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `key` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `parameters` text COLLATE utf8_unicode_ci,
+  `recipient_id` int(11) DEFAULT NULL,
+  `recipient_type` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `index_activities_on_trackable_id_and_trackable_type` (`trackable_id`,`trackable_type`),
+  KEY `index_activities_on_owner_id_and_owner_type` (`owner_id`,`owner_type`),
+  KEY `index_activities_on_recipient_id_and_recipient_type` (`recipient_id`,`recipient_type`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `activities`
+--
+
+LOCK TABLES `activities` WRITE;
+/*!40000 ALTER TABLE `activities` DISABLE KEYS */;
+INSERT INTO `activities` VALUES (1,43,'Advertisement',NULL,NULL,'advertisement.create',NULL,NULL,NULL,'2016-12-22 18:05:05','2016-12-22 18:05:05'),(2,43,'Advertisement',NULL,NULL,'advertisement.update',NULL,NULL,NULL,'2016-12-22 18:05:05','2016-12-22 18:05:05'),(3,43,'Advertisement',NULL,NULL,'advertisement.update',NULL,NULL,NULL,'2016-12-22 18:05:07','2016-12-22 18:05:07');
+/*!40000 ALTER TABLE `activities` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `admins`
+--
+
+DROP TABLE IF EXISTS `admins`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `admins` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `encrypted_password` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `reset_password_token` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `reset_password_sent_at` datetime DEFAULT NULL,
+  `remember_created_at` datetime DEFAULT NULL,
+  `sign_in_count` int(11) NOT NULL DEFAULT '0',
+  `current_sign_in_at` datetime DEFAULT NULL,
+  `last_sign_in_at` datetime DEFAULT NULL,
+  `current_sign_in_ip` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `last_sign_in_ip` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `name` text COLLATE utf8_unicode_ci,
+  `contact_no` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `index_admins_on_email` (`email`),
+  UNIQUE KEY `index_admins_on_reset_password_token` (`reset_password_token`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `admins`
+--
+
+LOCK TABLES `admins` WRITE;
+/*!40000 ALTER TABLE `admins` DISABLE KEYS */;
+INSERT INTO `admins` VALUES (1,'admin@sb.com','$2a$11$LV1vcBBqgxE4cR9rcpjyzud1aGvHU91XGvm8jIdmNsQ5VqYKpF6mm',NULL,NULL,NULL,53,'2017-01-31 05:24:43','2017-01-31 04:48:54','172.16.2.8','127.0.0.1','Apoorv Mittal',NULL,'2016-11-18 08:57:55','2017-01-31 05:24:43'),(2,'apoorv@sp-assurance.com','$2a$11$rTpoA5knpekFxq69X3uQIuRQw9SIQM6GjGm0MSOTHS3v7QZJZnXoq',NULL,NULL,NULL,11,'2016-12-15 04:15:06','2016-12-05 09:52:38','127.0.0.1','127.0.0.1',NULL,NULL,'2016-11-18 10:28:17','2016-12-15 04:15:06');
+/*!40000 ALTER TABLE `admins` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `admins_roles`
+--
+
+DROP TABLE IF EXISTS `admins_roles`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `admins_roles` (
+  `admin_id` int(11) DEFAULT NULL,
+  `role_id` int(11) DEFAULT NULL,
+  KEY `index_admins_roles_on_admin_id_and_role_id` (`admin_id`,`role_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `admins_roles`
+--
+
+LOCK TABLES `admins_roles` WRITE;
+/*!40000 ALTER TABLE `admins_roles` DISABLE KEYS */;
+INSERT INTO `admins_roles` VALUES (1,1);
+/*!40000 ALTER TABLE `admins_roles` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `advertisements`
+--
+
+DROP TABLE IF EXISTS `advertisements`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `advertisements` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `ad_type` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `url` text COLLATE utf8_unicode_ci,
+  `message` text COLLATE utf8_unicode_ci,
+  `title` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `description` text COLLATE utf8_unicode_ci,
+  `caption` text COLLATE utf8_unicode_ci,
+  `time_post` int(11) DEFAULT NULL,
+  `delay` int(11) DEFAULT NULL,
+  `advertisement_link` text COLLATE utf8_unicode_ci,
+  `after_complete` text COLLATE utf8_unicode_ci,
+  `repeat` tinyint(1) DEFAULT NULL,
+  `end_date` text COLLATE utf8_unicode_ci,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  `advertiser_id` int(11) DEFAULT NULL,
+  `influencer_id` int(11) DEFAULT NULL,
+  `platform` int(11) DEFAULT NULL,
+  `status` int(11) DEFAULT NULL,
+  `category` int(11) DEFAULT NULL,
+  `ad_image_url` text COLLATE utf8_unicode_ci,
+  `reason_for_decline` text COLLATE utf8_unicode_ci,
+  `photo_click_link` text COLLATE utf8_unicode_ci,
+  `posting_link` text COLLATE utf8_unicode_ci,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=93 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `advertisements`
+--
+
+LOCK TABLES `advertisements` WRITE;
+/*!40000 ALTER TABLE `advertisements` DISABLE KEYS */;
+INSERT INTO `advertisements` VALUES (26,'2',NULL,'','','','',NULL,NULL,'http://facebook.com/108891589589870_148751842270511',NULL,NULL,NULL,'2016-11-24 07:20:43','2016-12-05 11:38:06',1,1,1,6,1,'http://res.cloudinary.com/dhdl31ov5/image/upload/v1485928935/xaqkjiizivc5i0wknrei.jpg',NULL,NULL,NULL),(27,'1',NULL,'adahsdb','','FWAESRTJKUJRSDGASDDHTKYLUYTHSDDYUKL','SAFDDGJHKJGFDSAFTJK',NULL,NULL,'',NULL,NULL,NULL,'2016-11-24 07:25:22','2016-12-12 07:49:57',1,1,1,5,1,'http://res.cloudinary.com/dhdl31ov5/image/upload/v1485928935/xaqkjiizivc5i0wknrei.jpg','cannot publish.',NULL,NULL),(28,'2',NULL,'','','Sdxasdasd','',NULL,NULL,'http://facebook.com/108891589589870_155091141636581',NULL,NULL,NULL,'2016-12-06 06:16:21','2016-12-12 06:25:19',1,2,1,5,1,'http://res.cloudinary.com/dhdl31ov5/image/upload/v1485928935/xaqkjiizivc5i0wknrei.jpg','fdsdfsd',NULL,NULL),(29,'2',NULL,'','','ghjkl;','',NULL,NULL,'',NULL,NULL,NULL,'2016-12-12 07:37:03','2016-12-12 07:49:39',1,1,1,5,1,'http://res.cloudinary.com/dhdl31ov5/image/upload/v1485928935/xaqkjiizivc5i0wknrei.jpg','it is getting repeated!!! ',NULL,NULL),(30,'2',NULL,'','','lknkjvhcghvjbklj;klkhvgcfgfhvjbj','',NULL,NULL,'http://facebook.com/108891589589870_155167921628903',NULL,NULL,NULL,'2016-12-12 07:38:32','2016-12-12 07:45:44',1,1,1,6,1,'http://res.cloudinary.com/dhdl31ov5/image/upload/v1485928935/xaqkjiizivc5i0wknrei.jpg',NULL,NULL,NULL),(31,'2','www.google.com','dvdafsdfsddfsd','asfsdfsdf','xczvx cdcsvdb','sdfsdfsdfsddfsd',NULL,NULL,'http://facebook.com/108891589589870_155215108290851',NULL,NULL,NULL,'2016-12-12 09:13:06','2016-12-12 09:33:01',1,1,1,6,1,'http://res.cloudinary.com/dhdl31ov5/image/upload/v1485928935/xaqkjiizivc5i0wknrei.jpg',NULL,'www.google.com',NULL),(32,'2',NULL,'','title title title title title title title ','descriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescription','caption caption caption caption caption ',NULL,NULL,'http://facebook.com/108891589589870_155221768290185',NULL,NULL,NULL,'2016-12-12 09:40:00','2016-12-12 09:45:10',1,2,1,6,1,'http://res.cloudinary.com/dhdl31ov5/image/upload/v1485928935/xaqkjiizivc5i0wknrei.jpg',NULL,'www.servicedealz.com',NULL),(33,'2',NULL,NULL,'asdasdas','dfsasdsadasd','asdasdasdas',NULL,NULL,'http://facebook.com/108891589589870_155224814956547',NULL,NULL,NULL,'2016-12-12 09:48:24','2016-12-12 09:55:59',1,2,1,6,1,'http://res.cloudinary.com/dhdl31ov5/image/upload/v1485928935/xaqkjiizivc5i0wknrei.jpg',NULL,'www.servicedealz.com',NULL),(34,'2',NULL,NULL,'asdasdsf','sdfsdfsdfsd','sdfsdf',NULL,NULL,'http://facebook.com/108891589589870_158113748000987',NULL,NULL,NULL,'2016-12-16 04:33:40','2016-12-16 04:49:34',1,1,1,6,1,'http://res.cloudinary.com/dhdl31ov5/image/upload/v1485928935/xaqkjiizivc5i0wknrei.jpg',NULL,'www.google.com',NULL),(35,'2',NULL,NULL,'asdasd','sdasdas','asdsda',NULL,NULL,'',NULL,NULL,NULL,'2016-12-16 10:21:19','2016-12-16 10:33:07',1,1,1,5,1,'http://res.cloudinary.com/dhdl31ov5/image/upload/v1485928935/xaqkjiizivc5i0wknrei.jpg','unable to publish, please check data.','www.google.com',NULL),(36,'2',NULL,NULL,'sdasdasd','sadasda','sdas',NULL,NULL,'http://facebook.com/108891589589870_158290101316685',NULL,NULL,NULL,'2016-12-16 10:22:08','2016-12-16 10:29:35',1,1,1,6,1,'http://res.cloudinary.com/dhdl31ov5/image/upload/v1485928935/xaqkjiizivc5i0wknrei.jpg',NULL,'www.google.com',NULL),(37,'1',NULL,NULL,'asd','adasd','asd',NULL,NULL,'',NULL,NULL,NULL,'2016-12-16 10:23:48','2016-12-16 10:33:28',1,1,1,5,1,'http://res.cloudinary.com/dhdl31ov5/image/upload/v1485928935/xaqkjiizivc5i0wknrei.jpg','unable to publish , cannot publish','',NULL),(38,'1',NULL,NULL,'asd','adasd','asd',NULL,NULL,'',NULL,NULL,NULL,'2016-12-16 10:23:48','2016-12-16 10:33:32',1,1,1,5,1,'http://res.cloudinary.com/dhdl31ov5/image/upload/v1485928935/xaqkjiizivc5i0wknrei.jpg','unable to publish , cannot publish','',NULL),(39,'2',NULL,NULL,'sdasd','sDasdsa','asdsd',NULL,NULL,'http://facebook.com/108891589589870_158288311316864',NULL,NULL,NULL,'2016-12-16 10:24:47','2016-12-16 10:27:56',1,1,1,6,1,'http://res.cloudinary.com/dhdl31ov5/image/upload/v1485928935/xaqkjiizivc5i0wknrei.jpg',NULL,'www.google.com',NULL),(40,'2',NULL,NULL,'asdADS','ASDASD','sdfsdf',NULL,NULL,'',NULL,NULL,NULL,'2016-12-16 10:25:48','2016-12-16 10:33:35',1,1,1,5,1,'http://res.cloudinary.com/dhdl31ov5/image/upload/v1485928935/xaqkjiizivc5i0wknrei.jpg','unable to publish , cannot publish','asASAD',NULL),(41,'2',NULL,NULL,'aaaaaaaaaaaaaaaaaaaaaaa','czxccasdasdasdasda','asdasdasd',NULL,NULL,'http://facebook.com/108891589589870_158307537981608',NULL,NULL,NULL,'2016-12-16 10:56:43','2016-12-16 10:57:57',1,9,1,6,1,'http://res.cloudinary.com/dhdl31ov5/image/upload/v1485928935/xaqkjiizivc5i0wknrei.jpg',NULL,'www.servicedealz.com',NULL),(42,'2',NULL,NULL,'asdasdsf','asdasd','asdas',NULL,NULL,'http://facebook.com/108891589589870_162776930868002',NULL,NULL,NULL,'2016-12-22 16:18:44','2016-12-23 04:30:58',1,1,1,6,1,'http://res.cloudinary.com/dhdl31ov5/image/upload/v1485928935/xaqkjiizivc5i0wknrei.jpg',NULL,'www.google.com',NULL),(43,'2',NULL,NULL,'asdasd','sadas','asdas',NULL,NULL,'http://facebook.com/108891589589870_168976296914732',NULL,NULL,NULL,'2016-12-22 18:05:05','2017-01-02 08:48:00',1,1,1,6,1,'http://res.cloudinary.com/dhdl31ov5/image/upload/v1485928935/xaqkjiizivc5i0wknrei.jpg',NULL,'www.google.com',NULL),(44,'2',NULL,NULL,'asdasd','asdasd','asdasd',NULL,NULL,'',NULL,NULL,NULL,'2016-12-23 04:14:46','2016-12-23 04:28:58',1,1,1,5,1,'http://res.cloudinary.com/dhdl31ov5/image/upload/v1485928935/xaqkjiizivc5i0wknrei.jpg','wrong link ','asdsa',NULL),(45,'2',NULL,NULL,'sdfsdfsd','sdasfvdafsdgf','sdfsdfds',NULL,NULL,'',NULL,NULL,NULL,'2016-12-23 05:16:45','2017-01-25 11:00:37',1,9,1,5,1,'http://res.cloudinary.com/dhdl31ov5/image/upload/v1485928935/xaqkjiizivc5i0wknrei.jpg','testing','www.servicedealz.com',NULL),(46,'2',NULL,NULL,'QDWAETRY','qwdfrgtfjk','WAFESGTFH,',NULL,NULL,'',NULL,NULL,NULL,'2016-12-23 05:51:48','2016-12-23 06:30:52',1,2,1,4,1,'http://res.cloudinary.com/dhdl31ov5/image/upload/v1485928935/xaqkjiizivc5i0wknrei.jpg',NULL,'www.google.com',NULL),(47,'2',NULL,NULL,'asdasdas','asdasdasdsa','asdasda',NULL,NULL,'',NULL,NULL,NULL,'2016-12-27 11:49:58','2016-12-27 11:55:37',1,1,1,4,1,'http://res.cloudinary.com/dhdl31ov5/image/upload/v1485928935/xaqkjiizivc5i0wknrei.jpg',NULL,'www.servicedealz.com',NULL),(48,'2',NULL,NULL,'title','des','tttt',NULL,NULL,'http://facebook.com/108891589589870_167040303774998',NULL,NULL,NULL,'2016-12-28 11:59:09','2016-12-30 07:19:07',9,2,1,6,2,'http://res.cloudinary.com/dhdl31ov5/image/upload/v1485928935/xaqkjiizivc5i0wknrei.jpg',NULL,'www.google.com',NULL),(49,'2',NULL,NULL,'demo title','demo description','demo caption',NULL,NULL,'http://facebook.com/108891589589870_167013313777697',NULL,NULL,NULL,'2016-12-30 05:35:32','2016-12-30 05:42:39',1,1,1,6,1,'http://res.cloudinary.com/dhdl31ov5/image/upload/v1485928935/xaqkjiizivc5i0wknrei.jpg',NULL,'www.sp-assurance.com',NULL),(50,'2',NULL,NULL,'Demo2 Title','Demo2 Description','Demo Caption',NULL,NULL,'http://facebook.com/108891589589870_167028023776226',NULL,NULL,NULL,'2016-12-30 05:57:21','2016-12-30 06:31:45',1,1,1,6,1,'http://res.cloudinary.com/dhdl31ov5/image/upload/v1485928935/xaqkjiizivc5i0wknrei.jpg',NULL,'www.sp-assurance.com',NULL),(51,'2',NULL,NULL,'title','dsdf','demo caption',NULL,NULL,'http://facebook.com/108891589589870_167139607098401',NULL,NULL,NULL,'2016-12-30 07:14:18','2016-12-30 12:03:55',1,1,1,6,1,'http://res.cloudinary.com/dhdl31ov5/image/upload/v1485928935/xaqkjiizivc5i0wknrei.jpg',NULL,'www.sp-assurance.com',NULL),(52,'2',NULL,NULL,'aaaaaaaaaaaaaaaaaaaaaaa','safdh','asdasdasd',NULL,NULL,'http://facebook.com/108891589589870_167108877101474',NULL,NULL,NULL,'2016-12-30 08:30:26','2016-12-30 10:52:25',1,1,1,6,1,'http://res.cloudinary.com/dhdl31ov5/image/upload/v1485928935/xaqkjiizivc5i0wknrei.jpg',NULL,'www.servicedealz.com',NULL),(53,'2',NULL,NULL,'asdfgh','sdfghj','asdfhm,',NULL,NULL,'http://facebook.com/434563586668101_168992283579800',NULL,NULL,NULL,'2017-01-02 08:40:49','2017-01-02 09:24:24',1,1,1,6,1,'http://res.cloudinary.com/dhdl31ov5/image/upload/v1485928935/xaqkjiizivc5i0wknrei.jpg',NULL,'www.google.com',NULL),(54,'2',NULL,NULL,'aaaaaaaaaaaaaaaaaaaaaaa','dddddddd','ffffffff',NULL,NULL,'',NULL,NULL,NULL,'2017-01-03 09:41:56','2017-01-31 06:24:31',1,1,1,4,1,'http://res.cloudinary.com/dhdl31ov5/image/upload/v1485928935/xaqkjiizivc5i0wknrei.jpg',NULL,'www.servicedealz.com',NULL),(55,'2',NULL,NULL,'ASDFB','DSAFH','asdasdasd',NULL,NULL,'http://facebook.com/108891589589870_175205206291841',NULL,NULL,NULL,'2017-01-03 09:42:19','2017-01-12 11:08:07',1,1,1,6,1,'http://res.cloudinary.com/dhdl31ov5/image/upload/v1485928935/xaqkjiizivc5i0wknrei.jpg',NULL,'www.google.com',NULL),(56,'2',NULL,NULL,'asdavf','asdsfbg ','asdfb',NULL,NULL,'',NULL,NULL,NULL,'2017-01-03 09:48:36','2017-01-03 09:48:43',1,1,1,1,1,'http://res.cloudinary.com/dhdl31ov5/image/upload/v1485928935/xaqkjiizivc5i0wknrei.jpg',NULL,'www.google.com',NULL),(57,'2',NULL,NULL,'asdavf','asdsfbg ','asdfb',NULL,NULL,'',NULL,NULL,NULL,'2017-01-03 09:48:53','2017-01-03 09:48:56',1,1,1,1,1,'http://res.cloudinary.com/dhdl31ov5/image/upload/v1485928935/xaqkjiizivc5i0wknrei.jpg',NULL,'www.google.com',NULL),(58,'2',NULL,NULL,'asdavf','asdsfbg ','asdfb',NULL,NULL,'',NULL,NULL,NULL,'2017-01-03 09:49:04','2017-01-03 09:49:11',1,1,1,1,1,'http://res.cloudinary.com/dhdl31ov5/image/upload/v1485928935/xaqkjiizivc5i0wknrei.jpg',NULL,'www.google.com',NULL),(59,'2',NULL,NULL,'asdavf','asdsfbg ','asdfb',NULL,NULL,'',NULL,NULL,NULL,'2017-01-03 09:49:27','2017-01-03 09:49:36',1,1,1,1,1,'http://res.cloudinary.com/dhdl31ov5/image/upload/v1485928935/xaqkjiizivc5i0wknrei.jpg',NULL,'www.google.com',NULL),(60,'2',NULL,NULL,'asdavf','asdsfbg ','asdfb',NULL,NULL,'',NULL,NULL,NULL,'2017-01-03 09:50:03','2017-01-12 11:18:48',1,1,1,4,1,'http://res.cloudinary.com/dhdl31ov5/image/upload/v1485928935/xaqkjiizivc5i0wknrei.jpg',NULL,'www.google.com',NULL),(61,'2',NULL,NULL,'sfdgthgh','zdxgcbvbn','eztrdtyuj',NULL,NULL,'',NULL,NULL,NULL,'2017-01-12 11:23:22','2017-01-24 07:19:16',1,1,1,2,1,'http://res.cloudinary.com/dhdl31ov5/image/upload/v1485928935/xaqkjiizivc5i0wknrei.jpg',NULL,'www.google.com',NULL),(63,'2',NULL,NULL,'test','test','test',NULL,NULL,'http://facebook.com/108891589589870_179188045893557',NULL,NULL,NULL,'2017-01-18 09:43:39','2017-01-18 09:46:42',1,1,1,6,1,'http://res.cloudinary.com/dhdl31ov5/image/upload/v1485928935/xaqkjiizivc5i0wknrei.jpg',NULL,'www.google.com',NULL),(64,'2',NULL,NULL,'test','test','test',NULL,NULL,'',NULL,NULL,NULL,'2017-01-18 09:47:36','2017-01-18 09:47:59',1,1,1,2,1,'http://res.cloudinary.com/dhdl31ov5/image/upload/v1485928935/xaqkjiizivc5i0wknrei.jpg',NULL,'test',NULL),(65,'2',NULL,NULL,'test','test','test',NULL,NULL,'http://facebook.com/108891589589870_179192835893078',NULL,NULL,NULL,'2017-01-18 09:49:39','2017-01-18 09:50:47',1,1,1,6,1,'http://res.cloudinary.com/dhdl31ov5/image/upload/v1485928935/xaqkjiizivc5i0wknrei.jpg',NULL,'www.google.com',NULL),(66,'2',NULL,NULL,'sss','ssss','sss',NULL,NULL,'',NULL,NULL,NULL,'2017-01-20 05:41:50','2017-01-24 17:18:53',1,1,1,2,1,'http://res.cloudinary.com/dhdl31ov5/image/upload/v1485928935/xaqkjiizivc5i0wknrei.jpg',NULL,'www.google.com',NULL),(67,'2',NULL,NULL,'sss','ssss','sss',NULL,NULL,'',NULL,NULL,NULL,'2017-01-20 05:42:05','2017-01-24 17:18:55',1,1,1,2,1,'http://res.cloudinary.com/dhdl31ov5/image/upload/v1485928935/xaqkjiizivc5i0wknrei.jpg',NULL,'www.google.com',NULL),(68,'2',NULL,NULL,'sdafgb','asdfgb','dweg',NULL,NULL,'http://facebook.com/108891589589870_183085848837110',NULL,NULL,NULL,'2017-01-23 18:46:43','2017-01-23 19:09:26',11,13,1,2,4,'http://res.cloudinary.com/dhdl31ov5/image/upload/v1485928935/xaqkjiizivc5i0wknrei.jpg',NULL,'www.google.com',NULL),(69,'2',NULL,NULL,'sdafgb','ddd','ddd',NULL,NULL,'http://facebook.com/434563586668101_184027802076248',NULL,NULL,NULL,'2017-01-24 08:04:51','2017-01-25 06:40:25',11,2,1,6,1,'http://res.cloudinary.com/dhdl31ov5/image/upload/v1485928935/xaqkjiizivc5i0wknrei.jpg',NULL,'www.google.com',NULL),(70,'2',NULL,NULL,'SFZGF','adF','SZGF',NULL,NULL,'',NULL,NULL,NULL,'2017-01-24 08:07:13','2017-01-24 17:19:08',11,NULL,NULL,2,1,'http://res.cloudinary.com/dhdl31ov5/image/upload/v1485928935/xaqkjiizivc5i0wknrei.jpg',NULL,'',NULL),(71,'2',NULL,NULL,'dsff','sdf','dsv',NULL,NULL,'http://facebook.com/434563586668101_184030898742605',NULL,NULL,NULL,'2017-01-24 09:16:15','2017-01-25 06:46:47',11,2,1,6,1,'http://res.cloudinary.com/dhdl31ov5/image/upload/v1485928935/xaqkjiizivc5i0wknrei.jpg',NULL,'www.google.com',NULL),(72,'2',NULL,NULL,'aaaa','aaaa','aaaa',NULL,NULL,'http://facebook.com/434563586668101_184031345409227',NULL,NULL,NULL,'2017-01-24 13:09:49','2017-01-25 06:47:53',11,2,1,6,1,'http://res.cloudinary.com/dhdl31ov5/image/upload/v1485928935/xaqkjiizivc5i0wknrei.jpg',NULL,'www.google.com',NULL),(73,'2',NULL,NULL,'sdafgb','sdx','sss',NULL,NULL,'http://facebook.com/108891589589870_183609955451366',NULL,NULL,NULL,'2017-01-24 14:20:01','2017-01-24 14:21:19',13,9,1,6,1,'http://res.cloudinary.com/dhdl31ov5/image/upload/v1485928935/xaqkjiizivc5i0wknrei.jpg',NULL,'www.google.com',NULL),(74,'2',NULL,NULL,'sdafgb','sssssssssssssssss','ssss',NULL,NULL,'http://facebook.com/434563586668101_184068692072159',NULL,NULL,NULL,'2017-01-24 17:14:30','2017-01-25 08:00:08',11,2,1,6,1,'http://res.cloudinary.com/dhdl31ov5/image/upload/v1485928935/xaqkjiizivc5i0wknrei.jpg',NULL,'www.google.com',NULL),(75,'2',NULL,NULL,'zzz','zzz','zzz',NULL,NULL,'http://facebook.com/365046930506651_408372382840772',NULL,NULL,NULL,'2017-01-24 18:04:49','2017-01-31 04:43:42',11,9,1,6,1,'http://res.cloudinary.com/dhdl31ov5/image/upload/v1485928935/xaqkjiizivc5i0wknrei.jpg',NULL,'www.google.com',NULL),(76,'2',NULL,NULL,'test','test','test',NULL,NULL,'http://facebook.com/365046930506651_408374662840544',NULL,NULL,NULL,'2017-01-31 04:48:31','2017-01-31 04:51:14',11,2,1,6,3,'http://res.cloudinary.com/dhdl31ov5/image/upload/v1485928935/xaqkjiizivc5i0wknrei.jpg',NULL,'www.google.com',NULL),(77,'2',NULL,NULL,'test','test','test',NULL,NULL,'http://facebook.com/365046930506651_408408462837164',NULL,NULL,NULL,'2017-01-31 06:49:56','2017-01-31 06:52:35',11,2,1,6,3,'http://res.cloudinary.com/dhdl31ov5/image/upload/v1485928935/xaqkjiizivc5i0wknrei.jpg',NULL,'www.google.com',NULL),(78,'2',NULL,NULL,'test','test','test',NULL,NULL,'http://facebook.com/365046930506651_408455296165814',NULL,NULL,NULL,'2017-01-31 09:23:19','2017-01-31 10:02:30',11,9,1,6,3,'http://res.cloudinary.com/dhdl31ov5/image/upload/v1485928935/xaqkjiizivc5i0wknrei.jpg',NULL,'www.google.com',NULL),(79,'1',NULL,NULL,'test','test','test',NULL,NULL,'',NULL,NULL,NULL,'2017-01-31 09:48:34','2017-01-31 09:53:21',11,9,1,5,1,'http://res.cloudinary.com/dhdl31ov5/image/upload/v1485928935/xaqkjiizivc5i0wknrei.jpg','retyr','',NULL),(80,'3',NULL,NULL,'test','test','test',NULL,NULL,'www.google.com',NULL,NULL,NULL,'2017-01-31 09:54:32','2017-01-31 10:30:08',11,12,1,1,3,'http://res.cloudinary.com/dhdl31ov5/image/upload/v1485928935/xaqkjiizivc5i0wknrei.jpg',NULL,'',NULL),(81,'1',NULL,NULL,'test','test','test',NULL,NULL,'http://facebook.com/365046930506651_408458646165479',NULL,NULL,NULL,'2017-01-31 10:01:50','2017-01-31 10:14:03',11,9,1,6,3,'http://res.cloudinary.com/dhdl31ov5/image/upload/v1485928935/xaqkjiizivc5i0wknrei.jpg',NULL,'','www.servicedealz.com'),(82,'2',NULL,NULL,'test','test','test',NULL,NULL,'http://facebook.com/365046930506651_408461629498514',NULL,NULL,NULL,'2017-01-31 10:16:09','2017-01-31 10:27:10',11,9,1,6,3,'http://res.cloudinary.com/dhdl31ov5/image/upload/v1485928935/xaqkjiizivc5i0wknrei.jpg',NULL,'www.google.com',''),(83,'1',NULL,NULL,'test','test','test',NULL,NULL,'http://facebook.com/365046930506651_408461526165191',NULL,NULL,NULL,'2017-01-31 10:16:43','2017-01-31 10:26:53',11,9,1,6,3,'http://res.cloudinary.com/dhdl31ov5/image/upload/v1485928935/xaqkjiizivc5i0wknrei.jpg',NULL,'','www.sp-assurance.com'),(84,'1',NULL,NULL,'test','test','test',NULL,NULL,'http://facebook.com/365046930506651_408498532828157',NULL,NULL,NULL,'2017-01-31 10:31:53','2017-01-31 11:16:00',11,9,1,6,3,'http://res.cloudinary.com/dhdl31ov5/image/upload/v1485928935/xaqkjiizivc5i0wknrei.jpg',NULL,'','www.servicedealz.com'),(85,'2',NULL,NULL,'test','test','test',NULL,NULL,'',NULL,NULL,NULL,'2017-01-31 11:29:44','2017-01-31 11:29:46',11,9,1,1,3,'http://res.cloudinary.com/dhdl31ov5/image/upload/v1485928935/xaqkjiizivc5i0wknrei.jpg',NULL,'www.google.com',''),(86,'2',NULL,NULL,'test','test','test',NULL,NULL,'',NULL,NULL,NULL,'2017-01-31 11:39:08','2017-01-31 11:39:08',11,9,1,1,3,'http://res.cloudinary.com/dhdl31ov5/image/upload/v1485928935/xaqkjiizivc5i0wknrei.jpg',NULL,'www.sp-assurance.com',''),(87,'2',NULL,NULL,'test','test','test',NULL,NULL,'http://facebook.com/365046930506651_408510286160315',NULL,NULL,NULL,'2017-01-31 11:40:36','2017-01-31 11:44:34',11,9,1,6,3,'http://res.cloudinary.com/dhdl31ov5/image/upload/v1485928935/xaqkjiizivc5i0wknrei.jpg',NULL,'www.sp-assurance.com',''),(88,'1',NULL,NULL,'test','test','test',NULL,NULL,'',NULL,NULL,NULL,'2017-02-01 05:54:04','2017-02-01 05:54:04',11,9,1,1,3,'http://res.cloudinary.com/dhdl31ov5/image/upload/v1485928935/xaqkjiizivc5i0wknrei.jpg',NULL,'','www.servicedealz.com'),(89,'1',NULL,NULL,'','','',NULL,NULL,'',NULL,NULL,NULL,'2017-02-01 05:58:44','2017-02-01 05:58:44',11,9,1,1,3,'http://res.cloudinary.com/dhdl31ov5/image/upload/v1485928935/xaqkjiizivc5i0wknrei.jpg',NULL,'','www.servicedealz.com'),(90,'',NULL,NULL,'','','',NULL,NULL,'',NULL,NULL,NULL,'2017-02-01 05:59:14','2017-02-01 05:59:14',11,9,1,1,3,'http://res.cloudinary.com/dhdl31ov5/image/upload/v1485928935/xaqkjiizivc5i0wknrei.jpg',NULL,'',''),(91,'1',NULL,NULL,'','','',NULL,NULL,'',NULL,NULL,NULL,'2017-02-01 06:00:19','2017-02-01 06:00:19',11,9,1,1,3,'http://res.cloudinary.com/dhdl31ov5/image/upload/v1485928935/xaqkjiizivc5i0wknrei.jpg',NULL,'','www.servicedealz.com'),(92,'2',NULL,NULL,'test','test','test',NULL,NULL,NULL,NULL,NULL,NULL,'2017-02-01 06:02:12','2017-02-01 06:02:16',11,9,1,1,3,'http://res.cloudinary.com/dhdl31ov5/image/upload/v1485928935/xaqkjiizivc5i0wknrei.jpg',NULL,'www.google.com','');
+/*!40000 ALTER TABLE `advertisements` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `advertisers`
+--
+
+DROP TABLE IF EXISTS `advertisers`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `advertisers` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `encrypted_password` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `reset_password_token` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `reset_password_sent_at` datetime DEFAULT NULL,
+  `remember_created_at` datetime DEFAULT NULL,
+  `sign_in_count` int(11) NOT NULL DEFAULT '0',
+  `current_sign_in_at` datetime DEFAULT NULL,
+  `last_sign_in_at` datetime DEFAULT NULL,
+  `current_sign_in_ip` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `last_sign_in_ip` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  `name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `telephone_no` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `address` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `city` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `state` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `country` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `zip` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `username` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `providerid` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `uid` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `wallet_amount` int(11) DEFAULT NULL,
+  `advertiser_type` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `token` text COLLATE utf8_unicode_ci,
+  `is_verified` tinyint(1) DEFAULT NULL,
+  `profile_photo_url` text COLLATE utf8_unicode_ci,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `index_advertisers_on_email` (`email`) USING BTREE,
+  UNIQUE KEY `index_advertisers_on_reset_password_token` (`reset_password_token`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `advertisers`
+--
+
+LOCK TABLES `advertisers` WRITE;
+/*!40000 ALTER TABLE `advertisers` DISABLE KEYS */;
+INSERT INTO `advertisers` VALUES (6,'aprvm@live.com','$2a$11$U/SGlUOeFYQJJpZDU4b1xelKsHnBEqLv6o0vHK62NqFgleQ.3dhrG',NULL,NULL,NULL,6,'2016-11-07 07:55:10','2016-11-04 10:23:26','127.0.0.1','127.0.0.1','2016-11-04 06:25:01','2016-11-07 07:55:10','APOORV MITTAL','9044458430','lko','lko','up','Germany','75400','aprvm',NULL,NULL,0,NULL,NULL,1,NULL),(8,'bhavana@spa-systems.com','$2a$08$5Qx/TFCUPgSngTDPDrNG/OxxgPQj7wFN5Dm4y/cW7Vw.Cj/HJUET6',NULL,NULL,NULL,2,'2017-01-23 12:25:40','2017-01-23 12:24:33','127.0.0.1','127.0.0.1','2016-12-28 10:49:32','2017-01-23 12:25:40','bhavana','1111','asd','lko','ds','india','1111',NULL,NULL,NULL,0,NULL,'pqvztkhbcy2806935147',NULL,NULL),(9,'dapoorv@sp-assurance.com','$2a$11$VsTkuvdRw/aEjY5X2FJiIecfKPKngyxWHhjyqbeSdGkXc/iuFQD9u',NULL,NULL,NULL,0,NULL,NULL,NULL,NULL,'2017-01-23 11:06:08','2017-01-23 11:06:08','apoorv mittal','fda','adf','asd','asd','india','226016',NULL,NULL,NULL,0,NULL,'rfbtqlaouw2493710865',NULL,NULL),(10,'krishan.kumar@sp-assurance.com','$2a$11$Lc68Pxa6iWuf6vFgZLY7seV4nk.HrveVazHIbDBXybZXAt/jDVPby',NULL,NULL,NULL,1,'2017-01-23 11:23:59','2017-01-23 11:23:59','127.0.0.1','127.0.0.1','2017-01-23 11:23:42','2017-01-23 11:23:59','apoorv mittal','1111','ads','kn','up','india','226016',NULL,NULL,NULL,0,NULL,'pnqarveldf5136987402',NULL,NULL),(11,'apoorv@sp-assurance.com','$2a$11$53BamR9.7t94mFmLpyxJX.LiCzXYrLUiNW5WpVZBwrMJewP5NDC8C',NULL,NULL,NULL,36,'2017-02-01 05:30:36','2017-02-01 04:46:39','172.16.2.24','127.0.0.1','2017-01-23 12:26:52','2017-02-01 05:30:36','apoorv mittal','1111','llll','lko','ud','india','226016',NULL,NULL,NULL,6000,NULL,'jbtiumqfak4790638152',1,'http://res.cloudinary.com/dhdl31ov5/image/upload/v1485256391/fvfweuwjdku7gu0ukh8n.jpg'),(12,'aqpoorv@sp-assurance.com','$2a$11$WklMNiytbQp84YB9sxEkLuziLY6klDstdQVGw34E9wZpWr/ndfvUG',NULL,NULL,NULL,3,'2017-01-24 14:00:19','2017-01-24 13:56:29','127.0.0.1','127.0.0.1','2017-01-24 13:51:42','2017-01-24 14:00:19','apoorv mittal','9873029644','llll','luckno','up','india','226016',NULL,NULL,NULL,0,NULL,'ohrpyezngd7861952034',1,NULL);
+/*!40000 ALTER TABLE `advertisers` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `app_configurations`
+--
+
+DROP TABLE IF EXISTS `app_configurations`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `app_configurations` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `config_key` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `config_value` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `app_configurations`
+--
+
+LOCK TABLES `app_configurations` WRITE;
+/*!40000 ALTER TABLE `app_configurations` DISABLE KEYS */;
+INSERT INTO `app_configurations` VALUES (1,'update_social_data','2','2016-11-29 07:11:28','2017-01-31 12:05:52'),(2,'facebook_access_token','986978254757512|vGvEynp44LE_I_yG6dgAsjlF770','2016-11-30 05:26:06','2016-11-30 05:54:44'),(3,'mailing url','http://172.16.2.228:3000/','2016-12-28 09:55:22','2016-12-28 09:55:22'),(4,'mailing_url','test@spa-systems.com','2017-01-30 06:50:28','2017-01-30 06:50:28');
+/*!40000 ALTER TABLE `app_configurations` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `campaigns`
+--
+
+DROP TABLE IF EXISTS `campaigns`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `campaigns` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `category_id` int(11) DEFAULT NULL,
+  `advertiser_id` int(11) DEFAULT NULL,
+  `title` text COLLATE utf8_unicode_ci,
+  `message` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `description` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `caption` text COLLATE utf8_unicode_ci,
+  `image` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `url` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `media_type` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `platform_type` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `post_start_time` datetime DEFAULT NULL,
+  `post_end_time` datetime DEFAULT NULL,
+  `delay_time` int(11) DEFAULT NULL,
+  `random_post_accounts` tinyint(1) DEFAULT '0',
+  `delete_after_finished` tinyint(1) DEFAULT '0',
+  `auto_pause_posts` tinyint(1) DEFAULT '0',
+  `time_pause` int(11) DEFAULT NULL,
+  `after_complete_post_count` int(11) DEFAULT NULL,
+  `repeat_post` tinyint(1) DEFAULT '0',
+  `repeat_frequency` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `campaigns`
+--
+
+LOCK TABLES `campaigns` WRITE;
+/*!40000 ALTER TABLE `campaigns` DISABLE KEYS */;
+/*!40000 ALTER TABLE `campaigns` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `categories`
+--
+
+DROP TABLE IF EXISTS `categories`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `categories` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `categories`
+--
+
+LOCK TABLES `categories` WRITE;
+/*!40000 ALTER TABLE `categories` DISABLE KEYS */;
+INSERT INTO `categories` VALUES (1,'Celebrity','2016-12-29 04:40:57','2016-12-29 04:40:57'),(2,'Cars','2016-12-29 04:40:57','2016-12-29 04:40:57'),(3,'Animals','2016-12-29 04:40:57','2016-12-29 04:40:57'),(4,'Nature','2016-12-29 04:40:58','2016-12-29 04:40:58'),(5,'Food','2016-12-29 04:40:58','2016-12-29 04:40:58'),(6,'Sports','2016-12-29 04:40:58','2016-12-29 04:40:58'),(7,'Fitness','2016-12-29 04:40:58','2016-12-29 04:40:58'),(8,'Models','2016-12-29 04:40:58','2016-12-29 04:40:58'),(9,'Technology','2016-12-29 04:40:58','2016-12-29 04:40:58'),(10,'Premium','2016-12-29 04:40:58','2016-12-29 04:40:58'),(11,'Other','2016-12-29 04:40:58','2016-12-29 04:40:58');
+/*!40000 ALTER TABLE `categories` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `countries`
+--
+
+DROP TABLE IF EXISTS `countries`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `countries` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `country_name` text COLLATE utf8_unicode_ci,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `countries`
+--
+
+LOCK TABLES `countries` WRITE;
+/*!40000 ALTER TABLE `countries` DISABLE KEYS */;
+INSERT INTO `countries` VALUES (1,'india','2016-12-28 06:44:03','2016-12-28 06:44:03');
+/*!40000 ALTER TABLE `countries` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `delayed_jobs`
+--
+
+DROP TABLE IF EXISTS `delayed_jobs`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `delayed_jobs` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `priority` int(11) NOT NULL DEFAULT '0',
+  `attempts` int(11) NOT NULL DEFAULT '0',
+  `handler` text COLLATE utf8_unicode_ci NOT NULL,
+  `last_error` text COLLATE utf8_unicode_ci,
+  `run_at` datetime DEFAULT NULL,
+  `locked_at` datetime DEFAULT NULL,
+  `failed_at` datetime DEFAULT NULL,
+  `locked_by` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `queue` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `delayed_jobs_priority` (`priority`,`run_at`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `delayed_jobs`
+--
+
+LOCK TABLES `delayed_jobs` WRITE;
+/*!40000 ALTER TABLE `delayed_jobs` DISABLE KEYS */;
+/*!40000 ALTER TABLE `delayed_jobs` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `group_mappings`
+--
+
+DROP TABLE IF EXISTS `group_mappings`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `group_mappings` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `advertiser_id` int(11) DEFAULT NULL,
+  `influencer_group_id` int(11) DEFAULT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  `group_name` text COLLATE utf8_unicode_ci,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `group_mappings`
+--
+
+LOCK TABLES `group_mappings` WRITE;
+/*!40000 ALTER TABLE `group_mappings` DISABLE KEYS */;
+INSERT INTO `group_mappings` VALUES (12,12,NULL,'2017-01-24 13:59:20','2017-01-24 13:59:20','test'),(13,13,NULL,'2017-01-24 14:02:47','2017-01-24 14:02:47','gpojo1'),(14,13,NULL,'2017-01-24 14:10:01','2017-01-24 14:10:01','ccc'),(15,13,NULL,'2017-01-24 14:10:11','2017-01-24 14:10:11','sss'),(16,13,NULL,'2017-01-24 14:14:55','2017-01-24 14:14:55','aAX'),(17,11,NULL,'2017-01-31 11:53:52','2017-01-31 11:53:52','sw2');
+/*!40000 ALTER TABLE `group_mappings` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `influencer_financial_data`
+--
+
+DROP TABLE IF EXISTS `influencer_financial_data`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `influencer_financial_data` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `influencer_id` int(11) DEFAULT NULL,
+  `bank_name` text COLLATE utf8_unicode_ci,
+  `bank_branch` text COLLATE utf8_unicode_ci,
+  `ifsc_code` text COLLATE utf8_unicode_ci,
+  `ac_type` text COLLATE utf8_unicode_ci,
+  `ac_number` text COLLATE utf8_unicode_ci,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `influencer_financial_data`
+--
+
+LOCK TABLES `influencer_financial_data` WRITE;
+/*!40000 ALTER TABLE `influencer_financial_data` DISABLE KEYS */;
+/*!40000 ALTER TABLE `influencer_financial_data` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `influencer_financial_infos`
+--
+
+DROP TABLE IF EXISTS `influencer_financial_infos`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `influencer_financial_infos` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `influencer_id` int(11) DEFAULT NULL,
+  `bank_name` text COLLATE utf8_unicode_ci,
+  `bank_branch` text COLLATE utf8_unicode_ci,
+  `ifsc_code` text COLLATE utf8_unicode_ci,
+  `ac_type` text COLLATE utf8_unicode_ci,
+  `ac_number` text COLLATE utf8_unicode_ci,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `influencer_financial_infos`
+--
+
+LOCK TABLES `influencer_financial_infos` WRITE;
+/*!40000 ALTER TABLE `influencer_financial_infos` DISABLE KEYS */;
+INSERT INTO `influencer_financial_infos` VALUES (1,2,'sbin001619','munshipulia',NULL,'1','20085107491','2017-01-25 08:29:29','2017-01-25 08:44:07'),(2,2,'test','test',NULL,'1','0000000000000000011111','2017-01-25 08:29:43','2017-01-25 08:29:43'),(3,18,'State Bank Of India','indira nagar','sbin9972b','1','1111111111111100111','2017-01-25 09:43:26','2017-01-31 12:40:44');
+/*!40000 ALTER TABLE `influencer_financial_infos` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `influencer_groups`
+--
+
+DROP TABLE IF EXISTS `influencer_groups`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `influencer_groups` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `advertiser_id` int(11) DEFAULT NULL,
+  `influencer_id` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `group_name` text COLLATE utf8_unicode_ci,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  `category_id` int(11) DEFAULT NULL,
+  `group_mapping_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `influencer_groups`
+--
+
+LOCK TABLES `influencer_groups` WRITE;
+/*!40000 ALTER TABLE `influencer_groups` DISABLE KEYS */;
+INSERT INTO `influencer_groups` VALUES (30,12,'2','test','2017-01-24 13:59:21','2017-01-24 13:59:21',2,12),(31,12,'9','test','2017-01-24 13:59:21','2017-01-24 13:59:21',2,12),(32,12,'12','test','2017-01-24 13:59:21','2017-01-24 13:59:21',2,12),(33,13,'2','gpojo1','2017-01-24 14:02:47','2017-01-24 14:02:47',2,13),(34,13,'9','gpojo1','2017-01-24 14:02:47','2017-01-24 14:02:47',2,13),(35,13,'11','gpojo1','2017-01-24 14:02:48','2017-01-24 14:02:48',2,13),(36,13,'2','ccc','2017-01-24 14:10:01','2017-01-24 14:10:01',2,14),(37,13,'9','ccc','2017-01-24 14:10:01','2017-01-24 14:10:01',2,14),(38,13,'12','ccc','2017-01-24 14:10:01','2017-01-24 14:10:01',2,14),(39,13,'9','sss','2017-01-24 14:10:11','2017-01-24 14:10:11',2,15),(40,13,'11','sss','2017-01-24 14:10:12','2017-01-24 14:10:12',2,15),(41,13,'12','sss','2017-01-24 14:10:12','2017-01-24 14:10:12',2,15),(42,13,'11','aAX','2017-01-24 14:14:55','2017-01-24 14:14:55',1,16),(43,13,'12','aAX','2017-01-24 14:14:55','2017-01-24 14:14:55',1,16),(44,11,'12','sw2','2017-01-31 11:53:52','2017-01-31 11:53:52',1,17),(45,11,'16','sw2','2017-01-31 11:53:52','2017-01-31 11:53:52',1,17);
+/*!40000 ALTER TABLE `influencer_groups` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `influencers`
+--
+
+DROP TABLE IF EXISTS `influencers`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `influencers` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `encrypted_password` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `reset_password_token` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `reset_password_sent_at` datetime DEFAULT NULL,
+  `remember_created_at` datetime DEFAULT NULL,
+  `sign_in_count` int(11) NOT NULL DEFAULT '0',
+  `current_sign_in_at` datetime DEFAULT NULL,
+  `last_sign_in_at` datetime DEFAULT NULL,
+  `current_sign_in_ip` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `last_sign_in_ip` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `name` text COLLATE utf8_unicode_ci,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  `facebook_page_count` int(11) DEFAULT NULL,
+  `instagram_page_count` int(11) DEFAULT NULL,
+  `wallet_amount` int(11) DEFAULT NULL,
+  `category` text COLLATE utf8_unicode_ci,
+  `publishing_price` text COLLATE utf8_unicode_ci,
+  `token` text COLLATE utf8_unicode_ci,
+  `is_verified` tinyint(1) DEFAULT NULL,
+  `profile_image_url` text COLLATE utf8_unicode_ci,
+  `category_id` int(11) DEFAULT NULL,
+  `gender` int(11) DEFAULT NULL,
+  `age` int(11) DEFAULT NULL,
+  `country` text COLLATE utf8_unicode_ci,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `index_influencers_on_email` (`email`),
+  UNIQUE KEY `index_influencers_on_reset_password_token` (`reset_password_token`)
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `influencers`
+--
+
+LOCK TABLES `influencers` WRITE;
+/*!40000 ALTER TABLE `influencers` DISABLE KEYS */;
+INSERT INTO `influencers` VALUES (9,'apoorv@influencer5.com','$2a$11$Q5cMpWhqyQZIu2oQ9n89uuOc5DPw8K0whsknY5eGZpHMUm8/lv1UK',NULL,NULL,NULL,26,'2017-02-01 04:43:10','2017-01-31 12:09:48','127.0.0.1','127.0.0.1','apoorv','2016-12-16 07:22:17','2017-02-01 04:43:10',NULL,NULL,NULL,NULL,'2000',NULL,NULL,'http://res.cloudinary.com/dhdl31ov5/image/upload/v1485929916/social-influencer7_hfxbho.jpg',1,1,24,NULL),(12,'apoorv@sp-assuranc2e.com','$2a$11$wDij9E3I.uVL5G6Vd0MDJetvFF6HW/SrcmwuYOVEiEaue5OSAZNtC',NULL,NULL,NULL,1,'2017-01-31 10:29:15','2017-01-31 10:29:15','127.0.0.1','127.0.0.1','apoorv mittal','2016-12-28 11:40:33','2017-01-31 10:29:15',NULL,NULL,NULL,NULL,'2000','pfrcahyqwe8195327460',NULL,'http://res.cloudinary.com/dhdl31ov5/image/upload/v1485929916/social-influencer7_hfxbho.jpg',1,NULL,NULL,NULL),(13,'aprvm@live.com','$2a$11$WxBMUg3cGFJHWiOc9ii69O0b.w1eeCCu8LjYluk8v05kLPTudTeuq',NULL,NULL,NULL,1,'2017-01-23 18:48:38','2017-01-23 18:48:38','127.0.0.1','127.0.0.1','apoorv mittal','2017-01-23 10:37:19','2017-01-23 19:17:12',NULL,NULL,NULL,NULL,'2000','obntkgchds4096813257',NULL,'http://res.cloudinary.com/dhdl31ov5/image/upload/v1485928935/xaqkjiizivc5i0wknrei.jpg',1,NULL,NULL,NULL),(14,'apoovrv@sp-assurance.com','$2a$11$2latRKErI3MlfZMDjxr6.eWZxMklVySFuGGgPmfiWNQdhCh1I5M.y',NULL,NULL,NULL,1,'2017-01-23 10:59:11','2017-01-23 10:59:11','127.0.0.1','127.0.0.1','apoorv mittal','2017-01-23 10:58:52','2017-01-23 10:59:11',NULL,NULL,NULL,NULL,'2000','xhcjigrskd5327014986',NULL,'http://res.cloudinary.com/dhdl31ov5/image/upload/v1485929651/social-influencer1_af7ppq.jpg',1,NULL,NULL,NULL),(15,'aaapoorv@sp-assurance.com','$2a$11$NM.B2z2vBwoyd2TY9yf0Zu1kgskqX7mrI5VgXWEXfZX7shakG3uNO',NULL,NULL,NULL,0,NULL,NULL,NULL,NULL,'apoorv mittal','2017-01-23 11:02:46','2017-01-23 11:02:46',NULL,NULL,NULL,NULL,'2000','oyiukhrltp6275318940',NULL,'http://res.cloudinary.com/dhdl31ov5/image/upload/v1485929916/social-influencer7_hfxbho.jpg',1,NULL,NULL,NULL),(16,'gapoorv@sp-assurance.com','$2a$11$wS9wfsMKnrdk/9keqsG.bu5sE2VLz2gK3dUKd5p.imC4xlw7MvbAq',NULL,NULL,NULL,0,NULL,NULL,NULL,NULL,'apoorv mittal','2017-01-23 11:03:29','2017-01-24 10:17:23',NULL,NULL,NULL,NULL,'2000','pkjbqyohcz3215706489',NULL,'http://res.cloudinary.com/dhdl31ov5/image/upload/v1485929651/social-influencer1_af7ppq.jpg',7,NULL,NULL,NULL),(18,'aqpoorvt5@sp-assurance.com','$2a$11$XNjUdajDtRJG9aBhljICx.AG/bkH58M24ySe9pGnWETtClCYL3eX6',NULL,NULL,NULL,2,'2017-01-31 12:36:19','2017-01-25 09:42:23','127.0.0.1','127.0.0.1','apoorv mittal','2017-01-25 09:41:54','2017-01-31 12:36:19',NULL,NULL,NULL,NULL,'2000','xsdavilfoj1290637845',NULL,'http://res.cloudinary.com/dhdl31ov5/image/upload/v1485929916/social-influencer7_hfxbho.jpg',1,1,24,NULL);
+/*!40000 ALTER TABLE `influencers` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `messages`
+--
+
+DROP TABLE IF EXISTS `messages`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `messages` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `message_from_type` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `message_to_type` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `message_from_id` int(11) DEFAULT NULL,
+  `message_to_id` int(11) DEFAULT NULL,
+  `message` text COLLATE utf8_unicode_ci,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `messages`
+--
+
+LOCK TABLES `messages` WRITE;
+/*!40000 ALTER TABLE `messages` DISABLE KEYS */;
+/*!40000 ALTER TABLE `messages` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `names`
+--
+
+DROP TABLE IF EXISTS `names`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `names` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `category_id` int(11) DEFAULT NULL,
+  `influencer_id` int(11) DEFAULT NULL,
+  `advertiser_id` int(11) DEFAULT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `names`
+--
+
+LOCK TABLES `names` WRITE;
+/*!40000 ALTER TABLE `names` DISABLE KEYS */;
+/*!40000 ALTER TABLE `names` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `notifications`
+--
+
+DROP TABLE IF EXISTS `notifications`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `notifications` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `activity_type` text COLLATE utf8_unicode_ci,
+  `activity` text COLLATE utf8_unicode_ci,
+  `viewed` tinyint(1) DEFAULT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=215 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `notifications`
+--
+
+LOCK TABLES `notifications` WRITE;
+/*!40000 ALTER TABLE `notifications` DISABLE KEYS */;
+INSERT INTO `notifications` VALUES (1,'1','Apoorv Mittal signed up as influencer',0,'2017-01-12 10:59:43','2017-01-12 10:59:43'),(2,'1','Apoorv Mittal signed up as influencer',0,'2017-01-12 11:01:21','2017-01-12 11:01:21'),(3,'4','New Ad published by apoorv mittal',0,'2017-01-12 11:08:08','2017-01-12 11:08:08'),(4,'1','Apoorv Mittal signed up as influencer',0,'2017-01-12 11:21:42','2017-01-12 11:21:42'),(5,'3','New Ad created',0,'2017-01-12 11:23:26','2017-01-12 11:23:26'),(6,'1','Apoorv Mittal signed up as influencer',0,'2017-01-12 11:23:26','2017-01-12 11:23:26'),(7,'3','New Ad created',0,'2017-01-12 11:50:56','2017-01-12 11:50:56'),(8,'1','Apoorv Mittal signed up as influencer',0,'2017-01-12 11:50:56','2017-01-12 11:50:56'),(9,'1','Apoorv Mittal signed up as influencer',0,'2017-01-12 11:57:47','2017-01-12 11:57:47'),(10,'1','Apoorv Mittal signed up as influencer',0,'2017-01-18 09:41:43','2017-01-18 09:41:43'),(11,'3','New Ad created',0,'2017-01-18 09:43:46','2017-01-18 09:43:46'),(12,'1','Apoorv Mittal signed up as influencer',0,'2017-01-18 09:43:47','2017-01-18 09:43:47'),(13,'1','Apoorv Mittal signed up as influencer',0,'2017-01-18 09:45:25','2017-01-18 09:45:25'),(14,'4','New Ad published by apoorv mittal',0,'2017-01-18 09:46:42','2017-01-18 09:46:42'),(15,'1','Apoorv Mittal signed up as influencer',0,'2017-01-18 09:47:10','2017-01-18 09:47:10'),(16,'3','New Ad created',0,'2017-01-18 09:47:38','2017-01-18 09:47:38'),(17,'1','Apoorv Mittal signed up as influencer',0,'2017-01-18 09:47:38','2017-01-18 09:47:38'),(18,'1','Apoorv Mittal signed up as influencer',0,'2017-01-18 09:48:12','2017-01-18 09:48:12'),(19,'1','Apoorv Mittal signed up as influencer',0,'2017-01-18 09:49:20','2017-01-18 09:49:20'),(20,'3','New Ad created',0,'2017-01-18 09:49:44','2017-01-18 09:49:44'),(21,'1','Apoorv Mittal signed up as influencer',0,'2017-01-18 09:49:44','2017-01-18 09:49:44'),(22,'1','Apoorv Mittal signed up as influencer',0,'2017-01-18 09:49:57','2017-01-18 09:49:57'),(23,'4','New Ad published by apoorv mittal',0,'2017-01-18 09:50:47','2017-01-18 09:50:47'),(24,'1','Apoorv Mittal signed up as influencer',0,'2017-01-18 09:51:55','2017-01-18 09:51:55'),(25,'1','Apoorv Mittal signed up as influencer',0,'2017-01-19 09:54:07','2017-01-19 09:54:07'),(26,'1','Apoorv Mittal signed up as influencer',0,'2017-01-20 05:35:18','2017-01-20 05:35:18'),(27,'3','New Ad created',0,'2017-01-20 05:41:56','2017-01-20 05:41:56'),(28,'1','Apoorv Mittal signed up as influencer',0,'2017-01-20 05:41:56','2017-01-20 05:41:56'),(29,'3','New Ad created',0,'2017-01-20 05:42:09','2017-01-20 05:42:09'),(30,'1','Apoorv Mittal signed up as influencer',0,'2017-01-20 05:42:10','2017-01-20 05:42:10'),(31,'1','Apoorv Mittal signed up as influencer',0,'2017-01-20 06:15:33','2017-01-20 06:15:33'),(32,'1','Apoorv Mittal signed up as influencer',0,'2017-01-20 06:18:16','2017-01-20 06:18:16'),(33,'1','Apoorv Mittal signed up as influencer',0,'2017-01-20 06:19:30','2017-01-20 06:19:30'),(34,'1','Apoorv Mittal signed up as influencer',0,'2017-01-20 06:48:55','2017-01-20 06:48:55'),(35,'1','Apoorv Mittal signed up as influencer',0,'2017-01-20 06:51:52','2017-01-20 06:51:52'),(36,'1','Apoorv Mittal signed up as influencer',0,'2017-01-20 09:25:42','2017-01-20 09:25:42'),(37,'1','Apoorv Mittal signed up as influencer',0,'2017-01-20 09:51:01','2017-01-20 09:51:01'),(38,'1','apoorv mittal signed up as influencer',0,'2017-01-23 11:06:08','2017-01-23 11:06:08'),(39,'1','apoorv mittal signed up as influencer',0,'2017-01-23 11:06:08','2017-01-23 11:06:08'),(40,'1','apoorv mittal signed up as influencer',0,'2017-01-23 11:23:42','2017-01-23 11:23:42'),(41,'1','apoorv mittal signed up as influencer',0,'2017-01-23 11:23:42','2017-01-23 11:23:42'),(42,'1','apoorv mittal signed up as influencer',0,'2017-01-23 11:23:59','2017-01-23 11:23:59'),(43,'1','bhavana signed up as influencer',0,'2017-01-23 12:24:33','2017-01-23 12:24:33'),(44,'1','bhavana signed up as influencer',0,'2017-01-23 12:25:41','2017-01-23 12:25:41'),(45,'1','apoorv mittal signed up as influencer',0,'2017-01-23 12:26:52','2017-01-23 12:26:52'),(46,'1','apoorv mittal signed up as influencer',0,'2017-01-23 12:26:52','2017-01-23 12:26:52'),(47,'1','apoorv mittal signed up as influencer',0,'2017-01-23 12:27:25','2017-01-23 12:27:25'),(48,'1','apoorv mittal signed up as influencer',0,'2017-01-23 12:27:31','2017-01-23 12:27:31'),(49,'1','apoorv mittal signed up as influencer',0,'2017-01-23 12:27:47','2017-01-23 12:27:47'),(50,'1','apoorv mittal signed up as influencer',0,'2017-01-23 12:46:22','2017-01-23 12:46:22'),(51,'1','apoorv mittal signed up as influencer',0,'2017-01-23 12:46:22','2017-01-23 12:46:22'),(52,'1','apoorv mittal signed up as influencer',0,'2017-01-23 12:50:13','2017-01-23 12:50:13'),(53,'1','apoorv mittal signed up as influencer',0,'2017-01-23 13:09:20','2017-01-23 13:09:20'),(54,'1','apoorv mittal signed up as influencer',0,'2017-01-23 16:27:55','2017-01-23 16:27:55'),(55,'1','apoorv mittal signed up as influencer',0,'2017-01-23 18:42:34','2017-01-23 18:42:34'),(56,'1','apoorv mittal signed up as influencer',0,'2017-01-23 18:44:50','2017-01-23 18:44:50'),(57,'3','New Ad created',0,'2017-01-23 18:46:47','2017-01-23 18:46:47'),(58,'1','apoorv mittal signed up as influencer',0,'2017-01-23 18:46:47','2017-01-23 18:46:47'),(59,'1','apoorv mittal signed up as influencer',0,'2017-01-23 18:48:30','2017-01-23 18:48:30'),(60,'4','New Ad published by apoorv mittal',0,'2017-01-23 19:05:38','2017-01-23 19:05:38'),(61,'4','New Ad published by apoorv mittal',0,'2017-01-23 19:05:40','2017-01-23 19:05:40'),(62,'4','New Ad published by apoorv mittal',0,'2017-01-23 19:07:32','2017-01-23 19:07:32'),(63,'4','New Ad published by apoorv mittal',0,'2017-01-23 19:08:33','2017-01-23 19:08:33'),(64,'1','apoorv mittal signed up as influencer',0,'2017-01-24 06:32:00','2017-01-24 06:32:00'),(65,'3','New Ad created',0,'2017-01-24 08:04:57','2017-01-24 08:04:57'),(66,'1','apoorv mittal signed up as influencer',0,'2017-01-24 08:04:57','2017-01-24 08:04:57'),(67,'3','New Ad created',0,'2017-01-24 09:16:19','2017-01-24 09:16:19'),(68,'1','apoorv mittal signed up as influencer',0,'2017-01-24 09:16:20','2017-01-24 09:16:20'),(69,'1','apoorv mittal signed up as influencer',0,'2017-01-24 09:35:14','2017-01-24 09:35:14'),(70,'1','apoorv mittal signed up as influencer',0,'2017-01-24 09:50:15','2017-01-24 09:50:15'),(71,'1','apoorv mittal signed up as influencer',0,'2017-01-24 11:12:43','2017-01-24 11:12:43'),(72,'1','apoorv mittal signed up as influencer',0,'2017-01-24 11:13:11','2017-01-24 11:13:11'),(73,'1','apoorv mittal signed up as influencer',0,'2017-01-24 11:19:30','2017-01-24 11:19:30'),(74,'1','apoorv mittal signed up as influencer',0,'2017-01-24 11:25:40','2017-01-24 11:25:40'),(75,'1','apoorv mittal signed up as influencer',0,'2017-01-24 11:45:46','2017-01-24 11:45:46'),(76,'1','apoorv mittal signed up as influencer',0,'2017-01-24 13:08:32','2017-01-24 13:08:32'),(77,'3','New Ad created',0,'2017-01-24 13:10:04','2017-01-24 13:10:04'),(78,'1','apoorv mittal signed up as influencer',0,'2017-01-24 13:10:04','2017-01-24 13:10:04'),(79,'1','apoorv mittal signed up as influencer',0,'2017-01-24 13:50:18','2017-01-24 13:50:18'),(80,'1','apoorv mittal signed up as influencer',0,'2017-01-24 13:50:23','2017-01-24 13:50:23'),(81,'1','apoorv mittal signed up as influencer',0,'2017-01-24 13:51:42','2017-01-24 13:51:42'),(82,'1','apoorv mittal signed up as influencer',0,'2017-01-24 13:51:42','2017-01-24 13:51:42'),(83,'1','apoorv mittal signed up as influencer',0,'2017-01-24 13:52:18','2017-01-24 13:52:18'),(84,'1','apoorv mittal signed up as influencer',0,'2017-01-24 13:56:03','2017-01-24 13:56:03'),(85,'1','apoorv mittal signed up as influencer',0,'2017-01-24 13:56:29','2017-01-24 13:56:29'),(86,'1','apoorv mittal signed up as influencer',0,'2017-01-24 14:00:01','2017-01-24 14:00:01'),(87,'1','apoorv mittal signed up as influencer',0,'2017-01-24 14:00:19','2017-01-24 14:00:19'),(88,'1','apoorv mittal signed up as influencer',0,'2017-01-24 14:01:09','2017-01-24 14:01:09'),(89,'1','apoorv mittal signed up as influencer',0,'2017-01-24 14:01:40','2017-01-24 14:01:40'),(90,'1','apoorv mittal signed up as influencer',0,'2017-01-24 14:01:40','2017-01-24 14:01:40'),(91,'1','apoorv mittal signed up as influencer',0,'2017-01-24 14:02:10','2017-01-24 14:02:10'),(92,'1','apoorv mittal signed up as influencer',0,'2017-01-24 14:02:30','2017-01-24 14:02:30'),(93,'1','apoorv mittal signed up as influencer',0,'2017-01-24 14:13:23','2017-01-24 14:13:23'),(94,'1','apoorv mittal signed up as influencer',0,'2017-01-24 14:18:17','2017-01-24 14:18:17'),(95,'3','New Ad created',0,'2017-01-24 14:20:06','2017-01-24 14:20:06'),(96,'1','apoorv mittal signed up as influencer',0,'2017-01-24 14:20:06','2017-01-24 14:20:06'),(97,'1','apoorv mittal signed up as influencer',0,'2017-01-24 14:20:34','2017-01-24 14:20:34'),(98,'4','New Ad published by apoorv',0,'2017-01-24 14:21:19','2017-01-24 14:21:19'),(99,'1','apoorv mittal signed up as influencer',0,'2017-01-24 16:09:20','2017-01-24 16:09:20'),(100,'3','New Ad created',0,'2017-01-24 17:14:40','2017-01-24 17:14:40'),(101,'1','apoorv mittal signed up as influencer',0,'2017-01-24 17:14:41','2017-01-24 17:14:41'),(102,'1','apoorv mittal signed up as influencer',0,'2017-01-24 18:04:25','2017-01-24 18:04:25'),(103,'3','New Ad created',0,'2017-01-24 18:04:52','2017-01-24 18:04:52'),(104,'1','apoorv mittal signed up as influencer',0,'2017-01-24 18:05:25','2017-01-24 18:05:25'),(105,'4','New Ad published by apoorv',0,'2017-01-24 18:06:50','2017-01-24 18:06:50'),(106,'4','New Ad published by apoorv',0,'2017-01-24 18:08:06','2017-01-24 18:08:06'),(107,'1','apoorv mittal signed up as influencer',0,'2017-01-24 18:08:59','2017-01-24 18:08:59'),(108,'4','New Ad published by apoorv',0,'2017-01-24 18:09:16','2017-01-24 18:09:16'),(109,'1','apoorv mittal signed up as influencer',0,'2017-01-24 18:09:16','2017-01-24 18:09:16'),(110,'4','New Ad published by apoorv',0,'2017-01-24 18:13:57','2017-01-24 18:13:57'),(111,'1','apoorv mittal signed up as influencer',0,'2017-01-24 18:13:57','2017-01-24 18:13:57'),(112,'1','apoorv mittal signed up as influencer',0,'2017-01-25 05:58:59','2017-01-25 05:58:59'),(113,'1','apoorv mittal signed up as influencer',0,'2017-01-25 06:01:09','2017-01-25 06:01:09'),(114,'1','apoorv mittal signed up as influencer',0,'2017-01-25 06:03:41','2017-01-25 06:03:41'),(115,'1','apoorv mittal signed up as influencer',0,'2017-01-25 06:15:16','2017-01-25 06:15:16'),(116,'1','apoorv mittal signed up as influencer',0,'2017-01-25 06:31:31','2017-01-25 06:31:31'),(117,'4','New Ad published by apoorv ',0,'2017-01-25 06:40:25','2017-01-25 06:40:25'),(118,'1','apoorv mittal signed up as influencer',0,'2017-01-25 06:40:25','2017-01-25 06:40:25'),(119,'4','New Ad published by apoorv ',0,'2017-01-25 06:46:47','2017-01-25 06:46:47'),(120,'1','apoorv mittal signed up as influencer',0,'2017-01-25 06:46:47','2017-01-25 06:46:47'),(121,'4','New Ad published by apoorv ',0,'2017-01-25 06:47:53','2017-01-25 06:47:53'),(122,'1','apoorv mittal signed up as influencer',0,'2017-01-25 06:47:53','2017-01-25 06:47:53'),(123,'4','New Ad published by apoorv ',0,'2017-01-25 08:00:08','2017-01-25 08:00:08'),(124,'1','apoorv mittal signed up as influencer',0,'2017-01-25 08:00:08','2017-01-25 08:00:08'),(125,'1','apoorv mittal signed up as influencer',0,'2017-01-25 09:26:38','2017-01-25 09:26:38'),(126,'1','apoorv mittal signed up as influencer',0,'2017-01-25 10:05:19','2017-01-25 10:05:19'),(127,'1','apoorv mittal signed up as influencer',0,'2017-01-25 10:58:50','2017-01-25 10:58:50'),(128,'1','apoorv mittal signed up as influencer',0,'2017-01-25 11:02:27','2017-01-25 11:02:27'),(129,'1','apoorv mittal signed up as influencer',0,'2017-01-30 06:02:42','2017-01-30 06:02:42'),(130,'1','apoorv mittal signed up as influencer',0,'2017-01-30 07:10:46','2017-01-30 07:10:46'),(131,'1','apoorv mittal signed up as influencer',0,'2017-01-30 07:10:46','2017-01-30 07:10:46'),(132,'1','apoorv mittal signed up as influencer',0,'2017-01-30 09:10:23','2017-01-30 09:10:23'),(133,'1','apoorv mittal signed up as influencer',0,'2017-01-30 10:18:34','2017-01-30 10:18:34'),(134,'1','apoorv mittal signed up as influencer',0,'2017-01-30 11:55:01','2017-01-30 11:55:01'),(135,'1','apoorv mittal signed up as influencer',0,'2017-01-31 04:42:05','2017-01-31 04:42:05'),(136,'1','apoorv mittal signed up as influencer',0,'2017-01-31 04:42:52','2017-01-31 04:42:52'),(137,'4','New Ad published by apoorv',0,'2017-01-31 04:43:42','2017-01-31 04:43:42'),(138,'1','apoorv mittal signed up as influencer',0,'2017-01-31 04:43:42','2017-01-31 04:43:42'),(139,'1','apoorv mittal signed up as influencer',0,'2017-01-31 04:45:07','2017-01-31 04:45:07'),(140,'1','apoorv mittal signed up as influencer',0,'2017-01-31 04:46:43','2017-01-31 04:46:43'),(141,'3','New Ad created',0,'2017-01-31 04:48:33','2017-01-31 04:48:33'),(142,'1','apoorv mittal signed up as influencer',0,'2017-01-31 04:49:58','2017-01-31 04:49:58'),(143,'4','New Ad published by apoorv ',0,'2017-01-31 04:51:15','2017-01-31 04:51:15'),(144,'1','apoorv mittal signed up as influencer',0,'2017-01-31 04:51:15','2017-01-31 04:51:15'),(145,'1','apoorv mittal signed up as influencer',0,'2017-01-31 04:52:19','2017-01-31 04:52:19'),(146,'1','apoorv mittal signed up as influencer',0,'2017-01-31 04:54:26','2017-01-31 04:54:26'),(147,'1','apoorv mittal signed up as influencer',0,'2017-01-31 06:49:35','2017-01-31 06:49:35'),(148,'3','New Ad created',0,'2017-01-31 06:50:03','2017-01-31 06:50:03'),(149,'1','apoorv mittal signed up as influencer',0,'2017-01-31 06:50:16','2017-01-31 06:50:16'),(150,'4','New Ad published by apoorv ',0,'2017-01-31 06:52:35','2017-01-31 06:52:35'),(151,'1','apoorv mittal signed up as influencer',0,'2017-01-31 06:52:35','2017-01-31 06:52:35'),(152,'1','apoorv mittal signed up as influencer',0,'2017-01-31 09:21:32','2017-01-31 09:21:32'),(153,'1','apoorv mittal signed up as influencer',0,'2017-01-31 09:22:44','2017-01-31 09:22:44'),(154,'3','New Ad created',0,'2017-01-31 09:23:23','2017-01-31 09:23:23'),(155,'1','apoorv mittal signed up as influencer',0,'2017-01-31 09:24:55','2017-01-31 09:24:55'),(156,'4','New Ad published by apoorv',0,'2017-01-31 09:34:57','2017-01-31 09:34:57'),(157,'1','apoorv mittal signed up as influencer',0,'2017-01-31 09:34:58','2017-01-31 09:34:58'),(158,'4','New Ad published by apoorv',0,'2017-01-31 09:41:01','2017-01-31 09:41:01'),(159,'1','apoorv mittal signed up as influencer',0,'2017-01-31 09:41:01','2017-01-31 09:41:01'),(160,'4','New Ad published by apoorv',0,'2017-01-31 09:42:25','2017-01-31 09:42:25'),(161,'1','apoorv mittal signed up as influencer',0,'2017-01-31 09:42:25','2017-01-31 09:42:25'),(162,'4','New Ad published by apoorv',0,'2017-01-31 09:42:26','2017-01-31 09:42:26'),(163,'1','apoorv mittal signed up as influencer',0,'2017-01-31 09:42:26','2017-01-31 09:42:26'),(164,'1','apoorv mittal signed up as influencer',0,'2017-01-31 09:45:57','2017-01-31 09:45:57'),(165,'1','apoorv mittal signed up as influencer',0,'2017-01-31 09:47:12','2017-01-31 09:47:12'),(166,'3','New Ad created',0,'2017-01-31 09:48:34','2017-01-31 09:48:34'),(167,'1','apoorv mittal signed up as influencer',0,'2017-01-31 09:48:48','2017-01-31 09:48:48'),(168,'1','apoorv mittal signed up as influencer',0,'2017-01-31 09:53:43','2017-01-31 09:53:43'),(169,'3','New Ad created',0,'2017-01-31 09:54:33','2017-01-31 09:54:33'),(170,'3','New Ad created',0,'2017-01-31 10:01:50','2017-01-31 10:01:50'),(171,'1','apoorv mittal signed up as influencer',0,'2017-01-31 10:02:04','2017-01-31 10:02:04'),(172,'4','New Ad published by apoorv',0,'2017-01-31 10:02:30','2017-01-31 10:02:30'),(173,'1','apoorv mittal signed up as influencer',0,'2017-01-31 10:02:30','2017-01-31 10:02:30'),(174,'4','New Ad published by apoorv',0,'2017-01-31 10:14:03','2017-01-31 10:14:03'),(175,'1','apoorv mittal signed up as influencer',0,'2017-01-31 10:14:03','2017-01-31 10:14:03'),(176,'1','apoorv mittal signed up as influencer',0,'2017-01-31 10:14:27','2017-01-31 10:14:27'),(177,'1','apoorv mittal signed up as influencer',0,'2017-01-31 10:15:35','2017-01-31 10:15:35'),(178,'3','New Ad created',0,'2017-01-31 10:16:12','2017-01-31 10:16:12'),(179,'3','New Ad created',0,'2017-01-31 10:16:44','2017-01-31 10:16:44'),(180,'1','apoorv mittal signed up as influencer',0,'2017-01-31 10:16:52','2017-01-31 10:16:52'),(181,'4','New Ad published by apoorv',0,'2017-01-31 10:26:53','2017-01-31 10:26:53'),(182,'1','apoorv mittal signed up as influencer',0,'2017-01-31 10:26:53','2017-01-31 10:26:53'),(183,'4','New Ad published by apoorv',0,'2017-01-31 10:27:10','2017-01-31 10:27:10'),(184,'1','apoorv mittal signed up as influencer',0,'2017-01-31 10:27:10','2017-01-31 10:27:10'),(185,'1','apoorv mittal signed up as influencer',0,'2017-01-31 10:27:59','2017-01-31 10:27:59'),(186,'1','apoorv mittal signed up as influencer',0,'2017-01-31 10:28:52','2017-01-31 10:28:52'),(187,'1','apoorv mittal signed up as influencer',0,'2017-01-31 10:30:28','2017-01-31 10:30:28'),(188,'1','apoorv mittal signed up as influencer',0,'2017-01-31 10:31:25','2017-01-31 10:31:25'),(189,'3','New Ad created',0,'2017-01-31 10:31:53','2017-01-31 10:31:53'),(190,'1','apoorv mittal signed up as influencer',0,'2017-01-31 10:32:01','2017-01-31 10:32:01'),(191,'4','New Ad published by apoorv',0,'2017-01-31 11:16:00','2017-01-31 11:16:00'),(192,'1','apoorv mittal signed up as influencer',0,'2017-01-31 11:16:00','2017-01-31 11:16:00'),(193,'1','apoorv mittal signed up as influencer',0,'2017-01-31 11:21:03','2017-01-31 11:21:03'),(194,'3','New Ad created',0,'2017-01-31 11:29:46','2017-01-31 11:29:46'),(195,'3','New Ad created',0,'2017-01-31 11:40:38','2017-01-31 11:40:38'),(196,'1','apoorv mittal signed up as influencer',0,'2017-01-31 11:42:28','2017-01-31 11:42:28'),(197,'4','New Ad published by apoorv',0,'2017-01-31 11:44:35','2017-01-31 11:44:35'),(198,'1','apoorv mittal signed up as influencer',0,'2017-01-31 11:44:35','2017-01-31 11:44:35'),(199,'1','apoorv mittal signed up as influencer',0,'2017-01-31 11:45:07','2017-01-31 11:45:07'),(200,'1','apoorv mittal signed up as influencer',0,'2017-01-31 11:55:51','2017-01-31 11:55:51'),(201,'1','apoorv mittal signed up as influencer',0,'2017-01-31 11:57:50','2017-01-31 11:57:50'),(202,'1','apoorv mittal signed up as influencer',0,'2017-01-31 11:59:17','2017-01-31 11:59:17'),(203,'1','apoorv mittal signed up as influencer',0,'2017-01-31 12:06:14','2017-01-31 12:06:14'),(204,'1','apoorv mittal signed up as influencer',0,'2017-01-31 12:11:31','2017-01-31 12:11:31'),(205,'1','apoorv mittal signed up as influencer',0,'2017-01-31 12:36:13','2017-01-31 12:36:13'),(206,'1','apoorv mittal signed up as influencer',0,'2017-02-01 04:35:09','2017-02-01 04:35:09'),(207,'1','apoorv mittal signed up as influencer',0,'2017-02-01 04:43:01','2017-02-01 04:43:01'),(208,'1','apoorv mittal signed up as influencer',0,'2017-02-01 04:46:39','2017-02-01 04:46:39'),(209,'1','apoorv mittal signed up as influencer',0,'2017-02-01 05:30:36','2017-02-01 05:30:36'),(210,'3','New Ad created',0,'2017-02-01 05:54:04','2017-02-01 05:54:04'),(211,'3','New Ad created',0,'2017-02-01 05:58:44','2017-02-01 05:58:44'),(212,'3','New Ad created',0,'2017-02-01 05:59:14','2017-02-01 05:59:14'),(213,'3','New Ad created',0,'2017-02-01 06:00:19','2017-02-01 06:00:19'),(214,'3','New Ad created',0,'2017-02-01 06:02:16','2017-02-01 06:02:16');
+/*!40000 ALTER TABLE `notifications` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `pending_notifications`
+--
+
+DROP TABLE IF EXISTS `pending_notifications`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `pending_notifications` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `notification_type` int(11) DEFAULT NULL,
+  `influencer_id` int(11) DEFAULT NULL,
+  `advertiser_id` int(11) DEFAULT NULL,
+  `notification_text` text COLLATE utf8_unicode_ci,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  `viewed` tinyint(1) DEFAULT NULL,
+  `advertisement_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=108 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `pending_notifications`
+--
+
+LOCK TABLES `pending_notifications` WRITE;
+/*!40000 ALTER TABLE `pending_notifications` DISABLE KEYS */;
+INSERT INTO `pending_notifications` VALUES (1,0,1,1,'Created a new Advertisement','2016-12-22 16:18:51','2016-12-23 04:07:14',1,NULL),(2,0,1,1,'Created a new Advertisement','2016-12-22 18:05:07','2016-12-23 04:00:41',1,NULL),(3,0,1,1,'Created a new Advertisement','2016-12-23 04:14:49','2016-12-23 04:29:03',1,NULL),(4,0,9,1,'A new Advertisement for You','2016-12-23 05:16:47','2016-12-23 05:16:47',0,45),(6,1,2,1,'Advertisement Approved By Admin','2016-12-23 05:56:21','2016-12-23 05:57:27',0,46),(7,0,2,1,'Advertisement Approved By Admin','2016-12-23 06:00:51','2016-12-23 06:00:51',0,46),(8,4,2,1,'Advertisement Approved By Admin','2016-12-23 06:14:10','2016-12-30 08:49:28',1,46),(9,2,2,1,'Advertisement Declined By Admin','2016-12-23 06:35:00','2016-12-27 06:21:40',1,46),(10,NULL,2,1,'Advertisement Declined By Admin','2016-12-23 06:55:41','2016-12-23 06:55:41',0,46),(11,4,2,1,'Advertisement Declined By Admin','2016-12-23 06:56:18','2016-12-30 09:07:09',1,46),(12,1,1,1,'A new Advertisement for You','2016-12-27 11:50:01','2016-12-27 11:50:01',0,47),(13,4,1,1,'Advertisement Declined By Admin','2016-12-27 11:55:37','2016-12-30 08:48:28',1,47),(14,1,2,9,'A new Advertisement for You','2016-12-28 11:59:15','2016-12-28 11:59:15',0,48),(15,2,2,9,'Advertisement Approved By Admin','2016-12-28 12:01:58','2016-12-30 08:26:54',1,48),(16,1,1,1,'A new Advertisement for You','2016-12-30 05:35:39','2016-12-30 05:35:39',0,49),(17,2,1,1,'Advertisement Approved By Admin','2016-12-30 05:36:00','2016-12-30 08:28:11',1,49),(18,1,1,1,'A new Advertisement for You','2016-12-30 05:57:31','2016-12-30 05:57:31',0,50),(19,2,1,1,'Advertisement Approved By Admin','2016-12-30 06:06:46','2016-12-30 07:09:38',1,50),(20,1,1,1,'A new Advertisement for You','2016-12-30 07:14:27','2016-12-30 07:14:27',0,51),(21,2,1,1,'Advertisement Approved By Admin','2016-12-30 08:28:19','2016-12-30 09:09:23',1,51),(22,1,1,1,'A new Advertisement for You','2016-12-30 08:30:31','2016-12-30 08:30:31',0,52),(23,2,1,1,'Advertisement Approved By Admin','2016-12-30 08:31:30','2016-12-30 09:18:38',1,52),(24,1,1,1,'A new Advertisement for You','2017-01-02 08:41:04','2017-01-02 08:41:04',0,53),(25,2,1,1,'Advertisement Approved By Admin','2017-01-02 08:45:32','2017-01-02 08:45:38',1,53),(26,1,1,1,'A new Advertisement for You','2017-01-03 09:42:00','2017-01-03 09:42:00',0,54),(27,1,1,1,'A new Advertisement for You','2017-01-03 09:42:22','2017-01-03 09:42:22',0,55),(28,1,1,1,'A new Advertisement for You','2017-01-03 09:48:43','2017-01-03 09:48:43',0,56),(29,1,1,1,'A new Advertisement for You','2017-01-03 09:48:56','2017-01-03 09:48:56',0,57),(30,1,1,1,'A new Advertisement for You','2017-01-03 09:49:11','2017-01-03 09:49:11',0,58),(31,1,1,1,'A new Advertisement for You','2017-01-03 09:49:36','2017-01-03 09:49:36',0,59),(32,1,1,1,'A new Advertisement for You','2017-01-03 09:50:07','2017-01-03 09:50:07',0,60),(33,2,1,1,'Advertisement Approved By Admin','2017-01-12 11:04:04','2017-01-12 11:04:15',1,55),(34,4,1,1,'Advertisement Declined By Admin','2017-01-12 11:18:48','2017-01-12 11:21:48',1,60),(35,1,1,1,'A new Advertisement for You','2017-01-12 11:23:26','2017-01-12 11:23:26',0,61),(36,1,NULL,1,'A new Advertisement for You','2017-01-12 11:50:56','2017-01-12 11:50:56',0,62),(37,1,1,1,'A new Advertisement for You','2017-01-18 09:43:46','2017-01-18 09:43:46',0,63),(38,2,1,1,'Advertisement Approved By Admin','2017-01-18 09:45:13','2017-01-18 09:45:19',1,63),(39,1,1,1,'A new Advertisement for You','2017-01-18 09:47:38','2017-01-18 09:47:38',0,64),(40,2,1,1,'Advertisement Approved By Admin','2017-01-18 09:48:01','2017-01-18 09:48:06',1,64),(41,1,1,1,'A new Advertisement for You','2017-01-18 09:49:44','2017-01-18 09:49:44',0,65),(42,2,1,1,'Advertisement Approved By Admin','2017-01-18 09:50:22','2017-01-18 09:52:14',1,65),(43,1,1,1,'A new Advertisement for You','2017-01-20 05:41:56','2017-01-20 05:41:56',0,66),(44,1,1,1,'A new Advertisement for You','2017-01-20 05:42:09','2017-01-20 05:42:09',0,67),(45,1,13,11,'A new Advertisement for You','2017-01-23 18:46:47','2017-01-23 18:46:47',0,68),(46,2,13,11,'Advertisement Approved By Admin','2017-01-23 18:48:08','2017-01-23 18:48:27',1,68),(47,2,1,1,'Advertisement Approved By Admin','2017-01-24 07:19:16','2017-01-24 07:19:16',0,61),(48,1,2,11,'A new Advertisement for You','2017-01-24 08:04:57','2017-01-24 08:04:57',0,69),(49,1,2,11,'A new Advertisement for You','2017-01-24 09:16:19','2017-01-24 09:16:19',0,71),(50,1,2,11,'A new Advertisement for You','2017-01-24 13:10:04','2017-01-24 13:10:04',0,72),(51,1,9,13,'A new Advertisement for You','2017-01-24 14:20:06','2017-01-24 14:20:06',0,73),(52,2,9,13,'Advertisement Approved By Admin','2017-01-24 14:20:24','2017-01-24 14:20:30',1,73),(53,1,2,11,'A new Advertisement for You','2017-01-24 17:14:41','2017-01-24 17:14:41',0,74),(54,2,2,11,'Advertisement Approved By Admin','2017-01-24 17:17:47','2017-01-24 17:18:09',1,74),(55,2,2,11,'Advertisement Approved By Admin','2017-01-24 17:18:17','2017-01-24 17:18:44',1,72),(56,2,2,11,'Advertisement Approved By Admin','2017-01-24 17:18:35','2017-01-24 17:18:40',1,71),(57,2,1,1,'Advertisement Approved By Admin','2017-01-24 17:18:53','2017-01-24 17:18:53',0,66),(58,2,1,1,'Advertisement Approved By Admin','2017-01-24 17:18:55','2017-01-24 17:18:55',0,67),(59,2,2,11,'Advertisement Approved By Admin','2017-01-24 17:18:59','2017-01-24 17:20:24',1,69),(60,2,NULL,11,'Advertisement Approved By Admin','2017-01-24 17:19:09','2017-01-24 17:20:26',1,70),(61,1,9,11,'A new Advertisement for You','2017-01-24 18:04:53','2017-01-24 18:04:53',0,75),(62,2,9,11,'Advertisement Approved By Admin','2017-01-24 18:05:13','2017-01-24 18:05:16',1,75),(63,6,9,11,'Published By Influencer','2017-01-24 18:13:57','2017-01-24 18:14:03',1,75),(64,6,2,11,'Published By Influencer','2017-01-25 06:40:25','2017-01-25 06:52:08',1,69),(65,6,2,11,'Published By Influencer','2017-01-25 06:46:47','2017-01-25 06:52:06',1,71),(66,6,2,11,'Published By Influencer','2017-01-25 06:47:53','2017-01-25 06:51:59',1,72),(67,6,2,11,'Published By Influencer','2017-01-25 08:00:08','2017-01-25 09:01:09',1,74),(68,6,9,11,'Published By Influencer','2017-01-31 04:43:42','2017-01-31 04:45:14',1,75),(69,1,2,11,'A new Advertisement for You','2017-01-31 04:48:33','2017-01-31 04:48:33',0,76),(70,2,2,11,'Advertisement Approved By Admin','2017-01-31 04:49:06','2017-01-31 04:50:13',1,76),(71,6,2,11,'Published By Influencer','2017-01-31 04:51:15','2017-01-31 04:53:19',1,76),(72,4,1,1,'Advertisement Declined By Admin','2017-01-31 06:24:32','2017-01-31 06:24:32',0,54),(73,1,2,11,'A new Advertisement for You','2017-01-31 06:50:03','2017-01-31 06:50:03',0,77),(74,2,2,11,'Advertisement Approved By Admin','2017-01-31 06:50:32','2017-01-31 09:53:48',1,77),(75,6,2,11,'Published By Influencer','2017-01-31 06:52:35','2017-01-31 09:53:58',1,77),(76,1,9,11,'A new Advertisement for You','2017-01-31 09:23:23','2017-01-31 09:23:23',0,78),(77,2,9,11,'Advertisement Approved By Admin','2017-01-31 09:23:52','2017-01-31 09:45:01',1,78),(78,6,9,11,'Published By Influencer','2017-01-31 09:34:58','2017-01-31 09:53:50',1,78),(79,6,9,11,'Published By Influencer','2017-01-31 09:41:01','2017-01-31 09:53:54',1,78),(80,6,9,11,'Published By Influencer','2017-01-31 09:42:25','2017-01-31 09:53:56',1,78),(81,6,9,11,'Published By Influencer','2017-01-31 09:42:26','2017-01-31 09:53:59',1,78),(82,1,9,11,'A new Advertisement for You','2017-01-31 09:48:34','2017-01-31 09:48:34',0,79),(83,2,9,11,'Advertisement Approved By Admin','2017-01-31 09:48:42','2017-01-31 09:53:52',1,79),(84,1,12,11,'A new Advertisement for You','2017-01-31 09:54:33','2017-01-31 09:54:33',0,80),(85,1,9,11,'A new Advertisement for You','2017-01-31 10:01:50','2017-01-31 10:01:50',0,81),(86,6,9,11,'Published By Influencer','2017-01-31 10:02:30','2017-01-31 10:28:20',1,78),(87,2,9,11,'Advertisement Approved By Admin','2017-01-31 10:02:35','2017-01-31 10:28:17',1,81),(88,6,9,11,'Published By Influencer','2017-01-31 10:14:03','2017-01-31 10:28:18',1,81),(89,1,9,11,'A new Advertisement for You','2017-01-31 10:16:12','2017-01-31 10:16:12',0,82),(90,1,9,11,'A new Advertisement for You','2017-01-31 10:16:44','2017-01-31 10:16:44',0,83),(91,2,9,11,'Advertisement Approved By Admin','2017-01-31 10:17:00','2017-01-31 10:28:15',1,82),(92,2,9,11,'Advertisement Approved By Admin','2017-01-31 10:17:02','2017-01-31 10:28:11',1,83),(93,6,9,11,'Published By Influencer','2017-01-31 10:26:53','2017-01-31 10:28:13',1,83),(94,6,9,11,'Published By Influencer','2017-01-31 10:27:10','2017-01-31 10:28:08',1,82),(95,2,12,11,'Advertisement Approved By Admin','2017-01-31 10:29:23','2017-01-31 11:47:36',1,80),(96,1,9,11,'A new Advertisement for You','2017-01-31 10:31:53','2017-01-31 10:31:53',0,84),(97,2,9,11,'Advertisement Approved By Admin','2017-01-31 10:32:50','2017-01-31 11:43:02',1,84),(98,6,9,11,'Published By Influencer','2017-01-31 11:16:01','2017-01-31 11:57:47',1,84),(99,1,9,11,'A new Advertisement for You','2017-01-31 11:29:46','2017-01-31 11:29:46',0,85),(100,1,9,11,'A new Advertisement for You','2017-01-31 11:40:38','2017-01-31 11:40:38',0,87),(101,2,9,11,'Advertisement Approved By Admin','2017-01-31 11:42:48','2017-01-31 11:57:45',1,87),(102,6,9,11,'Published By Influencer','2017-01-31 11:44:35','2017-01-31 11:45:15',1,87),(103,1,9,11,'A new Advertisement for You','2017-02-01 05:54:04','2017-02-01 05:54:04',0,88),(104,1,9,11,'A new Advertisement for You','2017-02-01 05:58:44','2017-02-01 05:58:44',0,89),(105,1,9,11,'A new Advertisement for You','2017-02-01 05:59:14','2017-02-01 05:59:14',0,90),(106,1,9,11,'A new Advertisement for You','2017-02-01 06:00:19','2017-02-01 06:00:19',0,91),(107,1,9,11,'A new Advertisement for You','2017-02-01 06:02:16','2017-02-01 06:02:16',0,92);
+/*!40000 ALTER TABLE `pending_notifications` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `roles`
+--
+
+DROP TABLE IF EXISTS `roles`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `roles` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `resource_id` int(11) DEFAULT NULL,
+  `resource_type` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `index_roles_on_name` (`name`),
+  KEY `index_roles_on_name_and_resource_type_and_resource_id` (`name`,`resource_type`,`resource_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `roles`
+--
+
+LOCK TABLES `roles` WRITE;
+/*!40000 ALTER TABLE `roles` DISABLE KEYS */;
+INSERT INTO `roles` VALUES (1,'Admin',NULL,NULL,'2016-11-18 09:01:05','2016-11-18 09:01:05');
+/*!40000 ALTER TABLE `roles` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `schema_migrations`
+--
+
+DROP TABLE IF EXISTS `schema_migrations`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `schema_migrations` (
+  `version` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  UNIQUE KEY `unique_schema_migrations` (`version`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `schema_migrations`
+--
+
+LOCK TABLES `schema_migrations` WRITE;
+/*!40000 ALTER TABLE `schema_migrations` DISABLE KEYS */;
+INSERT INTO `schema_migrations` VALUES ('20161101092757'),('20161101132458'),('20161101132617'),('20161101135233'),('20161102072525'),('20161106133024'),('20161107062043'),('20161107105743'),('20161114063626'),('20161114063845'),('20161114072117'),('20161115102428'),('20161115103805'),('20161115110140'),('20161115112607'),('20161116055020'),('20161116112941'),('20161116115528'),('20161116115616'),('20161116181149'),('20161116182317'),('20161116182334'),('20161116182714'),('20161117064900'),('20161117102808'),('20161118072045'),('20161118090009'),('20161123202002'),('20161123210504'),('20161123214838'),('20161129061809'),('20161130064734'),('20161130105147'),('20161205115157'),('20161207053807'),('20161207053826'),('20161207070856'),('20161207070905'),('20161212051357'),('20161212093221'),('20161215052733'),('20161222100721'),('20161222160033'),('20161222162139'),('20161222175510'),('20161223045020'),('20161227082957'),('20161227084423'),('20161227084900'),('20161227085104'),('20161228064326'),('20170102072637'),('20170102083812'),('20170103091110'),('20170120092438'),('20170120092524'),('20170123162440'),('20170123163241'),('20170123164638'),('20170123170817'),('20170123172928'),('20170124063503'),('20170124093852'),('20170125074925'),('20170125075051'),('20170125081138'),('20170131095714');
+/*!40000 ALTER TABLE `schema_migrations` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `social_accounts`
+--
+
+DROP TABLE IF EXISTS `social_accounts`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `social_accounts` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `influencer_id` int(11) DEFAULT NULL,
+  `platform_type` int(11) DEFAULT NULL,
+  `facebook_profile_id` text COLLATE utf8_unicode_ci,
+  `platform_link` text COLLATE utf8_unicode_ci,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  `facebook_page_count` int(11) DEFAULT NULL,
+  `instagram_page_count` int(11) DEFAULT NULL,
+  `about` text COLLATE utf8_unicode_ci,
+  `facebook_image_url` text COLLATE utf8_unicode_ci,
+  `country` text COLLATE utf8_unicode_ci,
+  `category` text COLLATE utf8_unicode_ci,
+  `facebook_page_id` text COLLATE utf8_unicode_ci,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `social_accounts`
+--
+
+LOCK TABLES `social_accounts` WRITE;
+/*!40000 ALTER TABLE `social_accounts` DISABLE KEYS */;
+INSERT INTO `social_accounts` VALUES (9,1,1,NULL,NULL,'2017-01-02 09:00:06','2017-01-31 11:53:23',2731117,NULL,'Official Page of BB Ki Vines.\nFor enquiries: bhuvanbam@gmail.com\nbbkivines@gmail.com','https://scontent.xx.fbcdn.net/v/t1.0-1/c0.5.889.889/s50x50/12036745_607713666037920_2412952109580003505_n.jpg?oh=1f056e3edb65175cb4205c266ad6160e&oe=590869D2','India','Public Figure','BBkiVines'),(10,2,1,NULL,NULL,'2017-01-25 06:05:21','2017-01-31 11:53:24',1,NULL,'ecadcaeefwefwfwfwefweefwefwefdddddddddddddddddddddddddddsssssssssssssssssssssssssssdfasfafaf','https://scontent.xx.fbcdn.net/v/t1.0-1/c15.0.50.50/p50x50/418333_10149999285994467_1920585607_n.png?oh=801194486f1aa202e8675a7d68078b67&oe=5944A104','India','Arts & Entertainment','434563586668101'),(11,18,NULL,NULL,NULL,'2017-01-25 09:47:30','2017-01-25 09:47:30',NULL,NULL,NULL,NULL,NULL,NULL,'Aasda-434563586668101'),(12,9,NULL,NULL,NULL,'2017-01-31 09:27:26','2017-01-31 09:31:42',NULL,NULL,NULL,NULL,NULL,NULL,'690894611085161');
+/*!40000 ALTER TABLE `social_accounts` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `transactions`
+--
+
+DROP TABLE IF EXISTS `transactions`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `transactions` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `advertisement_id` int(11) DEFAULT NULL,
+  `influencer_id` int(11) DEFAULT NULL,
+  `advertiser_id` int(11) DEFAULT NULL,
+  `amount` text COLLATE utf8_unicode_ci,
+  `status` int(11) DEFAULT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `transactions`
+--
+
+LOCK TABLES `transactions` WRITE;
+/*!40000 ALTER TABLE `transactions` DISABLE KEYS */;
+INSERT INTO `transactions` VALUES (1,54,1,1,'90',1,'2017-01-03 09:42:00','2017-01-03 09:42:00'),(2,55,1,1,'90',1,'2017-01-03 09:42:22','2017-01-03 09:42:22'),(3,58,1,1,'90',1,'2017-01-03 09:49:11','2017-01-03 09:49:11'),(4,59,1,1,'90',1,'2017-01-03 09:49:36','2017-01-03 09:49:36'),(5,60,1,1,'90',1,'2017-01-03 09:50:07','2017-01-03 09:50:07'),(6,61,1,1,'90',1,'2017-01-12 11:23:26','2017-01-12 11:23:26'),(7,62,NULL,1,'',1,'2017-01-12 11:50:56','2017-01-12 11:50:56'),(8,63,1,1,'90',1,'2017-01-18 09:43:47','2017-01-18 09:43:47'),(9,64,1,1,'90',1,'2017-01-18 09:47:38','2017-01-18 09:47:38'),(10,65,1,1,'90',1,'2017-01-18 09:49:44','2017-01-18 09:49:44'),(11,66,1,1,'90',1,'2017-01-20 05:41:56','2017-01-20 05:41:56'),(12,67,1,1,'90',1,'2017-01-20 05:42:09','2017-01-20 05:42:09'),(13,68,13,11,'0',1,'2017-01-23 18:46:47','2017-01-23 18:46:47'),(14,69,2,11,'1000',1,'2017-01-24 08:04:57','2017-01-24 08:04:57'),(15,71,2,11,'1000',1,'2017-01-24 09:16:19','2017-01-24 09:16:19'),(16,72,2,11,'2000',1,'2017-01-24 13:10:04','2017-01-24 13:10:04'),(17,73,9,13,'2000',1,'2017-01-24 14:20:06','2017-01-24 14:20:06'),(18,74,2,11,'2000',1,'2017-01-24 17:14:41','2017-01-24 17:14:41'),(19,75,9,11,'2000',1,'2017-01-24 18:04:53','2017-01-24 18:04:53'),(20,76,2,11,'2000',1,'2017-01-31 04:48:33','2017-01-31 04:48:33'),(21,77,2,11,'2000',1,'2017-01-31 06:50:03','2017-01-31 06:50:03'),(22,78,9,11,'2000',1,'2017-01-31 09:23:23','2017-01-31 09:23:23'),(23,79,9,11,'2000',1,'2017-01-31 09:48:34','2017-01-31 09:48:34'),(24,80,12,11,'2000',1,'2017-01-31 09:54:33','2017-01-31 09:54:33'),(25,81,9,11,'2000',1,'2017-01-31 10:01:50','2017-01-31 10:01:50'),(26,82,9,11,'2000',1,'2017-01-31 10:16:12','2017-01-31 10:16:12'),(27,83,9,11,'2000',1,'2017-01-31 10:16:44','2017-01-31 10:16:44'),(28,84,9,11,'2000',1,'2017-01-31 10:31:53','2017-01-31 10:31:53'),(29,85,9,11,'2000',1,'2017-01-31 11:29:46','2017-01-31 11:29:46'),(30,87,9,11,'2000',1,'2017-01-31 11:40:38','2017-01-31 11:40:38'),(31,88,9,11,'2000',1,'2017-02-01 05:54:04','2017-02-01 05:54:04'),(32,89,9,11,'2000',1,'2017-02-01 05:58:44','2017-02-01 05:58:44'),(33,90,9,11,'2000',1,'2017-02-01 05:59:14','2017-02-01 05:59:14'),(34,91,9,11,'2000',1,'2017-02-01 06:00:19','2017-02-01 06:00:19'),(35,92,9,11,'2000',1,'2017-02-01 06:02:16','2017-02-01 06:02:16');
+/*!40000 ALTER TABLE `transactions` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `wallet_transactions`
+--
+
+DROP TABLE IF EXISTS `wallet_transactions`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `wallet_transactions` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `advertiser_id` int(11) DEFAULT NULL,
+  `paypal_transaction_id` text COLLATE utf8_unicode_ci,
+  `transaction_amount` int(11) DEFAULT NULL,
+  `transaction_description` text COLLATE utf8_unicode_ci,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `wallet_transactions`
+--
+
+LOCK TABLES `wallet_transactions` WRITE;
+/*!40000 ALTER TABLE `wallet_transactions` DISABLE KEYS */;
+INSERT INTO `wallet_transactions` VALUES (1,1,'PAY-0T88925314724793TLBRCXCA',NULL,'asdasd','2016-12-27 08:51:44','2016-12-27 08:51:44'),(2,1,'PAY-8DJ949390F764714KLBRCX7A',100,'asdasd','2016-12-27 08:53:41','2016-12-27 08:53:41'),(3,1,'PAY-2HP70723H6552782GLBRCZTY',500,'acfgbnhjk','2016-12-27 08:57:17','2016-12-27 08:57:17'),(4,1,'PAY-08D5138799788150MLBRC2XQ',200,'zcasdasd','2016-12-27 08:59:40','2016-12-27 08:59:40'),(5,1,'PAY-4DA6323013141315NLBRD2YY',100,'dasdsd','2016-12-27 10:08:01','2016-12-27 10:08:01'),(6,1,'PAY-4SU92189RY579325PLBRD36I',200,'sdasdasd','2016-12-27 10:10:32','2016-12-27 10:10:32'),(7,1,'PAY-46L17206LM843201ALBREIHQ',2000,'dsfghjk','2016-12-27 10:36:45','2016-12-27 10:36:45'),(8,9,'PAY-64S61673DM023071SLBR2PAY',100,'ggg','2016-12-28 11:53:05','2016-12-28 11:53:05'),(9,1,'PAY-9GP43267NA2942415LCA2V5Q',2000,'asasd','2017-01-20 06:15:33','2017-01-20 06:15:33'),(10,1,'PAY-6CB09856GT474422PLCA2XGI',3000,'asdasd','2017-01-20 06:18:16','2017-01-20 06:18:16'),(11,1,'PAY-2J788143079287332LCA2XZA',1000,'eee','2017-01-20 06:19:30','2017-01-20 06:19:30'),(12,1,'PAY-1T478753G6208930FLCA3FSI',122,'aaa','2017-01-20 06:48:55','2017-01-20 06:48:55'),(13,1,'PAY-27W34841X9426630TLCA3G6A',122,'aaa','2017-01-20 06:51:52','2017-01-20 06:51:52'),(14,11,'PAY-0D576421899993051LCDAA2Y',3000,'sdc','2017-01-23 13:09:20','2017-01-23 13:09:20'),(15,11,'PAY-47U5133650678322GLCDVDMI',3000,'sadfgh','2017-01-24 13:08:32','2017-01-24 13:08:32'),(16,13,'PAY-3TL18747UC362735FLCDWEEA',2000,'asdasd','2017-01-24 14:18:17','2017-01-24 14:18:17'),(17,11,'PAY-2UD95017EN685553ALCDZOEQ',2000,'sdafhm','2017-01-24 18:04:25','2017-01-24 18:04:25'),(18,11,'PAY-5AN303051W344730ALCED6DY',2500,'test','2017-01-25 06:01:09','2017-01-25 06:01:09'),(19,11,'PAY-2G189200F44603126LCHRFYQ',4000,'test','2017-01-30 10:18:34','2017-01-30 10:18:34'),(20,11,'PAY-8ST4447198880542GLCIBNGA',5000,'sddd','2017-01-31 04:46:43','2017-01-31 04:46:43'),(21,11,'PAY-5V7791679C609601NLCIFOTI',5000,'dddd','2017-01-31 09:22:44','2017-01-31 09:22:44'),(22,11,'PAY-0YB81051CG784244JLCIF2BY',5000,'','2017-01-31 09:47:12','2017-01-31 09:47:12'),(23,11,'PAY-1K4357065V281664YLCIGHLQ',5000,'test','2017-01-31 10:15:35','2017-01-31 10:15:35'),(24,11,'PAY-1PS9904916883414RLCIGOYY',5000,'','2017-01-31 10:31:25','2017-01-31 10:31:25'),(25,11,'PAY-1JL10067B2334004ELCIHWLA',5000,'test','2017-01-31 11:55:50','2017-01-31 11:55:50');
+/*!40000 ALTER TABLE `wallet_transactions` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2017-02-01 11:49:48

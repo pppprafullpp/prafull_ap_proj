@@ -38,7 +38,8 @@ class AdvertisersController < ApplicationController
     @spent_this_month = spent_monthly("advertiser",current_advertiser.id)
     @published_ad_count = published_ad_count(current_advertiser.id)
     @influencer_count = Influencer.count
-  end
+    @total_spent = spent_total("advertiser",current_advertiser.id)
+   end
 
   def my_wallet
     @wallet_amount = current_advertiser.wallet_amount

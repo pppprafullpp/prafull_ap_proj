@@ -54,7 +54,7 @@
       <div class="form-group">
         <label class="control-label col-md-5" for="">Choose Social Influencer</label>
           <div class="col-md-7">
-             <%= f.select :influencer_id, options_for_select(Influencer.all.map {|i| [i.name+"(#{i.email})",i.id]}), { }, {:multiple => true,:class => "form-control chosen-select", :style => "width:450px;",:placeholder=>"select Influencers" } %>
+             <%= f.select :influencer_id, options_for_select(Influencer.all.map {|i| [i.name+"(#{i.email})",i.id]}),{}, {:multiple => true,:class => "form-control chosen-select", :style => "width:450px;",:value=>"select Influencers"}%>
           </div>
       </div>
 
@@ -111,6 +111,7 @@
     </div>
   </div>
 <script>
+$(".search-field > input[type=text]").val("Choose Social Influencer'");
 function delete_group(id){
   event.preventDefault;
   $.ajax({
@@ -132,11 +133,9 @@ function delete_group(id){
 
 </div>
 <!-- Table-->
-
 </div>
 </section>
-
-
+<%= render :partial => "/layouts/footer" %>
 </div>
 </section>
 </main>

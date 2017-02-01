@@ -17,7 +17,7 @@
   <div class="col-md-3 col-sm-6">
               <div class="dashboard-tile detail">
                   <div class="content">
-                      <h1 class="text-left timer">$<%=@spent_today%></h1>
+                      <h1 class="text-left timer">$<%=number_to_human(@spent_today, :format => '%n%u', :units => { :thousand => 'K' }) %></h1>
                       <p>Today Spend</p>
                   </div>
                   <div class="icon"><span class="ion-social-usd"></span></div>
@@ -27,7 +27,7 @@
   <div class="col-md-3 col-sm-6">
               <div class="dashboard-tile detail">
                   <div class="content">
-                      <h1 class="text-left timer">$<%=@spent_this_month%></h1>
+                      <h1 class="text-left timer">$<%=number_to_human(@spent_this_month, :format => '%n%u', :units => { :thousand => 'K' }) %></h1>
                       <p>Monthly Spend</p>
                   </div>
                   <div class="icon"><span class="ion-social-usd"></span></div>
@@ -47,10 +47,10 @@
   <div class="col-md-3 col-sm-6">
               <div class="dashboard-tile detail">
                   <div class="content">
-                      <h1 class="text-left timer"><%=@influencer_count%></h1>
-                      <p>Influencers</p>
+                      <h1 class="text-left timer">$<%=number_to_human(@total_spent, :format => '%n%u', :units => { :thousand => 'K' })%></h1>
+                      <p>Total Spent Till Now</p>
                   </div>
-                  <div class="icon"><span class="ion-clipboard"></span></div>
+                  <div class="icon"><span class="ion-social-usd"></span></div>
               </div>
           </div>
 </div>
@@ -101,8 +101,3 @@
   <%= render :partial => "/layouts/footer" %>
 </div>
 </main>
-<script>
-FB.api("/1115405461908086/comments",function(response){
-    console.log(response);
-  })
-</script>
