@@ -21,29 +21,11 @@
       <label class="control-label col-md-5" for="">Social Influencer Group Name</label>
         <div class="col-md-7">
           <!-- <input type="text" class="form-control" placeholder="Group Name"> -->
-          <%=f.text_field:group_name,:class=>"form-control",:onblur=>"check_existing_group(this.value)"%>
+          <%=f.text_field:group_name,:class=>"form-control", :required=>true%>
           <span class="hidden" id="error-msg"> </span>
         </div>
       </div>
-      <script>
-        function check_existing_group(group_name) {
-          console.log(group_name);
-          $.ajax({
-            url:"<%=check_existing_group_advertisers_path%>?name="+group_name,
-            type:"POST",
-            success: function(response){
-              console.log(response);
-              if (response["status"]){
-                $("#error-msg").removeClass("hidden").text("group already Exists");
-              $("#influencer_group_group_name").focus();
-              }
-              else {
-                $("#error-msg").addClass("hidden")
-              }
-            }
-          });
-        }
-  </script>
+
       <div class="form-group">
         <label class="control-label col-md-5" for="">Category:</label>
         <div class="col-md-7">
@@ -59,13 +41,42 @@
       </div>
 
       <div class="col-md-7 col-md-offset-5">
-      <%=f.submit "ADD", :class=>"btn btn-mountain btn-sm btn-round"%>
+      <%=f.submit "ADD", :class=>"btn btn-mountain btn-sm btn-round",:onclick=>"check_if_message_shown()"%>
       <a class="btn btn-mountain btn-sm btn-round" href="#">Cancel</a>
       <%end%>
     </div>
 <script>
   // $(".chzn-select").chosen({ max_selected_options: 5 });
   $("#influencer_group_influencer_id").chosen();
+  function check_if_message_shown(){
+   event.preventDefault();
+    var group_name = $("#influencer_group_group_name").val();
+    if(group_name!="") {
+      $.ajax({
+       url:"<%=check_existing_group_advertisers_path%>?name="+group_name,
+       type:"POST",
+       success: function(response){
+         console.log(response);
+         if (response["status"]){
+             toastr.error("Group Already Exists,Please Change Group Name");
+             $("#influencer_group_group_name").focus();
+         }
+         else {
+           if($("#influencer_group_category_id option:selected").val()!="" && $("#influencer_group_influencer_id option:selected").length>0){
+              $("#new_influencer_group").submit();
+           }
+           else {
+             toastr.error("Select Category & Influencers");
+           }
+
+           }
+       }
+     });
+    }
+    else {
+      toastr.error("Enter Group Name");
+    }
+  }
 </script>
  </div>
 </div>
@@ -111,7 +122,7 @@
     </div>
   </div>
 <script>
-$(".search-field > input[type=text]").val("Choose Social Influencer'");
+  // $(".search-field > input[type=text]").val("Choose Social Influencer");
 function delete_group(id){
   event.preventDefault;
   $.ajax({
