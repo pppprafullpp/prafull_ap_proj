@@ -41,7 +41,7 @@
         <div class="form-group">
           <label class="control-label col-md-3" for="">Ad type</label>
           <div class="col-md-5">
-            <%=select_tag("advertisement[ad_type]",options_for_select(Advertisement::TYPE),:class=>"form-control", :onchange=>"change_ad_type_div()",:prompt=>"Select Media")%>
+            <%=select_tag("advertisement[ad_type]",options_for_select(Advertisement::TYPE),:class=>"form-control", :onchange=>"change_ad_type_div()",:prompt=>"Select Ad Type")%>
           </div>
         </div>
 
@@ -83,7 +83,7 @@
               </div>
              </div>
 
-              <!--#video  
+              <!--#video
               <div id="video" style="display:none">
               <h5>Add video Ads</h5>
               <div class="form-group">
@@ -164,14 +164,21 @@
     //   $("#new_advertisement").submit();
     // }
     // toastr.error("Enter All the fields");
-    if($("#advertisement_ad_type option:selected").val()=="") {
+
+    if($("#advertisement_category option:selected").val()=="" || $("#advertisement_influencer_id").val() == "" || $("#advertisement_platform").val()=="" || $("#advertisement_ad_type").val()==""){
+      toastr.error("Select Category , Influencer and AD type");
+    }
+    else if($("#advertisement_ad_type option:selected").val()=="") {
       toastr.error("Select Media Type");
     }
     else if($("#advertisement_ad_type option:selected").val()==2 && $("#advertisement_ad_image_url").val()==""){
        toastr.error("upload a photo please");
      }
-    else if ($("#advertisement_ad_type option:selected").val()==1 && $("#advertisement_posting_link").val()==""){
+    else if ($("#advertisement_ad_type option:selected").val()==1 && $("#advertisement_posting_link").val()=="" || $("#advertisement_photo_click_link").val()==""){
       toastr.error("Enter Posting URL Please");
+    }
+    else if( $("#advertisement_ad_type option:selected").val()==2 && ($("#advertisement_description").val()=="" || $("#advertisement_title").val()=="" || $("#advertisement_caption").val()=="")){
+      toastr.error("Description, Caption and title");
     }
     else {
       $("#new_advertisement").submit();

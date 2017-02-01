@@ -34,7 +34,7 @@ class AdvertismentsController < ApplicationController
     :advertiser_id=>new_record.advertiser_id,
     :status=>new_record.status,
     :amount=>params[:advertisement_cost])
-    flash[:success] = "Ad created , you will be charged when you ad goes live"
+    flash[:success] = "Ad created , you will be charged when your ad goes live"
     redirect_to advertiser_ad_compaigns_path(advertiser_id:current_advertiser.id)
   end
 

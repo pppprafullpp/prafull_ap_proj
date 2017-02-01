@@ -3128,7 +3128,7 @@ footer {
   width:100%;
   margin-left:-230px;
   bottom:0;
-  height:100px;
+  height:auto;
 }
 
 @media (max-width: 47.9rem) {
@@ -9877,7 +9877,7 @@ table em{
 	margin-top:0;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
 .wd150, .wd105, .wd140{
 	width:100%;
 }
@@ -9889,6 +9889,15 @@ table em{
 .extraMargin{
 	margin-top:10px;
 }
+
+footer{
+	height:auto; margin-left:0; position:relative; margin-bottom:-100px;
+}
+
+footer p{
+	margin-left:0;
+}
+
 }
 img.img-thumb {
     max-width: 60px;
@@ -9915,4 +9924,12 @@ img.img-thumb {
 
 .profile-img{
 	width:100%;
+}
+
+.footerFixed{
+	margin-left:0;
+}
+
+.footerFixed p{
+	margin-left:0;
 }

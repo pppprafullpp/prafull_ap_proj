@@ -21,7 +21,7 @@
 				  </div>
 				    <%= render :partial => "advertiser"%>
             <%= render :partial => "influencer"%>
-            <div class="g-recaptcha" style="padding-left: 20%;"required data-sitekey="6LfJAwsUAAAAAJP5rBdRdnsi-hysY0nrQyCh6vjz"></div>
+            <div class="g-recaptcha" required data-sitekey="6LfJAwsUAAAAAJP5rBdRdnsi-hysY0nrQyCh6vjz"></div>
  				</div>
             </div>
           </div>
@@ -29,6 +29,7 @@
       </section>
       <!-- Footer-->
       <script>
+      $(".g-recaptcha > div").css("margin","0 auto");
         function check_for_number(value) {
           if(isNaN(value)){
               $("#error-msg").addClass("alert alert-danger").text("enter only numbers please");
@@ -40,10 +41,8 @@
             $("#error-msg").addClass("alert alert-danger").text("enter only characters ");
           }
         }
-
          function check_validation(e){
            e.preventDefault();
         }
-
       </script>
       <%= render :partial=>"layouts/footer"%>
