@@ -7,7 +7,7 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
     <%= csrf_meta_tags %>
-   <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+   <script src="https://www.google.com/recaptcha/api.js" ></script>
    <!-- <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async='async'></script> -->
    <meta name="turbolinks-cache-control" content="no-cache">
    <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -15,10 +15,14 @@
     //  $(document).ready(function(){
     //    $(".reloading_class").click(function(){window.location.reload()})
     //  });
+    function onloadCallback()
+    {
+      console.log("rr");
+    }
+
    document.addEventListener("page:restore", function() {
      app.init();
     });
-
      var OneSignal = window.OneSignal || [];
      OneSignal.push(["init", {
        appId: "57ad2410-e850-4023-95a9-8d740e124773",
@@ -32,6 +36,13 @@
        }
      }]);
      </script>
+
+
+     <script src="https://code.highcharts.com/highcharts.js"></script>
+
+
+
+
    <!-- <script src="https://www.google.com/recaptcha/api.js"></script> -->
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="assets/images/favicons/ms-icon-144x144.png">
@@ -63,17 +74,8 @@
   <%= yield %>
 <script>
 $("#menuzord").menuzord();
-// 
-// $(document).resize(function(){
-//         l = $(".showhide").length;
-//         if( l>1){
-//             $(".showhide:first").parent().remove();
-//             $("#menuzord").menuzord();
-//         }
-//         else {
-//           $("#menuzord").menuzord();
-//         }
-//    });
+
+
 
 </script>
 </body>

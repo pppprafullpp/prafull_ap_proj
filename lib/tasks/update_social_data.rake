@@ -4,6 +4,7 @@ namespace :update_social_data do
     task :update_facebook_likes => :environment do |t,token|
       social_accounts = SocialAccount.all
         social_accounts.each do |social_account|
+          puts "id="+social_account.id.to_s
           page = FbGraph2::Page.new(social_account.facebook_page_id).fetch(
                 :access_token => "986978254757512|vGvEynp44LE_I_yG6dgAsjlF770",
                 :fields => [:fan_count, :about,:picture,:location,:category]

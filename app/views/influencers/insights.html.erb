@@ -1,0 +1,133 @@
+<main>
+ <section id="one-page-side-menu-static" class="one-page-side-menu-static side-menu">
+ <div class="content-wrapper">
+<%= render :partial => "/layouts/left_panel" %>
+<%= render :partial => "/layouts/header" %>
+<section class="account section" style="min-height:575px;">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+      <h1>Insights</h1>
+      </div>
+    </div>
+    <div class="form-horizontal">
+      <%@social_accounts.each do |social_account|%>
+        <div class="row" style="border-bottom: 1px solid #000;">
+          <div class="col-md-4" id="chart_for_<%=social_account.id%>" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto;border-right: 1px solid #000;">
+            <script>
+               FB.api('/<%=social_account.facebook_page_id%>/insights/page_fans_country', 'GET',{"access_token":"EAAOBpshGnogBAC7Bs5ZA9jqP2ZAtgVZC7MgVHVmBzUNkKFUZBA0gj7A8GsKT2ApHZCpV5gPFbBSuaY46S5AuV5ruu68ZA19k2HtKPhlYJwEyBsdflYVHVE55gpbZANnms6xVRLIKnpcYxVYbB22Sl3giQJRmSbZCo4JRMPUY3djdkwZDZD"},function(response) {
+                  console.log(response);
+                  if(response["data"].length> 0){
+                    Highcharts.chart('chart_for_<%=social_account.id%>', {
+                     chart: {
+                         plotBackgroundColor: null,
+                         plotBorderWidth: null,
+                         plotShadow: false,
+                         type: 'pie'
+                     },
+                     title: {
+                         text: 'CountryWise Data'
+                     },
+                     tooltip: {
+                         pointFormat: '{point.name}: <b>{point.y}</b>'
+                     },
+                     plotOptions: {
+                         pie: {
+                             allowPointSelect: true,
+                             cursor: 'pointer',
+                             dataLabels: {
+                                 enabled: false
+                             },
+                             showInLegend: true
+                         }
+                     },
+                     series: [{
+                         name: 'Country',
+                         colorByPoint: true,
+                         data: [{
+                             name: 'AE',
+                             y: f["AE"]
+                         }, {
+                             name: 'US',
+                             y: f["US"],
+                         }, {
+                             name: 'AE',
+                             y: f["AE"]
+                         },{
+                           name: 'IN',
+                           y: f["IN"]
+                         },{
+                           name: 'TN',
+                           y: f["TN"]
+                         }
+                         ]
+                     }]
+                 });
+                  }
+                  else {
+                    $("#chart_for_<%=social_account.id%>").text("Not Enough Data to show Graph")
+                  }
+                });
+          </script>
+
+          </div>
+          <div class="col-md-4">
+            <p><b>Page id </b>:<%=social_account.facebook_page_id%></p>
+            <p><b>Page Name </b>:<span id="page_name_<%=social_account.id%>"></span></p>
+            <p><b>Page likes </b>:<%=social_account.facebook_page_count%></p>
+            <p><b>Page Impressions</b>:<span id="page_impressions_<%=social_account.id%>"></span></p>
+            <p><b>Page Engaged Users</b>:<span id="page_engaged_users_<%=social_account.id%>"></span></p>
+            <script>
+            FB.api('/'+"<%=social_account.facebook_page_id%>"+'/insights/page_impressions',
+                 'GET',
+                 {"access_token":"EAAOBpshGnogBAC7Bs5ZA9jqP2ZAtgVZC7MgVHVmBzUNkKFUZBA0gj7A8GsKT2ApHZCpV5gPFbBSuaY46S5AuV5ruu68ZA19k2HtKPhlYJwEyBsdflYVHVE55gpbZANnms6xVRLIKnpcYxVYbB22Sl3giQJRmSbZCo4JRMPUY3djdkwZDZD"},
+                 function(response) {
+                   console.log(response);
+                   monthly_impression = response["data"][2]["values"][2]["value"];
+                   $("#page_impressions_<%=social_account.id%>").text(monthly_impression);
+                   console.log(monthly_impression);
+                 }
+               );
+               FB.api('/'+"<%=social_account.facebook_page_id%>"+'/insights/page_impressions',
+                    'GET',
+                    {"access_token":"EAAOBpshGnogBAC7Bs5ZA9jqP2ZAtgVZC7MgVHVmBzUNkKFUZBA0gj7A8GsKT2ApHZCpV5gPFbBSuaY46S5AuV5ruu68ZA19k2HtKPhlYJwEyBsdflYVHVE55gpbZANnms6xVRLIKnpcYxVYbB22Sl3giQJRmSbZCo4JRMPUY3djdkwZDZD"},
+                    function(response) {
+                      console.log(response);
+                      monthly_engagement = response["data"][2]["values"][2]["value"];
+                      $("#page_engaged_users_<%=social_account.id%>").text(monthly_engagement);
+                      console.log(monthly_engagement);
+                    }
+                  );
+                  FB.api('/'+"<%=social_account.facebook_page_id%>",
+                       'GET',
+                       {"access_token":"EAAOBpshGnogBAC7Bs5ZA9jqP2ZAtgVZC7MgVHVmBzUNkKFUZBA0gj7A8GsKT2ApHZCpV5gPFbBSuaY46S5AuV5ruu68ZA19k2HtKPhlYJwEyBsdflYVHVE55gpbZANnms6xVRLIKnpcYxVYbB22Sl3giQJRmSbZCo4JRMPUY3djdkwZDZD"},
+                       function(response) {
+                         console.log(response["name"]);
+                         $("#page_name_<%=social_account.id%>").text(response["name"])
+                       }
+                     );
+            </script>
+          </div>
+        </div>
+
+      <%end%>
+      </div>
+      <div id="chart-area" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+
+  </div>
+  </section>
+  </div>
+  </section>
+  </main>
+<script>
+function check_for_number(obj) {
+   if(isNaN(obj.value[obj.value.length-1])){
+    $("#error-cross").removeClass("hidden");
+    $("#check-cross").addClass("hidden");
+  }
+  else {
+   $("#error-cross").addClass("hidden");
+   $("#check-cross").removeClass("hidden");
+  }
+}
+</script>

@@ -44,7 +44,7 @@
             <button class="btn btn-mountain-flat btn-sm violet-btn" onclick="open_share_dialog_to_profile(<%=ad_request.id%>,<%=ad_request.ad_type%>)">Post to facebook Profile</button>
 
             <%if current_influencer.social_account.present? and current_influencer.social_account.facebook_page_id.present?%>
-              <button class="btn btn-mountain-flat btn-sm violet-btn" onclick="open_share_dialog_to_page(<%=ad_request.id%>,<%=ad_request.ad_type%>)">Post to facebook Page</button>
+              <button class="btn btn-mountain-flat btn-sm violet-btn" onclick="open_share_dialog_to_page(<%=ad_request.id%>,<%=ad_request.ad_type%>,<%=current_influencer.social_account.facebook_page_id%>)">Post to facebook Page</button>
             <%end%>
               <button class="btn btn-mountain-flat btn-sm" data-toggle="modal" onclick="show_decline_modal(<%=ad_request.id%>)">Decline</button>
            </div>

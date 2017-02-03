@@ -6,7 +6,7 @@ class Influencer < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-    has_one :social_account
+    has_many :social_accounts
     has_one :influencer_financial_info
     has_many :advertisements
     # after_save :update_notification

@@ -19,7 +19,7 @@ class RegistrationsController < ApplicationController
       NotificationMailer.welcome_mail("influencer",new_influencer.id).deliver!
     end
     flash[:success] = "Successfully signed up, please login"
-    forward_to = params[:advertiser].present? ? "/advertisers/sign_in" :  "/influencers/sign_in"
+    forward_to = params[:advertiser].present? ? "/advertisers/sign_in" :  "/influencers/wizard"
     redirect_to forward_to
   end
 

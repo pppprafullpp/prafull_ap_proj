@@ -1,5 +1,5 @@
 class SocialAccount < ActiveRecord::Base
- 
+  validates_uniqueness_of :facebook_page_id
   def self.search(params)
     # raise params.to_yaml
     conditions = []

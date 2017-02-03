@@ -76,6 +76,10 @@ Rails.application.routes.draw do
     post :add_social_account_details
     get :profile
     get :ad_history
+    get :insights
+    collection do
+      get :wizard
+    end
     end
 
 

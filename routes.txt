@@ -56,6 +56,7 @@ advertisment_update_ad_share_url_and_status POST   /advertisments/:advertisment_
                                             PATCH  /advertisments/:id(.:format)                                             advertisments#update
                                             PUT    /advertisments/:id(.:format)                                             advertisments#update
                                             DELETE /advertisments/:id(.:format)                                             advertisments#destroy
+                      update_financial_data POST   /update_financial_data(.:format)                                         influencer_financial_infos#create
             update_influencer_profile_photo POST   /update_influencer_profile_photo(.:format)                               influencers#update_influencer_profile_photo
             update_advertiser_profile_photo POST   /update_advertiser_profile_photo(.:format)                               advertisers#update_advertiser_profile_photo
                      new_advertiser_session GET    /advertisers/sign_in(.:format)                                           devise/sessions#new

@@ -45,7 +45,7 @@
               <div class="dashboard-tile detail">
                   <div class="content">
                       <h1 class="text-left timer"><%=number_to_human(@total_spent, :format => '%n%u', :units => { :thousand => 'K' }) %></h1>
-                      <p>Recieved Total</p>
+                      <p>Received Total</p>
                   </div>
                   <div class="icon"><span class="ion-social-usd"></span></div>
               </div>
@@ -138,7 +138,11 @@
             </div>
           <%end%>
           <%else%>
-          <h3>No Ads Exists</h3>
+            <div class="col-md-12">
+              <div class="alert alert-info text-center">No Ads Exists</div>
+            </div>
+
+
           <%end%>
         </div>
 

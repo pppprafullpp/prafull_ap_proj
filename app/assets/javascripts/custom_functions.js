@@ -23,11 +23,9 @@ FB.init({
   xfbml      : true,  // parse social plugins on this page
   version    : 'v2.8' // use graph api version 2.8
 });
-
 FB.getLoginStatus(function(response) {
   statusChangeCallback(response);
 });
-
 };
 
 // Load the SDK asynchronously
@@ -56,7 +54,6 @@ function update_ad_share_url_and_status(id, post_id,type) {
 
 function open_share_dialog_to_profile(id,type) {
   console.log($("#posting_link_"+id).text());
-
   if (type == 1){
     FB.api('/me/feed', 'post', {
         message: $("#posting_link_"+id).text(),
@@ -95,14 +92,16 @@ function open_share_dialog_to_profile(id,type) {
 
 }
 
-function open_share_dialog_to_page(id,type) {
-  console.log(type)
+function open_share_dialog_to_page(id,type,page_id) {
+    console.log(type);
+    console.log(page_id);
     title = $("#" + id + "_title").text();
+
     description = $("#" + id + "_description").text();
     caption = $("#" + id + "_caption").text();
     image = $("#" + id + "_img").attr("src");
     photo_click_link = $("#" + id + "_photo_click_link").text();
-    page_id= $("#"+id+"_page_id").val();
+    console.log(title+description+image+photo_click_link);
     FB.api('/'+page_id+"/feed/", 'post', {
         message: title + " " + description,
         picture: image,
@@ -124,13 +123,13 @@ function LoginFB() {
     FB.login(function(response) {
         if(response["status"] ==  "connected"){
           toastr.success("Connected! Please retry now");
+          get_account_data();
         }
     }, {
-        scope: 'publish_actions,publish_pages,manage_pages',
+        scope: 'publish_actions,publish_pages,manage_pages,pages_show_list,read_insights',
         auth_type: 'reauthenticate',
     });
 }
-
 
 function decline_ad_by_influencer() {
     event.preventDefault();

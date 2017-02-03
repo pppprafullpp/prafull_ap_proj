@@ -1,0 +1,158 @@
+<main>
+ <section id="one-page-side-menu-static" class="one-page-side-menu-static side-menu">
+ <div class="content-wrapper">
+<%= render :partial => "/layouts/left_panel" %>
+<%= render :partial => "/layouts/header" %>
+
+<!-- /#header-->
+
+<section class="account section">
+<div class="container">
+
+<div class="row">
+<div class="col-md-12">
+<h1>Get Data From Facebook</h1>
+<h4>Please complete the wizard to pull your page details from facebook</h4>
+</div>
+</div>
+
+</div>
+
+
+<div class="container">
+<div class="row">
+<div class="col-md-8 col-md-offset-2">
+<div class="wizard">
+<div class="wizard-inner">
+  <div class="connecting-line"></div>
+  <ul class="nav nav-tabs" role="tablist">
+
+    <li role="presentation" class="active">
+      <a href="#step1" data-toggle="tab" aria-controls="step1" role="tab" title="Step 1">
+        <span class="round-tab step size-24">
+          <i class="ion-social-facebook"></i>
+        </span>
+      </a>
+    </li>
+
+    <li role="presentation" class="disabled">
+      <a href="#step2" data-toggle="tab" aria-controls="step2" role="tab" title="Step 2">
+        <span class="round-tab step size-24">
+          <i class="icon ion-information"></i>
+        </span>
+      </a>
+    </li>
+    <!-- <li role="presentation" class="disabled">
+      <a href="#step3" data-toggle="tab" aria-controls="step3" role="tab" title="Step 3">
+        <span class="round-tab step size-24">
+          <i class="ion-android-checkbox"></i>
+        </span>
+      </a>
+    </li> -->
+
+    <li role="presentation" class="disabled">
+      <a href="#complete" data-toggle="tab" aria-controls="complete" role="tab" title="Complete">
+        <span class="round-tab">
+          <i class="ion-android-add"></i>
+        </span>
+      </a>
+    </li>
+  </ul>
+</div>
+
+<form>
+  <div class="tab-content">
+    <div class="tab-pane active" role="tabpanel" id="step1">
+      <h4>Step 1</h4>
+      <div class="row">
+      <div class="form-group">
+        <div class="col-md-6">
+          <a href="javascript:void(0)" onclick="javascript:LoginFBForWizard()"><i class="ion-social-facebook"></i>&nbsp;Login To Facebook </a>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div class="mgTop80">
+          <hr>
+        </div>
+      </div>
+      <ul class="list-inline text-center mgTop30">
+        <li><button type="button" id="step_1_btn" class="btn btn-primary next-step">Continue</button></li>
+      </ul>
+      </div>
+    </div>
+
+    <div class="tab-pane" role="tabpanel" id="step2">
+      <h4>Page Details</h4>
+      <div id="data_from_fb">
+      <p id="show_success_message" class="alert alert-success hidden"></p>
+
+      </div>
+      <div class="mgTop80">
+      <hr>
+      </div>
+      <ul class="list-inline text-center">
+        <li><button type="button" class="btn btn-default prev-step">Previous</button></li>
+        <li><button type="button" class="btn btn-primary next-step">Save</button></li>
+      </ul>
+    </div>
+    <div class="tab-pane" role="tabpanel" id="complete">
+      <h4>Complete</h4>
+      <p>You have successfully completed all steps.</p>
+      <a href="/influencers" class="btn btn-success">Goto Dashboard</a>
+    </div>
+    <div class="clearfix"></div>
+  </div>
+
+</form>
+</div>
+</div>
+</div>
+
+</section>
+</div>
+</section>
+</main>
+<script>
+function LoginFBForWizard(){
+  console.log("ddd");
+  FB.login(function(response) {
+      if(response["status"] ==  "connected"){
+         get_account_data();
+      }
+  }, {
+      scope: 'publish_actions,publish_pages,manage_pages,pages_show_list,read_insights',
+      auth_type: 'reauthenticate',
+  });
+}
+
+function get_account_data(){
+  FB.api(
+    '/me/accounts',
+    'GET',
+    {"fields":"fan_count"},
+    function(response) {
+        for(i=0;i<response["data"].length;i++){
+            console.log(response["data"][i]);
+            add_social_account(response["data"][i]["id"],response["data"][i]["fan_count"],"<%=current_influencer.id%>");
+            $("#data_from_fb").append("<div class='col-md-12'>"+"<p> <b>Page ID</b> :"+response["data"][i]["id"]+"</p>"+"<p><b>Fans</b> :"+response["data"][i]["fan_count"]+"</p>"+"</div>")
+        }
+        $("#step_1_btn").click();
+     });
+}
+
+function add_social_account(page_id,page_likes,id){
+  $.ajax({
+    url: "/influencers/"+id+"/add_social_account_details",
+    type: "POST",
+    data: {
+      facebook_page_id:page_id,
+      facebook_page_likes:page_likes,
+    },
+    success: function(response){
+      $("#show_success_message").removeClass("hidden").html("Connected and Pulled Page Details");
+      console.log(response);
+     }
+  });
+}
+
+</script>

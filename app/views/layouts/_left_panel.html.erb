@@ -37,19 +37,21 @@
       <a href="<%=influencer_ad_requests_path(influencer_id:current_influencer.id)%>">
         <i class="ion-android-bulb"></i> <span>Ad Request</span></a>
       </li>
+
     <li class="<%='active' if params[:action] == 'ad_history' %> reloading_class">
       <a href="<%=influencer_ad_history_path(influencer_id:current_influencer.id)%>">
-
       <i class="ion-card"></i> <span>Ad History</span></a>
     </li>
-    <!-- <li>
-      <button class="btn btn-primary" href="#" onclick="javascript:LoginFB()">
-      <i class="icon ion-social-facebook"></i> <span>Facebook Login</span></button>
-    </li> -->
+
+    <li class="<%='active 'if params[:action] == 'ad_requests' %> reloading_class"%>
+      <a href="<%=influencer_insights_path(influencer_id:current_influencer.id)%>" data-method="get">
+        <i class="ion-android-bulb"></i> <span>Page Insights</span></a>
+    </li>
+
     <li>
-      <a class="fb-btn" href="javascript:void();" onclick="javascript:LoginFB()">
-  <i class="icon ion-social-facebook"></i> <span>Facebook Login</span>
-</a>
+      <a class="fb-btn" href="javascript:void(0)" onclick="javascript:LoginFB()">
+      <i class="icon ion-social-facebook"></i> <span>Facebook Login</span>
+   </a>
     </li>
   </ul>
   <%end%>

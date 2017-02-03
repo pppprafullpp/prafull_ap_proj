@@ -22,15 +22,15 @@
               <%if type == "advertiser"%>
                 <h5>Update Photo</h5>
                 <%=form_tag "/update_advertiser_profile_photo",:method=>"post",:multipart=>true do %>
-                  <%=file_field_tag(:advertiser_profile_photo,:class=>"form-control",:required=>true)%>
+                  <%=file_field_tag(:advertiser_profile_photo,:class=>"form-control form-control-img  ",:required=>true)%>
                   <br />
-                  <p align="center"><%=submit_tag "Update Profile Photo",:class=>"btn btn-success"%></p>
+                  <p  ><%=submit_tag "Update Profile Photo",:class=>"btn btn-mountain-flat btn-sm"%></p>
                   <%end%>
                   <%else%>
                   <%=form_tag "/update_influencer_profile_photo",:method=>"post",:multipart=>true do %>
                     <%=file_field_tag(:influencer_profile_photo,:class=>"form-control",:required=>true)%>
                     <br />
-                    <p align="center"><%=submit_tag "Update Profile Photo",:class=>"btn btn-success"%></p>
+                    <p align="center"><%=submit_tag "Update Profile Photo",:class=>"btn btn-mountain-flat btn-sm"%></p>
                     <%end%>
               <%end%>
             </div>
