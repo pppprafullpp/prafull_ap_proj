@@ -129,24 +129,25 @@ function get_account_data(){
   FB.api(
     '/me/accounts',
     'GET',
-    {"fields":"fan_count"},
+    {"fields":"fan_count,name","access_token":"EAAOBpshGnogBAC7Bs5ZA9jqP2ZAtgVZC7MgVHVmBzUNkKFUZBA0gj7A8GsKT2ApHZCpV5gPFbBSuaY46S5AuV5ruu68ZA19k2HtKPhlYJwEyBsdflYVHVE55gpbZANnms6xVRLIKnpcYxVYbB22Sl3giQJRmSbZCo4JRMPUY3djdkwZDZD"},
     function(response) {
         for(i=0;i<response["data"].length;i++){
             console.log(response["data"][i]);
-            add_social_account(response["data"][i]["id"],response["data"][i]["fan_count"],"<%=current_influencer.id%>");
+            add_social_account(response["data"][i]["id"],response["data"][i]["fan_count"],"<%=current_influencer.id%>",response["data"][i]["name"]);
             $("#data_from_fb").append("<div class='col-md-12'>"+"<p> <b>Page ID</b> :"+response["data"][i]["id"]+"</p>"+"<p><b>Fans</b> :"+response["data"][i]["fan_count"]+"</p>"+"</div>")
         }
         $("#step_1_btn").click();
      });
 }
 
-function add_social_account(page_id,page_likes,id){
+function add_social_account(page_id,page_likes,id,name){
   $.ajax({
     url: "/influencers/"+id+"/add_social_account_details",
     type: "POST",
     data: {
       facebook_page_id:page_id,
       facebook_page_likes:page_likes,
+      page_name:name
     },
     success: function(response){
       $("#show_success_message").removeClass("hidden").html("Connected and Pulled Page Details");
@@ -154,5 +155,4 @@ function add_social_account(page_id,page_likes,id){
      }
   });
 }
-
 </script>

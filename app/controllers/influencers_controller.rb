@@ -40,10 +40,20 @@ class InfluencersController < ApplicationController
 
   def add_social_account_details
       if SocialAccount.find_by_facebook_page_id(params[:facebook_page_id])
-          SocialAccount.find_by_facebook_page_id(params[:facebook_page_id]).update_attributes(:facebook_page_id=>params[:facebook_page_id],:facebook_page_count=>params[:facebook_page_likes],:influencer_id=>current_influencer.id)
-          puts ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
+          SocialAccount.find_by_facebook_page_id(params[:facebook_page_id])
+          .update_attributes(
+          :facebook_page_id=>params[:facebook_page_id],
+          :facebook_page_count=>params[:facebook_page_likes],
+          :influencer_id=>current_influencer.id,
+          :facebook_page_title=>params[:page_name])
+          puts ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>updated"
       else
-        SocialAccount.create!(:facebook_page_id=>params[:facebook_page_id],:facebook_page_count=>params[:facebook_page_likes],:influencer_id=>current_influencer.id)
+        SocialAccount.create!(
+        :facebook_page_id=>params[:facebook_page_id],
+        :facebook_page_count=>params[:facebook_page_likes],
+        :influencer_id=>current_influencer.id,
+        :facebook_page_title=>params[:page_name])
+        puts ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>created"
       end
 
       render :json=>{

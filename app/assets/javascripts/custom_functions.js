@@ -123,8 +123,7 @@ function LoginFB() {
     FB.login(function(response) {
         if(response["status"] ==  "connected"){
           toastr.success("Connected! Please retry now");
-          get_account_data();
-        }
+         }
     }, {
         scope: 'publish_actions,publish_pages,manage_pages,pages_show_list,read_insights',
         auth_type: 'reauthenticate',
