@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170203125005) do
+ActiveRecord::Schema.define(version: 20170204164410) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "trackable_id",   limit: 4
@@ -242,6 +242,7 @@ ActiveRecord::Schema.define(version: 20170203125005) do
     t.integer  "gender",                 limit: 4
     t.integer  "age",                    limit: 4
     t.text     "country",                limit: 65535
+    t.boolean  "completed_wizard"
   end
 
   add_index "influencers", ["email"], name: "index_influencers_on_email", unique: true, using: :btree

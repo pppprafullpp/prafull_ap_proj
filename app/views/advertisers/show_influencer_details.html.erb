@@ -15,26 +15,25 @@
       </div>
       <div class="col-md-8 col-offset-2">
         <h3><%=@influencer_details.name.titleize%></h3>
-         <!-- Influencer(id: integer, email: string, encrypted_password: string, reset_password_token: string,
-        reset_password_sent_at: datetime, remember_created_at: datetime, sign_in_count: integer,
-        current_sign_in_at: datetime, last_sign_in_at: datetime, current_sign_in_ip: string,
-        last_sign_in_ip: string, name: text, created_at: datetime, updated_at: datetime,
-        facebook_page_count: integer, instagram_page_count: integer,
-        wallet_amount: integer, category: text,
-        publishing_price: text, token: text, is_verified: boolean, profile_image_url: text) -->
         <table class="table table-striped">
           <tr>
             <td><b>Registered on</b> : <%=@influencer_details.created_at.strftime("%d/%m/%Y")%></td>
             <td><b>Category</b> : <%=@influencer_details.category.camelcase rescue nil%></td>
           </tr>
         </table>
-        <h3> Social Account (Information On Facebook) </h3>
-         <%if @social_account.present?%>
-             <p><b>Facebook followers :</b><%=@social_account.facebook_page_count%></p>
-             <p><b>Facebook page Id :</b> <%=@social_account.facebook_profile_id || "NA"%></p>
-             <p><b>Country :</b><%=@social_account.country%></p>
-             <p><b>Category :</b><%=@social_account.category%></p>
-             <p><b>Brief Details</b>: <%=@social_account.about%></p>
+        <h3> Insights </h3>
+        <p><i class="fa fa-instagram"></i> <%=@influencer_details.instagram_page_count || 0%></p>
+         <%if @social_accounts.present?%>
+          <%@social_accounts.each do |social_account|%>
+            <div class="col-md-12" style="border:1px solid #000">
+               <p><b>Facebook followers :</b><%=social_account.facebook_page_title%></p>
+               <p><b>Facebook followers :</b><%=social_account.facebook_page_count%></p>
+               <p><b>Facebook page Id :</b> <%=social_account.facebook_profile_id || "NA"%></p>
+               <p><b>Country :</b><%=social_account.country%></p>
+               <p><b>Category :</b><%=social_account.category%></p>
+               <p><b>Brief Details</b>: <%=social_account.about%></p>
+             </div>
+           <%end%>
          <%else%>
          <p>Do Not Exists!</p>
          <%end%>

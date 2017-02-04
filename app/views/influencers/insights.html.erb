@@ -11,6 +11,7 @@
       </div>
     </div>
     <div class="form-horizontal">
+      <p><b>Instagram Followers:<b><%= @instagram_followers%></p>
       <%@social_accounts.each do |social_account|%>
         <div class="row" style="border-bottom: 1px solid #000;">
           <div class="col-md-4" id="chart_for_<%=social_account.id%>" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto;border-right: 1px solid #000;">
@@ -77,7 +78,7 @@
             <p><b>Page likes </b>:<%=social_account.facebook_page_count%></p>
             <p><b>Page Impressions</b>:<span id="page_impressions_<%=social_account.id%>"></span></p>
             <p><b>Page Engaged Users</b>:<span id="page_engaged_users_<%=social_account.id%>"></span></p>
-            <script>
+             <script>
             FB.api('/'+"<%=social_account.facebook_page_id%>"+'/insights/page_impressions',
                  'GET',
                  {"access_token":"EAAOBpshGnogBAC7Bs5ZA9jqP2ZAtgVZC7MgVHVmBzUNkKFUZBA0gj7A8GsKT2ApHZCpV5gPFbBSuaY46S5AuV5ruu68ZA19k2HtKPhlYJwEyBsdflYVHVE55gpbZANnms6xVRLIKnpcYxVYbB22Sl3giQJRmSbZCo4JRMPUY3djdkwZDZD"},

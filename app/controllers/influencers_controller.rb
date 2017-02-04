@@ -1,5 +1,10 @@
 class InfluencersController < ApplicationController
   before_filter :authenticate_influencer!
+  before_filter :check_if_influencer_completed_wizard
+
+  def check_if_influencer_completed_wizard
+    true
+  end
 
   def index
     @ad_requests = Advertisement.where(:influencer_id=>current_influencer.id,:status=>approved_by_admin).limit(3)
@@ -21,6 +26,7 @@ class InfluencersController < ApplicationController
 
   def insights
     @social_accounts = current_influencer.social_accounts.order("ID DESC")
+    @instagram_followers = current_influencer.instagram_page_count
   end
 
   def change_password
@@ -55,7 +61,6 @@ class InfluencersController < ApplicationController
         :facebook_page_title=>params[:page_name])
         puts ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>created"
       end
-
       render :json=>{
       :status=>"updated",
       :code=>200
@@ -71,6 +76,13 @@ class InfluencersController < ApplicationController
     #   redirect_to :back
   end
 
+  def add_instagram_followers
+     current_influencer.update_attributes(:instagram_page_count=>params[:followers])
+      render :json=>{
+        :status => "updated",
+        :code => 200
+      }
+  end
 
   def update
     Influencer.find(current_influencer).update(update_influencer_params)

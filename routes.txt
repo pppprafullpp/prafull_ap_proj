@@ -169,6 +169,9 @@ advertisment_update_ad_share_url_and_status POST   /advertisments/:advertisment_
       influencer_add_social_account_details POST   /influencers/:influencer_id/add_social_account_details(.:format)         influencers#add_social_account_details
                          influencer_profile GET    /influencers/:influencer_id/profile(.:format)                            influencers#profile
                       influencer_ad_history GET    /influencers/:influencer_id/ad_history(.:format)                         influencers#ad_history
+                        influencer_insights GET    /influencers/:influencer_id/insights(.:format)                           influencers#insights
+                         wizard_influencers GET    /influencers/wizard(.:format)                                            influencers#wizard
+        add_instagram_followers_influencers POST   /influencers/add_instagram_followers(.:format)                           influencers#add_instagram_followers
                                 influencers GET    /influencers(.:format)                                                   influencers#index
                                             POST   /influencers(.:format)                                                   influencers#create
                              new_influencer GET    /influencers/new(.:format)                                               influencers#new

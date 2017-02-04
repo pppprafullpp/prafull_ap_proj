@@ -133,8 +133,8 @@ class AdvertisersController < ApplicationController
 
    def show_influencer_details
      @influencer_details = Influencer.find(params[:id])
-     @social_account = @influencer_details.social_account
-   end
+     @social_accounts = @influencer_details.social_accounts
+    end
 
    def group_details
      @group_details = GroupMapping.find(params[:id])

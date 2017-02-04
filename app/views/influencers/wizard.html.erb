@@ -12,7 +12,7 @@
 <div class="row">
 <div class="col-md-12">
 <h1>Get Data From Facebook</h1>
-<h4>Please complete the wizard to pull your page details from facebook</h4>
+<h4>Please complete the wizard to pull your page details from facebook & Instagram</h4>
 </div>
 </div>
 
@@ -25,7 +25,7 @@
 <div class="wizard">
 <div class="wizard-inner">
   <div class="connecting-line"></div>
-  <ul class="nav nav-tabs" role="tablist">
+  <ul class="nav nav-tabs" id="htabs" role="tablist">
 
     <li role="presentation" class="active">
       <a href="#step1" data-toggle="tab" aria-controls="step1" role="tab" title="Step 1">
@@ -42,13 +42,13 @@
         </span>
       </a>
     </li>
-    <!-- <li role="presentation" class="disabled">
+    <li role="presentation" class="disabled">
       <a href="#step3" data-toggle="tab" aria-controls="step3" role="tab" title="Step 3">
         <span class="round-tab step size-24">
           <i class="ion-android-checkbox"></i>
         </span>
       </a>
-    </li> -->
+    </li>
 
     <li role="presentation" class="disabled">
       <a href="#complete" data-toggle="tab" aria-controls="complete" role="tab" title="Complete">
@@ -76,7 +76,7 @@
         </div>
       </div>
       <ul class="list-inline text-center mgTop30">
-        <li><button type="button" id="step_1_btn" class="btn btn-primary next-step">Continue</button></li>
+        <li><button type="button" id="step_1_btn" class="btn btn-primary next-step hidden">Continue</button></li>
       </ul>
       </div>
     </div>
@@ -95,6 +95,24 @@
         <li><button type="button" class="btn btn-primary next-step">Save</button></li>
       </ul>
     </div>
+
+    <div class="tab-pane" role="tabpanel" id="step3">
+      <h4>Connect To Instagram</h4>
+      <div id="data_from_fb">
+        <a href="javascript:void(0)" onclick="window.open('https://api.instagram.com/oauth/authorize/?client_id=6b7aae8b938642eeb242a76096727fdf&redirect_uri=http://localhost:3000/influencers/wizard&response_type=token','_self')"><i class="ion-social-facebook"></i>&nbsp;Login To Instagram</a>
+        <p id="instagram_followers"></p>
+      </div>
+      <div class="mgTop80">
+      <hr>
+      </div>
+      <ul class="list-inline text-center">
+        <li><button type="button" class="btn btn-default prev-step">Previous</button></li>
+        <li><button type="button" class="btn btn-primary next-step">Save</button></li>
+      </ul>
+    </div>
+
+
+
     <div class="tab-pane" role="tabpanel" id="complete">
       <h4>Complete</h4>
       <p>You have successfully completed all steps.</p>
@@ -136,23 +154,62 @@ function get_account_data(){
             add_social_account(response["data"][i]["id"],response["data"][i]["fan_count"],"<%=current_influencer.id%>",response["data"][i]["name"]);
             $("#data_from_fb").append("<div class='col-md-12'>"+"<p> <b>Page ID</b> :"+response["data"][i]["id"]+"</p>"+"<p><b>Fans</b> :"+response["data"][i]["fan_count"]+"</p>"+"</div>")
         }
-        $("#step_1_btn").click();
+        $("#step_1_btn").removeClass("hidden").click();
      });
 }
 
-function add_social_account(page_id,page_likes,id,name){
-  $.ajax({
-    url: "/influencers/"+id+"/add_social_account_details",
-    type: "POST",
-    data: {
-      facebook_page_id:page_id,
-      facebook_page_likes:page_likes,
-      page_name:name
-    },
-    success: function(response){
-      $("#show_success_message").removeClass("hidden").html("Connected and Pulled Page Details");
-      console.log(response);
-     }
+  function add_social_account(page_id,page_likes,id,name){
+    $.ajax({
+      url: "/influencers/"+id+"/add_social_account_details",
+      type: "POST",
+      data: {
+        facebook_page_id:page_id,
+        facebook_page_likes:page_likes,
+        page_name:name
+      },
+      success: function(response){
+        $("#show_success_message").removeClass("hidden").html("Connected and Pulled Page Details");
+        console.log(response);
+       }
+    });
+  }
+
+  $(document).ready(function(){
+    if(location.href.split("#")[1]!=undefined && location.href.split("#")[1]!=null){
+      access_token = location.href.split("#")[1].split("=")[1];
+      $("#step3").addClass("active");
+      $("#step1").removeClass("active");
+      $("#htabs li:eq(0)").removeClass("active");
+      $("#htabs li:eq(2)").addClass("active")
+      get_data_from_instagram(access_token);
+    }
   });
-}
+
+  function get_data_from_instagram(access_token){
+    $.ajax({
+      url:"https://api.instagram.com/v1/users/self/?access_token="+access_token,
+      dataType:'jsonp',
+      type: "GET",
+      success: function(response){
+        console.log(response);
+        followed_by = response["data"]["counts"]["followed_by"];
+        $("#instagram_followers").html("<b>Followers:</b>"+response["data"]["counts"]["followed_by"])
+        add_instagram_follows(followed_by);
+      }
+    })
+  }
+
+  function add_instagram_follows(followed_by){
+    $.ajax({
+      url:"<%=add_instagram_followers_influencers_path%>",
+      type: "POST",
+      data: {
+        followers:followed_by
+      },
+      success: function(response){
+        console.log(response);
+      }
+    })
+  }
+
 </script>

@@ -77,9 +77,10 @@ Rails.application.routes.draw do
     get :profile
     get :ad_history
     get :insights
-    collection do
-      get :wizard
-    end
+      collection do
+        get :wizard
+        post :add_instagram_followers
+      end
     end
 
 

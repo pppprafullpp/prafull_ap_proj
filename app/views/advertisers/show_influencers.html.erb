@@ -63,13 +63,7 @@ function filter(type,obj){
     <!-- List Item -->
     <% @influencers.each do |influencer|%>
     <div class="item col-xs-12 col-lg-3 main-content-wrapper">
-      <%if influencer.social_account.present?%>
-      <div class="lft-icon">
-      <div class="center-icon">
-      <span class="ion-social-facebook"></span>
-      </div>
-      </div>
-      <%end%>
+
 
       <div class="price-features">
       <div class="advertiserBox">
@@ -89,13 +83,7 @@ function filter(type,obj){
           </div>
           <div>
           <hr>
-          <%if influencer.social_account.present?%>
-          <div class="wid-social-icons pull-left">
-          <ul>
-            <li><a class="fb-icon" title="Facebook page Exists" href="javascript:void(0)"><span class="ion-social-facebook"></span></a></li>
-           </ul>
-          </div>
-          <%end%>
+         
           <div class="pull-right">
           <p class="btn-list">
             <a href="<%=show_influencer_details_advertisers_path(id:influencer.id)%>" class="btn btn-mountain-flat btn-sm">Details</a></p>
