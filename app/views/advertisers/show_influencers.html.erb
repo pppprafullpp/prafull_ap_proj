@@ -77,15 +77,24 @@ function filter(type,obj){
         <h4><a href="influencer-detail.html"><%=influencer.name%></a></h4>
         <div class="price-number-wrap mgBottom30">
           <div class="price-top">
-          <p><%=influencer.social_account.about.truncate(10) rescue "Not Provided"%></p>
-          <p><strong>Followers:</strong> <span class="smFollow"><%=influencer.social_account.facebook_page_count rescue '0'%></span></br>
-          <strong>Recommended Price Tag/Posts:</strong> <span class="smPrice">$<%=influencer.publishing_price%></span></p>
+          <p><%=influencer.social_account.last.about.truncate(10) rescue "Not Provided"%></p>
+          <p><strong>Instagram Followers: </strong> <span class="smFollow"><%=influencer.instagram_page_count%></span></br>
+          <p><strong>Facbook page likes: </strong> <span class="smFollow">
+            <%if influencer.social_accounts.any?%>
+              <%influencer.social_accounts.each do |social_account|%>
+                <p><span><%=social_account.facebook_page_title%>: </span><span><%=social_account.facebook_page_count%></span></p>
+               <%end%>
+            <%end%>
+
+          </span></br>
+          <strong>Recommended Price Tag/Posts:</strong> <span class="smPrice">$ <%=influencer.publishing_price.present? ? influencer.publishing_price : "NA"%></span></p>
           </div>
           <div>
           <hr>
-         
+
           <div class="pull-right">
           <p class="btn-list">
+            <a href="<%=advertiser_create_ad_compaign_path(influencer_id:influencer.id)%>" class="btn btn-mountain-flat btn-sm">Post Ad</a></p>
             <a href="<%=show_influencer_details_advertisers_path(id:influencer.id)%>" class="btn btn-mountain-flat btn-sm">Details</a></p>
           </div>
           </div>

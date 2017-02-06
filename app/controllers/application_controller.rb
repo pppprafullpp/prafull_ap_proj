@@ -43,30 +43,30 @@ class ApplicationController < ActionController::Base
   end
 
   def today_earning(type,id)
-    amount = Transaction.where("created_at >= ? and #{type}_id = ?", Time.zone.now.beginning_of_day,id).sum(:amount)
+    amount = Transaction.where("created_at >= ? and #{type}_id = ? and status = ?", Time.zone.now.beginning_of_day,id,6).sum(:amount)
     amount
   end
 
   def monthly_earning(type,id)
-    amount = Transaction.where(created_at: Time.now.beginning_of_month..Time.now.end_of_month,eval(":#{type}_id")=>id).sum(:amount)
+    amount = Transaction.where(created_at: Time.now.beginning_of_month..Time.now.end_of_month,eval(":#{type}_id")=>id,:status=>6).sum(:amount)
     amount
   end
 
   def spent_total(type,id)
-    amount = Transaction.where(eval(":#{type}_id")=>id).sum(:amount)
+    amount = Transaction.where(eval(":#{type}_id")=>id,:status=>6).sum(:amount)
     amount
   end
-
-  def spent_today(type,id)
-    amount = Transaction.where("created_at >= ? and #{type}_id = ?", Time.zone.now.beginning_of_day,id).sum(:amount)
-    amount
-  end
-
-  def spent_monthly(type,id)
-    amount = Transaction.where(created_at: Time.now.beginning_of_month..Time.now.end_of_month,eval(":#{type}_id")=>id).sum(:amount)
-    amount
-  end
-
+  #
+  # def spent_today(type,id)
+  #   amount = Transaction.where("created_at >= ? and #{type}_id = ?", Time.zone.now.beginning_of_day,id).sum(:amount)
+  #   amount
+  # end
+  #
+  # def spent_monthly(type,id)
+  #   amount = Transaction.where(created_at: Time.now.beginning_of_month..Time.now.end_of_month,eval(":#{type}_id")=>id).sum(:amount)
+  #   amount
+  # end
+  #
   def published_ad_count(advertiser_id)
     published_ads = Advertisement.where(:status=>6,:advertiser_id=>advertiser_id).count
     published_ads

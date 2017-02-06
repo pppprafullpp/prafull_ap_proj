@@ -25,7 +25,7 @@
             <div class="form-group">
               <label class="control-label col-md-3" for="">Social Influencer</label>
               <div class="col-md-5">
-                <%=f.select :influencer_id,options_for_select(Influencer.all.map{|i| [i.name+"(#{i.email})",i.id]}),:prompt => "-Select-",:onchange=>"check_wallet_status(this.id)",:class=>"form-control", :required=>true%>
+                <%=f.select :influencer_id,options_for_select(Influencer.all.map{|i| [i.name,i.id]},params[:influencer_id]),:prompt => "-Select-",:onchange=>"check_wallet_status(this.id)",:class=>"form-control", :required=>true%>
                 <p id="check_wallet_msg" style="color:red"></p>
                 <%=hidden_field_tag(:advertisement_cost)%>
                </div>
@@ -174,7 +174,7 @@
     else if($("#advertisement_ad_type option:selected").val()==2 && $("#advertisement_ad_image_url").val()==""){
        toastr.error("upload a photo please");
      }
-    else if ($("#advertisement_ad_type option:selected").val()==1 && $("#advertisement_posting_link").val()=="" || $("#advertisement_photo_click_link").val()==""){
+    else if ($("#advertisement_ad_type option:selected").val()==1 && $("#advertisement_posting_link").val()==""){
       toastr.error("Enter Posting URL Please");
     }
     else if( $("#advertisement_ad_type option:selected").val()==2 && ($("#advertisement_description").val()=="" || $("#advertisement_title").val()=="" || $("#advertisement_caption").val()=="")){

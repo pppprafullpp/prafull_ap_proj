@@ -93,10 +93,20 @@ function open_share_dialog_to_profile(id,type) {
 }
 
 function open_share_dialog_to_page(id,type,page_id) {
-    console.log(type);
-    console.log(page_id);
+  if (type == 1){
+    FB.api('/me/feed', 'post', {
+        message: $("#posting_link_"+id).text(),
+    }, function(response) {
+        if (!response || response.error) {
+            LoginFB();
+            toastr.error("Error,"+response["error"]["message"]+", Please check if photo click link exists");
+        } else {
+            update_ad_share_url_and_status(id, response.id,"page")
+        }
+    });
+  }
+  else if(type ==2) {
     title = $("#" + id + "_title").text();
-
     description = $("#" + id + "_description").text();
     caption = $("#" + id + "_caption").text();
     image = $("#" + id + "_img").attr("src");
@@ -117,6 +127,7 @@ function open_share_dialog_to_page(id,type,page_id) {
             update_ad_share_url_and_status(id, response.id,"page");
         }
     });
+  }
 }
 
 function LoginFB() {

@@ -67,6 +67,8 @@ class AdvertismentsController < ApplicationController
     advertisement_id:advertisement.id,
     :viewed=>false)
 
+    Transaction.find_by_advertisement_id(advertisement.id).update_attributes(:status=>6)
+
     render :json => {
       success:true
     }
