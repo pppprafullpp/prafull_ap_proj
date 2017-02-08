@@ -8,12 +8,12 @@
 
         <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
           <div class="form-group">
-            <%= f.email_field :email,:placeholder=>"Enter Email",:autofocus=>true,:class=>"form-control",:autocomplete=>"off",:onblur=>"check_email_existing('#{resource_name}',this.value)" %>
+            <%= f.email_field :email,:placeholder=>"Enter Email",:autofocus=>true,:class=>"form-control",:onblur=>"check_email_existing('#{resource_name}',this.value)" %>
              <span class="sm-Txt hidden"  id="error-msg">asdf sdf</span>
           </div>
 
           <div class="form-group">
-            <%= f.password_field :password,:placeholder=>"Enter Password", autocomplete: "off", :class=>"form-control" %>
+            <%= f.password_field :password,:placeholder=>"Enter Password" , :class=>"form-control" %>
           </div>
 
           <% if devise_mapping.rememberable? -%>

@@ -55,8 +55,10 @@ class AdvertismentsController < ApplicationController
 
     advertisement_cost = Transaction.find_by_advertisement_id(advertisement.id).amount
 
-    new_wallet_amount = current_wallet_amount - advertisement_cost.to_i;
-
+    new_wallet_amount = current_wallet_amount.to_i - advertisement_cost.to_i;
+    if new_wallet_amount.to_i < 0
+      new_wallet_amount = 0
+    end
     advertiser.update_attributes(:wallet_amount=>new_wallet_amount)
 
     PendingNotification.create!(

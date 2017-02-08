@@ -16,8 +16,9 @@
         <div class="row" style="border-bottom: 1px solid #000;">
           <div class="col-md-4" id="chart_for_<%=social_account.id%>" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto;border-right: 1px solid #000;">
             <script>
-               FB.api('/<%=social_account.facebook_page_id%>/insights/page_fans_country', 'GET',{"access_token":"EAAOBpshGnogBAC7Bs5ZA9jqP2ZAtgVZC7MgVHVmBzUNkKFUZBA0gj7A8GsKT2ApHZCpV5gPFbBSuaY46S5AuV5ruu68ZA19k2HtKPhlYJwEyBsdflYVHVE55gpbZANnms6xVRLIKnpcYxVYbB22Sl3giQJRmSbZCo4JRMPUY3djdkwZDZD"},function(response) {
+               FB.api('/449082841792177/insights/page_fans_country', 'GET',{"access_token":"EAAOBpshGnogBAC7Bs5ZA9jqP2ZAtgVZC7MgVHVmBzUNkKFUZBA0gj7A8GsKT2ApHZCpV5gPFbBSuaY46S5AuV5ruu68ZA19k2HtKPhlYJwEyBsdflYVHVE55gpbZANnms6xVRLIKnpcYxVYbB22Sl3giQJRmSbZCo4JRMPUY3djdkwZDZD"},function(response) {
                   console.log(response);
+                  f  = response["data"][0]["values"][2]["value"];
                   if(response["data"].length> 0){
                     Highcharts.chart('chart_for_<%=social_account.id%>', {
                      chart: {

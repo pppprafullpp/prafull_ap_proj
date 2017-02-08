@@ -33,5 +33,19 @@ namespace :update_social_data do
           end
       end
 
+      task add_facebook_insights: :environment do
+        facebook_page_ids = SocialAccount.pluck(:facebook_page_id)
+        graph = Koala::Facebook::API.new("EAAOBpshGnogBAIZBo8yVpqwsjHZCv4TCbzE8LvaOJdVDwZAqARfFZBSP3yBI7q3Cn3HyMVZBf46dBl7PeO4amEkzVPC1ZBLYTWhMdtVwYwjMZBcmCZBLtZBvifFIIY6i6K7hl0teDcoeLlFjzIc9KNM2aivm3ZBVbbmvcJV46fPNCJbwZDZD")
 
+        page_consumptions = graph.get_connections("882472861843543","/insights/page_consumptions")
+        page_consumptions_by_consumption_type = graph.get_connections("882472861843543","/insights/page_consumptions_by_consumption_type")
+        page_fans = graph.get_connections("882472861843543","/insights/page_fans")
+        page_fans_locale = graph.get_connections("882472861843543","/insights/page_fans_locale")
+        page_views_total = graph.get_connections("882472861843543","/insights/page_views_total")
+        page_fans_gender_age = graph.get_connections("882472861843543","/insights/page_fans_gender_age")
+        puts "consumptions="+page_consumptions[2]["values"][2]["value"].to_s
+        puts "fans="+page_fans[0]["values"][0]["value"].to_s
+        puts "page_fans_locale"+page_fans_locale[0]["values"][0]["value"].to_s
+        puts "page views total"+page_views_total.to_s
+      end
     end

@@ -99,8 +99,8 @@
     <div class="tab-pane" role="tabpanel" id="step3">
       <h4>Connect To Instagram</h4>
       <div id="data_from_fb">
-        <a href="javascript:void(0)" onclick="window.open('https://api.instagram.com/oauth/authorize/?client_id=6b7aae8b938642eeb242a76096727fdf&redirect_uri=http://http://103.243.5.242:3000/influencers/wizard&response_type=token','_self')">
-          <i class="ion-social-facebook"></i>&nbsp;Login To Instagram</a>
+        <a href="javascript:void(0)" onclick="window.open('https://api.instagram.com/oauth/authorize/?client_id=6b7aae8b938642eeb242a76096727fdf&redirect_uri=http://localhost:3000/influencers/wizard&response_type=token','_self')">
+          <i class="ion-social-instagram"></i>&nbsp;Login To Instagram</a>
         <p id="instagram_followers"></p>
       </div>
       <div class="mgTop80">
@@ -148,13 +148,21 @@ function get_account_data(){
   FB.api(
     '/me/accounts',
     'GET',
-    {"fields":"fan_count,name","access_token":"EAAOBpshGnogBAC7Bs5ZA9jqP2ZAtgVZC7MgVHVmBzUNkKFUZBA0gj7A8GsKT2ApHZCpV5gPFbBSuaY46S5AuV5ruu68ZA19k2HtKPhlYJwEyBsdflYVHVE55gpbZANnms6xVRLIKnpcYxVYbB22Sl3giQJRmSbZCo4JRMPUY3djdkwZDZD"},
+    {"fields":"fan_count,name"},
     function(response) {
+      if (response["data"].length> 0)
+      {
+        $("#data_from_fb").html("");
         for(i=0;i<response["data"].length;i++){
             console.log(response["data"][i]);
             add_social_account(response["data"][i]["id"],response["data"][i]["fan_count"],"<%=current_influencer.id%>",response["data"][i]["name"]);
             $("#data_from_fb").append("<div class='col-md-12'>"+"<p> <b>Page ID</b> :"+response["data"][i]["id"]+"</p>"+"<p><b>Fans</b> :"+response["data"][i]["fan_count"]+"</p>"+"</div>")
         }
+      }
+      else {
+        $("#data_from_fb").html("").append("No Pages found")
+      }
+
         $("#step_1_btn").removeClass("hidden").click();
      });
 }
