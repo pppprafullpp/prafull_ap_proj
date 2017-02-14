@@ -76,6 +76,13 @@
   <%end%>
   </div>
 <script>
+function check_for_number(value) {
+  if(isNaN(value)){
+      $("#error-msg").addClass("alert alert-danger").text("enter only numbers please");
+      return false
+  }
+  return true
+}
 $("#create_advertiser_btn").on("click",function(event){
   event.preventDefault();
   name = $("#advertiser_name").val();
@@ -96,8 +103,12 @@ $("#create_advertiser_btn").on("click",function(event){
       },
       success : function(response) {
         console.log(response);
-        if (response["status"] != "error"){
+
+        if (response["status"] != "error" && check_for_number($("#advertiser_telephone_no").val())){
           $("#new_advertiser").submit();
+        }
+        else {
+            $("#error-msg").removeClass("hidden").text("Enter only Numbers in Telephone");
         }
       }
     })
