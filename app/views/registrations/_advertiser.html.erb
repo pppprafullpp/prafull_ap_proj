@@ -11,6 +11,7 @@
     <label class="control-label col-md-4" for="">Email</label>
     <div class="col-md-8">
       <%= f.text_field :email, :class=>"form-control",:placeholder=>"Enter Email",:onblur=>"check_exising_user(this.value)"%>
+      <span class="sm-Txt hidden"  id="error-email-msg"></span>
     </div>
   </div>
 
@@ -37,7 +38,7 @@
   <div class="form-group">
     <label class="control-label col-md-4" for="">City</label>
     <div class="col-md-8">
-      <%= f.text_field :city, :class=>"form-control",:placeholder=>"Enter City", :onkeyup=>"check_for_letters(this)",:autocomplete=>"off"%>
+      <%= f.text_field :city, :class=>"form-control",:placeholder=>"Enter City", :onkeyup=>"check_for_letters(this)",:autocomplete=>"off",:maxlength=>25%>
     </div>
   </div>
   <div class="form-group">
@@ -102,6 +103,64 @@ $("#create_advertiser_btn").on("click",function(event){
     })
   }
   else {
+    if($("#advertiser_name").val()==""){
+      $("#advertiser_name").addClass("error-border");
+    }
+    else {
+        $("#advertiser_name").removeClass("error-border");
+    }
+    if($("#advertiser_email").val()==""){
+      $("#advertiser_email").addClass("error-border");
+    }
+    else {
+        $("#advertiser_email").removeClass("error-border");
+    }
+    if($("#advertiser_password").val()==""){
+      $("#advertiser_password").addClass("error-border");
+    }
+    else {
+        $("#advertiser_password").removeClass("error-border");
+    }
+    if($("#advertiser_telephone_no").val()==""){
+      $("#advertiser_telephone_no").addClass("error-border");
+    }
+    else {
+        $("#advertiser_telephone_no").removeClass("error-border");
+    }
+    if($("#advertiser_city").val()==""){
+      $("#advertiser_city").addClass("error-border");
+    }
+    else {
+        $("#advertiser_city").removeClass("error-border");
+    }
+
+    if($("#advertiser_state").val()==""){
+      $("#advertiser_state").addClass("error-border");
+    }
+    else {
+        $("#advertiser_state").removeClass("error-border");
+    }
+
+    if($("#advertiser_address").val()==""){
+      $("#advertiser_address").addClass("error-border");
+    }
+    else {
+        $("#advertiser_address").removeClass("error-border");
+    }
+
+    if($("#advertiser_zip").val()==""){
+      $("#advertiser_zip").addClass("error-border");
+    }
+    else {
+        $("#advertiser_zip").removeClass("error-border");
+    }
+
+    if($("#advertiser_country option:selected").val()==""){
+      $("#advertiser_country ").addClass("error-border");
+    }
+    else {
+        $("#advertiser_country ").removeClass("error-border");
+    }
       $("#error-msg").removeClass("hidden").text("Enter All Fields & validate captcha");
   }
 });
@@ -120,12 +179,12 @@ $("#create_advertiser_btn").on("click",function(event){
           console.log(response);
           if (response["status"] == "error")
           {
-            $("#error-msg").removeClass("hidden").text("Email Already Exists");
+            $("#error-email-msg").removeClass("hidden").text("Email Already Exists");
             $("#advertiser_email").focus();
             // $("#advertiser_email").focus();
           }
           else {
-              $("#error-msg").addClass("hidden");
+              $("#error-email-msg").addClass("hidden");
           }
         }
       })

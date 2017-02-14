@@ -10008,7 +10008,7 @@ span.round-tab i{
 .wizard li.active span.round-tab {
     background: #fff;
     border: 2px solid #5bc0de;
-    
+
 }
 .wizard li.active span.round-tab i{
     color: #5bc0de;
@@ -10092,4 +10092,7 @@ span.round-tab:hover {
         position: absolute;
         left: 35%;
     }
+}
+.error-border {
+  border-color: red;
 }
