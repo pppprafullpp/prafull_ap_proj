@@ -80,12 +80,11 @@ function filter(type,obj){
           <p><%=influencer.social_account.last.about.truncate(10) rescue "Not Provided"%></p>
           <p><strong>Instagram Followers: </strong> <span class="smFollow"><%=influencer.instagram_page_count%></span></br>
           <p><strong>Facbook page likes: </strong> <span class="smFollow">
-            <%if influencer.social_accounts.any?%>
-              <%influencer.social_accounts.each do |social_account|%>
-                <p><span><%=social_account.facebook_page_title%>: </span><span><%=social_account.facebook_page_count%></span></p>
-               <%end%>
-            <%end%>
-
+            <%#if influencer.social_accounts.any?%>
+              <%#influencer.social_accounts.each do |social_account|%>
+                <!-- <p><span><%#=social_account.facebook_page_title%>: </span><span><%#=social_account.facebook_page_count%></span></p> -->
+               <%#end%>
+            <%#end%>
           </span></br>
           <strong>Recommended Price Tag/Posts:</strong> <span class="smPrice">$ <%=influencer.publishing_price.present? ? influencer.publishing_price : "NA"%></span></p>
           </div>

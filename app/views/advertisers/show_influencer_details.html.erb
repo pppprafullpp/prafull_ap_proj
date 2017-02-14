@@ -22,6 +22,18 @@
           </tr>
         </table>
         <h3> Insights </h3>
+
+
+        <%#if @image_urls.present?%>
+          <!-- <h3>Recent Media</h3> -->
+          <%#@image_urls.each do |image_url|%>
+          <!-- <div class="col-md-2"> -->
+            <!-- <img src="<%#=image_url%>" width="100px" height="100px" /> -->
+          <!-- </div> -->
+          <%#end%>
+        <%#end%>
+
+
         <p><i class="fa fa-instagram"></i> <%=@influencer_details.instagram_page_count || 0%></p>
          <%if @social_accounts.present?%>
           <%@social_accounts.each do |social_account|%>
@@ -34,6 +46,7 @@
                <p><b>Brief Details</b>: <%=social_account.about%></p>
              </div>
            <%end%>
+
          <%else%>
          <p>Do Not Exists!</p>
          <%end%>

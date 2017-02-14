@@ -59,6 +59,7 @@
     </li>
   </ul>
 </div>
+<i class="fa fa-spinner fa-spin hidden" id="spinner" style="font-size:48px;color:red" aria-hidden="true"></i>
 
 <form>
   <div class="tab-content">
@@ -124,6 +125,7 @@
 
 </form>
 </div>
+
 </div>
 </div>
 
@@ -133,9 +135,9 @@
 </main>
 <script>
 function LoginFBForWizard(){
-  console.log("ddd");
-  FB.login(function(response) {
+   FB.login(function(response) {
       if(response["status"] ==  "connected"){
+        facebook_access_token = response.authResponse.accessToken;
          get_account_data();
       }
   }, {
@@ -144,25 +146,199 @@ function LoginFBForWizard(){
   });
 }
 
+// function get_insights_info(page_id){
+//   console.log("page_id="+page_id);
+//     insights = [];
+//     FB.api("/"+page_id+"/insights/page_consumptions",function(response){
+//       if(response["data"][0]!=undefined){
+//           insights.push(response["data"][0]["values"][2]["value"]);
+//         }
+//         else {
+//           insights.push(0);
+//         }
+//     });
+//
+//     FB.api("/"+page_id+"/insights/page_consumptions_by_consumption_type",function(response){
+//       if(response["data"][0]!=undefined){
+//           insights.push(response["data"][0]["values"][2]["value"]);
+//         }
+//         else {
+//           insights.push(0);
+//         }
+//     });
+//
+//     FB.api("/"+page_id+"/insights/page_fans",function(response){
+//       if(response["data"][0]!=undefined){
+//           insights.push(response["data"][0]["values"][2]["value"]);
+//         }
+//         else {
+//           insights.push(0);
+//         }
+//     });
+//
+//     FB.api("/"+page_id+"/insights/page_fans_locale",function(response){
+//       if(response["data"][0]!=undefined){
+//           insights.push(response["data"][0]["values"][2]["value"]);
+//         }
+//         else {
+//           insights.push(0);
+//         }
+//     });
+//
+//     FB.api("/"+page_id+"/insights/page_fans_gender_age",function(response){
+//       if(response["data"][0]!=undefined){
+//           insights.push(response["data"][0]["values"][2]["value"]);
+//         }
+//         else {
+//           insights.push(0);
+//         }
+//     });
+//
+//     FB.api("/"+page_id+"/insights/page_views_total",function(response){
+//       if(response["data"][0]!=undefined){
+//           insights.push(response["data"][0]["values"][2]["value"]);
+//         }
+//         else {
+//           insights.push(0);
+//         }
+//     });
+//
+//     return (insights)
+// }
+
 function get_account_data(){
+  $("#spinner").removeClass("hidden");
   FB.api(
     '/me/accounts',
     'GET',
     {"fields":"fan_count,name"},
     function(response) {
-      if (response["data"].length> 0)
-      {
+      if (response["data"].length> 0){
         $("#data_from_fb").html("");
         for(i=0;i<response["data"].length;i++){
-            console.log(response["data"][i]);
-            add_social_account(response["data"][i]["id"],response["data"][i]["fan_count"],"<%=current_influencer.id%>",response["data"][i]["name"]);
+            fb_page_id =response["data"][i]["id"];
+            FB.api("/"+response["data"][i]["id"]+"/insights/page_consumptions",function(response){
+              if(response["data"]!=undefined && response["data"][0]!=undefined && response["data"][0]["values"]!=undefined){
+                   $.ajax({
+                    url:"<%=add_page_consumptions_insights_path%>",
+                    type:"POST",
+                    data:{
+                      page_id:fb_page_id,
+                      page_consumptions:response["data"][0]["values"][2]["value"]
+                    },
+                    success: function(response){
+
+                    }
+                  });
+                }
+                else {
+                  console.log("Not Available");
+                }
+            });
+
+            FB.api("/"+response["data"][i]["id"]+"/insights/page_consumptions_by_consumption_type",function(response){
+              if(response["data"]!=undefined && response["data"][0]!=undefined && response["data"][0]["values"]!=undefined){
+                   $.ajax({
+                    url:"<%=add_page_consumptions_by_consumption_type_insights_path%>",
+                    type:"POST",
+                    data:{
+                      page_id:fb_page_id,
+                      page_consumptions_by_consumption_type:response["data"][0]["values"][2]["value"]
+                    },
+                    success: function(response){
+                      console.log(response);
+                    }
+                  });
+                }
+                else {
+                  console.log("Not Available");
+                }
+            });
+
+            FB.api("/"+response["data"][i]["id"]+"/insights/page_fans",function(response){
+              if(response["data"]!=undefined && response["data"][0]!=undefined && response["data"][0]["values"]!=undefined){
+                   $.ajax({
+                    url:"<%=add_page_fans_insights_path%>",
+                    type:"POST",
+                    data:{
+                      page_id:fb_page_id,
+                      page_fans:response["data"][0]["values"][2]["value"]
+                    },
+                    success: function(response){
+                      console.log(response)
+                    }
+                  })
+                }
+                else {
+                  console.log("Not Available");
+                }
+            });
+
+            FB.api("/"+response["data"][i]["id"]+"/insights/page_fans_locale",function(response){
+              if(response["data"]!=undefined && response["data"][0]!=undefined && response["data"][0]["values"]!=undefined){
+                   $.ajax({
+                    url:"<%=add_page_fans_locale_insights_path%>",
+                    type:"POST",
+                    data:{
+                      page_id:fb_page_id,
+                      page_fans_locale:response["data"][0]["values"][2]["value"]
+                    },
+                    success: function(response){
+
+                    }
+                  })
+                }
+                else {
+                  console.log("Not Available");
+                }
+            });
+
+            FB.api("/"+response["data"][i]["id"]+"/insights/page_fans_gender_page",function(response){
+              if(response["data"]!=undefined && response["data"][0]!=undefined && response["data"][0]["values"]!=undefined){
+                   $.ajax({
+                    url:"<%=add_page_fans_gender_age_insights_path%>",
+                    type:"POST",
+                    data:{
+                      page_id:fb_page_id,
+                      page_fans_gender_page:response["data"][0]["values"][2]["value"]
+                    },
+                    success: function(response){
+
+                    }
+                  })
+                }
+                else {
+                  console.log("Not Available");
+                }
+            });
+
+            FB.api("/"+response["data"][i]["id"]+"/insights/page_views_total",function(response){
+              if(response["data"]!=undefined && response["data"][0]!=undefined && response["data"][0]["values"]!=undefined){
+                $.ajax({
+                    url:"<%=add_page_views_total_insights_path%>",
+                    type:"POST",
+                    data:{
+                      page_id:fb_page_id,
+                      page_views_total:response["data"][0]["values"][2]["value"]
+                    },
+                    success: function(response){
+
+                    }
+                  })
+                }
+                else {
+                  console.log("Not Available");
+                }
+            });
+            console.log("---------------------------------------------------------")
+             add_social_account(response["data"][i]["id"],response["data"][i]["fan_count"],"<%=current_influencer.id%>",response["data"][i]["name"]);
             $("#data_from_fb").append("<div class='col-md-12'>"+"<p> <b>Page ID</b> :"+response["data"][i]["id"]+"</p>"+"<p><b>Fans</b> :"+response["data"][i]["fan_count"]+"</p>"+"</div>")
-        }
+          }
       }
       else {
         $("#data_from_fb").html("").append("No Pages found")
       }
-
+      $("#spinner").addClass("hidden");
         $("#step_1_btn").removeClass("hidden").click();
      });
 }
@@ -178,13 +354,12 @@ function get_account_data(){
       },
       success: function(response){
         $("#show_success_message").removeClass("hidden").html("Connected and Pulled Page Details");
-        console.log(response);
-       }
+        }
     });
   }
 
   $(document).ready(function(){
-    if(location.href.split("#")[1]!=undefined && location.href.split("#")[1]!=null){
+     if(location.href.split("#")[1]!=undefined && location.href.split("#")[1]!=null){
       access_token = location.href.split("#")[1].split("=")[1];
       $("#step3").addClass("active");
       $("#step1").removeClass("active");
@@ -200,25 +375,25 @@ function get_account_data(){
       dataType:'jsonp',
       type: "GET",
       success: function(response){
-        console.log(response);
         followed_by = response["data"]["counts"]["followed_by"];
+        instagram_id = response["data"]["id"]
         $("#instagram_followers").html("<b>Followers:</b>"+response["data"]["counts"]["followed_by"])
-        add_instagram_follows(followed_by);
+        add_instagram_follows(followed_by,instagram_id);
       }
-    })
+    });
   }
 
-  function add_instagram_follows(followed_by){
+  function add_instagram_follows(followed_by,instagram_id_value){
     $.ajax({
       url:"<%=add_instagram_followers_influencers_path%>",
       type: "POST",
       data: {
-        followers:followed_by
+        followers:followed_by,
+        instagram_id:instagram_id_value
       },
       success: function(response){
         console.log(response);
       }
     })
   }
-
 </script>

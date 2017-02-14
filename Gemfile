@@ -64,3 +64,4 @@ gem 'paypal-sdk-rest'
 gem "rails-erd"
 gem 'chosen-rails'
 gem 'delayed_job_active_record'
+gem 'httparty'

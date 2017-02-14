@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170207104227) do
+ActiveRecord::Schema.define(version: 20170210103951) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "trackable_id",   limit: 4
@@ -243,6 +243,7 @@ ActiveRecord::Schema.define(version: 20170207104227) do
     t.integer  "age",                    limit: 4
     t.text     "country",                limit: 65535
     t.boolean  "completed_wizard"
+    t.text     "instagram_id",           limit: 65535
   end
 
   add_index "influencers", ["email"], name: "index_influencers_on_email", unique: true, using: :btree
@@ -284,6 +285,9 @@ ActiveRecord::Schema.define(version: 20170207104227) do
     t.text     "facebook_page_name",                    limit: 65535
     t.datetime "created_at",                                          null: false
     t.datetime "updated_at",                                          null: false
+    t.integer  "page_consumptions",                     limit: 4
+    t.text     "highest_page_locale_name",              limit: 65535
+    t.text     "highest_page_locale_value",             limit: 65535
   end
 
   create_table "pending_notifications", force: :cascade do |t|

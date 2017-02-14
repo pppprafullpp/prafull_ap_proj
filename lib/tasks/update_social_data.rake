@@ -1,4 +1,5 @@
 require "fb_graph2"
+require 'rest-client'
 
 namespace :update_social_data do
     task :update_facebook_likes => :environment do |t,token|
@@ -36,7 +37,6 @@ namespace :update_social_data do
       task add_facebook_insights: :environment do
         facebook_page_ids = SocialAccount.pluck(:facebook_page_id)
         graph = Koala::Facebook::API.new("EAAOBpshGnogBAIZBo8yVpqwsjHZCv4TCbzE8LvaOJdVDwZAqARfFZBSP3yBI7q3Cn3HyMVZBf46dBl7PeO4amEkzVPC1ZBLYTWhMdtVwYwjMZBcmCZBLtZBvifFIIY6i6K7hl0teDcoeLlFjzIc9KNM2aivm3ZBVbbmvcJV46fPNCJbwZDZD")
-
         page_consumptions = graph.get_connections("882472861843543","/insights/page_consumptions")
         page_consumptions_by_consumption_type = graph.get_connections("882472861843543","/insights/page_consumptions_by_consumption_type")
         page_fans = graph.get_connections("882472861843543","/insights/page_fans")
@@ -48,4 +48,36 @@ namespace :update_social_data do
         puts "page_fans_locale"+page_fans_locale[0]["values"][0]["value"].to_s
         puts "page views total"+page_views_total.to_s
       end
+
+      task add_or_update_demographic_data: :environment do
+        instagram_ids = Influencer.pluck(:instagram_id)
+        instagram_ids.each do |instagram_id|
+          if instagram_id.present?
+            puts instagram_id
+            url = "https://www.demographicspro.com/6/api/get_codes?get_audience_reach_analysis?for="+instagram_id+"&data=followers_of_id&network=instagram"
+            request = RestClient::Request.execute method: :get, url: url, user: 'socialbooker_apitest', password: '2vi8dtmsii3c'
+            request = JSON.parse(request)
+            male_reach = request["sections_list"][0]["section_content"][0]["i_average"]
+            female_reach = request["sections_list"][0]["section_content"][1]["i_average"]
+            country_reach = request["sections_list"][8]["section_content"]
+            puts "Female Reach = "+male_reach.to_s
+            puts "Male Reach = "+female_reach.to_s
+            top_5_countries_in_reach = country_reach.sort_by {|h| h["i_average"]}.reverse.first(5)
+            top_5_countries_in_reach = top_5_countries_in_reach.map{|f| f["name"]+","+f["i_average"].to_s}
+            puts "Top Countries in Reach ="+top_5_countries_in_reach.to_s
+          end
+        end
+      end
+
+      task get_data_from_instagram: :environment do
+
+        instagram_ids = Influencer.pluck(:instagram_id)
+        instagram_ids.each do |instagram_id|
+          if instagram_id.present?
+            
+          end
+        end
+      end
+
+
     end

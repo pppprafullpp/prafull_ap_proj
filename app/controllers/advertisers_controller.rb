@@ -1,4 +1,7 @@
 class AdvertisersController < ApplicationController
+  include HTTParty
+  require 'rest-client'
+  require 'net/http'
 
   before_filter :authenticate_advertiser!, :except =>[:new, :create]
   before_filter :check_if_verified
@@ -12,6 +15,7 @@ class AdvertisersController < ApplicationController
    end
 
    def show_influencers
+
       if params[:publishing_price].present? && params[:category].present?
          @influencers = Influencer.where(:publishing_price=>params[:publishing_price],:category_id=>params[:category])
        elsif params[:category].present?
@@ -134,6 +138,21 @@ class AdvertisersController < ApplicationController
    def show_influencer_details
      @influencer_details = Influencer.find(params[:id])
      @social_accounts = @influencer_details.social_accounts
+     instagram_id = @influencer_details.instagram_id
+     @image_urls = []
+     if instagram_id.present?
+       puts "?????????????????????????????????????????>>>>>>>>>>>>>>>>>>>>#{instagram_id}"
+       instagram_token = AppConfiguration.find_by(:config_key=>"instagram token").config_value
+       request_url = HTTParty.get("https://api.instagram.com/v1/users/"+instagram_id+"/media/recent?access_token="+instagram_token)
+
+       request_url["data"].each_with_index do |r,index|
+         @image_urls <<  r["images"]["standard_resolution"]["url"]
+       end
+
+      #  request_url = HTTParty.get(("https://api.instagram.com/v1/users/1581592650/?access_token=4082887215.6b7aae8.d7be357a0346496db3963e55bb06faf4"))
+      #  data = r["images"]["standard_resolution"]
+     end
+
     end
 
    def group_details

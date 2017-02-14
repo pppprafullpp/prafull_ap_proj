@@ -12,14 +12,14 @@
     </div>
     <div class="form-horizontal">
       <p><b>Instagram Followers:<b><%= @instagram_followers%></p>
-      <%@social_accounts.each do |social_account|%>
+       <%@social_accounts.each_with_index do |social_account,index|%>
         <div class="row" style="border-bottom: 1px solid #000;">
           <div class="col-md-4" id="chart_for_<%=social_account.id%>" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto;border-right: 1px solid #000;">
             <script>
-               FB.api('/449082841792177/insights/page_fans_country', 'GET',{"access_token":"EAAOBpshGnogBAC7Bs5ZA9jqP2ZAtgVZC7MgVHVmBzUNkKFUZBA0gj7A8GsKT2ApHZCpV5gPFbBSuaY46S5AuV5ruu68ZA19k2HtKPhlYJwEyBsdflYVHVE55gpbZANnms6xVRLIKnpcYxVYbB22Sl3giQJRmSbZCo4JRMPUY3djdkwZDZD"},function(response) {
-                  console.log(response);
-                  f  = response["data"][0]["values"][2]["value"];
+               FB.api('/<%= social_account.facebook_page_id %>/insights/page_fans_country', 'GET',{"access_token":"EAAOBpshGnogBAC7Bs5ZA9jqP2ZAtgVZC7MgVHVmBzUNkKFUZBA0gj7A8GsKT2ApHZCpV5gPFbBSuaY46S5AuV5ruu68ZA19k2HtKPhlYJwEyBsdflYVHVE55gpbZANnms6xVRLIKnpcYxVYbB22Sl3giQJRmSbZCo4JRMPUY3djdkwZDZD"},function(response) {
                   if(response["data"].length> 0){
+                    console.log(response);
+                    f = response["data"][0]["values"][2]["value"];
                     Highcharts.chart('chart_for_<%=social_account.id%>', {
                      chart: {
                          plotBackgroundColor: null,
@@ -53,14 +53,14 @@
                              name: 'US',
                              y: f["US"],
                          }, {
-                             name: 'AE',
-                             y: f["AE"]
+                             name: 'DE',
+                             y: f["DE"]
                          },{
                            name: 'IN',
                            y: f["IN"]
                          },{
-                           name: 'TN',
-                           y: f["TN"]
+                           name: 'TN' || f["AU"] ,
+                           y: f["TN"] || f["AU"]
                          }
                          ]
                      }]
@@ -84,27 +84,22 @@
                  'GET',
                  {"access_token":"EAAOBpshGnogBAC7Bs5ZA9jqP2ZAtgVZC7MgVHVmBzUNkKFUZBA0gj7A8GsKT2ApHZCpV5gPFbBSuaY46S5AuV5ruu68ZA19k2HtKPhlYJwEyBsdflYVHVE55gpbZANnms6xVRLIKnpcYxVYbB22Sl3giQJRmSbZCo4JRMPUY3djdkwZDZD"},
                  function(response) {
-                   console.log(response);
                    monthly_impression = response["data"][2]["values"][2]["value"];
                    $("#page_impressions_<%=social_account.id%>").text(monthly_impression);
-                   console.log(monthly_impression);
                  }
                );
                FB.api('/'+"<%=social_account.facebook_page_id%>"+'/insights/page_impressions',
                     'GET',
                     {"access_token":"EAAOBpshGnogBAC7Bs5ZA9jqP2ZAtgVZC7MgVHVmBzUNkKFUZBA0gj7A8GsKT2ApHZCpV5gPFbBSuaY46S5AuV5ruu68ZA19k2HtKPhlYJwEyBsdflYVHVE55gpbZANnms6xVRLIKnpcYxVYbB22Sl3giQJRmSbZCo4JRMPUY3djdkwZDZD"},
                     function(response) {
-                      console.log(response);
                       monthly_engagement = response["data"][2]["values"][2]["value"];
                       $("#page_engaged_users_<%=social_account.id%>").text(monthly_engagement);
-                      console.log(monthly_engagement);
                     }
                   );
                   FB.api('/'+"<%=social_account.facebook_page_id%>",
                        'GET',
                        {"access_token":"EAAOBpshGnogBAC7Bs5ZA9jqP2ZAtgVZC7MgVHVmBzUNkKFUZBA0gj7A8GsKT2ApHZCpV5gPFbBSuaY46S5AuV5ruu68ZA19k2HtKPhlYJwEyBsdflYVHVE55gpbZANnms6xVRLIKnpcYxVYbB22Sl3giQJRmSbZCo4JRMPUY3djdkwZDZD"},
                        function(response) {
-                         console.log(response["name"]);
                          $("#page_name_<%=social_account.id%>").text(response["name"])
                        }
                      );

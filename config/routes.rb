@@ -4,6 +4,16 @@ Rails.application.routes.draw do
   resources :campaigns
   resources :categories
   resources :influencer_financial_infos
+  resources :insights do
+    collection do
+      post :add_page_consumptions
+      post :add_page_consumptions_by_consumption_type
+      post :add_page_fans
+      post :add_page_fans_locale
+      post :add_page_fans_gender_age
+      post :add_page_views_total
+    end
+  end
   resources :advertisments do
     post :update_ad_share_url_and_status
     collection do

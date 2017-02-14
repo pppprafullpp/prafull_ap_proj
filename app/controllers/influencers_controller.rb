@@ -77,7 +77,7 @@ class InfluencersController < ApplicationController
   end
 
   def add_instagram_followers
-     current_influencer.update_attributes(:instagram_page_count=>params[:followers])
+     current_influencer.update_attributes(:instagram_page_count=>params[:followers],:instagram_id=>params[:instagram_id])
       render :json=>{
         :status => "updated",
         :code => 200

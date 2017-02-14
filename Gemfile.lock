@@ -93,6 +93,8 @@ GEM
     hashie (3.4.6)
     http-cookie (1.0.3)
       domain_name (~> 0.5)
+    httparty (0.14.0)
+      multi_xml (>= 0.5.2)
     httpclient (2.8.3)
     i18n (0.8.0)
     instagram (1.1.6)
@@ -272,6 +274,7 @@ DEPENDENCIES
   delayed_job_active_record
   devise
   fb_graph2
+  httparty
   instagram
   ionicons-rails
   jbuilder (~> 2.0)
