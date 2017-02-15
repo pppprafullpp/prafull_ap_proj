@@ -70,14 +70,26 @@ namespace :update_social_data do
       end
 
       task get_data_from_instagram: :environment do
-
+        instagram_token = AppConfiguration.find_by(:config_key=>"instagram_access_token").config_value
         instagram_ids = Influencer.pluck(:instagram_id)
-        instagram_ids.each do |instagram_id|
-          if instagram_id.present?
-            
-          end
+          instagram_ids.each do |instagram_id|
+           if instagram_id.present?
+             total_likes = [];
+             puts "--------------------------------------------------------------------------------------------------"
+             f=HTTParty.get("https://api.instagram.com/v1/users/#{instagram_id}/?access_token=#{instagram_token}")
+             profile_picture = f["data"]["profile_picture"]
+             puts "profile_picture= #{profile_picture}"
+             recent_media = HTTParty.get("https://api.instagram.com/v1/users/#{instagram_id}/media/recent?access_token=#{instagram_token}")
+             recent_media["data"].each_with_index do |media,index|
+                # puts "link = #{recent_media['data'][index]['link']}"
+                # puts "likes = #{recent_media['data'][index]['likes']['count']}"
+                total_likes << recent_media['data'][index]['likes']['count']
+                # puts "image link = #{recent_media['data'][index]['images']['thumbnail']['url']}"
+             end
+             if total_likes.length > 0
+               puts "Average="+ (total_likes.sum / total_likes.length ).to_s
+           end
         end
-      end
-
-
+      end #task
     end
+  end
