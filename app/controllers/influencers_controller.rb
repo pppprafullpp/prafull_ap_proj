@@ -49,7 +49,11 @@ class InfluencersController < ApplicationController
         likes_sum = likes_sum + object["likes"]["count"]
         comment_sum = comment_sum + object["comments"]["count"]
       end
-      @average_of_likes = likes_sum/total_object_length
+      if total_object_length > 0
+        @average_of_likes = likes_sum/total_object_length
+      else
+        @average_of_likes = 0
+      end
       @average_of_comments = comment_sum/total_object_length
 end
   end
