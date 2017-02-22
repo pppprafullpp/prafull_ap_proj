@@ -51,10 +51,11 @@ class InfluencersController < ApplicationController
       end
       if total_object_length > 0
         @average_of_likes = likes_sum/total_object_length
+        @average_of_comments = comment_sum/total_object_length
       else
         @average_of_likes = 0
+        @average_of_comments = 0
       end
-      @average_of_comments = comment_sum/total_object_length
 end
   end
 
