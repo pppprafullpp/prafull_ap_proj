@@ -27,6 +27,31 @@ class InfluencersController < ApplicationController
   def insights
     @social_accounts = current_influencer.social_accounts.order("ID DESC")
     @instagram_followers = current_influencer.instagram_page_count
+    @influencer_details = current_influencer
+    @token =  AppConfiguration.find_by(:config_key=>"instagram_access_token").config_value
+    @image_urls = []
+    if current_influencer.instagram_id.present?
+      instagram_token = AppConfiguration.find_by(:config_key=>"instagram_access_token").config_value
+      instagram_id = current_influencer.instagram_id
+      puts "?????????????????????????????????????????>>>>>>>>>>>>>>>>>>>>#{instagram_id}"
+      request_url = HTTParty.get("https://api.instagram.com/v1/users/"+current_influencer.instagram_id+"/media/recent?access_token="+instagram_token)
+      request_url["data"].each_with_index do |r,index|
+        @image_urls <<  r["images"]["standard_resolution"]["url"]
+      end
+      self_data = HTTParty.get("https://api.instagram.com/v1/users/#{instagram_id}/?access_token=#{@token}")["data"]["counts"]
+      @following = self_data["follows"]
+      @followed_by = self_data["followed_by"]
+      total_likes_object = HTTParty.get("https://api.instagram.com/v1/users/#{instagram_id}/media/recent/?access_token=#{@token}")["data"]
+      total_object_length = total_likes_object.length
+      likes_sum = 0
+      comment_sum =0
+      total_likes_object.each do |object|
+        likes_sum = likes_sum + object["likes"]["count"]
+        comment_sum = comment_sum + object["comments"]["count"]
+      end
+      @average_of_likes = likes_sum/total_object_length
+      @average_of_comments = comment_sum/total_object_length
+end
   end
 
   def change_password

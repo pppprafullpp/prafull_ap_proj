@@ -11,8 +11,8 @@ class Advertiser < ActiveRecord::Base
       ApplicationController.new.add_notification(Notification::ACTIVITY_TYPE["advertiser_sign_up"],"#{self.name} signed up as influencer",:viewed=>false)
     end
 
-    def self.verify(id)
-      self.find(id).update_attributes(:is_verified=>true)
+    def verify
+      self.update_attributes(:is_verified=>true)
     end
 
 end

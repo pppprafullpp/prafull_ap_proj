@@ -179,3 +179,14 @@ function decline_ad_by_influencer() {
        alert("Enter Reason for declining")
     }
 }
+
+function get_country_fans(page_id){
+  FB.api(
+  '/'+page_id+'/insights/page_fans_country',
+  'GET',
+  {'access_token':'EAAOBpshGnogBAD3kCywWmB9xhtsRXJ2zb2Hk1GkQaNjZAFeuZBo4AZBA9YyZAhb4jZAmAvaqTlokDf1p8IMKqZCQPiA38cjcNXVOKZB0IleFZCzi5n9C63MOcxMYzG0RQJLNkterebyMXOm1G3rcd6lu22XuCrTSfQYZD'},
+  function(response) {
+      console.log(response);
+  }
+);
+}

@@ -11,107 +11,171 @@
       </div>
     </div>
     <div class="form-horizontal">
-      <p><b>Instagram Followers:<b><%= @instagram_followers%></p>
-       <%@social_accounts.each_with_index do |social_account,index|%>
-        <div class="row" style="border-bottom: 1px solid #000;">
-          <div class="col-md-4" id="chart_for_<%=social_account.id%>" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto;border-right: 1px solid #000;">
-            <script>
-               FB.api('/<%= social_account.facebook_page_id %>/insights/page_fans_country', 'GET',{"access_token":"EAAOBpshGnogBAC7Bs5ZA9jqP2ZAtgVZC7MgVHVmBzUNkKFUZBA0gj7A8GsKT2ApHZCpV5gPFbBSuaY46S5AuV5ruu68ZA19k2HtKPhlYJwEyBsdflYVHVE55gpbZANnms6xVRLIKnpcYxVYbB22Sl3giQJRmSbZCo4JRMPUY3djdkwZDZD"},function(response) {
-                  if(response["data"].length> 0){
-                    console.log(response);
-                    f = response["data"][0]["values"][2]["value"];
-                    Highcharts.chart('chart_for_<%=social_account.id%>', {
-                     chart: {
-                         plotBackgroundColor: null,
-                         plotBorderWidth: null,
-                         plotShadow: false,
-                         type: 'pie'
-                     },
-                     title: {
-                         text: 'Country Wise Data'
-                     },
-                     tooltip: {
-                         pointFormat: '{point.name}: <b>{point.y}</b>'
-                     },
-                     plotOptions: {
-                         pie: {
-                             allowPointSelect: true,
-                             cursor: 'pointer',
-                             dataLabels: {
-                                 enabled: false
-                             },
-                             showInLegend: true
-                         }
-                     },
-                     series: [{
-                         name: 'Country',
-                         colorByPoint: true,
-                         data: [{
-                             name: 'AE',
-                             y: f["AE"]
-                         }, {
-                             name: 'US',
-                             y: f["US"],
-                         }, {
-                             name: 'DE',
-                             y: f["DE"]
-                         },{
-                           name: 'IN',
-                           y: f["IN"]
-                         },{
-                           name: 'TN' || f["AU"] ,
-                           y: f["TN"] || f["AU"]
-                         }
-                         ]
-                     }]
-                 });
-                  }
-                  else {
-                    $("#chart_for_<%=social_account.id%>").text("Not Enough Data to show Graph")
-                  }
-                });
+         <div class="container">
+         <div class="row">
+          <div class="col-md-12 text-center"><img class="circle-thumb" alt="team" src="<%=@influencer_details.profile_image_url%>"></div>
+         <div class="col-md-12 text-center mgTop10 mgBtm20">
+           <h4 class="member-name"><%=@influencer_details.name.camelcase%></h4>
+           <p>Joined: <%=@influencer_details.created_at.strftime("%d %B, %Y")%></p>
+         </div>
+         </div>
+
+         <!-- Facebook Data -->
+         <h3>Facebook Profile</h3>
+          <%@social_accounts.each do |account|%>
+         <div class="container">
+           <p>Page Name: <b><%=account.facebook_page_title%></b></p>
+         <div class="row">
+         <div class="col-md-4">
+           <h4>Country Fans</h4>
+           <table class="table table-striped">
+             <tbody id="country_data_<%=account.facebook_page_id%>">
+           </tbody>
+          </table>
+         </div>
+          <script>
+              FB.api(
+              '/'+"<%=account.facebook_page_id%>"+'/insights/page_fans_country',
+              'GET',
+              {'access_token':'EAAOBpshGnogBAD3kCywWmB9xhtsRXJ2zb2Hk1GkQaNjZAFeuZBo4AZBA9YyZAhb4jZAmAvaqTlokDf1p8IMKqZCQPiA38cjcNXVOKZB0IleFZCzi5n9C63MOcxMYzG0RQJLNkterebyMXOm1G3rcd6lu22XuCrTSfQYZD'},
+              function(response) {
+                if(response["data"][0]!=null){
+                  c=response.data[0]["values"][2]["value"];
+                  hash ={};
+                  sum = 0;
+                  counter =0;
+                  for(a in c) {
+                  console.log(a+":"+c[a]);
+                  hash[a]=c[a];
+                  sum = sum + c[a];
+                  counter++;
+                  $("#country_data_<%=account.facebook_page_id%>").append("<tr><td>"+a+"</td><td>"+c[a]+"</td></tr>");
+                }
+                $("#avg_page_reach_<%=account.facebook_page_id%>").text(sum/counter);
+                $("#total_countries_<%=account.facebook_page_id%>").text(counter);
+                $("#total_fans_<%=account.facebook_page_id%>").text(sum);
+              }
+            });
           </script>
+         <div class="col-md-8">
 
-          </div>
-          <div class="col-md-4">
-            <p><b>Page id </b>:<%=social_account.facebook_page_id%></p>
-            <p><b>Page Name </b>:<span id="page_name_<%=social_account.id%>"></span></p>
-            <p><b>Page likes </b>:<%=social_account.facebook_page_count%></p>
-            <p><b>Page Impressions</b>:<span id="page_impressions_<%=social_account.id%>"></span></p>
-            <p><b>Page Engaged Users</b>:<span id="page_engaged_users_<%=social_account.id%>"></span></p>
-             <script>
-            FB.api('/'+"<%=social_account.facebook_page_id%>"+'/insights/page_impressions',
-                 'GET',
-                 {"access_token":"EAAOBpshGnogBAC7Bs5ZA9jqP2ZAtgVZC7MgVHVmBzUNkKFUZBA0gj7A8GsKT2ApHZCpV5gPFbBSuaY46S5AuV5ruu68ZA19k2HtKPhlYJwEyBsdflYVHVE55gpbZANnms6xVRLIKnpcYxVYbB22Sl3giQJRmSbZCo4JRMPUY3djdkwZDZD"},
-                 function(response) {
-                   monthly_impression = response["data"][2]["values"][2]["value"];
-                   $("#page_impressions_<%=social_account.id%>").text(monthly_impression);
-                 }
-               );
-               FB.api('/'+"<%=social_account.facebook_page_id%>"+'/insights/page_impressions',
-                    'GET',
-                    {"access_token":"EAAOBpshGnogBAC7Bs5ZA9jqP2ZAtgVZC7MgVHVmBzUNkKFUZBA0gj7A8GsKT2ApHZCpV5gPFbBSuaY46S5AuV5ruu68ZA19k2HtKPhlYJwEyBsdflYVHVE55gpbZANnms6xVRLIKnpcYxVYbB22Sl3giQJRmSbZCo4JRMPUY3djdkwZDZD"},
-                    function(response) {
-                      monthly_engagement = response["data"][2]["values"][2]["value"];
-                      $("#page_engaged_users_<%=social_account.id%>").text(monthly_engagement);
-                    }
-                  );
-                  FB.api('/'+"<%=social_account.facebook_page_id%>",
-                       'GET',
-                       {"access_token":"EAAOBpshGnogBAC7Bs5ZA9jqP2ZAtgVZC7MgVHVmBzUNkKFUZBA0gj7A8GsKT2ApHZCpV5gPFbBSuaY46S5AuV5ruu68ZA19k2HtKPhlYJwEyBsdflYVHVE55gpbZANnms6xVRLIKnpcYxVYbB22Sl3giQJRmSbZCo4JRMPUY3djdkwZDZD"},
-                       function(response) {
-                         $("#page_name_<%=social_account.id%>").text(response["name"])
-                       }
-                     );
-            </script>
-          </div>
-        </div>
+           <div class="col-md-8" id="chart_for_<%=account.facebook_page_id%>" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto;">
+                <script>
+                   FB.api('/<%=account.facebook_page_id%>/insights/page_fans_country', 'GET',{"access_token":"EAAOBpshGnogBAC7Bs5ZA9jqP2ZAtgVZC7MgVHVmBzUNkKFUZBA0gj7A8GsKT2ApHZCpV5gPFbBSuaY46S5AuV5ruu68ZA19k2HtKPhlYJwEyBsdflYVHVE55gpbZANnms6xVRLIKnpcYxVYbB22Sl3giQJRmSbZCo4JRMPUY3djdkwZDZD"},function(response) {
+                      if(response["data"].length> 0){
+                        f = response["data"][0]["values"][2]["value"];
+                        Highcharts.chart('chart_for_<%=account.facebook_page_id%>', {
+                         chart: {
+                             plotBackgroundColor: null,
+                             plotBorderWidth: null,
+                             plotShadow: false,
+                             type: 'pie'
+                         },
+                         title: {
+                             text: 'Country Wise Data'
+                         },
+                         tooltip: {
+                             pointFormat: '{point.name}: <b>{point.y}</b>'
+                         },
+                         plotOptions: {
+                             pie: {
+                                 allowPointSelect: true,
+                                 cursor: 'pointer',
+                                 dataLabels: {
+                                     enabled: false
+                                 },
+                                 showInLegend: true
+                             }
+                         },
+                         series: [{
+                             name: 'Country',
+                             colorByPoint: true,
+                             data: [{
+                                 name: 'AE',
+                                 y: f["AE"]
+                             }, {
+                                 name: 'US',
+                                 y: f["US"],
+                             }, {
+                                 name: 'DE',
+                                 y: f["DE"]
+                             },{
+                               name: 'IN',
+                               y: f["IN"]
+                             },{
+                               name: 'TN' || f["AU"] ,
+                               y: f["TN"] || f["AU"]
+                             }
+                             ]
+                         }]
+                     });
+                      }
+                      else {
+                        $("#chart_for_<%=account.facebook_page_id%>").text("Not Enough Data to show Graph")
+                      }
+                    });
+              </script>
+           </div>
+           <div class="col-md-4">
+             <ul class="list-group">
+               <li class="list-group-item">
+               Total fans
+               <b id="total_fans_<%=account.facebook_page_id%>" class="">0</b>
+               </li>
+               <li class="list-group-item">
+               Average Page Reach
+               <b id="avg_page_reach_<%=account.facebook_page_id%>" class="">0</b>
+               </li>
+               <li class="list-group-item">
+               Total Country
+               <b id="total_countries_<%=account.facebook_page_id%>" class="">0</b>
+               </li>
+             </ul>
+           </div>
+         </div>
+         </div>
+         </div>
+          <%end%>
+           <!-- Facebook Data -->
 
-      <%end%>
+           <h3>Instagram Profile</h3>
+
+           <!-- Instagram Data -->
+           <div class="container inner-element text-center">
+             <div class="row">
+               <div class="col-md-3">
+                 <span id="id_follower"><strong><%=@followed_by || 0%></strong></span>
+                 Follower
+               </div>
+               <div class="col-md-3">
+                 <span  id="id_following"><strong><%=@following || 0%></strong></span>
+                 Following
+               </div>
+               <div class="col-md-3">
+                 <span  id="id_likes_per_post"><strong><%=@average_of_likes || 0%></strong></span>
+                 Likes/Post
+               </div>
+               <div class="col-md-3">
+                 <span><strong><%= @average_of_comments %></strong></span>
+                 Comments/Post
+               </div>
+             </div>
+           </div>
+            <%#=@image_urls%>
+           <div class="container inner-element">
+             <h4>Latest Media</h4>
+             <div class="row">
+               <div class="col-md-12 scroll">
+                  <%@image_urls.first(10).each do |url|%>
+                    <img alt="team" src="<%=url%>">
+                <%end%>
+              </div>
+             </div>
+           </div>
+           <!-- Instagram Data -->
+           </div>
+           </div>
       </div>
-      <!-- <div id="chart-area" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div> -->
-
-  </div>
   </section>
   </div>
   </section>

@@ -3,59 +3,180 @@
  <div class="content-wrapper">
   <%= render :partial => "/layouts/left_panel" %>
   <%= render :partial => "/layouts/header" %>
-  <section class="account section">
-    <div class="container mgTop10">
-    <div class="row">
-      <div class="col-md-3">
-        <% if @influencer_details.profile_image_url%>
-          <img height="250px" class="profile-img" src="<%=@influencer_details.profile_image_url%>">
-        <%else%>
-          <img height="250px" class="profile-img" src="/assets/default-user">
-        <%end%>
-      </div>
-      <div class="col-md-8 col-offset-2">
-        <h3><%=@influencer_details.name.titleize%></h3>
-        <table class="table table-striped">
-          <tr>
-            <td><b>Registered on</b> : <%=@influencer_details.created_at.strftime("%d/%m/%Y")%></td>
-            <td><b>Category</b> : <%=@influencer_details.category.camelcase rescue nil%></td>
-          </tr>
+  <section class="account section" style="min-height:575px;">
+			<div class="container">
+
+			  <div class="row">
+				<div class="col-md-12">
+					<h1>Influencer Details</h1>
+				</div>
+			 </div>
+
+			  <div class="row">
+        <div class="col-md-12 text-center"><img class="circle-thumb" alt="team" src="<%=@influencer_details.profile_image_url%>"></div>
+				<div class="col-md-12 text-center mgTop10 mgBtm20">
+					<h4 class="member-name"><%=@influencer_details.name.camelcase%></h4>
+					<p>Joined: <%=@influencer_details.created_at.strftime("%d %B, %Y")%></p>
+				</div>
+       </div>
+
+			  <!-- Facebook Data -->
+			  <h3>Facebook Profile</h3>
+        <%@social_accounts.each do |account|%>
+
+			  <div class="container">
+				<div class="row">
+				<div class="col-md-4">
+					<h4>Top Country Fans</h4>
+					<table class="table table-striped">
+						<tbody id="country_data_<%=account.facebook_page_id%>">
+					</tbody>
         </table>
-        <h3> Insights </h3>
+				</div>
+        <script>
+            FB.api(
+            '/'+"<%=account.facebook_page_id%>"+'/insights/page_fans_country',
+            'GET',
+            {'access_token':'EAAOBpshGnogBAD3kCywWmB9xhtsRXJ2zb2Hk1GkQaNjZAFeuZBo4AZBA9YyZAhb4jZAmAvaqTlokDf1p8IMKqZCQPiA38cjcNXVOKZB0IleFZCzi5n9C63MOcxMYzG0RQJLNkterebyMXOm1G3rcd6lu22XuCrTSfQYZD'},
+            function(response) {
+              if(response["data"][0]!=null){
+                c=response.data[0]["values"][2]["value"];
+                hash ={};
+                sum = 0;
+                counter =0;
+                for(a in c) {
+                console.log(a+":"+c[a]);
+                hash[a]=c[a];
+                sum = sum + c[a];
+                counter++;
+                $("#country_data_<%=account.facebook_page_id%>").append("<tr><td>"+a+"</td><td>"+c[a]+"</td></tr>");
+              }
+              $("#avg_page_reach_<%=account.facebook_page_id%>").text(sum/counter);
+              $("#total_countries_<%=account.facebook_page_id%>").text(counter);
+              $("#total_fans_<%=account.facebook_page_id%>").text(sum);
+            }
+          });
+        </script>
+				<div class="col-md-8">
+					<div class="col-md-8">
+ 					</div>
+					<div class="col-md-8" id="chart_for_<%=account.facebook_page_id%>" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto;">
+              <script>
+                 FB.api('/<%=account.facebook_page_id%>/insights/page_fans_country', 'GET',{"access_token":"EAAOBpshGnogBAC7Bs5ZA9jqP2ZAtgVZC7MgVHVmBzUNkKFUZBA0gj7A8GsKT2ApHZCpV5gPFbBSuaY46S5AuV5ruu68ZA19k2HtKPhlYJwEyBsdflYVHVE55gpbZANnms6xVRLIKnpcYxVYbB22Sl3giQJRmSbZCo4JRMPUY3djdkwZDZD"},function(response) {
+                    if(response["data"].length> 0){
+                      f = response["data"][0]["values"][2]["value"];
+                      Highcharts.chart('chart_for_<%=account.facebook_page_id%>', {
+                       chart: {
+                           plotBackgroundColor: null,
+                           plotBorderWidth: null,
+                           plotShadow: false,
+                           type: 'pie'
+                       },
+                       title: {
+                           text: 'Country Wise Data'
+                       },
+                       tooltip: {
+                           pointFormat: '{point.name}: <b>{point.y}</b>'
+                       },
+                       plotOptions: {
+                           pie: {
+                               allowPointSelect: true,
+                               cursor: 'pointer',
+                               dataLabels: {
+                                   enabled: false
+                               },
+                               showInLegend: true
+                           }
+                       },
+                       series: [{
+                           name: 'Country',
+                           colorByPoint: true,
+                           data: [{
+                               name: 'AE',
+                               y: f["AE"]
+                           }, {
+                               name: 'US',
+                               y: f["US"],
+                           }, {
+                               name: 'DE',
+                               y: f["DE"]
+                           },{
+                             name: 'IN',
+                             y: f["IN"]
+                           },{
+                             name: 'TN' || f["AU"] ,
+                             y: f["TN"] || f["AU"]
+                           }
+                           ]
+                       }]
+                   });
+                    }
+                    else {
+                      $("#chart_for_<%=account.facebook_page_id%>").text("Not Enough Data to show Graph")
+                    }
+                  });
+            </script>
+					</div>
+					<div class="col-md-4">
+						<ul class="list-group">
+							<li class="list-group-item">
+							Total fans
+							<b id="total_fans_<%=account.facebook_page_id%>" class="">0</b>
+							</li>
+							<li class="list-group-item">
+							Average Page Reach
+							<b id="avg_page_reach_<%=account.facebook_page_id%>" class="">0</b>
+							</li>
+							<li class="list-group-item">
+							Total Country
+							<b id="total_countries_<%=account.facebook_page_id%>" class="">0</b>
+							</li>
+						</ul>
+					</div>
+				</div>
+			  </div>
+			  </div>
+        <%end%>
+ 			  <!-- Facebook Data -->
 
+			  <h3>Instagram Profile</h3>
 
-        <%#if @image_urls.present?%>
-          <!-- <h3>Recent Media</h3> -->
-          <%#@image_urls.each do |image_url|%>
-          <!-- <div class="col-md-2"> -->
-            <!-- <img src="<%#=image_url%>" width="100px" height="100px" /> -->
-          <!-- </div> -->
-          <%#end%>
-        <%#end%>
+			  <!-- Instagram Data -->
+				<div class="container inner-element text-center">
+					<div class="row">
+						<div class="col-md-3">
+							<span id="id_follower"><strong><%=@followed_by || 0%></strong></span>
+							Follower
+						</div>
+						<div class="col-md-3">
+							<span  id="id_following"><strong><%=@following || 0%></strong></span>
+							Following
+						</div>
+						<div class="col-md-3">
+							<span  id="id_likes_per_post"><strong><%=@average_of_likes || 0%></strong></span>
+							Likes/Post
+						</div>
+						<div class="col-md-3">
+							<span><strong><%= @average_of_comments %></strong></span>
+							Comments/Post
+						</div>
+					</div>
+				</div>
+        <%#=@image_urls%>
+				<div class="container inner-element">
+					<h4>Latest Media</h4>
+					<div class="row">
+						<div class="col-md-12 scroll">
 
-
-        <p><i class="fa fa-instagram"></i> <%=@influencer_details.instagram_page_count || 0%></p>
-         <%if @social_accounts.present?%>
-          <%@social_accounts.each do |social_account|%>
-            <div class="col-md-12" style="border:1px solid #000">
-               <p><b>Facebook followers :</b><%=social_account.facebook_page_title%></p>
-               <p><b>Facebook followers :</b><%=social_account.facebook_page_count%></p>
-               <p><b>Facebook page Id :</b> <%=social_account.facebook_profile_id || "NA"%></p>
-               <p><b>Country :</b><%=social_account.country%></p>
-               <p><b>Category :</b><%=social_account.category%></p>
-               <p><b>Brief Details</b>: <%=social_account.about%></p>
-             </div>
-           <%end%>
-
-         <%else%>
-         <p>Do Not Exists!</p>
-         <%end%>
-      </div>
-      <div class="col-md-1">
-      </div>
-    </div>
-  </div>
-  </section>
+              <%@image_urls.first(10).each do |url|%>
+							   <img alt="team" src="<%=url%>">
+            <%end%>
+          </div>
+					</div>
+				</div>
+			  <!-- Instagram Data -->
+			</div>
+		  </section>
   </div>
 </section>
 </main>

@@ -16,8 +16,8 @@
  *= require_style
  *= require toastr
  *= require chosen
- */
-@import 'ionicons';
+  */
+/*@import '/fonts/ionicons';*/
 #toast-container{
   top: 70px;
 }

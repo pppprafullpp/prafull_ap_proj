@@ -139,16 +139,30 @@ class AdvertisersController < ApplicationController
      @influencer_details = Influencer.find(params[:id])
      @social_accounts = @influencer_details.social_accounts
      instagram_id = @influencer_details.instagram_id
+     @token =  AppConfiguration.find_by(:config_key=>"instagram_access_token").config_value
      @image_urls = []
      if instagram_id.present?
        puts "?????????????????????????????????????????>>>>>>>>>>>>>>>>>>>>#{instagram_id}"
-       instagram_token = AppConfiguration.find_by(:config_key=>"instagram token").config_value
+       instagram_token = AppConfiguration.find_by(:config_key=>"instagram_access_token").config_value
        request_url = HTTParty.get("https://api.instagram.com/v1/users/"+instagram_id+"/media/recent?access_token="+instagram_token)
-
        request_url["data"].each_with_index do |r,index|
          @image_urls <<  r["images"]["standard_resolution"]["url"]
        end
+       self_data = HTTParty.get("https://api.instagram.com/v1/users/#{instagram_id}/?access_token=#{@token}")["data"]["counts"]
+       @following = self_data["follows"]
+       @followed_by = self_data["followed_by"]
+       total_likes_object = HTTParty.get("https://api.instagram.com/v1/users/#{instagram_id}/media/recent/?access_token=#{@token}")["data"]
+       total_object_length = total_likes_object.length
+       likes_sum = 0
+       comment_sum =0
+       total_likes_object.each do |object|
+         likes_sum = likes_sum + object["likes"]["count"]
+         comment_sum = comment_sum + object["comments"]["count"]
+       end
+       @average_of_likes = likes_sum/total_object_length
+       @average_of_comments = comment_sum/total_object_length
 
+      #  byebug
       #  request_url = HTTParty.get(("https://api.instagram.com/v1/users/1581592650/?access_token=4082887215.6b7aae8.d7be357a0346496db3963e55bb06faf4"))
       #  data = r["images"]["standard_resolution"]
      end
