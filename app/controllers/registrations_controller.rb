@@ -10,13 +10,13 @@ class RegistrationsController < ApplicationController
       new_advertiser = Advertiser.create!(advertiser_params)
       activation_token = ApplicationController.new.generate_activation_token
       new_advertiser.update_attributes(:token=> activation_token)
-      # NotificationMailer.welcome_mail("advertiser",new_advertiser.id).deliver!
+      NotificationMailer.welcome_mail("advertiser",new_advertiser.id).deliver!
     else
       new_influencer = Influencer.new(influencer_params)
       activation_token = ApplicationController.new.generate_activation_token
       new_influencer.token = activation_token
       new_influencer.save!
-      # NotificationMailer.welcome_mail("influencer",new_influencer.id).deliver!
+      NotificationMailer.welcome_mail("influencer",new_influencer.id).deliver!
     end
     flash[:success] = "Successfully signed up, please login"
     forward_to = params[:advertiser].present? ? "/advertisers/sign_in" :  "/influencers/wizard"
