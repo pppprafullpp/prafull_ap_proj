@@ -34,7 +34,7 @@
         </div>
         <div class="caption">
           <b>Title:</b><h4 id="<%=ad_request.id%>_title"><%=ad_request.title%></h4>
-          <b>Description:</b><p id="<%=ad_request.id%>_description" class="word-wrap"><%=ad_request.description%></p>
+          <b>Description:</b><p id="<%=ad_request.id%>_description" class="word-wrap"><%=ad_request.description.truncate(30)%></p>
           <b>Caption:</b><p id="<%=ad_request.id%>_caption"><%=ad_request.caption%></p>
           <b>Photo Click Link:</b><p id="<%=ad_request.id%>_photo_click_link"><%=ad_request.photo_click_link%></p>
           <div class="price-cta">
@@ -44,9 +44,12 @@
             <button class="btn btn-mountain-flat btn-sm violet-btn" onclick="open_share_dialog_to_profile(<%=ad_request.id%>,<%=ad_request.ad_type%>)">Post to facebook Profile</button>
 
             <%if current_influencer.social_accounts.present? %>
+            <button class="btn btn-mountain-flat btn-sm violet-btn" onclick="javascript:$('#page_btn_<%=current_influencer.id%>').slideToggle()">Post to Page</button>
+            <div id="page_btn_<%=current_influencer.id%>" style="display:none">
               <%current_influencer.social_accounts.each do |social_account|%>
                 <button class="btn btn-mountain-flat btn-sm violet-btn" onclick="open_share_dialog_to_page(<%=ad_request.id%>,<%=ad_request.ad_type%>,<%=social_account.facebook_page_id%>)">Post to <%=social_account.facebook_page_title%> </button>
               <%end%>
+            </div>
             <%end%>
               <button class="btn btn-mountain-flat btn-sm" data-toggle="modal" onclick="show_decline_modal(<%=ad_request.id%>)">Decline</button>
            </div>

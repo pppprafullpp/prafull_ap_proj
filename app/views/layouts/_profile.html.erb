@@ -52,7 +52,7 @@
 
                   <tr>
                     <td><b>Category</b></td>
-                    <td><%=f.select :category_id,options_for_select(Category.pluck(:name,:id),eval("current_#{type}").category_id),{:prompt=>"-Category-"},:class=>"form-control", :required=>true%></td>
+                    <td><%=f.select :category_id,options_for_select(Category.pluck(:category_name,:id),eval("current_#{type}").category_id),{:prompt=>"-Category-"},:class=>"form-control", :required=>true%></td>
                    </tr>
                   <tr>
                     <td><b>Gender</b></td>

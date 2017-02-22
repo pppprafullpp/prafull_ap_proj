@@ -36,6 +36,7 @@ class WalletsController < ApplicationController
         :description => "This is the payment transaction description." }]})
 
         # Create Payment and return the status(true or false)
+        begin
         if @payment.create
             response = JSON.parse(@payment.to_json)
             transaction_id = response["id"]
@@ -49,6 +50,11 @@ class WalletsController < ApplicationController
           @error = @payment.error
           @success = false
         end
+      rescue Exception => e
+        puts ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>#{e}"
+        flash[:error] = e
+        redirect_to :back
+      end
   end
 
 end
