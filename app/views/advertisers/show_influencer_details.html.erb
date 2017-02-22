@@ -24,7 +24,7 @@
 			  <h3>Facebook Profile</h3>
         <%@social_accounts.each do |account|%>
 
-			  <div class="container">
+			  <div class="container" id="<%=account.facebook_page_id%>_container">
 				<div class="row">
 				<div class="col-md-4">
 					<h4>Top Country Fans</h4>
@@ -33,30 +33,7 @@
 					</tbody>
         </table>
 				</div>
-        <script>
-            FB.api(
-            '/'+"<%=account.facebook_page_id%>"+'/insights/page_fans_country',
-            'GET',
-            {'access_token':'EAAOBpshGnogBAD3kCywWmB9xhtsRXJ2zb2Hk1GkQaNjZAFeuZBo4AZBA9YyZAhb4jZAmAvaqTlokDf1p8IMKqZCQPiA38cjcNXVOKZB0IleFZCzi5n9C63MOcxMYzG0RQJLNkterebyMXOm1G3rcd6lu22XuCrTSfQYZD'},
-            function(response) {
-              if(response["data"][0]!=null){
-                c=response.data[0]["values"][2]["value"];
-                hash ={};
-                sum = 0;
-                counter =0;
-                for(a in c) {
-                console.log(a+":"+c[a]);
-                hash[a]=c[a];
-                sum = sum + c[a];
-                counter++;
-                $("#country_data_<%=account.facebook_page_id%>").append("<tr><td>"+a+"</td><td>"+c[a]+"</td></tr>");
-              }
-              $("#avg_page_reach_<%=account.facebook_page_id%>").text(sum/counter);
-              $("#total_countries_<%=account.facebook_page_id%>").text(counter);
-              $("#total_fans_<%=account.facebook_page_id%>").text(sum);
-            }
-          });
-        </script>
+
 				<div class="col-md-8">
 					<div class="col-md-8">
  					</div>
@@ -136,6 +113,34 @@
 				</div>
 			  </div>
 			  </div>
+        <script>
+            FB.api(
+            '/'+"<%=account.facebook_page_id%>"+'/insights/page_fans_country',
+            'GET',
+            {'access_token':'EAAOBpshGnogBAD3kCywWmB9xhtsRXJ2zb2Hk1GkQaNjZAFeuZBo4AZBA9YyZAhb4jZAmAvaqTlokDf1p8IMKqZCQPiA38cjcNXVOKZB0IleFZCzi5n9C63MOcxMYzG0RQJLNkterebyMXOm1G3rcd6lu22XuCrTSfQYZD'},
+            function(response) {
+              if(response["data"][0]!=null){
+                c=response.data[0]["values"][2]["value"];
+                hash ={};
+                sum = 0;
+                counter =0;
+                for(a in c) {
+                console.log(a+":"+c[a]);
+                hash[a]=c[a];
+                sum = sum + c[a];
+                counter++;
+                $("#country_data_<%=account.facebook_page_id%>").append("<tr><td>"+a+"</td><td>"+c[a]+"</td></tr>");
+              }
+              $("#avg_page_reach_<%=account.facebook_page_id%>").text(sum/counter);
+              $("#total_countries_<%=account.facebook_page_id%>").text(counter);
+              $("#total_fans_<%=account.facebook_page_id%>").text(sum);
+            }
+            else {
+              $("#<%=account.facebook_page_id%>_container").addClass("hidden");
+            }
+
+          });
+        </script>
         <%end%>
  			  <!-- Facebook Data -->
 
