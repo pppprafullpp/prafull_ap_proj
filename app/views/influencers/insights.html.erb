@@ -27,7 +27,8 @@
          </div>
 
          <!-- Facebook Data -->
-         <h3>Facebook Profile</h3>
+         <h3 id="fb_heading">Facebook Profile</h3>
+         <div id="outer_area">
           <%@social_accounts.each do |account|%>
          <div id ="container_<%=account.facebook_page_id%>" class="container">
            <p>Page Name: <b><%=account.facebook_page_title%></b></p>
@@ -118,6 +119,8 @@
          </div>
          </div>
          </div>
+       </div>
+
          <script>
              FB.api(
              '/'+"<%=account.facebook_page_id%>"+'/insights/page_fans_country',
@@ -203,4 +206,8 @@ function check_for_number(obj) {
    $("#check-cross").removeClass("hidden");
   }
 }
+if($("#outer_area").children().length == 0) {
+  $("#fb_heading").hide();
+}
+
 </script>
