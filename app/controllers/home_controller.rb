@@ -32,4 +32,11 @@ class HomeController < ApplicationController
         :present => present
     }
   end
+
+  def contact_us
+  end
+
+  def blog
+  end
+  
 end

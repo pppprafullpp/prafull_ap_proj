@@ -50,6 +50,10 @@ Rails.application.routes.draw do
   post "/check_email_existing" => "home#check_email_existing"
   resources :messages
 
+  get "/contact_us" => "home#contact_us"
+  get "/blog" => "home#blog"
+
+
   resources :advertisers do
     get :social_accounts
     get :ad_requests
