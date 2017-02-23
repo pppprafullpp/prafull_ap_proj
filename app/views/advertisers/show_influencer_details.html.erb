@@ -27,10 +27,12 @@
        </div>
 
 			  <!-- Facebook Data -->
-			  <h3>Facebook Profile</h3>
+			  <h3 id="fb_heading">Facebook Profile</h3>
+        <div id="fb_outer_area">
+
         <%@social_accounts.each do |account|%>
 
-			  <div class="container" id="<%=account.facebook_page_id%>_container">
+			  <div class="container fb-area" id="<%=account.facebook_page_id%>_container">
 				<div class="row">
 				<div class="col-md-4">
 					<h4>Top Country Fans</h4>
@@ -117,6 +119,7 @@
 						</ul>
 					</div>
 				</div>
+      </div>
 			  </div>
 			  </div>
         <script>
@@ -191,3 +194,9 @@
   </div>
 </section>
 </main>
+<script>
+if($("#fb_outer_area > .fb-area").length == 0) {
+  $("#fb_heading").hide();
+}
+
+</script>
