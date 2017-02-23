@@ -121,8 +121,7 @@
 				</div>
       </div>
 			  </div>
-			  </div>
-        <script>
+         <script>
             FB.api(
             '/'+"<%=account.facebook_page_id%>"+'/insights/page_fans_country',
             'GET',
@@ -176,21 +175,21 @@
 						</div>
 					</div>
 				</div>
-        <%#=@image_urls%>
+        <% if @image_urls.present?%>
 				<div class="container inner-element">
 					<h4>Latest Media</h4>
 					<div class="row">
 						<div class="col-md-12 scroll">
-
               <%@image_urls.first(10).each do |url|%>
 							   <img alt="team" src="<%=url%>">
             <%end%>
           </div>
 					</div>
 				</div>
-			  <!-- Instagram Data -->
-			</div>
+        <%end%>
+  			</div>
 		  </section>
+      <%=render :partial=>"layouts/footer"%>
   </div>
 </section>
 </main>

@@ -14,8 +14,6 @@
             <tr><td>Payment ID:<%=@payment.id%></td></tr>
            </table>
            <p>Wallet Amount: $<%=current_advertiser.wallet_amount%></p>
-          <%#=@payment.to_json%>
-
           <%end%>
           <% if !@success%>
             <p class="alert alert-danger"> Payment failed </p>
