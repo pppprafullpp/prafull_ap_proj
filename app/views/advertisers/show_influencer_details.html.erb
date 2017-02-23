@@ -13,7 +13,12 @@
 			 </div>
 
 			  <div class="row">
-        <div class="col-md-12 text-center"><img class="circle-thumb" alt="team" src="<%=@influencer_details.profile_image_url%>"></div>
+        <div class="col-md-12 text-center">
+          <%if @influencer_details.profile_image_url.present?%>
+          <img class="circle-thumb" alt="team" src="<%=@influencer_details.profile_image_url%>">
+          <%else%>
+            <img class="circle-thumb" alt="team" src="/assets/default-user">
+        </div>
 				<div class="col-md-12 text-center mgTop10 mgBtm20">
 					<h4 class="member-name"><%=@influencer_details.name.camelcase%></h4>
 					<p>Joined: <%=@influencer_details.created_at.strftime("%d %B, %Y")%></p>
