@@ -20,7 +20,7 @@
           <% if !@success%>
             <p class="alert alert-danger"> Payment failed </p>
             <div>
-              <p><%=@error["details"][0]["issue"]%></p>
+              <p><%=@error["details"][0]["issue"] rescue nil%></p>
               <p><%=@error["details"][1]["issue"] rescue nil%></p>
             </div>
             <%end%>
