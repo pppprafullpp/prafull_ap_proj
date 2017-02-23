@@ -29,7 +29,7 @@
       <div class="form-group">
         <label class="control-label col-md-5" for="">Category:</label>
         <div class="col-md-7">
-          <%=f.select :category_id,options_for_select(Category.pluck(:name,:id)),{:prompt=>"-Select Category-", :required=>true},:class=>"form-control"%>
+          <%=f.select :category_id,options_for_select(Category.pluck(:category_name,:id)),{:prompt=>"-Select Category-", :required=>true},:class=>"form-control"%>
         </div>
       </div>
 
