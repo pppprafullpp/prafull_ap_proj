@@ -9,17 +9,92 @@
     </section>
 
     <div class="row">
-      <div class="col-md-6" id="gender_demographic" style="min-width: 310px; max-width: 800px; height: 400px; margin: 0 auto">
-
+      <div class="col-md-12" id="gender_demographic" style="min-width: 310px; height: 400px; margin: 0 auto">
       </div>
-      <div class="col-md-4" id="">
-
-      </div>
+    </div>
+    <div class="col-md-12" id="top_5_countries_in_reach_chart" style="min-width: 310px; height: 400px; margin: 0 auto">
+    </div>
+    <div class="col-md-12" id="top_5_influences_in_reach_chart" style="min-width: 310px; height: 400px; margin: 0 auto">
+    </div>
+    <div class="col-md-12" id="followers_in_reach_chart" style="min-width: 310px; height: 400px; margin: 0 auto">
     </div>
   </div>
 </section>
 </main>
 <script>
+
+Highcharts.chart('followers_in_reach_chart', {
+    chart: {
+        type: 'column'
+    },
+    title: {
+        text: 'Followers '
+    },
+
+    credits: {
+        enabled: false
+    },
+     series: [
+    <%
+     @no_of_followers.each_with_index do |country,index|%>
+    {
+        name: "<%=country["name"]%>",
+        data: [<%=country["i_average"].round%>]
+    },
+    <%
+  end%>
+  ]
+});
+
+
+
+Highcharts.chart('top_5_influences_in_reach_chart', {
+    chart: {
+        type: 'column'
+    },
+    title: {
+        text: 'Influences Celebrity'
+    },
+
+    credits: {
+        enabled: false
+    },
+     series: [
+    <%
+    @top_5_influences_in_reach.each_with_index do |country,index|%>
+    {
+        name: "<%=country["name"]%>",
+        data: [<%=country["i_average"].round%>]
+    },
+    <%
+  end%>
+  ]
+});
+
+
+Highcharts.chart('top_5_countries_in_reach_chart', {
+    chart: {
+        type: 'column'
+    },
+    title: {
+        text: 'Top 5 countries Reach'
+    },
+
+    credits: {
+        enabled: false
+    },
+     series: [
+    <%
+    @top_5_countries_in_reach.each_with_index do |country,index|%>
+    {
+        name: "<%=country["name"]%>",
+        data: [<%=country["i_average"].round%>]
+    },
+    <%
+  end%>
+  ]
+});
+
 Highcharts.chart('gender_demographic', {
     chart: {
         type: 'bar',
@@ -28,8 +103,7 @@ Highcharts.chart('gender_demographic', {
       text: "Gender Reach"
     },
     yAxis: {
-        min: 0,
-        title: {
+         title: {
             text: 'Gender Reach(AVG)',
             align: 'high'
         },

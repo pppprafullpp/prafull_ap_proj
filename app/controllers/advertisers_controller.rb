@@ -17,14 +17,17 @@ class AdvertisersController < ApplicationController
    def show_demographic
      if params[:instagram_id].present?
        url = "https://www.demographicspro.com/6/api/get_codes?get_audience_reach_analysis?for="+params[:instagram_id]+"&data=followers_of_id&network=instagram"
-       puts url
        request = RestClient::Request.execute method: :get, url: url, user: 'socialbooker_apitest', password: '2vi8dtmsii3c'
        request = JSON.parse(request)
        @male_reach = request["sections_list"][0]["section_content"][0]["i_average"]
        @female_reach = request["sections_list"][0]["section_content"][1]["i_average"]
        @country_reach = request["sections_list"][8]["section_content"]
+       @influencers_reach = request["sections_list"][15]["section_content"]
+       @followers_reach = request["sections_list"][16]["section_content"]
        @top_5_countries_in_reach = @country_reach.sort_by {|h| h["i_average"]}.reverse.first(5)
-       @top_5_countries_in_reach = @top_5_countries_in_reach.map{|f| f["name"]+","+f["i_average"].to_s}
+       @top_5_influences_in_reach = @influencers_reach.sort_by {|h| h["i_average"]}.reverse.first(5)
+       @no_of_followers = @followers_reach.sort_by {|h| h["i_average"]}.reverse.first(5)
+      #  @top_5_countries_in_reach = @top_5_countries_in_reach.map{|f| f["name"]+","+f["i_average"].to_s}
        @token =  AppConfiguration.find_by(:config_key=>"instagram_access_token").config_value
        instagram_url = "https://api.instagram.com/v1/users/"+params[:instagram_id]+"/?access_token=#{@token}"
        ig_request = HTTParty.get(instagram_url)
@@ -32,7 +35,6 @@ class AdvertisersController < ApplicationController
        @ig_link = "http://instagram.com/"+ig_request["data"]["username"]
      end
    end
-
 
    def show_influencers
       if params[:publishing_price].present? && params[:category].present?
