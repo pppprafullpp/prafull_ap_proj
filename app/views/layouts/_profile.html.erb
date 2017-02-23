@@ -78,31 +78,33 @@
           <hr />
           <%if current_influencer%>
           <h3>Financial Details</h3>
+
           <div class="row">
           <div class="col-md-2"></div>
           <div class="col-md-8 text-center">
             <%=form_for @financial_data,:url=>"/update_financial_data",:method=>"post" do |f|%>
             <%=f.hidden_field:influencer_id,:value=>current_influencer.id%>
+            <p><span class="sm-Txt hidden" id="error-msg"></span></p>
             <table class="table table-striped">
               <tr>
-                <td><%=f.label:bank_name%></td>
-                <td><%=f.text_field:bank_name,:placeholder=>"Enter Bank Name",:class=>"form-control", :required=>true%></td>
+                <td><label>Bank Name</label></td>
+                <td><%=f.text_field:bank_name,:placeholder=>"Enter Bank Name",:class=>"form-control", :required=>true,:onkeyup=>"check_for_letters(this)"%></td>
               </tr>
               <tr>
-                <td><%=f.label:bank_branch%></td>
+                <td><label>Bank Branch</label></td>
                 <td><%=f.text_field:bank_branch,:placeholder=>"Enter Bank Branch",:class=>"form-control", :required=>true%></td>
               </tr>
                <tr>
-                <td><%=f.label:ifsc_code%></td>
-                <td><%=f.text_field:ifsc_code,:placeholder=>"Enter IFSC Code",:class=>"form-control", :required=>true%></td>
+                <td><label>IFSC Code</label></td>
+                <td><%=f.text_field:ifsc_code,:placeholder=>"Enter IFSC CODE",:class=>"form-control", :required=>true%></td>
               </tr>
               <tr>
-                <td><%=f.label:ac_type%></td>
-                 <td><%=f.select :ac_type,options_for_select(InfluencerFinancialInfosController::AC_TYPES),{:prompt=>"-AC TYPE-"},:class=>"form-control", :required=>true%></td>
+                <td><label>Account Type</label></td>
+                 <td><%=f.select :ac_type,options_for_select(InfluencerFinancialInfosController::AC_TYPES,@financial_data.ac_type),{:prompt=>"-ACCOUNT TYPE-"},:class=>"form-control", :required=>true%></td>
               </tr>
               <tr>
-                <td><%=f.label:ac_number%></td>
-                <td><%=f.text_field:ac_number,:placeholder=>"Enter Bank Name",:class=>"form-control", :required=>true%></td>
+                <td><label>Account Number</label></td>
+                <td><%=f.text_field:ac_number,:placeholder=>"Enter Account Number",:class=>"form-control", :required=>true%></td>
               </tr>
             </table>
             <%=f.submit("Update Fiancial Details", :class=>"btn btn-success")%>
@@ -131,3 +133,14 @@
    </div>
   </section>
 </main>
+<script>
+function check_for_letters(obj) {
+  console.log(isNaN(obj.value[obj.value.length-1]));
+  if((isNaN(obj.value[obj.value.length-1]) == false)  && obj.value!=" "){
+    $("#error-msg").removeClass("hidden").addClass("alert alert-danger").text("Enter Only Characters ");
+  }
+  else {
+      $("#error-msg").addClass("hidden");
+  }
+}
+</script>

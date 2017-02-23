@@ -75,6 +75,7 @@ Rails.application.routes.draw do
       get :group_details
       post :delete_group_member
       post :check_existing_group
+      get :show_demographic
     end
   end
 

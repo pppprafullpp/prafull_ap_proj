@@ -1,0 +1,72 @@
+<main>
+ <section id="one-page-side-menu-static" class="one-page-side-menu-static side-menu">
+   <div class="content-wrapper">
+    <%= render :partial => "/layouts/left_panel" %>
+    <%= render :partial => "/layouts/header" %>
+    <section class="account section">
+      <h3>Demographic of <%=@name%></h3>
+      <h4>link => <a href="<%=@ig_link%>" target="_blank"><%=@name%></a></h4>
+    </section>
+
+    <div class="row">
+      <div class="col-md-6" id="gender_demographic" style="min-width: 310px; max-width: 800px; height: 400px; margin: 0 auto">
+
+      </div>
+      <div class="col-md-4" id="">
+
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+<script>
+Highcharts.chart('gender_demographic', {
+    chart: {
+        type: 'bar',
+    },
+    title: {
+      text: "Gender Reach"
+    },
+    yAxis: {
+        min: 0,
+        title: {
+            text: 'Gender Reach(AVG)',
+            align: 'high'
+        },
+        labels: {
+            overflow: 'justify'
+        }
+    },
+    tooltip: {
+        valueSuffix: '%'
+    },
+    plotOptions: {
+        bar: {
+            dataLabels: {
+                enabled: true
+            }
+        }
+    },
+    legend: {
+        layout: 'vertical',
+        align: 'right',
+        verticalAlign: 'top',
+        x: -40,
+        y: 80,
+        floating: true,
+        borderWidth: 1,
+        backgroundColor: ((Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'),
+        shadow: true
+    },
+    credits: {
+        enabled: false
+    },
+    series: [{
+        name: 'Male',
+        data: [<%=@male_reach%>]
+    }, {
+        name: 'Female',
+        data: [<%=@female_reach%>]
+    } ]
+});
+</script>

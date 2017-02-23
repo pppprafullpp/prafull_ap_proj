@@ -72,9 +72,9 @@
           <ul id="account-dropdown" class="dropdown-menu animated fadeInDown">
             <li>
               <%if current_advertiser %>
-                <a href="<%=advertiser_profile_path(advertiser_id:current_advertiser.id)%>"><span class="ion-person"></span> Profile</a>
+                <a data-method="get" href="<%=advertiser_profile_path(advertiser_id:current_advertiser.id)%>"><span class="ion-person"></span> Profile</a>
               <%elsif current_influencer%>
-              <a href="<%=influencer_profile_path(influencer_id:current_influencer.id)%>"><span class="ion-person"></span> Profile</a>
+              <a data-method="get" href="<%=influencer_profile_path(influencer_id:current_influencer.id)%>"><span class="ion-person"></span> Profile</a>
               <%end%>
             </li>
             <!-- <li>
@@ -82,12 +82,12 @@
             </li> -->
             <li>
               <%if current_advertiser%>
-                <a href="<%=advertiser_setting_path(advertiser_id:current_advertiser.id)%>"><span class="ion-gear-b"></span> Settings</a>
+                <a data-method="get"  href="<%=advertiser_setting_path(advertiser_id:current_advertiser.id)%>"><span class="ion-gear-b"></span> Settings</a>
                 <%elsif current_influencer%>
-                <a href="<%=influencer_setting_path(influencer_id:current_influencer.id)%>"><span class="ion-gear-b"></span> Settings</a>
+                <a data-method="get"  href="<%=influencer_setting_path(influencer_id:current_influencer.id)%>"><span class="ion-gear-b"></span> Settings</a>
               <%end%>
               <%if current_influencer%>
-              <a href="/influencers/wizard" data-method="get"><span class="ion-gear-b"></span> Wizard</a>
+              <a data-method="get"  href="/influencers/wizard" data-method="get"><span class="ion-gear-b"></span> Wizard</a>
               <%end%>
             </li>
             <li>

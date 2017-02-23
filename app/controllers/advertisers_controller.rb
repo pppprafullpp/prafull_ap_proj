@@ -14,8 +14,27 @@ class AdvertisersController < ApplicationController
     end
    end
 
-   def show_influencers
+   def show_demographic
+     if params[:instagram_id].present?
+       url = "https://www.demographicspro.com/6/api/get_codes?get_audience_reach_analysis?for="+params[:instagram_id]+"&data=followers_of_id&network=instagram"
+       puts url
+       request = RestClient::Request.execute method: :get, url: url, user: 'socialbooker_apitest', password: '2vi8dtmsii3c'
+       request = JSON.parse(request)
+       @male_reach = request["sections_list"][0]["section_content"][0]["i_average"]
+       @female_reach = request["sections_list"][0]["section_content"][1]["i_average"]
+       @country_reach = request["sections_list"][8]["section_content"]
+       @top_5_countries_in_reach = @country_reach.sort_by {|h| h["i_average"]}.reverse.first(5)
+       @top_5_countries_in_reach = @top_5_countries_in_reach.map{|f| f["name"]+","+f["i_average"].to_s}
+       @token =  AppConfiguration.find_by(:config_key=>"instagram_access_token").config_value
+       instagram_url = "https://api.instagram.com/v1/users/"+params[:instagram_id]+"/?access_token=#{@token}"
+       ig_request = HTTParty.get(instagram_url)
+       @name = ig_request["data"]["full_name"]
+       @ig_link = "http://instagram.com/"+ig_request["data"]["username"]
+     end
+   end
 
+
+   def show_influencers
       if params[:publishing_price].present? && params[:category].present?
          @influencers = Influencer.where(:publishing_price=>params[:publishing_price],:category_id=>params[:category])
        elsif params[:category].present?
@@ -159,9 +178,13 @@ class AdvertisersController < ApplicationController
          likes_sum = likes_sum + object["likes"]["count"]
          comment_sum = comment_sum + object["comments"]["count"]
        end
-       @average_of_likes = likes_sum/total_object_length
-       @average_of_comments = comment_sum/total_object_length
-
+       if total_object_length > 0
+         @average_of_likes = likes_sum/total_object_length
+         @average_of_comments = comment_sum/total_object_length
+       else
+         @average_of_likes = 0
+         @average_of_comments = 0
+      end
       #  byebug
       #  request_url = HTTParty.get(("https://api.instagram.com/v1/users/1581592650/?access_token=4082887215.6b7aae8.d7be357a0346496db3963e55bb06faf4"))
       #  data = r["images"]["standard_resolution"]
