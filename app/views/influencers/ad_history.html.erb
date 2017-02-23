@@ -11,6 +11,7 @@
     <div class="col-md-6">
       <h1>Ad History</h1>
     </div>
+    <%if @ad_requests%>
     <div class="col-md-6 text-right">
       <div class="form-inline extraMargin">
       <div class="form-group extraControl wd150 clearfix  ">
@@ -21,6 +22,7 @@
       </div>
    </div>
     </div>
+    <%end%>
  </div>
 
     <div class="row">
@@ -62,7 +64,7 @@
 </main>
 <script>
 function filter(obj,influencer_id){
-   console.log($("#"+obj.id+" option:selected").val());
+  console.log($("#"+obj.id+" option:selected").val());
   window.open("<%=influencer_ad_history_path(influencer_id:current_influencer.id)%>?status="+$("#"+obj.id+" option:selected").val(),"_self");
 }
 
