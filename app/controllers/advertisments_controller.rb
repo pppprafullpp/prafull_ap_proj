@@ -2,7 +2,7 @@ class AdvertismentsController < ApplicationController
 
   def index
     @advertisement = Advertisement.find(params[:advertisement_id])
-    PendingNotification.find(params[:pn_id]).update_attributes(:viewed=>true)
+    # PendingNotification.find(params[:pn_id]).update_attributes(:viewed=>true)
   end
 
   def show

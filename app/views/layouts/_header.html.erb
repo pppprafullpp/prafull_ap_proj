@@ -1,9 +1,7 @@
 <div class="topBar">
   <div class="row">
     <div class="userName"><span class="ion-navicon-round navIcon1"></span> <span class="ion-navicon-round navIcon2"></span></div>
-
     <div class="user-nav">
-
       <ul>
         <%if current_influencer%>
         <%wallet = current_influencer.wallet_amount%>
@@ -20,45 +18,22 @@
              <strong>Hello, <%=name.titleize%></strong>
           </div>
         </li>
-        <!-- <li><i class="fa fa-refresh fa-2x" style="cursor:pointer" onclick="get_pending_notifications()"></i><li> -->
           <li class="dropdown messages">
           <span class="badge badge-danager animated bounceIn" id="pending_notifications_count_id">0</span>
-          <a onclick="javascript:$('#notification-dropdown').toggle()" class="dropdown-toggle options topIcon"
-          id="toggle-mail" data-toggle="dropdown">
-          <span class="fa fa-bell"></span>
+          <%if current_advertiser.present?%>
+          <a href="<%=notifications_advertisers_path%>"   class="dropdown-toggle options topIcon" id="toggle-mail" >
+            <span class="fa fa-bell"></span>
           </a>
-
+          <%else%>
+          <a href="<%=notifications_influencers_path%>"   class="dropdown-toggle options topIcon" id="toggle-mail"  >
+            <span class="fa fa-bell"></span>
+          </a>
+          <%end%>
           <ul id="notification-dropdown" class="dropdown-menu alert animated fadeInDown">
           </ul>
 
           </li>
-<!--
-          <li class="dropdown messages">
-          <span class="badge badge-danager animated bounceIn" id="new-messages">10</span>
-          <a onclick="javascript:$('#mailer-dropdown').toggle()" class="dropdown-toggle options topIcon" id="toggle-mail" data-toggle="dropdown">
-          <span class="ion-android-mail"></span>
-          </a>
 
-          <ul id="mailer-dropdown" class="dropdown-menu alert animated fadeInDown">
-          <li>
-          <h1>You have <strong id="messages-count">10</strong> new messages</h1>
-
-          <a href="#">
-          <div class="profile-photo">
-          <img src="/assets/profile-img.png" alt="" class="img-circle">
-          </div>
-          <div class="message-info">
-            <span class="sender">James Bond</span>
-            <span class="time">30 mins</span>
-            <div class="message-content">Lorem ipsum dolor sit amet, elit rutrum felis sed erat augue fusce...</div>
-          </div>
-          </a>
-          </li>
-          <li><a href="#">Check all messages <span class="ion-arrow-right-b"></span></a> <a href="javascript.void(0)" onclick="show_modal()">Create Message</a>
-          </li>
-          </ul>
-
-          </li> -->
         <li id="user_dropdown" >
           <a class="dropdown-toggle" onclick="javascript:$('#user_dropdown').toggleClass('open')" data-toggle="dropdown" href="#">
             <%if current_advertiser && current_advertiser.profile_photo_url%>
@@ -130,7 +105,7 @@
 
 <script>
 $(document).ready(get_pending_notifications);
-// setInterval(get_pending_notifications,5000)
+setInterval(get_pending_notifications,5000)
 function show_modal(){
   event.preventDefault();
   $('#createMessagepopup').modal('show')

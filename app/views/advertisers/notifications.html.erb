@@ -1,0 +1,50 @@
+<main>
+<section id="one-page-side-menu-static" class="one-page-side-menu-static side-menu">
+<div class="content-wrapper">
+<%= render :partial => "/layouts/left_panel" %>
+<%= render :partial => "/layouts/header" %>
+<section class="account section" style="min-height:575px;">
+ <div class="container">
+   <div class="row">
+     <div class="col-md-12">
+     <h1>Notifications</h1>
+     </div>
+   </div>
+    <div class="form-horizontal">
+        <div class="container">
+          <h3>New Notification</h3>
+          <%if @pending_notifications.present? && @pending_notifications.length > 0%>
+          <table class="table table-striped">
+            <tr>
+              <th>Notification</th>
+              <th>Advertisement</th>
+            </tr>
+          <%@pending_notifications.each do |notification|%>
+          <tr>
+            <td><%=notification.notification_text%></td>
+            <td><a href="/advertisments?advertisement_id=<%=notification.advertisement_id%>">Goto Advertisement</a></td>
+          </tr>
+          <%end%>
+        </table>
+        <%else%>
+        <p>No New Notifications</p>
+        <%end%>
+        <h3>Previous Notifications</h3>
+        <%if @previous_notifications.present?%>
+        <table class="table table-striped">
+          <tr>
+            <th>Notification</th>
+            <th>Advertisement</th>
+          </tr>
+          <%@previous_notifications.each do |notification|%>
+          <tr>
+            <td><%=notification.notification_text%></td>
+            <td><a href="/advertisments?advertisement_id=<%=notification.advertisement_id%>">Goto Advertisement</a></td>
+          </tr>
+          <%end%>
+        <%end%>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>

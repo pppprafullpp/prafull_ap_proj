@@ -6,6 +6,14 @@ class InfluencersController < ApplicationController
     true
   end
 
+  def notifications
+    @pending_notifications = PendingNotification.find_by_sql("SELECT * FROM pending_notifications WHERE influencer_id = #{current_influencer.id} and notification_type = 2 and viewed=false ORDER BY ID DESC")
+    @previous_notifications = PendingNotification.find_by_sql("SELECT * FROM pending_notifications WHERE advertiser_id=#{current_influencer.id} and viewed=true and notification_type IN (2,3,4,5,6) ORDER BY ID DESC")
+    @pending_notifications.each do |n|
+      n.update_attributes(:viewed=>true)
+    end
+  end
+
   def index
     @ad_requests = Advertisement.where(:influencer_id=>current_influencer.id,:status=>approved_by_admin).limit(3)
     @earned_today = today_earning("influencer",current_influencer.id)

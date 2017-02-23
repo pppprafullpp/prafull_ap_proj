@@ -7,13 +7,21 @@
       <div class="container">
         <% type = current_influencer.present? ? "influencer"  : "advertiser"%>
         <div class="row">
+          <div class="col-md-12">          <h3>Profile </h3></div>
+        </div>
+      <div class="row">
+
           <div class="col-md-3">
             <div class="advertiserBox">
 
               <%if current_influencer.present? && current_influencer.profile_image_url.present? %>
-                <a href="#"><img src="<%=current_influencer.profile_image_url%>"></a>
+                <a href="#"><img src="<%=current_influencer.profile_image_url %>"></a>
+                <%elsif current_influencer.present? && current_influencer.profile_image_url.blank?%>
+                <a href="#"><img src="/assets/default-user"></a>
                 <%elsif current_advertiser.present? && current_advertiser.profile_photo_url.present?%>
                 <a href="#"><img src="<%=current_advertiser.profile_photo_url%>"></a>
+                  <%elsif current_advertiser.present? && current_advertiser.profile_photo_url.blank?%>
+                  <a href="#"><img src="/assets/default-user"></a>
                 <%else%>
                 <a style="display:none" href="#"><img src="/assets/default-user"></a>
               <%end%>
@@ -37,7 +45,6 @@
           </div>
           <div class="col-md-8">
             <div class="form-horizontal">
-              <h3>Profile </h3>
               <table class="table">
                 <tr>
                   <td><b>Name</b></td>
@@ -56,7 +63,7 @@
                    </tr>
                   <tr>
                     <td><b>Gender</b></td>
-                    <td><%=f.select :gender,options_for_select(Influencer::GENDERS),{:prompt=>"-Gender-"},:class=>"form-control", :required=>true%></td>
+                    <td><%=f.select :gender,options_for_select(Influencer::GENDERS,current_influencer.gender),{:prompt=>"-Gender-"},:class=>"form-control", :required=>true%></td>
                   </tr>
                   <tr>
                     <td><b>Age</b></td>
@@ -88,7 +95,7 @@
             <table class="table table-striped">
               <tr>
                 <td><label>Bank Name</label></td>
-                <td><%=f.text_field:bank_name,:placeholder=>"Enter Bank Name",:class=>"form-control", :required=>true,:onkeyup=>"check_for_letters(this)"%></td>
+                <td><%=f.text_field:bank_name,:placeholder=>"Enter Bank Name",:class=>"form-control", :required=>true,:onkeyup=>"check_for_letters(this)",:maxlength=>30%></td>
               </tr>
               <tr>
                 <td><label>Bank Branch</label></td>
@@ -104,10 +111,10 @@
               </tr>
               <tr>
                 <td><label>Account Number</label></td>
-                <td><%=f.text_field:ac_number,:placeholder=>"Enter Account Number",:class=>"form-control", :required=>true%></td>
+                <td><%=f.text_field:ac_number,:placeholder=>"Enter Account Number",:class=>"form-control", :required=>true, :maxlength=> 20%></td>
               </tr>
             </table>
-            <%=f.submit("Update Fiancial Details", :class=>"btn btn-success")%>
+            <%=f.submit("Update Financial Details", :class=>"btn btn-success",:id=>"update_financial_data_btn")%>
             <%end%>
           </div>
           <div class="col-md-2"></div>
@@ -138,9 +145,19 @@ function check_for_letters(obj) {
   console.log(isNaN(obj.value[obj.value.length-1]));
   if((isNaN(obj.value[obj.value.length-1]) == false)  && obj.value!=" "){
     $("#error-msg").removeClass("hidden").addClass("alert alert-danger").text("Enter Only Characters ");
+    $("#update_financial_data_btn").hide();
   }
   else {
       $("#error-msg").addClass("hidden");
+      $("#update_financial_data_btn").show();
   }
 }
+$("#edit_influencer_financial_info_1").on("submit",function(){
+   if($("#error-msg").is(":visible") == true){
+    event.preventdefault;
+    event.stopImmediatePropagation;
+    return false;
+
+  }
+})
 </script>

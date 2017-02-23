@@ -61,7 +61,6 @@ add_page_consumptions_by_consumption_type_insights POST   /insights/add_page_con
                                                    PUT    /insights/:id(.:format)                                                  insights#update
                                                    DELETE /insights/:id(.:format)                                                  insights#destroy
        advertisment_update_ad_share_url_and_status POST   /advertisments/:advertisment_id/update_ad_share_url_and_status(.:format) advertisments#update_ad_share_url_and_status
-                    show_demographic_advertisments GET    /advertisments/show_demographic(.:format)                                advertisments#show_demographic
            ad_declined_by_influencer_advertisments POST   /advertisments/ad_declined_by_influencer(.:format)                       advertisments#ad_declined_by_influencer
                                      advertisments GET    /advertisments(.:format)                                                 advertisments#index
                                                    POST   /advertisments(.:format)                                                 advertisments#create
@@ -160,6 +159,7 @@ add_page_consumptions_by_consumption_type_insights POST   /insights/add_page_con
                        advertiser_show_influencers GET    /advertisers/:advertiser_id/show_influencers(.:format)                   advertisers#show_influencers
                                 advertiser_profile GET    /advertisers/:advertiser_id/profile(.:format)                            advertisers#profile
                               advertiser_my_wallet GET    /advertisers/:advertiser_id/my_wallet(.:format)                          advertisers#my_wallet
+                         notifications_advertisers GET    /advertisers/notifications(.:format)                                     advertisers#notifications
                      get_wallet_status_advertisers POST   /advertisers/get_wallet_status(.:format)                                 advertisers#get_wallet_status
                show_influencer_details_advertisers GET    /advertisers/show_influencer_details(.:format)                           advertisers#show_influencer_details
                  create_audience_group_advertisers POST   /advertisers/create_audience_group(.:format)                             advertisers#create_audience_group
@@ -167,6 +167,7 @@ add_page_consumptions_by_consumption_type_insights POST   /insights/add_page_con
                          group_details_advertisers GET    /advertisers/group_details(.:format)                                     advertisers#group_details
                    delete_group_member_advertisers POST   /advertisers/delete_group_member(.:format)                               advertisers#delete_group_member
                   check_existing_group_advertisers POST   /advertisers/check_existing_group(.:format)                              advertisers#check_existing_group
+                      show_demographic_advertisers GET    /advertisers/show_demographic(.:format)                                  advertisers#show_demographic
                                        advertisers GET    /advertisers(.:format)                                                   advertisers#index
                                                    POST   /advertisers(.:format)                                                   advertisers#create
                                     new_advertiser GET    /advertisers/new(.:format)                                               advertisers#new
@@ -188,6 +189,7 @@ add_page_consumptions_by_consumption_type_insights POST   /insights/add_page_con
                              influencer_ad_history GET    /influencers/:influencer_id/ad_history(.:format)                         influencers#ad_history
                                influencer_insights GET    /influencers/:influencer_id/insights(.:format)                           influencers#insights
                                 wizard_influencers GET    /influencers/wizard(.:format)                                            influencers#wizard
+                         notifications_influencers GET    /influencers/notifications(.:format)                                     influencers#notifications
                add_instagram_followers_influencers POST   /influencers/add_instagram_followers(.:format)                           influencers#add_instagram_followers
                                        influencers GET    /influencers(.:format)                                                   influencers#index
                                                    POST   /influencers(.:format)                                                   influencers#create

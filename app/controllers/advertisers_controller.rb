@@ -221,6 +221,14 @@ class AdvertisersController < ApplicationController
    def add_member_to_existing_group
    end
 
+   def notifications
+     @pending_notifications = PendingNotification.find_by_sql("SELECT * FROM pending_notifications WHERE advertiser_id=#{current_advertiser.id} and viewed=false and notification_type IN (2,3,4,5,6) ORDER BY ID DESC")
+     @previous_notifications = PendingNotification.find_by_sql("SELECT * FROM pending_notifications WHERE advertiser_id=#{current_advertiser.id} and viewed=true and notification_type IN (2,3,4,5,6) ORDER BY ID DESC")
+      @pending_notifications.each do |n|
+       n.update_attributes(:viewed=>true)
+     end
+   end
+
   private
 
   def advertiser_params

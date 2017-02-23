@@ -20,7 +20,7 @@
               <p>
                 <span style="border-bottom:solid 1px #e1e1e1; margin-bottom:10px; padding-bottom:10px; display:block"><strong>Posted By: </strong><%=Advertiser.find(@advertisement.advertiser_id).name%></span>
                 <span style="border-bottom:solid 1px #e1e1e1; margin-bottom:10px; padding-bottom:10px; display:block"><strong>Platform: </strong><%=Advertisement::PLATFORMS.key(@advertisement.platform)%></span>
-                <span style="border-bottom:solid 1px #e1e1e1; margin-bottom:10px; padding-bottom:10px; display:block"><strong>Category: </strong><%=Category.find(@advertisement.category).name%></span>
+                <span style="border-bottom:solid 1px #e1e1e1; margin-bottom:10px; padding-bottom:10px; display:block"><strong>Category: </strong><%=Category.find(@advertisement.category).category_name%></span>
                 <span style="border-bottom:solid 1px #e1e1e1; margin-bottom:10px; padding-bottom:10px; display:block"><strong>Desctiption: </strong><%=@advertisement.description %></span>
                 <span style="border-bottom:solid 1px #e1e1e1; margin-bottom:10px; padding-bottom:10px; display:block"><strong>Caption: </strong><%=@advertisement.caption %></span>
                 <span style="border-bottom:solid 1px #e1e1e1; margin-bottom:10px; padding-bottom:10px; display:block"><strong>Title: </strong><%=@advertisement.title %></span>

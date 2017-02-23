@@ -2,10 +2,10 @@
   <%if current_advertiser%>
   <a href="/advertisers" class="menuzord-brand"><%= image_tag "header/menu-logo-blue.png"  ,:class=>"dark-logo"%></a>
   <ul class="nav menuzord-menu menuzord-indented scrollable" style="max-height: 400px;">
-    <li class="<%='active' if params[:action] == 'index' %> reloading_class"><a href="/advertisers"><i class="ion-home"></i> <span>Dashboard</span></a></li>
-    <li class="<%='active' if params[:action] == 'ad_compaigns' || params[:action] == 'create_ad_compaign' %> reloading_class"><a href="<%=advertiser_ad_compaigns_path(advertiser_id:current_advertiser.id)%>"><i class="ion-android-bulb"></i> <span>Ad Campaigns</span></a></li>
-    <li class="<%='active' if params[:action] == 'show_influencers' %> reloading_class"><a href="<%=advertiser_show_influencers_path(advertiser_id:current_advertiser.id)%>"><i class="ion-person"></i> <span>Influencers</span></a></li>
-    <li class="<%='active' if params[:action] == 'audience_management' %> reloading_class"><a href="<%=advertiser_audience_management_path(advertiser_id:current_advertiser.id)%>"><i class="ion-person"></i> <span>Audience</span></a></li>
+    <li class="<%='active' if params[:action] == 'index' %> reloading_class"><a data-method="get" href="/advertisers"><i class="ion-home"></i> <span>Dashboard</span></a></li>
+    <li class="<%='active' if params[:action] == 'ad_compaigns' || params[:action] == 'create_ad_compaign' %> reloading_class"><a data-method="get" href="<%=advertiser_ad_compaigns_path(advertiser_id:current_advertiser.id)%>"><i class="ion-android-bulb"></i> <span>Ad Campaigns</span></a></li>
+    <li class="<%='active' if params[:action] == 'show_influencers' %> reloading_class"><a data-method="get" href="<%=advertiser_show_influencers_path(advertiser_id:current_advertiser.id)%>"><i class="ion-person"></i> <span>Influencers</span></a></li>
+    <li class="<%='active' if params[:action] == 'audience_management' %> reloading_class"><a data-method="get" href="<%=advertiser_audience_management_path(advertiser_id:current_advertiser.id)%>"><i class="ion-person"></i> <span>Audience</span></a></li>
      <!-- <li><a href="<%#=advertiser_social_accounts_path(advertiser_id:current_advertiser.id)%>">
       <i class="ion-card"></i> <span>Social Accounts</span></a>
     </li> -->
@@ -30,21 +30,21 @@
     <a href="/influencers" class="menuzord-brand"><%= image_tag "header/menu-logo-blue.png"  ,:class=>"dark-logo"%></a>
     <ul class="nav menuzord-menu menuzord-indented scrollable" id="showhide">
       <li class="<%='active' if params[:action] == 'index' %> reloading_class">
-        <a href="/influencers"><i class="ion-home">
+        <a data-method="get" href="/influencers"><i class="ion-home">
       </i><span>Dashboard</span></a>
     </li>
     <li class="<%='active 'if params[:action] == 'ad_requests' %> reloading_class"%>
-      <a href="<%=influencer_ad_requests_path(influencer_id:current_influencer.id)%>">
+      <a data-method="get" href="<%=influencer_ad_requests_path(influencer_id:current_influencer.id)%>">
         <i class="ion-android-bulb"></i> <span>Ad Request</span></a>
       </li>
 
     <li class="<%='active' if params[:action] == 'ad_history' %> reloading_class">
-      <a href="<%=influencer_ad_history_path(influencer_id:current_influencer.id)%>">
+      <a data-method="get" href="<%=influencer_ad_history_path(influencer_id:current_influencer.id)%>">
       <i class="ion-card"></i> <span>Ad History</span></a>
     </li>
 
     <li class="<%='active 'if params[:action] == 'insights' %> reloading_class"%>
-      <a href="<%=influencer_insights_path(influencer_id:current_influencer.id)%>" data-method="get">
+      <a data-method="get" href="<%=influencer_insights_path(influencer_id:current_influencer.id)%>" data-method="get">
         <i class="ion-android-bulb"></i> <span>Page Insights</span></a>
     </li>
 

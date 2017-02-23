@@ -68,6 +68,7 @@ Rails.application.routes.draw do
     get :profile
     get :my_wallet
     collection do
+      get :notifications
       post :get_wallet_status
       get :show_influencer_details
       post :create_audience_group
@@ -94,6 +95,7 @@ Rails.application.routes.draw do
     get :insights
       collection do
         get :wizard
+        get :notifications
         post :add_instagram_followers
       end
     end
