@@ -10,7 +10,7 @@ namespace :update_social_data do
                 :access_token => "986978254757512|vGvEynp44LE_I_yG6dgAsjlF770",
                 :fields => [:fan_count, :about,:picture,:location,:category]
                 )
-                puts "Updated:#{social_account.facebook_page_id} with #{page.raw_attributes['fan_count'].to_s} likes"
+                if page.present?
                 country = page.raw_attributes["location"].present? ? page.raw_attributes["location"]["country"] : "Not provided"
                 category = page.raw_attributes["category"].present? ? page.raw_attributes["category"] : "Not Provided"
 
@@ -21,6 +21,10 @@ namespace :update_social_data do
                 :country => country,
                 :category => page.raw_attributes["category"]
                 )
+                puts "Updated:#{social_account.facebook_page_id} with #{page.raw_attributes['fan_count'].to_s} likes"
+              else
+                puts "Error in page : #{social_account.id.to_s}"
+              end
           end
           puts "--------------------------------------------------------------------------------------"
       end
